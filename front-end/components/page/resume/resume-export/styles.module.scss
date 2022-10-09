@@ -1,0 +1,11 @@
+.resume-export-container{
+    background-color: rgb(101, 110, 131);
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    .resume-export-main{
+        position:absolute;
+        inset: 40px 74px 72px;
+    }
+}
