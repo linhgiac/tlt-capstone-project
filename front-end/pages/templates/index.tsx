@@ -1,9 +1,10 @@
-import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { Button } from 'antd';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-const Home: NextPage = () => {
+type TemplatesProps = {};
+
+const Templates = (props: TemplatesProps) => {
     const router = useRouter();
     return (
         <div>
@@ -12,7 +13,7 @@ const Home: NextPage = () => {
                 size='large'
                 onClick={() => {
                     router.push({
-                        pathname: '/templates',
+                        pathname: '/dashboard',
                     });
                 }}>
                 Create My Resume
@@ -21,4 +22,4 @@ const Home: NextPage = () => {
     );
 };
 
-export default Home;
+export default Templates;
