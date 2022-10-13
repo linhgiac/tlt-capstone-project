@@ -1,5 +1,5 @@
 import { PersonalDetails } from './../configs/interfaces/resume';
-const PersonalDetailData: PersonalDetails = {
+export const PersonalDetailData: PersonalDetails = {
         id: 1,
         header: 'Personal Detail',
         jobTitle: 'Web Developer',

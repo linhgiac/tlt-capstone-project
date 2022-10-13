@@ -1,7 +1,7 @@
 import React from 'react';
-import { EditableTitle } from '../../../../custom';
+import { EditableTitle } from '../../../../../custom';
 import classNames from 'classnames';
-import SectionImportTitle from '../section-import-title';
+import SectionImportTitle from '../../section-import-title';
 import { Input } from 'antd';
 import styles from './styles.module.scss';
 

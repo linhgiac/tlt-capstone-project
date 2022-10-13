@@ -1,22 +1,27 @@
 import React from 'react';
-import PersonalDetailsImport from './personal-details-import';
+import PersonalDetailsImport from './resume-import-form/personal-details-import';
 import ResumeTitle from './resume-title';
-import ProfessionalSummaryImport from './professional-summary-import';
+import ProfessionalSummaryImport from './resume-import-form/professional-summary-import';
 import classNames from 'classnames';
 import { Button } from 'antd';
+import { FieldFormData } from '../../../../configs/interfaces/resume';
+import ResumeImportForm from './resume-import-form';
 
 type ResumeImportProps = {
     className?: string;
+    onChange: () => void;
+    fields: FieldFormData[];
 };
 
 const ResumeImport = (props: ResumeImportProps) => {
-    const { className } = props;
+    const { className, fields, onChange } = props;
+
+    const changeHandler = () => {};
     return (
         <div className={classNames(className)}>
             <h2>Resume Import</h2>
             <ResumeTitle />
-            <PersonalDetailsImport className='p-b-20' />
-            <ProfessionalSummaryImport className='p-b-20' />
+            <ResumeImportForm fields={fields} onChange={changeHandler} />
             <Button type='primary' size='large'>
                 Save Resume
             </Button>
