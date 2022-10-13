@@ -5,19 +5,13 @@ import ProfessionalSummaryImport from './professional-summary-import';
 
 type Props = {
     className?: string;
-    onChange: (fields: FieldFormData[]) => void;
-    fields: FieldFormData[];
 };
 
 const ResumeImportForm = (props: Props) => {
-    const { className, onChange, fields } = props;
+    const { className } = props;
     return (
         <div>
-            <PersonalDetailsImport
-                className='p-b-20'
-                fields={fields}
-                onChange={}
-            />
+            <PersonalDetailsImport className='p-b-20' />
             <ProfessionalSummaryImport className='p-b-20' />
         </div>
     );

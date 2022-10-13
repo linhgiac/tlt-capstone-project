@@ -9,19 +9,17 @@ import ResumeImportForm from './resume-import-form';
 
 type ResumeImportProps = {
     className?: string;
-    onChange: () => void;
-    fields: FieldFormData[];
 };
 
 const ResumeImport = (props: ResumeImportProps) => {
-    const { className, fields, onChange } = props;
+    const { className } = props;
 
     const changeHandler = () => {};
     return (
         <div className={classNames(className)}>
             <h2>Resume Import</h2>
             <ResumeTitle />
-            <ResumeImportForm fields={fields} onChange={changeHandler} />
+            <ResumeImportForm />
             <Button type='primary' size='large'>
                 Save Resume
             </Button>

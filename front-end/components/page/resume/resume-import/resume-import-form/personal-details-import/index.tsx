@@ -12,17 +12,13 @@ import {
 
 type PersonalDetailsImportProps = {
     className?: string;
-    onChange: (fields: FieldFormData[]) => void;
-    fields: FieldFormData[];
 };
 
 const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
-    const { className, fields, onChange } = props;
+    const { className } = props;
     const [form] = useForm();
 
-    const changeFieldsHandler = (_: any, allFields: any) => {
-        onChange(allFields);
-    };
+    const changeFieldsHandler = (_: any, allFields: any) => {};
 
     // const onFinish = async (values: PersonalDetailsFormValue) => {
     //     const response = await fetch(
@@ -112,7 +108,6 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
             <SectionImportTitle>Personal Details</SectionImportTitle>
             <Form
                 form={form}
-                fields={fields}
                 onFieldsChange={changeFieldsHandler}
                 size='large'
                 colon={false}>
