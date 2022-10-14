@@ -9,6 +9,8 @@ import {
     FieldFormData,
     PersonalDetailsFormValue,
 } from '../../../../../../configs/interfaces/resume';
+import { useRecoilState } from 'recoil';
+import { personalDetailFieldsState } from '../../../../../../recoil-state/resume-state';
 
 type PersonalDetailsImportProps = {
     className?: string;
@@ -18,7 +20,13 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     const { className } = props;
     const [form] = useForm();
 
-    const changeFieldsHandler = (_: any, allFields: any) => {};
+    const [personalDetailFields, setPersonalDetailFields] = useRecoilState(
+        personalDetailFieldsState
+    );
+    const changeFieldsHandler = (_: any, allFields: any) => {
+        console.log('all Fields:', allFields);
+        setPersonalDetailFields(allFields);
+    };
 
     // const onFinish = async (values: PersonalDetailsFormValue) => {
     //     const response = await fetch(
@@ -108,6 +116,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
             <SectionImportTitle>Personal Details</SectionImportTitle>
             <Form
                 form={form}
+                fields={personalDetailFields}
                 onFieldsChange={changeFieldsHandler}
                 size='large'
                 colon={false}>
