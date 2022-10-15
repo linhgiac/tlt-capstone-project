@@ -4,13 +4,15 @@ import SectionImportTitle from '../../section-import-title';
 import ImageUpload from '../../../../../custom/image-upload';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
-import { useForm } from 'antd/es/form/Form';
 import {
     FieldFormData,
     PersonalDetailsFormValue,
 } from '../../../../../../configs/interfaces/resume';
-import { useRecoilState } from 'recoil';
-import { personalDetailFieldsState } from '../../../../../../recoil-state/resume-state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+    personalDetailFieldsState,
+    personalDetailValueState,
+} from '../../../../../../recoil-state/resume-state';
 
 type PersonalDetailsImportProps = {
     className?: string;
@@ -18,7 +20,7 @@ type PersonalDetailsImportProps = {
 
 const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     const { className } = props;
-    const [form] = useForm();
+    const [form] = Form.useForm();
 
     const [personalDetailFields, setPersonalDetailFields] = useRecoilState(
         personalDetailFieldsState
@@ -27,12 +29,12 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
         console.log(
             'all Fields:',
             allFields.map((field: any) => {
-                return { name: field.name, value: field.value };
+                return { name: field.name[0], value: field.value };
             })
         );
         setPersonalDetailFields(
             allFields.map((field: any) => {
-                return { name: field.name, value: field.value };
+                return { name: field.name[0], value: field.value };
             })
         );
     };

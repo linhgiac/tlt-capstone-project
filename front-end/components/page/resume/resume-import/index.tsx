@@ -7,7 +7,11 @@ import { Button } from 'antd';
 import { FieldFormData } from '../../../../configs/interfaces/resume';
 import ResumeImportForm from './resume-import-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { personalDetailFieldsState } from '../../../../recoil-state/resume-state';
+import {
+    personalDetailValueState,
+    professionalSummaryFieldState,
+    professionalSummaryValueState,
+} from '../../../../recoil-state/resume-state';
 
 type ResumeImportProps = {
     className?: string;
@@ -15,10 +19,12 @@ type ResumeImportProps = {
 
 const ResumeImport = (props: ResumeImportProps) => {
     const { className } = props;
-    const personalDetailFields = useRecoilValue(personalDetailFieldsState);
+    const personalDetail = useRecoilValue(personalDetailValueState);
+    const professionalSummary = useRecoilValue(professionalSummaryValueState);
 
     const submitFormHandler = () => {
-        console.log(personalDetailFields);
+        console.log('personalDetail', personalDetail);
+        console.log('professionalSummary', professionalSummary);
     };
     return (
         <div className={classNames(className)}>
