@@ -2,7 +2,7 @@ import React from 'react';
 import { EditableTitle } from '../../../../../custom';
 import classNames from 'classnames';
 import SectionImportTitle from '../../section-import-title';
-import { Input } from 'antd';
+import { Form, Input } from 'antd';
 import styles from './styles.module.scss';
 
 const { TextArea } = Input;
@@ -19,10 +19,14 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
         <div className={classNames(className)}>
             <SectionImportTitle>Professional Summary</SectionImportTitle>
             <p style={{ color: 'grey', fontSize: '12px' }}>{SUMMARY_INTRO}</p>
-            <TextArea
-                className={styles['professional-summary-input']}
-                autoSize={{ minRows: 5, maxRows: 5 }}
-            />
+            <Form>
+                <Form.Item>
+                    <TextArea
+                        className={styles['professional-summary-input']}
+                        autoSize={{ minRows: 5, maxRows: 5 }}
+                    />
+                </Form.Item>
+            </Form>
         </div>
     );
 }

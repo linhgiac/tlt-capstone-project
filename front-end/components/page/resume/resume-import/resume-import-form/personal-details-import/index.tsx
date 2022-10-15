@@ -24,8 +24,17 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
         personalDetailFieldsState
     );
     const changeFieldsHandler = (_: any, allFields: any) => {
-        console.log('all Fields:', allFields);
-        setPersonalDetailFields(allFields);
+        console.log(
+            'all Fields:',
+            allFields.map((field: any) => {
+                return { name: field.name, value: field.value };
+            })
+        );
+        setPersonalDetailFields(
+            allFields.map((field: any) => {
+                return { name: field.name, value: field.value };
+            })
+        );
     };
 
     // const onFinish = async (values: PersonalDetailsFormValue) => {
@@ -49,15 +58,21 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className='no-margin'
                             name='jobTitle'
-                            label='Wanted Job Title'></Form.Item>
-                        <Input />
+                            label='Wanted Job Title'>
+                            <Input />
+                        </Form.Item>
                     </Col>
                     <Col
                         span={12}
                         className={classNames('p-l-24', 'no-margin')}>
-                        <ImageUpload
-                            className={classNames('no-margin', 'no-padding')}
-                        />
+                        <Form.Item className='no-margin' name='avatar' label=''>
+                            <ImageUpload
+                                className={classNames(
+                                    'no-margin',
+                                    'no-padding'
+                                )}
+                            />
+                        </Form.Item>
                     </Col>
                 </Row>
                 <Row justify='start'>
@@ -65,15 +80,17 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className='no-margin'
                             name='firstName'
-                            label='First Name'></Form.Item>
-                        <Input />
+                            label='First Name'>
+                            <Input />
+                        </Form.Item>
                     </Col>
                     <Col span={12} className='p-l-24'>
                         <Form.Item
                             className='no-margin'
                             name='lastName'
-                            label='Last Name'></Form.Item>
-                        <Input />
+                            label='Last Name'>
+                            <Input />
+                        </Form.Item>
                     </Col>
                 </Row>
                 <Row justify='start'>
@@ -81,15 +98,17 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className='no-margin'
                             name='email'
-                            label='Email'></Form.Item>
-                        <Input />
+                            label='Email'>
+                            <Input />
+                        </Form.Item>
                     </Col>
                     <Col span={12} className='p-l-24'>
                         <Form.Item
                             className='no-margin'
                             name='phone'
-                            label='Phone'></Form.Item>
-                        <Input />
+                            label='Phone'>
+                            <Input />
+                        </Form.Item>
                     </Col>
                 </Row>
                 <Row justify='start'>
@@ -97,15 +116,17 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className='no-margin'
                             name='country'
-                            label='Country'></Form.Item>
-                        <Input />
+                            label='Country'>
+                            <Input />
+                        </Form.Item>
                     </Col>
                     <Col span={12} className='p-l-24'>
                         <Form.Item
                             className='no-margin'
                             name='city'
-                            label='City'></Form.Item>
-                        <Input />
+                            label='City'>
+                            <Input />
+                        </Form.Item>
                     </Col>
                 </Row>
             </>
@@ -116,6 +137,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
             <SectionImportTitle>Personal Details</SectionImportTitle>
             <Form
                 form={form}
+                layout='vertical'
                 fields={personalDetailFields}
                 onFieldsChange={changeFieldsHandler}
                 size='large'

@@ -2,7 +2,9 @@ import { atom } from 'recoil';
 import { FieldFormData } from './../../configs/interfaces/resume';
 
 
-export const personalDetailFieldsState = atom<FieldFormData[]>({
+const personalDetailFieldsState = atom<FieldFormData[]>({
     key: 'personalDetailFormValueState',
-    default: []
+    default: [{name: 'jobTitle', value: ''}]
 })
+
+export {personalDetailFieldsState}
