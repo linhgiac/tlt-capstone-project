@@ -3,7 +3,7 @@ from torch.autograd import Variable
 from math import ceil
 
 
-def prepare_generator_batch(samples, start_letter=0, gpu=False):
+def prepare_generator_batch(samples, gpu=False):
     """
     Takes samples (a batch) and returns
 
@@ -17,10 +17,8 @@ def prepare_generator_batch(samples, start_letter=0, gpu=False):
 
     batch_size, seq_len = samples.size()
 
-    inp = torch.zeros(batch_size, seq_len)
-    target = samples
-    inp[:, 0] = start_letter
-    inp[:, 1:] = target[:, :seq_len-1]
+    inp = samples[:, :seq_len-1]
+    target = samples[:, 1:seq_len]
 
     inp = Variable(inp).type(torch.LongTensor)
     target = Variable(target).type(torch.LongTensor)
@@ -77,12 +75,11 @@ def batchwise_sample(gen, num_samples, batch_size):
     return torch.cat(samples, 0)[:num_samples]
 
 
-def batchwise_oracle_nll(gen, oracle, num_samples, batch_size, max_seq_len, start_letter=0, gpu=False):
+def batchwise_oracle_nll(gen, oracle, num_samples, batch_size, max_seq_len, gpu=False):
     s = batchwise_sample(gen, num_samples, batch_size)
     oracle_nll = 0
     for i in range(0, num_samples, batch_size):
-        inp, target = prepare_generator_batch(
-            s[i:i+batch_size], start_letter, gpu)
+        inp, target = prepare_generator_batch(s[i:i+batch_size], gpu)
         oracle_loss = oracle.batchNLLLoss(inp, target) / max_seq_len
         oracle_nll += oracle_loss.data.item()
 

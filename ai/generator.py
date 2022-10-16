@@ -6,6 +6,7 @@ import numpy as np
 import pdb
 import math
 import torch.nn.init as init
+from constant import *
 
 
 class Generator(nn.Module):
@@ -52,34 +53,36 @@ class Generator(nn.Module):
         out = F.log_softmax(out, dim=1)
         return out, hidden
 
-    def sample(self, num_samples, start_letter=0):
-        """
-        Samples the network and returns num_samples samples of length max_seq_len.
-
-        Outputs: samples, hidden
-            - samples: num_samples x max_seq_length (a sampled sequence in each row)
-        """
-
-        samples = torch.zeros(
-            num_samples, self.max_seq_len).type(torch.LongTensor)
-
-        h = self.init_hidden(num_samples)
-        inp = autograd.Variable(torch.LongTensor([start_letter]*num_samples))
-
-        if self.gpu:
-            samples = samples.cuda()
-            inp = inp.cuda()
-
-        for i in range(self.max_seq_len):
-            # out: num_samples x vocab_size
-            out, h = self.forward(inp, h)
-            # num_samples x 1 (sampling from each row)
-            out = torch.multinomial(torch.exp(out), 1)
-            samples[:, i] = out.view(-1).data
-
-            inp = out.view(-1)
-
-        return samples
+    def sample(self, batch_size, x=None):
+        res = []
+        flag = False  # whether sample from zero
+        if x is None:
+            flag = True
+        if flag:
+            x = autograd.Variable(torch.zeros((batch_size, 1)).long())
+        if CUDA:
+            x = x.cuda()
+        h = self.init_hidden(batch_size)
+        samples = []
+        if flag:
+            for i in range(MAX_SEQ_LEN):
+                output, h = self.forward(x, h)
+                x = torch.multinomial(torch.exp(output), 1)
+                samples.append(x)
+        else:
+            given_len = x.size(1)
+            lis = x.chunk(x.size(1), dim=1)
+            for i in range(given_len):
+                output, h = self.forward(lis[i], h)
+                samples.append(lis[i])
+            x = torch.multinomial(torch.exp(output), 1)
+            for i in range(given_len, MAX_SEQ_LEN):
+                samples.append(x)
+                output, h = self.forward(x, h)
+                x = torch.multinomial(torch.exp(output), 1)
+        output = torch.cat(samples, dim=1)
+        print(output.size())
+        return output
 
     def batchNLLLoss(self, inp, target):
         """
