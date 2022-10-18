@@ -1,17 +1,10 @@
 import React from 'react';
-import PersonalDetailsImport from './resume-import-form/personal-details-import';
 import ResumeTitle from './resume-title';
-import ProfessionalSummaryImport from './resume-import-form/professional-summary-import';
 import classNames from 'classnames';
 import { Button } from 'antd';
-import { FieldFormData } from '../../../../configs/interfaces/resume';
 import ResumeImportForm from './resume-import-form';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-    personalDetailValueState,
-    professionalSummaryFieldState,
-    professionalSummaryValueState,
-} from '../../../../recoil-state/resume-state';
+import { resumeValueState } from '../../../../recoil-state/resume-state';
+import { useRecoilValue } from 'recoil';
 
 type ResumeImportProps = {
     className?: string;
@@ -19,12 +12,16 @@ type ResumeImportProps = {
 
 const ResumeImport = (props: ResumeImportProps) => {
     const { className } = props;
-    const personalDetail = useRecoilValue(personalDetailValueState);
-    const professionalSummary = useRecoilValue(professionalSummaryValueState);
+    const resumeValue = useRecoilValue(resumeValueState);
 
-    const submitFormHandler = () => {
-        console.log('personalDetail', personalDetail);
-        console.log('professionalSummary', professionalSummary);
+    const submitFormHandler = async () => {
+        const response = await fetch('/api/resume-editor', {
+            method: 'POST',
+            body: JSON.stringify({ resumeValue }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+        const data = await response.json();
+        console.log('data', data);
     };
     return (
         <div className={classNames(className)}>

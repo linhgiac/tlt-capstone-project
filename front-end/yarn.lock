@@ -145,13 +145,6 @@
   dependencies:
     "tslib" "^2.4.0"
 
-"@types/antd@^1.0.0":
-  "integrity" "sha512-wnRh+S6vPMahsuSN6lFJQzNXuhUKr9JKic1L/NMdIChsuu9Fc+mDyF7H17eFPQlgpLVdT0DyYIgB1di8DA9AuQ=="
-  "resolved" "https://registry.npmjs.org/@types/antd/-/antd-1.0.0.tgz"
-  "version" "1.0.0"
-  dependencies:
-    "antd" "*"
-
 "@types/json5@^0.0.29":
   "integrity" "sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ=="
   "resolved" "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
@@ -264,7 +257,7 @@
   dependencies:
     "color-convert" "^2.0.1"
 
-"antd@*", "antd@^4.23.5":
+"antd@^4.23.5":
   "integrity" "sha512-AMea5NYoMeGvRxZ/rslGvRqaiuzBgQMpOdlQfNjOfMd+0ZGi+E4AiwXilR99muFOttPcr3ebeIsKiUS5p/cnig=="
   "resolved" "https://registry.npmjs.org/antd/-/antd-4.23.5.tgz"
   "version" "4.23.5"

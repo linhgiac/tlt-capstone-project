@@ -3,25 +3,12 @@ export enum ResumeTitleType {
     Changeable = 'CHANGEABLE'
 }
 
-export type ResumeData = {
-    personalDetail: PersonalDetails,
-    professionalSummary: ProfessionalSummary
+export type ResumeDataType = {
+    personalDetail: PersonalDetailsDataType,
+    professionalSummary: ProfessionalSummaryDataType
 }
 
-export type PersonalDetailsFormValue = {
-    jobTitle?: string,
-    firstName?: string,
-    lastName?: string,
-    email?: string,
-    phone?: string,
-    country?: string,
-    address?: string,
-    nationality?: string,
-    placeOfBirth?: string,
-    dateOfBirth?: Date
-}
-
-export type PersonalDetails = {
+export type PersonalDetailsDataType = {
     id?: number,
     header?: string,
     jobTitle?: string,
@@ -36,7 +23,7 @@ export type PersonalDetails = {
     dateOfBirth?: Date
 }
 
-export type ProfessionalSummary = {
+export type ProfessionalSummaryDataType = {
     id?: number,
     header?: string,
     content?: string

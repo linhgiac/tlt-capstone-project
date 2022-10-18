@@ -23,12 +23,6 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
         'Write 2-4 short & energetic sentences to interest the reader! Mention your role, experience & most importantly - your biggest achievements, best qualities and skills.';
 
     const changeFieldsHandler = (_: any, allFields: any) => {
-        console.log(
-            'pro',
-            allFields.map((field: any) => {
-                return { name: field.name[0], value: field.value };
-            })
-        );
         setProfessionalSummaryField(
             allFields.map((field: any) => {
                 return { name: field.name[0], value: field.value };

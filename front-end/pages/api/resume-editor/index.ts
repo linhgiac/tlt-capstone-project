@@ -1,13 +1,20 @@
-import { ResumeData } from './../../../configs/interfaces/resume';
+import { resumeValueState } from './../../../recoil-state/resume-state/index';
+import { ResumeDataType, PersonalDetailsDataType } from './../../../configs/interfaces/resume';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { PersonalDetails } from '../../../configs/interfaces/resume'
 import { PersonalDetailData } from '../../../mock/resume'
 
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResumeData | {}>
+  res: NextApiResponse<ResumeDataType | {}>
 ) {
-  res.status(200).json({})
+  if (req.method === "GET"){
+    
+    res.status(200).json({})
+  }
+  else if (req.method === "POST"){
+    const resumeDataValue = req.body.resumeValue
+    res.status(201).json(resumeDataValue)
+  }
 }

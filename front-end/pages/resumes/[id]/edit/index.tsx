@@ -9,6 +9,7 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     const [isEditing, setIsEditing] = useState(true);
 
     const changeLayoutHandler = () => {
+        new Promise(() => {});
         setIsEditing(!isEditing);
     };
     return (
