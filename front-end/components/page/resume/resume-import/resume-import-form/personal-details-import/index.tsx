@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Col, Form, Input, Row } from 'antd';
+import React, { useState } from 'react';
+import { Col, Form, Input, Row, Typography } from 'antd';
 import SectionImportTitle from '../../section-import-title';
 import ImageUpload from '../../../../../custom/image-upload';
 import classNames from 'classnames';
-import styles from './styles.module.scss';
-import {
-    FieldFormData,
-    PersonalDetailsFormValue,
-} from '../../../../../../configs/interfaces/resume';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
     personalDetailFieldsState,
-    personalDetailValueState,
+    personalDetailTitleState,
 } from '../../../../../../recoil-state/resume-state';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import styles from './styles.module.scss';
 
 type PersonalDetailsImportProps = {
     className?: string;
@@ -25,13 +22,9 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     const [personalDetailFields, setPersonalDetailFields] = useRecoilState(
         personalDetailFieldsState
     );
+    const personalDetailTitle = useRecoilValue(personalDetailTitleState);
+
     const changeFieldsHandler = (_: any, allFields: any) => {
-        console.log(
-            'all Fields:',
-            allFields.map((field: any) => {
-                return { name: field.name[0], value: field.value };
-            })
-        );
         setPersonalDetailFields(
             allFields.map((field: any) => {
                 return { name: field.name[0], value: field.value };
@@ -39,20 +32,14 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
         );
     };
 
-    // const onFinish = async (values: PersonalDetailsFormValue) => {
-    //     const response = await fetch(
-    //         '../../../../../pages/api/personal-details',
-    //         {
-    //             method: 'POST',
-    //             body: JSON.stringify({}),
-    //         }
-    //     );
-    // };
-
     const getFixedField = () => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const [expand, setExpand] = useState(false);
+        const { Text } = Typography;
 
+        const expandHandler = () => {
+            setExpand(!expand);
+        };
         return (
             <>
                 <Row justify='start'>
@@ -131,12 +118,83 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         </Form.Item>
                     </Col>
                 </Row>
+                {!expand ? (
+                    <Text
+                        className={styles['expand-details-text']}
+                        onClick={expandHandler}>
+                        <br />
+                        Edit additional details <DownOutlined />
+                    </Text>
+                ) : (
+                    <>
+                        <Row justify='start'>
+                            <Col span={12} className='p-r-24'>
+                                <Form.Item
+                                    className='no-margin'
+                                    name='address'
+                                    label='Address'>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col span={12} className='p-l-24'>
+                                <Form.Item
+                                    className='no-margin'
+                                    name='postalCode'
+                                    label='Postal Code'>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row justify='start'>
+                            <Col span={12} className='p-r-24'>
+                                <Form.Item
+                                    className='no-margin'
+                                    name='drivingLicense'
+                                    label='Driving License'>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col span={12} className='p-l-24'>
+                                <Form.Item
+                                    className='no-margin'
+                                    name='nationality'
+                                    label='Nationality'>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row justify='start'>
+                            <Col span={12} className='p-r-24'>
+                                <Form.Item
+                                    className='no-margin'
+                                    name='placeOfBirth'
+                                    label='Place Of Birth'>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col span={12} className='p-l-24'>
+                                <Form.Item
+                                    className='no-margin'
+                                    name='dateOfBirth'
+                                    label='Date Of Birth'>
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Text
+                            className={styles['expand-details-text']}
+                            onClick={expandHandler}>
+                            <br />
+                            Hide additional details <UpOutlined />
+                        </Text>
+                    </>
+                )}
             </>
         );
     };
     return (
         <div className={classNames(className)}>
-            <SectionImportTitle>Personal Details</SectionImportTitle>
+            <SectionImportTitle>{personalDetailTitle}</SectionImportTitle>
             <Form
                 form={form}
                 layout='vertical'

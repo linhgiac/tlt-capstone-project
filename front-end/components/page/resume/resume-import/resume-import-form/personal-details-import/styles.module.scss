@@ -1,0 +1,10 @@
+@import '../../../../../../styles/variables.scss';
+
+.expand-details-text{
+    color: $primary-color;
+    font-weight: 600;
+    &:hover{
+        color: $hover-color;
+        cursor: pointer;
+    }
+}
