@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldFormData } from '../../../../../configs/interfaces/resume';
+import { FieldFormData } from '../../../../../configs/interfaces/resume.interface';
 import PersonalDetailsImport from './personal-details-import';
 import ProfessionalSummaryImport from './professional-summary-import';
 

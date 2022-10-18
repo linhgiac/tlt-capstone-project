@@ -1,6 +1,6 @@
-import { PersonalDetailData } from './../../mock/resume';
+import { PersonalDetailData } from '../../mock/resume.mock';
 import { atom, selector } from 'recoil';
-import { FieldFormData, PersonalDetailsDataType, ProfessionalSummaryDataType, ResumeDataType } from './../../configs/interfaces/resume';
+import { FieldFormData, PersonalDetailsDataType, ProfessionalSummaryDataType, ResumeDataType } from '../../configs/interfaces/resume.interface';
 
 export const resumeValueState = selector<ResumeDataType>({
     key: 'resumeValueState',
