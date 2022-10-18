@@ -6,6 +6,7 @@ import { Form, Input } from 'antd';
 import styles from './styles.module.scss';
 import { professionalSummaryFieldState } from '../../../../../../recoil-state/resume-state';
 import { useRecoilState } from 'recoil';
+import { professionalSummaryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title-state';
 
 const { TextArea } = Input;
 
@@ -19,6 +20,8 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     const [form] = Form.useForm();
     const [professionalSummaryField, setProfessionalSummaryField] =
         useRecoilState(professionalSummaryFieldState);
+    const [professionalSummaryTitle, setProfessionalSummaryTitle] =
+        useRecoilState(professionalSummaryTitleValueState);
     const SUMMARY_INTRO =
         'Write 2-4 short & energetic sentences to interest the reader! Mention your role, experience & most importantly - your biggest achievements, best qualities and skills.';
 
@@ -31,7 +34,12 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     };
     return (
         <div className={classNames(className)}>
-            <SectionImportTitle>Professional Summary</SectionImportTitle>
+            <SectionImportTitle
+                onChangeTitle={(title: string) => {
+                    setProfessionalSummaryTitle(title);
+                }}>
+                {professionalSummaryTitle}
+            </SectionImportTitle>
             <p style={{ color: 'grey', fontSize: '12px' }}>{SUMMARY_INTRO}</p>
             <Form
                 form={form}

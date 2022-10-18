@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Col, Form, Input, Row, Typography } from 'antd';
 import SectionImportTitle from '../../section-import-title';
 import ImageUpload from '../../../../../custom/image-upload';
@@ -22,15 +22,20 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     const [personalDetailFields, setPersonalDetailFields] = useRecoilState(
         personalDetailFieldsState
     );
-    const personalDetailTitle = useRecoilValue(personalDetailTitleState);
+    const [personalDetailTitle, setPersonalDetailTitle] = useRecoilState(
+        personalDetailTitleState
+    );
 
-    const changeFieldsHandler = (_: any, allFields: any) => {
-        setPersonalDetailFields(
-            allFields.map((field: any) => {
-                return { name: field.name[0], value: field.value };
-            })
-        );
-    };
+    const changeFieldsHandler = useCallback(
+        (_: any, allFields: any) => {
+            setPersonalDetailFields(
+                allFields.map((field: any) => {
+                    return { name: field.name[0], value: field.value };
+                })
+            );
+        },
+        [setPersonalDetailFields]
+    );
 
     const getFixedField = () => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -194,7 +199,12 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     };
     return (
         <div className={classNames(className)}>
-            <SectionImportTitle>{personalDetailTitle}</SectionImportTitle>
+            <SectionImportTitle
+                onChangeTitle={(title: string) => {
+                    setPersonalDetailTitle(title);
+                }}>
+                {personalDetailTitle}
+            </SectionImportTitle>
             <Form
                 form={form}
                 layout='vertical'

@@ -5,16 +5,22 @@ import styles from './styles.module.scss';
 
 type SectionImportTitleProps = {
     className?: string;
-    children: React.ReactNode;
+    children: string;
+    onChangeTitle: (title: string) => void;
 };
 
-function SectionImportTitle({ className, children }: SectionImportTitleProps) {
+function SectionImportTitle({
+    className,
+    children,
+    onChangeTitle,
+}: SectionImportTitleProps) {
     return (
         <EditableTitle
             className={classNames(
                 { className },
                 styles['section-import-title']
-            )}>
+            )}
+            onChangeTitle={onChangeTitle}>
             {children}
         </EditableTitle>
     );
