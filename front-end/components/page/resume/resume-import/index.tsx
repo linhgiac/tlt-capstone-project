@@ -5,6 +5,7 @@ import { Button } from 'antd';
 import ResumeImportForm from './resume-import-form';
 import { resumeValueState } from '../../../../recoil-state/resume-state';
 import { useRecoilValue } from 'recoil';
+import { useResetAllResumeChangeFields } from '../../../../configs/utils/resume-value.utils';
 
 type ResumeImportProps = {
     className?: string;
@@ -12,7 +13,7 @@ type ResumeImportProps = {
 
 const ResumeImport = (props: ResumeImportProps) => {
     const { className } = props;
-    const resumeValue = useRecoilValue(resumeValueState);
+    const resumeValue: any = useRecoilValue(resumeValueState);
 
     const submitFormHandler = async () => {
         const response = await fetch('/api/resume-editor', {

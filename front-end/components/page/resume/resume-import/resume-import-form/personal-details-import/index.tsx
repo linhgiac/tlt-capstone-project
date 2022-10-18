@@ -10,6 +10,7 @@ import {
 } from '../../../../../../recoil-state/resume-state';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
+import { FieldFormData } from '../../../../../../configs/interfaces/resume.interface';
 
 type PersonalDetailsImportProps = {
     className?: string;
@@ -26,15 +27,40 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
         personalDetailTitleState
     );
 
+    // const changeFieldsHandler = useCallback(
+    //     (_: any, allFields: any) => {
+    //         setPersonalDetailFields(
+    //             allFields.map((field: any) => {
+    //                 return { name: field.name[0], value: field.value };
+    //             })
+    //         );
+    //     },
+    //     [setPersonalDetailFields]
+    // );
+
     const changeFieldsHandler = useCallback(
-        (_: any, allFields: any) => {
-            setPersonalDetailFields(
-                allFields.map((field: any) => {
-                    return { name: field.name[0], value: field.value };
-                })
+        (changeFields: any, _: any) => {
+            const personalDetailsChangeField = {
+                name: changeFields[0].name[0],
+                value: changeFields[0].value,
+            };
+            let personalDetailsChangeFields = personalDetailFields;
+            const numOfFields: number = personalDetailsChangeFields.length;
+            personalDetailsChangeFields = personalDetailsChangeFields.filter(
+                (field: FieldFormData) =>
+                    field.name !== personalDetailsChangeField.name
+            );
+            personalDetailsChangeFields = [
+                ...personalDetailsChangeFields,
+                personalDetailsChangeField,
+            ];
+            setPersonalDetailFields(personalDetailsChangeFields);
+            console.log(
+                'personalDetailsChangeFields',
+                personalDetailsChangeFields
             );
         },
-        [setPersonalDetailFields]
+        [setPersonalDetailFields, personalDetailFields]
     );
 
     const getFixedField = () => {
