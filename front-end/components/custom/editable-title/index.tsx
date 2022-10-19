@@ -15,7 +15,6 @@ type EditableTitleProps = {
 export const EditableTitle = (props: EditableTitleProps) => {
     const { className, children, onChangeTitle, defaultTitle } = props;
     const [titleWidth, setTitleWidth] = useState(`${children.length * 0.55}em`);
-    console.log('children', children);
 
     // const editHandler = useCallback(() => {
     //     setIsEditing(true);

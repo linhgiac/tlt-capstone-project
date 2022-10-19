@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import ResumeTitle from './resume-title';
 import classNames from 'classnames';
 import { Button } from 'antd';
 import ResumeImportForm from './resume-import-form';
-import { resumeValueState } from '../../../../recoil-state/resume-state';
-import { useRecoilValue } from 'recoil';
-import { useResetAllResumeChangeFields } from '../../../../configs/utils/resume-value.utils';
+import {
+    personalDetailFieldsState,
+    professionalSummaryFieldState,
+    resumeValueState,
+} from '../../../../recoil-state/resume-state/resume.state';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 type ResumeImportProps = {
     className?: string;
@@ -15,6 +18,18 @@ const ResumeImport = (props: ResumeImportProps) => {
     const { className } = props;
     const resumeValue: any = useRecoilValue(resumeValueState);
 
+    const resetPersonalDetailChangeValue = useSetRecoilState(
+        personalDetailFieldsState
+    );
+    const resetProfessionalSummaryChangeValue = useSetRecoilState(
+        professionalSummaryFieldState
+    );
+
+    const resetChangeValue = useCallback(async () => {
+        resetPersonalDetailChangeValue([]);
+        resetProfessionalSummaryChangeValue([]);
+    }, [resetPersonalDetailChangeValue, resetProfessionalSummaryChangeValue]);
+
     const submitFormHandler = async () => {
         const response = await fetch('/api/resume-editor', {
             method: 'POST',
@@ -23,6 +38,7 @@ const ResumeImport = (props: ResumeImportProps) => {
         });
         const data = await response.json();
         console.log('data', data);
+        await resetChangeValue();
     };
     return (
         <div className={classNames(className)}>

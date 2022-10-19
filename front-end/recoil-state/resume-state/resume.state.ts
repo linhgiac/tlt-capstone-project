@@ -1,4 +1,4 @@
-import { PersonalDetailData } from '../../mock/resume.mock';
+import { personalDetailTitleValueState, professionalSummaryTitleValueState} from './resume-title.state';
 import { atom, selector } from 'recoil';
 import { FieldFormData, PersonalDetailsDataType, ProfessionalSummaryDataType, ResumeDataType } from '../../configs/interfaces/resume.interface';
 
@@ -10,10 +10,6 @@ export const resumeValueState = selector<ResumeDataType>({
         return {personalDetail, professionalSummary}
     }
 })
-export const personalDetailTitleState = atom<string>({
-    key: 'personalDetailTitle',
-    default: 'Personal Details'
-})
 export const personalDetailFieldsState = atom<FieldFormData[]>({
     key: 'personalDetailFieldsState',
     default: []
@@ -22,8 +18,9 @@ export const personalDetailFieldsState = atom<FieldFormData[]>({
 export const personalDetailValueState = selector<PersonalDetailsDataType>({
     key: 'personalDetailValueState',
     get: ({get}) => {
+        const title = get(personalDetailTitleValueState)
         const fields = get(personalDetailFieldsState)
-        let personalDetail = {}
+        let personalDetail = {header: title}
         fields.forEach((field) => {
             const obj = {[field.name.toString()]: field.value}
             personalDetail = {...personalDetail, ...obj}
@@ -39,8 +36,9 @@ export const professionalSummaryFieldState = atom<FieldFormData[]>({
 export const professionalSummaryValueState = selector<ProfessionalSummaryDataType>({
     key: 'professionalSummaryValueState',
     get: ({get}) => {
+        const title = get(professionalSummaryTitleValueState)
         const fields = get(professionalSummaryFieldState)
-        let professionalSummary = {}
+        let professionalSummary = {header: title}
         fields.forEach((field) => {
             const obj = {[field.name.toString()]: field.value}
             professionalSummary = {...professionalSummary, ...obj}

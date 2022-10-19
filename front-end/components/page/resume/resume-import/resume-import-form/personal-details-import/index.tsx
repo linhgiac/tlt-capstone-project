@@ -4,13 +4,11 @@ import SectionImportTitle from '../../section-import-title';
 import ImageUpload from '../../../../../custom/image-upload';
 import classNames from 'classnames';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-    personalDetailFieldsState,
-    personalDetailTitleState,
-} from '../../../../../../recoil-state/resume-state';
+import { personalDetailFieldsState } from '../../../../../../recoil-state/resume-state/resume.state';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
 import { FieldFormData } from '../../../../../../configs/interfaces/resume.interface';
+import { personalDetailTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 
 type PersonalDetailsImportProps = {
     className?: string;
@@ -24,7 +22,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
         personalDetailFieldsState
     );
     const [personalDetailTitle, setPersonalDetailTitle] = useRecoilState(
-        personalDetailTitleState
+        personalDetailTitleValueState
     );
 
     // const changeFieldsHandler = useCallback(
@@ -45,7 +43,6 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                 value: changeFields[0].value,
             };
             let personalDetailsChangeFields = personalDetailFields;
-            const numOfFields: number = personalDetailsChangeFields.length;
             personalDetailsChangeFields = personalDetailsChangeFields.filter(
                 (field: FieldFormData) =>
                     field.name !== personalDetailsChangeField.name
@@ -55,10 +52,6 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                 personalDetailsChangeField,
             ];
             setPersonalDetailFields(personalDetailsChangeFields);
-            console.log(
-                'personalDetailsChangeFields',
-                personalDetailsChangeFields
-            );
         },
         [setPersonalDetailFields, personalDetailFields]
     );

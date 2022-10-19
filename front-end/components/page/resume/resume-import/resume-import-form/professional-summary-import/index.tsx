@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import SectionImportTitle from '../../section-import-title';
 import { Form, Input } from 'antd';
 import styles from './styles.module.scss';
-import { professionalSummaryFieldState } from '../../../../../../recoil-state/resume-state';
+import { professionalSummaryFieldState } from '../../../../../../recoil-state/resume-state/resume.state';
 import { useRecoilState } from 'recoil';
-import { professionalSummaryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title-state';
+import { professionalSummaryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 
 const { TextArea } = Input;
 
@@ -25,11 +25,12 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     const SUMMARY_INTRO =
         'Write 2-4 short & energetic sentences to interest the reader! Mention your role, experience & most importantly - your biggest achievements, best qualities and skills.';
 
-    const changeFieldsHandler = (_: any, allFields: any) => {
+    const changeFieldsHandler = (changeFields: any, _: any) => {
         setProfessionalSummaryField(
-            allFields.map((field: any) => {
-                return { name: field.name[0], value: field.value };
-            })
+            // allFields.map((field: any) => {
+            //     return { name: field.name[0], value: field.value };
+            // })
+            [{ name: changeFields[0].name[0], value: changeFields[0].value }]
         );
     };
     return (
