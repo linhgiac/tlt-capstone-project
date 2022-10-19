@@ -12,10 +12,11 @@ const { TextArea } = Input;
 
 type ProfessionalSummaryImportProps = {
     className?: string;
+    defaultTitle?: string;
 };
 
 function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
-    const { className } = props;
+    const { className, defaultTitle } = props;
 
     const [form] = Form.useForm();
     const [professionalSummaryField, setProfessionalSummaryField] =
@@ -38,7 +39,8 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
             <SectionImportTitle
                 onChangeTitle={(title: string) => {
                     setProfessionalSummaryTitle(title);
-                }}>
+                }}
+                defaultTitle={defaultTitle}>
                 {professionalSummaryTitle}
             </SectionImportTitle>
             <p style={{ color: 'grey', fontSize: '12px' }}>{SUMMARY_INTRO}</p>

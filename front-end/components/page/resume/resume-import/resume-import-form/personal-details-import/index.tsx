@@ -12,10 +12,11 @@ import { personalDetailTitleValueState } from '../../../../../../recoil-state/re
 
 type PersonalDetailsImportProps = {
     className?: string;
+    defaultTitle?: string;
 };
 
 const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
-    const { className } = props;
+    const { className, defaultTitle } = props;
     const [form] = Form.useForm();
 
     const [personalDetailFields, setPersonalDetailFields] = useRecoilState(
@@ -221,7 +222,8 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
             <SectionImportTitle
                 onChangeTitle={(title: string) => {
                     setPersonalDetailTitle(title);
-                }}>
+                }}
+                defaultTitle={defaultTitle}>
                 {personalDetailTitle}
             </SectionImportTitle>
             <Form

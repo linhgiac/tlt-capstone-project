@@ -7,12 +7,14 @@ type SectionImportTitleProps = {
     className?: string;
     children: string;
     onChangeTitle: (title: string) => void;
+    defaultTitle?: string;
 };
 
 function SectionImportTitle({
     className,
     children,
     onChangeTitle,
+    defaultTitle,
 }: SectionImportTitleProps) {
     return (
         <EditableTitle
@@ -20,7 +22,8 @@ function SectionImportTitle({
                 { className },
                 styles['section-import-title']
             )}
-            onChangeTitle={onChangeTitle}>
+            onChangeTitle={onChangeTitle}
+            defaultTitle={defaultTitle}>
             {children}
         </EditableTitle>
     );

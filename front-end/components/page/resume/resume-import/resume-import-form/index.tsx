@@ -10,8 +10,14 @@ const ResumeImportForm = (props: Props) => {
     const { className } = props;
     return (
         <div>
-            <PersonalDetailsImport className='p-b-20' />
-            <ProfessionalSummaryImport className='p-b-20' />
+            <PersonalDetailsImport
+                className='p-b-20'
+                defaultTitle='Personal Details'
+            />
+            <ProfessionalSummaryImport
+                className='p-b-20'
+                defaultTitle='Professional Summary'
+            />
         </div>
     );
 };
