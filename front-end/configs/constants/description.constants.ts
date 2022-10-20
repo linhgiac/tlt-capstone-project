@@ -1,0 +1,2 @@
+export const PROFESSIONAL_SUMMARY_DESCRIPTION = 'Write 2-4 short & energetic sentences to interest the reader! Mention your role, experience & most importantly - your biggest achievements, best qualities and skills.'
+export const EMPLOYMENT_HISTORY_DESCRIPTION = 'Show your relevant experience (last 10 years). Use bullet points to note your achievements, if possible - use numbers/facts (Achieved X, measured by Y, by doing Z)'

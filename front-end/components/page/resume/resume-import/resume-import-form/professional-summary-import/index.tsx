@@ -7,6 +7,7 @@ import styles from './styles.module.scss';
 import { professionalSummaryFieldState } from '../../../../../../recoil-state/resume-state/resume.state';
 import { useRecoilState } from 'recoil';
 import { professionalSummaryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
+import { PROFESSIONAL_SUMMARY_DESCRIPTION } from '../../../../../../configs/constants/description.constants';
 
 const { TextArea } = Input;
 
@@ -23,9 +24,6 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
         useRecoilState(professionalSummaryFieldState);
     const [professionalSummaryTitle, setProfessionalSummaryTitle] =
         useRecoilState(professionalSummaryTitleValueState);
-    const SUMMARY_INTRO =
-        'Write 2-4 short & energetic sentences to interest the reader! Mention your role, experience & most importantly - your biggest achievements, best qualities and skills.';
-
     const changeFieldsHandler = (changeFields: any, _: any) => {
         setProfessionalSummaryField(
             // allFields.map((field: any) => {
@@ -43,7 +41,9 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
                 defaultTitle={defaultTitle}>
                 {professionalSummaryTitle}
             </SectionImportTitle>
-            <p style={{ color: 'grey', fontSize: '12px' }}>{SUMMARY_INTRO}</p>
+            <p style={{ color: 'grey', fontSize: '12px' }}>
+                {PROFESSIONAL_SUMMARY_DESCRIPTION}
+            </p>
             <Form
                 form={form}
                 layout='vertical'

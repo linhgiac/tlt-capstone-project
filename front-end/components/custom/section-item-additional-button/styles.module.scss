@@ -1,0 +1,9 @@
+@import './../../../styles/variables.scss';
+.section-item-add-button{
+    color: $primary-color;
+    font-weight: 600;
+    &:hover{
+        color: $hover-color;
+        cursor: pointer;
+    }
+}
