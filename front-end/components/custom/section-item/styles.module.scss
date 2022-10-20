@@ -1,0 +1,28 @@
+@import './../../../styles/variables.scss';
+.section-item__container{
+    border: 1px solid $light-color;
+    border-radius: 5px;
+    
+    .section-item__header{
+        justify-content: space-between;
+        height: 60px;
+        line-height: 20px;
+        padding: 20px;
+        div{
+            font-weight: 600;
+        };
+        .section-item__icon{
+            stroke: $medium-color;   
+            stroke-width: 70;    
+         }
+        
+    }
+    .section-item__form{
+        padding: 0px 20px;
+    }
+    &:hover{
+            color: $hover-color;
+            border-color: $hover-color;
+            stroke: $hover-color;
+        }
+}

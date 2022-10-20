@@ -55,12 +55,22 @@ export const EditableTitle = (props: EditableTitleProps) => {
             />
             {/* <div className={classNames(className)}>{children}</div> */}
             <EditOutlined
-                className={classNames(className, 'center', 'p-l-8')}
+                className={classNames(
+                    className,
+                    'center',
+                    'p-l-8',
+                    styles['editable-title-icon']
+                )}
                 onClick={editHandler}
             />
             {defaultTitle && (
                 <UndoOutlined
-                    className={classNames(className, 'center', 'p-l-8')}
+                    className={classNames(
+                        className,
+                        'center',
+                        'p-l-8',
+                        styles['editable-title-icon']
+                    )}
                     onClick={resetTitleHandler}
                 />
             )}
