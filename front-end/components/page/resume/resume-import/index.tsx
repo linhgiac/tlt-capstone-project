@@ -7,7 +7,7 @@ import {
     personalDetailFieldsState,
     professionalSummaryFieldState,
     resumeValueState,
-} from '../../../../recoil-state/resume-state/resume.state';
+} from '../../../../recoil-state/resume-state/resume-single-section.state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 type ResumeImportProps = {

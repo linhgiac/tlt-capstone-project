@@ -4,7 +4,7 @@ import SectionImportTitle from '../../section-import-title';
 import ImageUpload from '../../../../../custom/image-upload';
 import classNames from 'classnames';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { personalDetailFieldsState } from '../../../../../../recoil-state/resume-state/resume.state';
+import { personalDetailFieldsState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
 import { FieldFormData } from '../../../../../../configs/interfaces/resume.interface';

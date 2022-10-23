@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import SectionImportTitle from '../../section-import-title';
 import { Form, Input } from 'antd';
 import styles from './styles.module.scss';
-import { professionalSummaryFieldState } from '../../../../../../recoil-state/resume-state/resume.state';
+import { professionalSummaryFieldState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
 import { useRecoilState } from 'recoil';
 import { professionalSummaryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import { PROFESSIONAL_SUMMARY_DESCRIPTION } from '../../../../../../configs/constants/description.constants';
