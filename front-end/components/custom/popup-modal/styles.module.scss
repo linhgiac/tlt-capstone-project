@@ -1,0 +1,82 @@
+@import '/styles/variables.scss';
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 520px;
+    min-height: 220px;
+  }
+  
+.container {
+    width: 520px;
+    min-height: 220px;
+    margin: -24px;
+    padding-bottom: 20px;
+  }
+  
+.header {
+    height: 14px;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    .error {
+      height: 100%;
+      border-radius: 8px 8px 0 0;
+      background-color: $error-color;
+    }
+    .success {
+      height: 100%;
+      border-radius: 8px 8px 0 0;
+      background-color: $success-color;
+    }
+    .warning {
+      height: 100%;
+      border-radius: 8px 8px 0 0;
+      background-color: $warning-color;
+    }
+    .info {
+      height: 100%;
+      border-radius: 8px 8px 0 0;
+      background-color: $primary-color;
+    }
+  }
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    gap: 22px;
+    padding: 35px 75px;
+    word-break: break-word;
+  }
+  
+.title {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 40px;
+    text-align: center;
+  }
+  
+.description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: $inactive-text-color;
+  }
+  
+.action {
+    padding-top: 20px;
+    align-items: center;
+    justify-content: center;
+    gap: 75px;
+    width: 100%;
+    display: flex;
+  }
+  
+.button {
+    width: 137px;
+    border-radius: 8px;
+    font-weight: 400;
+  }
