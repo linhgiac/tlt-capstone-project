@@ -6,17 +6,19 @@ type EmploymentHistoryItemsProps = {
     className?: string;
     sectionType: string;
     items?: EmploymentHistoryItemDataType[];
+    onRemoveItem: (position: number) => void;
 };
 
 const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
-    const { className, sectionType, items } = props;
+    const { className, sectionType, items, onRemoveItem } = props;
     return (
         <>
             {items?.map((item) => (
                 <SectionItem
-                    key={item.id}
+                    key={item.position}
                     itemHeader={'Not specified'}
                     sectionType={sectionType}
+                    onRemove={onRemoveItem.bind(null, item.position)}
                 />
             ))}
             {/* {items?.map((item) => {

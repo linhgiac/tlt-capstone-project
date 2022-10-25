@@ -41,7 +41,7 @@ export type ComplexSectionDataType = {
 export type ComplexSectionDetailsDataType = {
     id?: number,
     header?: string,
-    position?: number,
+    position: number,
     sectionType: ComplexSection,
     items?: ComplexSectionItemDataType[]
 }
@@ -50,7 +50,7 @@ export type ComplexSectionItemDataType = EmploymentHistoryItemDataType | Educati
 
 export type EmploymentHistoryItemDataType = {
     id?: number,
-    position?:number,
+    position:number,
     jobTitle?: string,
     employer?:string,
     description?: string,
@@ -61,7 +61,7 @@ export type EmploymentHistoryItemDataType = {
 
 export type EducationItemDataType = {
     id?: number,
-    position?: number,
+    position: number,
     school?: string,
     degree?: string,
     description?: string,
@@ -72,7 +72,7 @@ export type EducationItemDataType = {
 
 export type WorkExperienceItemDataType = {
     id?: number,
-    position?: number,
+    position: number,
     title?: string,
     role?: string,
     description?: string,
@@ -82,21 +82,21 @@ export type WorkExperienceItemDataType = {
 export type SkillLevelType = 'novice' | 'beginner' | 'skillful' | 'experienced' | 'expert'
 export type SkillItemDataType = {
     id?: number,
-    position?: number,
+    position: number,
     name?: string,
     level?: SkillLevelType
 }
 
 export type LinkItemDataType = {
     id?: number,
-    position?: number,
+    position: number,
     label?: string,
     link?: string
 }
 
 export type CustomItemDataType = {
     id?: number,
-    position?: number,
+    position: number,
     title?: string,
     description?: string,
     city?: string,
@@ -112,6 +112,6 @@ export type FieldFormData = {
 export type ComplexItemsFieldFormData = {
     itemId?: number,
     sectionType: string,
-    position?: number
+    position: number
     data?: FieldFormData[] 
 }

@@ -4,22 +4,31 @@ import classNames from 'classnames';
 import styles from './styles.module.scss';
 import SectionForm from '../section-form';
 import { SECTION_TYPE } from '../../../configs/constants/resume.constants';
+import { Modal } from 'antd';
 
 type Props = {
     className?: string;
     itemHeader: string;
     children?: string;
     sectionType: string;
+    onRemove: () => void;
 };
 
 const SectionItem = (props: Props) => {
-    const { className, itemHeader, children, sectionType } = props;
+    const { className, itemHeader, children, sectionType, onRemove } = props;
     const labelList = useMemo(() => SECTION_TYPE[sectionType], [sectionType]);
     const [isVisible, setIsVisible] = useState(false);
+    const [isOpened, setIsOpened] = useState(false);
     const clickHandler = () => {
         setIsVisible(!isVisible);
     };
-    const deleteHandler = () => {};
+    const showModal = () => {
+        setIsOpened(true);
+    };
+    const deleteHandler = () => {
+        onRemove();
+        setIsOpened(false);
+    };
     return (
         <>
             <div
@@ -49,13 +58,22 @@ const SectionItem = (props: Props) => {
                             'center',
                             styles['section-item__remove']
                         )}
-                        onClick={deleteHandler}>
+                        onClick={showModal}>
                         <DeleteOutlined />
                     </div>
                 </div>
                 <div className={styles['section-item__form']}>
                     {isVisible && <SectionForm labelList={labelList} />}
                 </div>
+            </div>
+            <div>
+                <Modal
+                    title='Delete Entry'
+                    open={isOpened}
+                    onOk={deleteHandler}
+                    onCancel={() => {
+                        setIsOpened(false);
+                    }}></Modal>
             </div>
         </>
     );

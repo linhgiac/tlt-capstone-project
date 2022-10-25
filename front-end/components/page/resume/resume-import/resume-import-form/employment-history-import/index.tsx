@@ -9,6 +9,7 @@ import {
     employmentHistoriesValueState,
     employmentHistoryItemsState,
 } from '../../../../../../recoil-state/resume-state/resume-complex-section.state';
+import { arrangePosition } from '../../../../../../configs/utils/position';
 
 type EmploymentHistoryProps = {
     className?: string;
@@ -35,7 +36,16 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
             return prevItems.concat([newItem]);
         });
     };
-    // const removeItemHandler = () => {};
+    const removeItemHandler = async (position: number) => {
+        setEmploymentHistoryItems((prevItems) => {
+            return prevItems.filter((item) => item.position != position);
+        });
+
+        setEmploymentHistoryItems((prevItems) => {
+            return arrangePosition(prevItems);
+        });
+    };
+
     useEffect(() => {
         console.log('employmentHistoryItems', employmentHistoryItems);
     }, [employmentHistoryItems]);
@@ -49,7 +59,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
             <EmploymentHistoryItems
                 items={employmentHistoryItems}
                 sectionType={sectionType}
-                // onRemoveItem={removeItemHandler}
+                onRemoveItem={removeItemHandler}
             />
             <SectionItemAdditionalButton
                 onAddItem={addItemHandler}
