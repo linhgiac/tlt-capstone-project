@@ -4,9 +4,9 @@ export type ResumeDataType = {
     id?: number,
     title?: string,
     templateId?: number,
-    personalDetail: PersonalDetailsDataType,
-    professionalSummary: ProfessionalSummaryDataType
-    complexSection: ComplexSectionDataType
+    personalDetail?: PersonalDetailsDataType,
+    professionalSummary?: ProfessionalSummaryDataType
+    complexSection?: ComplexSectionDataType[]
 }
 
 export type PersonalDetailsDataType = {
@@ -39,11 +39,14 @@ export type ComplexSectionDataType = {
 }
 
 export type ComplexSectionDetailsDataType = {
-    is?: number,
+    id?: number,
     header?: string,
     position?: number,
-    items?: EmploymentHistoryItemDataType[] | EducationItemDataType[] | WorkExperienceItemDataType[] |SkillItemDataType[] | LinkItemDataType[] | CustomItemDataType[]
+    sectionType: ComplexSection,
+    items?: ComplexSectionItemDataType[]
 }
+
+export type ComplexSectionItemDataType = EmploymentHistoryItemDataType | EducationItemDataType | WorkExperienceItemDataType |SkillItemDataType| LinkItemDataType | CustomItemDataType
 
 export type EmploymentHistoryItemDataType = {
     id?: number,
@@ -107,6 +110,8 @@ export type FieldFormData = {
     errors?: string[]
 }
 export type ComplexItemsFieldFormData = {
-    itemId: number,
+    itemId?: number,
+    sectionType: string,
+    position?: number
     data?: FieldFormData[] 
 }

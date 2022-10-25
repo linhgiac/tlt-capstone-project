@@ -19,6 +19,7 @@ const SectionItem = (props: Props) => {
     const clickHandler = () => {
         setIsVisible(!isVisible);
     };
+    const deleteHandler = () => {};
     return (
         <>
             <div
@@ -34,7 +35,7 @@ const SectionItem = (props: Props) => {
                             styles['section-item__header']
                         )}
                         onClick={clickHandler}>
-                        <div>Test</div>
+                        <div>{itemHeader}</div>
                         <div
                             className={classNames(
                                 'center',
@@ -47,7 +48,8 @@ const SectionItem = (props: Props) => {
                         className={classNames(
                             'center',
                             styles['section-item__remove']
-                        )}>
+                        )}
+                        onClick={deleteHandler}>
                         <DeleteOutlined />
                     </div>
                 </div>

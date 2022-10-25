@@ -18,5 +18,5 @@ const EDUCATION_LABEL ={}
 
 export const SECTION_TYPE:any = {
     personalDetails: PERSONAL_DETAILS_LABEL,
-    employmentHistory: EMPLOYMENT_HISTORY_LABEL,  
+    employmentHistories: EMPLOYMENT_HISTORY_LABEL,  
 }

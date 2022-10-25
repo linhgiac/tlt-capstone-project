@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <ConfigProvider prefixCls='tlt'>
             <RecoilRoot>
-                <Component {...pageProps} />;
+                <Component {...pageProps} />
             </RecoilRoot>
         </ConfigProvider>
     );

@@ -22,7 +22,7 @@ const ResumeImportForm = (props: Props) => {
             <EmploymentHistoryImport
                 className='p-b-20'
                 defaultTitle='Employment History'
-                sectionType='employmentHistory'
+                sectionType='employmentHistories'
             />
         </div>
     );

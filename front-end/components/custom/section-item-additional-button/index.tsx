@@ -6,17 +6,30 @@ import styles from './styles.module.scss';
 
 type Props = {
     className?: string;
-    type: 'employment' | 'education' | 'link' | 'skill' | 'item';
+    sectionType: keyof typeof Type;
+    onAddItem: (type: string) => void;
 };
+enum Type {
+    employmentHistories = 'employment',
+    education = 'education',
+    workExperiences = 'project',
+    skills = 'skills',
+    links = 'links',
+    customs = 'item',
+}
 
 const SectionItemAdditionalButton = (props: Props) => {
-    const { className, type } = props;
+    const { className, sectionType, onAddItem } = props;
     const { Text } = Typography;
 
     return (
-        <div className={(classNames(className), 'p-t-20')}>
+        <div
+            className={(classNames(className), 'p-t-20')}
+            onClick={() => {
+                onAddItem(sectionType);
+            }}>
             <Text className={styles['section-item-add-button']}>
-                <PlusOutlined /> Add one more {type}
+                <PlusOutlined /> Add one more {Type[sectionType]}
             </Text>
         </div>
     );
