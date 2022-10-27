@@ -1,22 +1,36 @@
 import { DeleteOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
 import SectionForm from '../section-form';
 import { SECTION_TYPE } from '../../../configs/constants/resume.constants';
 import { Modal } from 'antd';
 import PopupModal from '../popup-modal';
+import { EmploymentHistoryItemDataType } from '../../../configs/interfaces/resume.interface';
 
 type Props = {
+    position: number;
     className?: string;
     itemHeader: string;
     children?: string;
     sectionType: string;
     onRemove: () => void;
+    onChangeItem: (
+        changedData: EmploymentHistoryItemDataType,
+        allData: EmploymentHistoryItemDataType
+    ) => void;
 };
 
 const SectionItem = (props: Props) => {
-    const { className, itemHeader, children, sectionType, onRemove } = props;
+    const {
+        position,
+        className,
+        itemHeader,
+        children,
+        sectionType,
+        onRemove,
+        onChangeItem,
+    } = props;
     const labelList = useMemo(() => SECTION_TYPE[sectionType], [sectionType]);
     const [isVisible, setIsVisible] = useState(false);
     const [isModalOpened, setIsModalOpened] = useState(false);
@@ -30,6 +44,15 @@ const SectionItem = (props: Props) => {
         onRemove();
         setIsModalOpened(false);
     };
+
+    const changeItemValueHandler = useCallback(
+        (itemChangedFields: any, itemAllFields: any) => {
+            const changedData = { ...itemChangedFields, position };
+            const allData = { ...itemAllFields, position };
+            onChangeItem(changedData, allData);
+        },
+        [onChangeItem, position]
+    );
     return (
         <>
             <div
@@ -64,7 +87,12 @@ const SectionItem = (props: Props) => {
                     </div>
                 </div>
                 <div className={styles['section-item__form']}>
-                    {isVisible && <SectionForm labelList={labelList} />}
+                    {isVisible && (
+                        <SectionForm
+                            labelList={labelList}
+                            onChangeItemValue={changeItemValueHandler}
+                        />
+                    )}
                 </div>
             </div>
             <div>

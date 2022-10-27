@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import SectionItem from '../../../../../custom/section-item';
 import classNames from 'classnames';
 import SectionItemAdditionalButton from '../../../../../custom/section-item-additional-button';
@@ -10,6 +10,9 @@ import {
     employmentHistoryItemsState,
 } from '../../../../../../recoil-state/resume-state/resume-complex-section.state';
 import { arrangePosition } from '../../../../../../configs/utils/position';
+import { employmentHistoryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
+import SectionImportTitle from '../../section-import-title';
+import { EmploymentHistoryItemDataType } from '../../../../../../configs/interfaces/resume.interface';
 
 type EmploymentHistoryProps = {
     className?: string;
@@ -23,6 +26,10 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         defaultTitle,
         sectionType = 'employmentHistories',
     } = props;
+    const [employmentHistoryTitle, setEmploymentHistoryTitle] = useRecoilState(
+        employmentHistoryTitleValueState
+    );
+
     const [employmentHistoryItems, setEmploymentHistoryItems] = useRecoilState(
         employmentHistoryItemsState
     );
@@ -45,6 +52,21 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
             return arrangePosition(prevItems);
         });
     };
+    const changeItemHandler = useCallback(
+        (
+            changedData: EmploymentHistoryItemDataType,
+            allData: EmploymentHistoryItemDataType
+        ) => {
+            setEmploymentHistoryItems((prevItems) => {
+                const { position } = changedData;
+                const prevUnChangedItems = prevItems.filter(
+                    (item) => item.position != position
+                );
+                return prevUnChangedItems.concat([changedData]);
+            });
+        },
+        [setEmploymentHistoryItems]
+    );
 
     useEffect(() => {
         console.log('employmentHistoryItems', employmentHistoryItems);
@@ -52,7 +74,13 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
 
     return (
         <div className={classNames(className)}>
-            <h1>{defaultTitle}</h1>
+            <SectionImportTitle
+                onChangeTitle={(title: string) => {
+                    setEmploymentHistoryTitle(title);
+                }}
+                defaultTitle={defaultTitle}>
+                {employmentHistoryTitle}
+            </SectionImportTitle>
             <p style={{ color: 'grey', fontSize: '12px' }}>
                 {EMPLOYMENT_HISTORY_DESCRIPTION}
             </p>
@@ -60,6 +88,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
                 items={employmentHistoryItems}
                 sectionType={sectionType}
                 onRemoveItem={removeItemHandler}
+                onChangeItem={changeItemHandler}
             />
             <SectionItemAdditionalButton
                 onAddItem={addItemHandler}
