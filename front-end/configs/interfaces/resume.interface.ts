@@ -6,13 +6,12 @@ export type ResumeDataType = {
     templateId?: number,
     personalDetail?: PersonalDetailsDataType,
     professionalSummary?: ProfessionalSummaryDataType
-    complexSection?: ComplexSectionDataType[]
+    complexSections?: ComplexSectionDataType
 }
 
 export type PersonalDetailsDataType = {
     id?: number,
     header?: string,
-    resumeId?: number
     jobTitle?: string,
     firstName?: string,
     lastName?: string,
@@ -34,8 +33,8 @@ export type ProfessionalSummaryDataType = {
 export type ComplexSection = 'employmentHistories' | 'education' | 'workExperiences' | 'skills' | 'links' | 'customs';
 
 export type ComplexSectionDataType = {
-    sectionType: ComplexSection
-    sectionDetails: Record<ComplexSection, ComplexSectionDetailsDataType>
+    sectionType: ComplexSection[]
+    sectionDetails: Partial<Record<ComplexSection, ComplexSectionDetailsDataType>>
 }
 
 export type ComplexSectionDetailsDataType = {

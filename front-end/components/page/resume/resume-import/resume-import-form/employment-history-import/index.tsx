@@ -1,14 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
-import SectionItem from '../../../../../custom/section-item';
 import classNames from 'classnames';
 import SectionItemAdditionalButton from '../../../../../custom/section-item-additional-button';
 import { EMPLOYMENT_HISTORY_DESCRIPTION } from '../../../../../../configs/constants/description.constants';
 import EmploymentHistoryItems from './employment-history-items';
 import { useRecoilState } from 'recoil';
-import {
-    employmentHistoriesValueState,
-    employmentHistoryItemsState,
-} from '../../../../../../recoil-state/resume-state/resume-complex-section.state';
+import { employmentHistoryItemsState } from '../../../../../../recoil-state/resume-state/resume-complex-section.state';
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { employmentHistoryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';

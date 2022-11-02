@@ -58,7 +58,6 @@ const SectionForm = (props: Props) => {
     };
 
     const changeFieldsHandler = (changedField: any, allFormFields: any) => {
-        console.log('allFormFields', allFormFields);
         const itemChangedField = {
             name: changedField[0].name[0],
             value: changedField[0].value,
@@ -77,8 +76,6 @@ const SectionForm = (props: Props) => {
                 return { name: field.name[0], value: field.value };
             })
         );
-        console.log('changedFields', changedFields);
-        console.log('allFields', allFields);
     };
 
     useEffect(() => {
@@ -96,9 +93,6 @@ const SectionForm = (props: Props) => {
             itemAllFields = { ...itemAllFields, ...obj };
         });
 
-        console.log('itemAllFields', itemAllFields);
-
-        console.log('itemChangeFields', itemChangeFields);
         onChangeItemValue(itemChangeFields, itemAllFields);
     }, [changedFields, allFields, onChangeItemValue]);
 

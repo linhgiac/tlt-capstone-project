@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import ResumeTitle from './resume-title';
 import classNames from 'classnames';
 import { Button } from 'antd';
@@ -9,6 +9,7 @@ import {
     resumeValueState,
 } from '../../../../recoil-state/resume-state/resume-single-section.state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { employmentHistoryItemsState } from '../../../../recoil-state/resume-state/resume-complex-section.state';
 
 type ResumeImportProps = {
     className?: string;
@@ -24,11 +25,19 @@ const ResumeImport = (props: ResumeImportProps) => {
     const resetProfessionalSummaryChangeValue = useSetRecoilState(
         professionalSummaryFieldState
     );
+    const resetEmploymentHistoriesChangeValue = useSetRecoilState(
+        employmentHistoryItemsState
+    );
 
     const resetChangeValue = useCallback(async () => {
         resetPersonalDetailChangeValue([]);
         resetProfessionalSummaryChangeValue([]);
-    }, [resetPersonalDetailChangeValue, resetProfessionalSummaryChangeValue]);
+        resetEmploymentHistoriesChangeValue([]);
+    }, [
+        resetPersonalDetailChangeValue,
+        resetProfessionalSummaryChangeValue,
+        resetEmploymentHistoriesChangeValue,
+    ]);
 
     const submitFormHandler = async () => {
         const response = await fetch('/api/resume-editor', {
@@ -40,6 +49,12 @@ const ResumeImport = (props: ResumeImportProps) => {
         console.log('data', data);
         await resetChangeValue();
     };
+
+    useEffect(() => {
+        // resetChangeValue();
+        console.log('resumeValue', resumeValue);
+    }, [resumeValue, resetChangeValue]);
+
     return (
         <div className={classNames(className)}>
             <h2>Resume Import</h2>

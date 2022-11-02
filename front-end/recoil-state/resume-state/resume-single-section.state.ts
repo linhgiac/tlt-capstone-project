@@ -1,3 +1,4 @@
+import { employmentHistoriesValueState, complexSectionValueState } from './resume-complex-section.state';
 import { personalDetailTitleValueState, professionalSummaryTitleValueState} from './resume-title.state';
 import { atom, selector } from 'recoil';
 import { FieldFormData, PersonalDetailsDataType, ProfessionalSummaryDataType, ResumeDataType } from '../../configs/interfaces/resume.interface';
@@ -7,7 +8,18 @@ export const resumeValueState = selector<ResumeDataType>({
     get: ({get}) => {
         const personalDetail = get(personalDetailValueState)
         const professionalSummary = get(professionalSummaryValueState)
-        return {personalDetail, professionalSummary}
+        const complexSections = get(complexSectionValueState)
+        let result = {}
+        if(Object.keys(personalDetail).length>1){
+            result = Object.assign(result, {personalDetail})
+        }
+        if(Object.keys(professionalSummary).length>1){
+            result = Object.assign(result, {professionalSummary})
+        }
+        if(complexSections.sectionType?.length){
+            result = Object.assign(result, {complexSections})
+        }
+        return result
     }
 })
 export const personalDetailFieldsState = atom<FieldFormData[]>({

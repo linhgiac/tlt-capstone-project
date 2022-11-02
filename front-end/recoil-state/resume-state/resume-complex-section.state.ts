@@ -1,15 +1,20 @@
 import { employmentHistoryTitleValueState } from './resume-title.state';
-import { ComplexItemsFieldFormData, ComplexSectionItemDataType, ComplexSectionDataType, ComplexSectionDetailsDataType, EmploymentHistoryItemDataType } from './../../configs/interfaces/resume.interface';
+import { ComplexSectionDataType, ComplexSectionDetailsDataType, EmploymentHistoryItemDataType, ComplexSection } from './../../configs/interfaces/resume.interface';
 import { atom, selector } from 'recoil';
-// const complexSectionValueState = selector<ComplexSectionDataType>({
-//     key: 'complexSectionValueState',
-//     get: () => {}
-// })
 
 
-export const employmentHistoryChangeItemsState = atom<EmploymentHistoryItemDataType[]>({
-    key: 'employmentHistoryChangeValueState',
-    default: []
+export const complexSectionValueState = selector<ComplexSectionDataType>({
+    key: 'complexSectionValueState',
+    get: ({get}) => {
+        const employmentHistories = get(employmentHistoriesValueState)
+        const sectionType: ComplexSection[] = []
+        const sectionDetails: Partial<Record<ComplexSection, ComplexSectionDetailsDataType>> = {}
+        if(employmentHistories.items?.length) {
+            sectionType.push('employmentHistories')
+            sectionDetails['employmentHistories'] = employmentHistories
+        }
+        return {sectionType, sectionDetails}
+    }
 })
 
 export const employmentHistoryItemsState = atom<EmploymentHistoryItemDataType[]>({
@@ -30,7 +35,6 @@ export const employmentHistoriesValueState = selector<ComplexSectionDetailsDataT
         const header = get(employmentHistoryTitleValueState)
         const {id, position, sectionType} = get(employmentHistoriesDetails)
         const items = get(employmentHistoryItemsState)
-
         return {
         id,
         header,
