@@ -53,6 +53,7 @@ const SectionItem = (props: Props) => {
         },
         [onChangeItem, position]
     );
+
     return (
         <>
             <div

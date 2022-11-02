@@ -59,10 +59,15 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         ) => {
             setEmploymentHistoryItems((prevItems) => {
                 const { position } = changedData;
-                const prevUnChangedItems = prevItems.filter(
-                    (item) => item.position != position
-                );
-                return prevUnChangedItems.concat([changedData]);
+
+                if (prevItems.length === position) {
+                    prevItems.push(changedData);
+                } else {
+                    const revUnChangedItems = [...prevItems];
+                    revUnChangedItems.splice(position, 1, changedData);
+                    return revUnChangedItems;
+                }
+                return prevItems;
             });
         },
         [setEmploymentHistoryItems]
