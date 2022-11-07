@@ -69,9 +69,9 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         [setEmploymentHistoryItems]
     );
 
-    useEffect(() => {
-        console.log('employmentHistoryItems', employmentHistoryItems);
-    }, [employmentHistoryItems]);
+    // useEffect(() => {
+    //     console.log('employmentHistoryItems', employmentHistoryItems);
+    // }, [employmentHistoryItems]);
 
     return (
         <div className={classNames(className)}>

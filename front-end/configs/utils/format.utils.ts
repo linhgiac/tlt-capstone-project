@@ -1,4 +1,7 @@
+import { ResumeDataType } from './../interfaces/resume.interface';
 import camelCase from 'camelcase'
+
+
 export const convertCamelToSnake = (obj: any, newObj = {}) => {
     for (let key in obj) {
         let value = null
@@ -31,4 +34,36 @@ export const convertSnakeToCamel = (obj: any, newObj = {}) => {
         newObj = {...newObj, ...convert}
     }
     return newObj
+}
+
+export const convertPayloadData = async (resumeData: ResumeDataType) => {
+    const {title, personalDetails, professionalSummary, complexSections} = resumeData
+    const sectionType = complexSections?.sectionType
+    const sectionDetails = complexSections?.sectionDetails
+    const newComplexSections = complexSections?.sectionType.map((type) => {
+        if(sectionDetails){
+            const details = {...sectionDetails[type]}
+            // const items = details.items 
+            // delete details.items
+            return {...details, [type]: details.items}
+        }
+    })
+    let result = {}
+    if(title){
+        result = Object.assign(result, {title})
+    }
+    if(personalDetails) {
+        result = Object.assign(result, {personalDetails})
+    }
+    if(professionalSummary){
+        result = Object.assign(result, {professionalSummary})
+    }
+    if(newComplexSections){
+        result = Object.assign(result, {complexSections: newComplexSections})
+    }
+    // const convertedResult = convertCamelToSnake(result)
+    // console.log('convertedResult', convertedResult)
+    // return convertedResult
+    console.log('result', result)
+    return result
 }

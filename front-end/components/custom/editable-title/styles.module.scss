@@ -1,12 +1,24 @@
 @import './../../../styles/variables.scss';
-.editable-title-input{
-    background:none;
-    padding: 4px 0px;
-}
-.editable-title-icon{
-    color: #848484;
-    padding-right: 4px;
-    &:hover{
-        color: $hover-color;
+.editable-title{
+    position: relative;
+    min-width: 3em;
+    min-height: 40px;
+    .editable-title-input-div{
+        visibility: hidden;
+        background:none;
+        padding: 4px 0px;
+    }
+    .editable-title-input{
+        background:none;
+        padding: 4px 0px;
+        position: absolute;
+        width: 100%;
+    }
+    .editable-title-icon{
+        color: #848484;
+        padding-right: 4px;
+        &:hover{
+            color: $hover-color;
+        }
     }
 }

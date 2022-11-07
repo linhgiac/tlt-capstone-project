@@ -24,7 +24,7 @@ export const employmentHistoryItemsState = atom<EmploymentHistoryItemDataType[]>
 export const employmentHistoriesDetails = atom<ComplexSectionDetailsDataType>({
     key: 'employmentHistoriesDetails',
     default: {
-        position: 1,
+        position: 2,
         sectionType: 'employmentHistories'
     }
 })

@@ -15,6 +15,7 @@ type EditableTitleProps = {
 export const EditableTitle = (props: EditableTitleProps) => {
     const { className, children, onChangeTitle, defaultTitle } = props;
     const [titleWidth, setTitleWidth] = useState(`${children.length * 0.55}em`);
+    // const [isEditing, setIsEditing] = useState(false);
 
     // const editHandler = useCallback(() => {
     //     setIsEditing(true);
@@ -25,34 +26,45 @@ export const EditableTitle = (props: EditableTitleProps) => {
         if (ref.current && ref) {
             ref.current.focus();
             ref.current.select();
+            // setIsEditing(true);
         }
     };
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitleWidth(`${+e.target.value.length * 0.55}em`);
         onChangeTitle(e.target.value);
     };
     const resetTitleHandler = () => {
         if (defaultTitle) {
-            setTitleWidth(`${+defaultTitle?.length * 0.55}em`);
             onChangeTitle(defaultTitle);
         }
     };
 
     return (
-        <div className='flex-row'>
-            <Input
-                ref={ref}
-                className={classNames(
-                    className,
-                    styles['editable-title-input']
-                )}
-                defaultValue={children}
-                value={children}
-                // onPressEnter={editHandler}
-                onChange={changeHandler}
-                style={{ width: titleWidth }}
-            />
+        <div className={classNames('flex-row')}>
+            <div className={classNames('flex-row', styles['editable-title'])}>
+                <div
+                    className={classNames(
+                        className,
+                        styles['editable-title-input-div']
+                    )}>
+                    {children}
+                </div>
+
+                <Input
+                    ref={ref}
+                    className={classNames(
+                        className,
+                        styles['editable-title-input']
+                    )}
+                    defaultValue={children}
+                    value={children}
+                    // onPressEnter={editHandler}
+                    onChange={changeHandler}
+                    // style={{ width: titleWidth }}
+                    // onBlur={() => setIsEditing(false)}
+                />
+            </div>
+
             {/* <div className={classNames(className)}>{children}</div> */}
             <EditOutlined
                 className={classNames(

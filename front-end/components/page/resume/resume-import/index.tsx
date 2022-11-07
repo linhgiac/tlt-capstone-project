@@ -10,6 +10,7 @@ import {
 } from '../../../../recoil-state/resume-state/resume-single-section.state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { employmentHistoryItemsState } from '../../../../recoil-state/resume-state/resume-complex-section.state';
+import { convertPayloadData } from '../../../../configs/utils/format.utils';
 
 type ResumeImportProps = {
     className?: string;
@@ -40,11 +41,13 @@ const ResumeImport = (props: ResumeImportProps) => {
     ]);
 
     const submitFormHandler = async () => {
+        const resumeConvertedValue = await convertPayloadData(resumeValue);
         const response = await fetch('/api/resume-editor', {
             method: 'POST',
-            body: JSON.stringify({ resumeValue }),
+            body: JSON.stringify({ resumeValue: resumeConvertedValue }),
             headers: { 'Content-Type': 'application/json' },
         });
+        console.log(response);
         const data = await response.json();
         console.log('data', data);
         await resetChangeValue();
