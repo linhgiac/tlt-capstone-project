@@ -5,7 +5,9 @@ import { resumeTitleValueState } from '../../../../../recoil-state/resume-state/
 import { EditableTitle } from '../../../../custom';
 import styles from './styles.module.scss';
 
-type ResumeTitleProps = {};
+type ResumeTitleProps = {
+    initialValue?: string;
+};
 
 const ResumeTitle = (props: ResumeTitleProps) => {
     const [resumeTitleValue, setResumeTitleValue] = useRecoilState(

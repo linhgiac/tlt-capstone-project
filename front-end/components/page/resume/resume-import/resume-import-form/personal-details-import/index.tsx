@@ -7,16 +7,20 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { personalDetailFieldsState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
-import { FieldFormData } from '../../../../../../configs/interfaces/resume.interface';
+import {
+    FieldFormData,
+    PersonalDetailsDataType,
+} from '../../../../../../configs/interfaces/resume.interface';
 import { personalDetailTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 
 type PersonalDetailsImportProps = {
     className?: string;
     defaultTitle?: string;
+    initialValue: PersonalDetailsDataType | undefined;
 };
 
 const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
-    const { className, defaultTitle } = props;
+    const { className, defaultTitle, initialValue } = props;
     const [form] = Form.useForm();
 
     const [personalDetailFields, setPersonalDetailFields] = useRecoilState(
@@ -230,6 +234,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                 form={form}
                 layout='vertical'
                 fields={personalDetailFields}
+                initialValues={initialValue}
                 onFieldsChange={changeFieldsHandler}
                 size='large'
                 colon={false}>

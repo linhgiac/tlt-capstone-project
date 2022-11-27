@@ -8,16 +8,18 @@ import { professionalSummaryFieldState } from '../../../../../../recoil-state/re
 import { useRecoilState } from 'recoil';
 import { professionalSummaryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import { PROFESSIONAL_SUMMARY_DESCRIPTION } from '../../../../../../configs/constants/description.constants';
+import { ProfessionalSummaryDataType } from '../../../../../../configs/interfaces/resume.interface';
 
 const { TextArea } = Input;
 
 type ProfessionalSummaryImportProps = {
     className?: string;
     defaultTitle?: string;
+    initialValue: ProfessionalSummaryDataType | undefined;
 };
 
 function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
-    const { className, defaultTitle } = props;
+    const { className, defaultTitle, initialValue } = props;
 
     const [form] = Form.useForm();
     const [professionalSummaryField, setProfessionalSummaryField] =
@@ -48,10 +50,11 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
                 form={form}
                 layout='vertical'
                 fields={professionalSummaryField}
+                initialValues={initialValue}
                 onFieldsChange={changeFieldsHandler}
                 size='large'
                 colon={false}>
-                <Form.Item name='professionalSummary'>
+                <Form.Item name='content'>
                     <TextArea
                         className={styles['professional-summary-input']}
                         autoSize={{ minRows: 5, maxRows: 5 }}

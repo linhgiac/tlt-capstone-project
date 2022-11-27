@@ -18,6 +18,7 @@ export type PersonalDetailsDataType = {
     email?: string,
     phone?: string,
     country?: string,
+    city?: string,
     address?: string,
     nationality?: string,
     placeOfBirth?: string,
