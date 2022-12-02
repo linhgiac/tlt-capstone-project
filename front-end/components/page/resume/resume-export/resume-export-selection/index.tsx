@@ -1,18 +1,20 @@
 import { Button } from 'antd';
+import classNames from 'classnames';
 import React from 'react';
 import styles from './styles.module.scss';
 
 type ResumeExportSelectionProps = {
+    className: string;
     onChangeEditorLayout: () => void;
 };
 
 const ResumeExportSelection = (props: ResumeExportSelectionProps) => {
-    const { onChangeEditorLayout } = props;
+    const { className, onChangeEditorLayout } = props;
     const clickHandler = () => {
         onChangeEditorLayout();
     };
     return (
-        <div className={styles['resume-export-button']}>
+        <div className={classNames(className, styles['resume-export-button'])}>
             <Button
                 type='text'
                 shape='round'

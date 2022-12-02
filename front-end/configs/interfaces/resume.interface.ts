@@ -3,7 +3,7 @@
 export type ResumeDataType = {
     id?: number,
     title?: string,
-    templateId?: number,
+    templateId: number,
     personalDetails?: PersonalDetailsDataType,
     professionalSummary?: ProfessionalSummaryDataType
     complexSections?: ComplexSectionDataType

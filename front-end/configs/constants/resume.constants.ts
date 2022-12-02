@@ -20,3 +20,8 @@ export const SECTION_TYPE:any = {
     personalDetails: PERSONAL_DETAILS_LABEL,
     employmentHistories: EMPLOYMENT_HISTORY_LABEL,  
 }
+
+export const RESUME_SIZE = {
+    width: 1174,
+    height: 1660
+}

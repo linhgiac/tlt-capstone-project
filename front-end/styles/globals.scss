@@ -126,6 +126,10 @@
   align-items: center;
 }
 
+.relative{
+  position: relative;
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -280,4 +284,18 @@
 
 .warn {
   color: $warning-color;
+}
+
+.resume-background{
+  position: relative;
+  z-index: 1;
+}
+.resume-content{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+}
+.resume-canvas{
+  display: flex;
 }

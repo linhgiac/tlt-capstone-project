@@ -31,6 +31,7 @@ const ResumeEditor = (props: ResumeEditorProps) => {
                     <ResumeExport
                         className='w-50'
                         onChangeLayout={changeLayoutHandler}
+                        resumeData={initialResumeData}
                     />
                 </div>
             ) : (

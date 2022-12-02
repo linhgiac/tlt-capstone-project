@@ -36,3 +36,6 @@ $font-size: 16px;
 
 $card-body-horizontal-padding: 32px;
 $list-item-vertical-padding: 12px;
+
+$canvas-scale-width: calc(1174px / 1660px * (100vh - 112px));
+$canvas-scale-height: calc((100vh - 112px))
