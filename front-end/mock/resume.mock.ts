@@ -23,7 +23,7 @@ export const MOCKED_RESUME: ResumeDataType = {
                 header: 'Personal Details',
                 jobTitle: 'Web Developer',
                 firstName:'Giac',
-                lastName:'Linh',
+                // lastName:'Linh',
                 email: 'linhgiac@gmail.com',
                 phone: '0123456789',
                 country: 'Vietnam',
