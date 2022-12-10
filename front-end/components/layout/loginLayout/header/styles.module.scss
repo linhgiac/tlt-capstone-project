@@ -1,0 +1,21 @@
+@import '../../../../styles/variables.scss';
+
+.header{
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .logo{
+    cursor: pointer;
+    float: left;
+    width: 120px;
+    height: 31px;
+  }
+
+  .right-header{
+    cursor: pointer;
+    &:hover {
+      color: $hover-color;
+    }
+  }
+}

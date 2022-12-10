@@ -1,0 +1,9 @@
+@import '../../../../../styles/variables.scss';
+
+.text-button{
+  color: $primary-color;
+  &:hover{
+    color: $hover-color;
+    background-color: transparent;
+  }
+}
