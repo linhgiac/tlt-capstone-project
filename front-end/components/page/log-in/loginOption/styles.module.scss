@@ -1,0 +1,16 @@
+.button{
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  Button{
+    font-size: 16px;
+    font-weight: 600;
+    height: 50px;
+
+  }}
+.register{
+  padding-top: 24px;
+  font-size: 16px;
+  font-weight: 400;
+
+}

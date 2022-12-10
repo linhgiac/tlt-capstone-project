@@ -1,19 +1,20 @@
 import { GetServerSideProps } from 'next';
 import React from 'react';
-import LoginContent from '../../components/page/log-in';
+import RegisterContent from '../../components/page/register';
 import { LAYOUT } from '../../configs/constants/misc';
+import { Form } from 'antd';
 
-type LoginProps = {};
+type Props = {};
 
-const Login = (props: LoginProps) => {
+const Register = (props: Props) => {
     return (
         <div style={{ height: '100vh' }}>
-            <LoginContent />
+            <RegisterContent />
         </div>
     );
 };
 
-export default Login;
+export default Register;
 
 export const getServerSideProps: GetServerSideProps = async () => {
     const defaultReturnProps = {

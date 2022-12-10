@@ -1,0 +1,23 @@
+.login-container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.title{
+  flex-direction: column;
+  margin-bottom: 30px;
+  h1{margin-bottom: 0.3em}
+}
+.button{
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  Button{
+    font-size: 16px;
+    font-weight: 600;
+    height: 50px;
+
+  }
+}

@@ -25,7 +25,8 @@ const HeaderButton = (props: HeaderButtonProps) => {
             <Button
                 className={classNames('m-l-8', 'h-40px')}
                 size="middle"
-                type="primary">
+                type="primary"
+                onClick={() => router.push('/register')}>
                 Sign Up
             </Button>
         </div>
