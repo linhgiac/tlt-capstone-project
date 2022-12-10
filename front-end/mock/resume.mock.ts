@@ -1,4 +1,5 @@
 import { PersonalDetailsDataType, ResumeDataType } from './../configs/interfaces/resume.interface';
+import { TemplatesDataType } from '../configs/interfaces/template.interface';
 
 export const PersonalDetailData: PersonalDetailsDataType = {
         id: 1,
@@ -32,5 +33,164 @@ export const MOCKED_RESUME: ResumeDataType = {
         professionalSummary: {
                 header: 'Professional Summary',
                 content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+        }
+}
+
+type MockedTemplatesDataType = {
+        all: TemplatesDataType,
+        creative: TemplatesDataType,
+        simple: TemplatesDataType,
+        professional: TemplatesDataType,
+        modern: TemplatesDataType
+}
+
+export const MOCKED_TEMPLATES: MockedTemplatesDataType = {
+        all: {
+                data: [
+                        {
+                                id: 1,
+                                type: 'creative',
+                                thumnail: './image/template.png',
+                                name: 'Creative_Template',
+                                title: 'Creative Template',
+                                description: 'Something creative description'
+                        },
+                        {
+                                id: 2,
+                                type: 'simple',
+                                thumnail: './image/template.png',
+                                name: 'Simple_Template',
+                                title: 'Simple Template',
+                                description: 'Something simple description'
+                        },
+                        {
+                                id: 3,
+                                type: 'professional',
+                                thumnail: './image/template.png',
+                                name: 'Professional_Template',
+                                title: 'Professional Template',
+                                description: 'Something professional description'
+                        },
+                        {
+                                id: 4,
+                                type: 'modern',
+                                thumnail: './image/template.png',
+                                name: 'Modern_Template',
+                                title: 'Modern Template',
+                                description: 'Something modern description'
+                        },
+                        {
+                                id: 5,
+                                type: 'creative',
+                                thumnail: './image/template.png',
+                                name: 'Creative_Template',
+                                title: 'Creative Template',
+                                description: 'Something creative description'
+                        },
+                        {
+                                id: 6,
+                                type: 'simple',
+                                thumnail: './image/template.png',
+                                name: 'Simple_Template',
+                                title: 'Simple Template',
+                                description: 'Something simple description'
+                        },
+                        {
+                                id: 7,
+                                type: 'professional',
+                                thumnail: './image/template.png',
+                                name: 'Professional_Template',
+                                title: 'Professional Template',
+                                description: 'Something professional description'
+                        },
+                        {
+                                id: 8,
+                                type: 'modern',
+                                thumnail: './image/template.png',
+                                name: 'Modern_Template',
+                                title: 'Modern Template',
+                                description: 'Something modern description'
+                        }
+                ]
+        },
+        creative: {
+                data: [
+                        {
+                                id: 1,
+                                type: 'creative',
+                                thumnail: './image/template.png',
+                                name: 'Creative_Template',
+                                title: 'Creative Template',
+                                description: 'Something creative description'
+                        },
+                        {
+                                id: 5,
+                                type: 'creative',
+                                thumnail: './image/template.png',
+                                name: 'Creative_Template',
+                                title: 'Creative Template',
+                                description: 'Something creative description'
+                        },
+                ]
+        },
+        simple: {
+                data: [
+                        {
+                                id: 2,
+                                type: 'simple',
+                                thumnail: './image/template.png',
+                                name: 'Simple_Template',
+                                title: 'Simple Template',
+                                description: 'Something simple description'
+                        },
+                        {
+                                id: 6,
+                                type: 'simple',
+                                thumnail: './image/template.png',
+                                name: 'Simple_Template',
+                                title: 'Simple Template',
+                                description: 'Something simple description'
+                        },
+                ]
+        },
+        professional: {
+                data: [
+                        {
+                                id: 3,
+                                type: 'professional',
+                                thumnail: './image/template.png',
+                                name: 'Professional_Template',
+                                title: 'Professional Template',
+                                description: 'Something professional description'
+                        },
+                        {
+                                id: 7,
+                                type: 'professional',
+                                thumnail: './image/template.png',
+                                name: 'Professional_Template',
+                                title: 'Professional Template',
+                                description: 'Something professional description'
+                        },
+                ]
+        },
+        modern: {
+                data: [
+                        {
+                                id: 4,
+                                type: 'modern',
+                                thumnail: './image/template.png',
+                                name: 'Modern_Template',
+                                title: 'Modern Template',
+                                description: 'Something modern description'
+                        },
+                        {
+                                id: 8,
+                                type: 'modern',
+                                thumnail: './image/template.png',
+                                name: 'Modern_Template',
+                                title: 'Modern Template',
+                                description: 'Something modern description'
+                        }
+                ]
         }
 }
