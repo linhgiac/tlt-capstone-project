@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 
 type Props = {
     form: FormInstance;
+    // onChangeValue: (value: any) => void;
     onLogin: (values: any) => void;
     onBack: () => void;
 };
@@ -17,7 +18,8 @@ const LoginForm = (props: Props) => {
             <Form
                 layout="vertical"
                 form={form}
-                onFinish={onLogin}>
+                onFinish={onLogin}
+                >
                 <Item
                     label="Username"
                     name="username"

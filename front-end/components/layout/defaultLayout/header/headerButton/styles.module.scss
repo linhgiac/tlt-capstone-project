@@ -1,5 +1,8 @@
 @import '../../../../../styles/variables.scss';
 
+.button{
+  font-weight: 600;
+}
 .text-button{
   color: $primary-color;
   &:hover{

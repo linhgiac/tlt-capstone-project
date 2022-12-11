@@ -10,6 +10,8 @@ import {
 import classNames from 'classnames';
 import LoginOption from './loginOption';
 import LoginForm from './loginForm';
+import { LoginValue } from '../../../configs/interfaces/user.interface';
+import axios from 'axios';
 
 const { Title, Text } = Typography;
 
@@ -18,12 +20,18 @@ type Props = {};
 const LoginContent = (props: Props) => {
     const [isLogging, setIsLogging] = useState(false);
     const [form] = Form.useForm();
+    console.log('form :>> ', form);
+    const [error, setError] = useState({ error: '' });
 
     const clickOptionHandler = useCallback(() => {
         setIsLogging(true);
     }, []);
-    const loginHandler = (values: any) => {
-        console.log('loginValues', values);
+    const loginHandler = async (values: any) => {
+        try {
+            const res = await axios.post('http://localhost:8000/accounts/token/', values);
+        } catch (error) {
+
+        }
     };
 
     return (
@@ -50,6 +58,8 @@ const LoginContent = (props: Props) => {
                     <LoginForm
                         form={form}
                         onLogin={loginHandler}
+                        // onChangeValue={setUser}
+                        // onLoginFailed = {}
                         onBack={() => {
                             setIsLogging(false);
                         }}

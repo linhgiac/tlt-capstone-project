@@ -32,7 +32,11 @@ const HeaderRouter = (props: HeaderRouterProps) => {
             mode="horizontal"
             items={headerRouterItems}
             onClick={clickHandler}
-            // style={{ fontSize: '16px' }}
+            style={{
+                borderBottom: 'none',
+                fontSize: '16px',
+                fontWeight: '400',
+            }}
         />
     );
 };

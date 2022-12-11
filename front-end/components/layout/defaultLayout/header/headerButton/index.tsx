@@ -14,8 +14,13 @@ const HeaderButton = (props: HeaderButtonProps) => {
     return (
         <div className={classNames(className)}>
             <Button
-                className={classNames('m-l-8', 'h-40px', styles['text-button'])}
-                size="middle"
+                className={classNames(
+                    'm-l-8',
+                    'h-40px',
+                    styles['text-button'],
+                    styles['button']
+                )}
+                size="large"
                 type="text"
                 onClick={() => {
                     router.push('/log-in');
@@ -23,8 +28,13 @@ const HeaderButton = (props: HeaderButtonProps) => {
                 Log in
             </Button>
             <Button
-                className={classNames('m-l-8', 'h-40px')}
-                size="middle"
+                className={classNames(
+                    'm-l-8',
+                    'h-40px ',
+                    'btn-lg-b-r-6',
+                    styles['button']
+                )}
+                size="large"
                 type="primary"
                 onClick={() => router.push('/register')}>
                 Sign Up
