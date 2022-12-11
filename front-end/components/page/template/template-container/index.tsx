@@ -21,8 +21,8 @@ const TemplateContainer = (props: TemplateContainerProps) => {
             items.push(<TemplateItem item={data[i]}></TemplateItem>)
             if (items.length == itemPerRow) {
                 children.push(
-                    <Row>
-                        {items.map((item) => (<Col>{item}</Col>))}
+                    <Row key={children.length}>
+                        {items.map((item) => (<Col key={item.props.item.id}>{item}</Col>))}
                     </Row>
                 )
                 while (items.length > 0)
@@ -31,8 +31,8 @@ const TemplateContainer = (props: TemplateContainerProps) => {
         }
         if (items.length > 0) {
             children.push(
-                <Row>
-                    {items.map((item) => (<Col>{item}</Col>))}
+                <Row key={children.length}>
+                    {items.map((item) => (<Col key={item.props.item.id}>{item}</Col>))}
                 </Row>
             )
         }

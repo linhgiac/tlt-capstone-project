@@ -12,7 +12,7 @@ const HeaderRouter = (props: HeaderRouterProps) => {
     const router = useRouter();
     const headerRouterItems: MenuItem[] = [
         getItem('Resume', 'resume', <DownOutlined />, false, [
-            getItem('All templates', 'templates'),
+            getItem('All templates', 'templates/all'),
             getItem('Creative', 'templates/creative'),
             getItem('Simple', 'templates/simple'),
             getItem('Professional', 'templates/professional'),

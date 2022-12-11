@@ -1,0 +1,66 @@
+@import '../../../styles/variables.scss';
+
+.dashboard-container {
+    padding-top: 30px;
+}
+
+.dashboard-row {
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+}
+
+.dashboard-item {
+    width: 400px;
+    height: 320px;
+    margin: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.dashboard-item-preview {
+    border: 0;
+    cursor: pointer;
+    background-color: $medium-color;
+    width: 180px;
+    height: 320px;
+    margin-right: 20px;
+}
+
+.dashboard-item-body {
+    padding: 0;
+}
+
+.dashboard-item-title-container {
+    align-items: center;
+    color: $placeholder-color;
+}
+
+.dashboard-item-title {
+    padding: 0;
+    font-size: 25px;
+    color: $dark-color;
+    border: 0;
+    cursor: pointer;
+    background: none;
+}
+
+.dashboard-item-title:hover {
+    color: $active-color;
+}
+
+.dashboard-item-button-list {
+    padding-top: 20px;
+}
+
+.dashboard-item-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    display: block;
+}
+
+.dashboard-item-button:hover {
+    color: $active-color;
+}

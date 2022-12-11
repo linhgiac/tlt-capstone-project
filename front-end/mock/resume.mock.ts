@@ -18,7 +18,7 @@ export const PersonalDetailData: PersonalDetailsDataType = {
 
 export const MOCKED_RESUME: ResumeDataType = {
         id: 1,
-        title: 'Mocked Resume',
+        title: 'M_Resume',
         templateId: 1,
         personalDetails: {
                 header: 'Personal Details',
