@@ -5,23 +5,25 @@ import { FormInstance, Typography, Form } from 'antd';
 import RegisterForm from './registerForm';
 import { useRouter } from 'next/router';
 import axios, { AxiosError } from 'axios';
+import { HOST } from '../../../configs/constants/misc';
+import NotificationBox from '../../custom/notification-box';
 const { Title, Text } = Typography;
 type Props = {};
 
-type RegisterResponse = {
-
-}
+type RegisterResponse = {};
 
 const RegisterContent = (props: Props) => {
     const [form] = Form.useForm();
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
     const router = useRouter();
     const registerHandler = async (values: any) => {
         console.log('values :>> ', values);
         try {
             setIsLoading(true);
             const response = await axios.post<RegisterResponse>(
-                'http://localhost:8000/accounts/register/',
+                `${HOST}accounts/register/`,
                 values,
                 {
                     headers: {
@@ -29,11 +31,19 @@ const RegisterContent = (props: Props) => {
                         'Content-Type': 'application/json',
                     },
                 }
-            )
-            console.log(response);
+            );
+            console.log('response:>>>>', response);
+            setSuccess(true);
             router.replace('/log-in');
         } catch (error: any) {
-            console.log(error.response.data);
+            console.log('error :>> ', error);
+            if (error.response.data.username) {
+                setError(error.response.data.username);
+            } else if (error.response.data.password) {
+                setError(error.response.data.password);
+            } else if (error.response.data.email) {
+                setError(error.response.data.email);
+            }
         }
         setIsLoading(false);
     };
@@ -49,12 +59,26 @@ const RegisterContent = (props: Props) => {
                 <div className={classNames('center', styles['title'])}>
                     <Title>Register</Title>
                 </div>
+                {error && (
+                    <NotificationBox
+                        type={'error'}
+                        title={'Register Failed'}
+                        msg={error}
+                    />
+                )}
+                {success && (
+                    <NotificationBox
+                        type={'success'}
+                        title={'Register Succeeded'}
+                    />
+                )}
 
                 <RegisterForm
                     form={form}
                     isLoading={isLoading}
                     onBack={() => {
                         router.push('./log-in');
+                        setError('');
                     }}
                     onRegister={registerHandler}
                 />

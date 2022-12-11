@@ -1,6 +1,9 @@
 import { Button } from 'antd';
+import classNames from 'classnames';
 import React from 'react';
-import HomeCard from '../home-card';
+import HomeCard from '../homeCard';
+import HomeInstructionStep from './homeInstructionStep';
+import styles from './styles.module.scss';
 
 type Props = {};
 
@@ -12,7 +15,17 @@ const HomeInstruction = (props: Props) => {
         <HomeCard
             title={TITLE}
             description={DESCRIPTION}>
-            <Button>Create My Button</Button>
+            <Button
+                type="primary"
+                className={styles['button']}>
+                Create My Button
+            </Button>
+            <HomeInstructionStep
+                className={classNames(
+                    'center',
+                    styles['home-instruction__step']
+                )}
+            />
         </HomeCard>
     );
 };

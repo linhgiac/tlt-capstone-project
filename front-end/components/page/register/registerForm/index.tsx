@@ -26,6 +26,17 @@ const RegisterForm = (props: Props) => {
                         {
                             required: true,
                             message: 'Please input your username!',
+                            min: 6,
+                        },
+                        {
+                            min: 6,
+                            message:
+                                'Username must have at least 6 characters!',
+                        },
+                        {
+                            pattern: /[a-z][a-z0-9]+/,
+                            message:
+                                'Username must only have lowercase letter and number!',
                         },
                     ]}>
                     <Input size="large"></Input>
@@ -48,10 +59,16 @@ const RegisterForm = (props: Props) => {
                 <Item
                     label="Password"
                     name="password"
+                    hasFeedback
                     rules={[
                         {
                             required: true,
                             message: 'Please input your password!',
+                        },
+                        {
+                            min: 8,
+                            message:
+                                'Password must have at least 8 characters!',
                         },
                     ]}>
                     <Input.Password size="large" />
@@ -66,6 +83,7 @@ const RegisterForm = (props: Props) => {
                             required: true,
                             message: 'Please confirm your password!',
                         },
+                        
                         ({ getFieldValue }) => ({
                             validator(_, value) {
                                 if (

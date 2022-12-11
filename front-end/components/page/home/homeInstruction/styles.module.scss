@@ -1,0 +1,47 @@
+
+@import '../../../../styles/variables.scss';
+
+$padding-left: 20px;
+$padding-right: 20px;
+$step-width: 770px;
+.button{
+  height: 60px;
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 8px;
+  margin: 30px 0px
+}
+.home-instruction__step{
+  width: $step-width;
+  padding-left: $padding-left;
+  padding-right: $padding-right;
+  border-radius: 8px;
+  background-color: #fff;
+  .tlt-tabs-tab-btn{
+    padding: 30px
+  }
+}
+.step-panel{
+  width: calc($step-width - $padding-left - $padding-right);
+  padding: 20px;
+  .step-panel__title{
+    font-size: 18px;
+    font-weight: 600;
+    color: $hover-color;
+    padding-bottom: 10px;
+  }
+  .step-panel__description{
+    font-size: 16px;
+    text-align: justify;
+  }
+}
+.step-title{
+  font-size: 18px;
+  font-weight: 600;
+  // color: $background-color;
+  width: calc($step-width / 3 - $padding-left - $padding-right);
+  padding-left: 10px;
+  
+}
