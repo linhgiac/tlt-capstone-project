@@ -5,13 +5,14 @@ import styles from './styles.module.scss';
 
 type Props = {
     form: FormInstance;
+    isLoading: boolean;
     onBack: () => void;
     onRegister: (values: any) => void;
 };
 const { Item } = Form;
 
 const RegisterForm = (props: Props) => {
-    const { onBack, onRegister, form } = props;
+    const { onBack, onRegister, form, isLoading } = props;
     return (
         <div>
             <Form
@@ -97,7 +98,8 @@ const RegisterForm = (props: Props) => {
                         <Button
                             size="large"
                             type="primary"
-                            htmlType="submit">
+                            htmlType="submit"
+                            loading={isLoading}>
                             Register
                         </Button>
                     </Item>

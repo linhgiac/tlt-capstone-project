@@ -1,17 +1,41 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import { FormInstance, Typography, Form } from 'antd';
 import RegisterForm from './registerForm';
 import { useRouter } from 'next/router';
+import axios, { AxiosError } from 'axios';
 const { Title, Text } = Typography;
 type Props = {};
 
+type RegisterResponse = {
+
+}
+
 const RegisterContent = (props: Props) => {
     const [form] = Form.useForm();
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
-    const registerHandler = (values: any) => {
+    const registerHandler = async (values: any) => {
         console.log('values :>> ', values);
+        try {
+            setIsLoading(true);
+            const response = await axios.post<RegisterResponse>(
+                'http://localhost:8000/accounts/register/',
+                values,
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+            console.log(response);
+            router.replace('/log-in');
+        } catch (error: any) {
+            console.log(error.response.data);
+        }
+        setIsLoading(false);
     };
 
     return (
@@ -28,6 +52,7 @@ const RegisterContent = (props: Props) => {
 
                 <RegisterForm
                     form={form}
+                    isLoading={isLoading}
                     onBack={() => {
                         router.push('./log-in');
                     }}

@@ -5,6 +5,7 @@ import styles from './styles.module.scss';
 
 type Props = {
     form: FormInstance;
+    isLoading: boolean;
     // onChangeValue: (value: any) => void;
     onLogin: (values: any) => void;
     onBack: () => void;
@@ -12,7 +13,7 @@ type Props = {
 const { Item } = Form;
 
 const LoginForm = (props: Props) => {
-    const { form, onBack, onLogin } = props;
+    const { form, onBack, onLogin, isLoading } = props;
     return (
         <div>
             <Form
@@ -56,7 +57,8 @@ const LoginForm = (props: Props) => {
                         <Button
                             size="large"
                             type="primary"
-                            htmlType="submit">
+                            htmlType="submit"
+                            loading={isLoading}>
                             Login
                         </Button>
                     </Item>
