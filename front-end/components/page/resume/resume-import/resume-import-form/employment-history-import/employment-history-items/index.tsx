@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { EmploymentHistoryItemDataType } from '../../../../../../../configs/interfaces/resume.interface';
 import SectionItem from '../../../../../../custom/section-item';
 
@@ -6,7 +6,6 @@ type EmploymentHistoryItemsProps = {
     className?: string;
     sectionType: string;
     items?: EmploymentHistoryItemDataType[];
-    // onGetItemHeader: (itemsHeader: any[]) => any[];
     onRemoveItem: (position: number) => void;
     onChangeItem: (
         changedData: EmploymentHistoryItemDataType,
@@ -21,7 +20,6 @@ const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
         items,
         onRemoveItem,
         onChangeItem,
-        // onGetItemHeader,
     } = props;
 
     return (

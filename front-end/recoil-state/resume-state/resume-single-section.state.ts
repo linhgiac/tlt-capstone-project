@@ -6,27 +6,33 @@ import { FieldFormData, PersonalDetailsDataType, ProfessionalSummaryDataType, Re
 
 export const resumeValueState = selector<ResumeDataType>({
     key: 'resumeValueState',
-    get: ({get}) => {
-        const title = get(resumeTitleValueState)
-        const personalDetails: PersonalDetailsDataType = get(personalDetailValueState)
-        const professionalSummary: ProfessionalSummaryDataType = get(professionalSummaryValueState)
-        const complexSections: ComplexSectionDataType = get(complexSectionValueState)
-        let result = {}
-        if(title){
-            result = Object.assign(result, {title})
+    get: ({ get }) => {
+        const title = get(resumeTitleValueState);
+        const personalDetails: PersonalDetailsDataType = get(
+            personalDetailValueState
+        );
+        const professionalSummary: ProfessionalSummaryDataType = get(
+            professionalSummaryValueState
+        );
+        const complexSections: ComplexSectionDataType = get(
+            complexSectionValueState
+        );
+        let result = {};
+        if (title) {
+        result = Object.assign(result, { title });
         }
-        if(Object.keys(personalDetails).length>1){
-            result = Object.assign(result, {personalDetails})
+        if (Object.keys(personalDetails).length > 1) {
+            result = Object.assign(result, { personalDetails });
         }
-        if(Object.keys(professionalSummary).length>1){
-            result = Object.assign(result, {professionalSummary})
+        if (Object.keys(professionalSummary).length > 1) {
+            result = Object.assign(result, { professionalSummary });
         }
-        if(complexSections.sectionType?.length){
-            result = Object.assign(result, {complexSections})
+        if (complexSections.sectionType?.length) {
+            result = Object.assign(result, { complexSections });
         }
-        return result
-    }
-})
+        return result;
+    },
+});
 
 export const personalDetailFieldsState = atom<FieldFormData[]>({
     key: 'personalDetailFieldsState',

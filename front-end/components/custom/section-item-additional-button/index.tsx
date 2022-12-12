@@ -11,7 +11,7 @@ type Props = {
 };
 enum Type {
     employmentHistories = 'employment',
-    education = 'education',
+    educations = 'education',
     workExperiences = 'project',
     skills = 'skills',
     links = 'links',

@@ -3,7 +3,7 @@
 export type ResumeDataType = {
     id?: number,
     title?: string,
-    templateId: number,
+    templateId?: number,
     personalDetails?: PersonalDetailsDataType,
     professionalSummary?: ProfessionalSummaryDataType
     complexSections?: ComplexSectionDataType
@@ -31,7 +31,7 @@ export type ProfessionalSummaryDataType = {
     content?: string
 }
 
-export type ComplexSection = 'employmentHistories' | 'education' | 'workExperiences' | 'skills' | 'links' | 'customs';
+export type ComplexSection = 'employmentHistories' | 'educations' | 'workExperiences' | 'skills' | 'links' | 'customs';
 
 export type ComplexSectionDataType = {
     sectionType: ComplexSection[]
