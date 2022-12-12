@@ -9,7 +9,11 @@ import {
     resumeValueState,
 } from '../../../../recoil-state/resume-state/resume-single-section.state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { employmentHistoryItemsState } from '../../../../recoil-state/resume-state/resume-complex-section.state';
+import {
+    educationItemsState,
+    employmentHistoryItemsState,
+    linkItemsState,
+} from '../../../../recoil-state/resume-state/resume-complex-section.state';
 import { convertPayloadData } from '../../../../configs/utils/format.utils';
 import styles from './styles.module.scss';
 import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
@@ -38,14 +42,22 @@ const ResumeImport = (props: ResumeImportProps) => {
         employmentHistoryItemsState
     );
 
+    const resetEducationsChangeValue = useSetRecoilState(educationItemsState);
+
+    const resetLinksChangeValue = useSetRecoilState(linkItemsState);
+
     const resetChangeValue = useCallback(async () => {
         resetPersonalDetailChangeValue([]);
         resetProfessionalSummaryChangeValue([]);
         resetEmploymentHistoriesChangeValue([]);
+        resetEducationsChangeValue([]);
+        resetLinksChangeValue([]);
     }, [
         resetPersonalDetailChangeValue,
         resetProfessionalSummaryChangeValue,
         resetEmploymentHistoriesChangeValue,
+        resetEducationsChangeValue,
+        resetLinksChangeValue,
     ]);
 
     const submitFormHandler = async () => {
@@ -94,15 +106,15 @@ const ResumeImport = (props: ResumeImportProps) => {
             <ResumeImportForm initialValue={initialResume} />
             <Button
                 className={'btn'}
-                type='primary'
-                size='large'
+                type="primary"
+                size="large"
                 onClick={submitFormHandler}>
                 Save Resume
             </Button>
             <Button
                 className={'btn'}
-                type='primary'
-                size='large'
+                type="primary"
+                size="large"
                 onClick={getDataHandler}>
                 Get Resume Data
             </Button>

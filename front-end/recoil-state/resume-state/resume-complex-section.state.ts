@@ -1,6 +1,7 @@
 import {
     educationTitleValueState,
     employmentHistoryTitleValueState,
+    linkTitleValueState,
 } from './resume-title.state';
 import {
     ComplexSectionDataType,
@@ -39,7 +40,9 @@ export const complexSectionValueState = selector<ComplexSectionDataType>({
 });
 
 //employment history
-export const employmentHistoryItemsState = atom<EmploymentHistoryItemDataType[]>({
+export const employmentHistoryItemsState = atom<
+    EmploymentHistoryItemDataType[]
+>({
     key: 'employmentHistoryItemsState',
     default: [],
 });
@@ -107,7 +110,7 @@ export const linkItemsState = atom<LinkItemDataType[]>({
 export const linksDetails = atom<ComplexSectionDetailsDataType>({
     key: 'linksDetails',
     default: {
-        position: 3,
+        position: 4,
         sectionType: 'links',
     },
 });
@@ -115,9 +118,9 @@ export const linksDetails = atom<ComplexSectionDetailsDataType>({
 export const linksValueState = selector<ComplexSectionDetailsDataType>({
     key: 'linksValueState',
     get: ({ get }) => {
-        const header = get(educationTitleValueState);
-        const { id, position, sectionType } = get(educationsDetails);
-        const items = get(educationItemsState);
+        const header = get(linkTitleValueState);
+        const { id, position, sectionType } = get(linksDetails);
+        const items = get(linkItemsState);
         return {
             id,
             header,
