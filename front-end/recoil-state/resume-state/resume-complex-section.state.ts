@@ -2,6 +2,7 @@ import {
     educationTitleValueState,
     employmentHistoryTitleValueState,
     linkTitleValueState,
+    skillTitleValueState,
 } from './resume-title.state';
 import {
     ComplexSectionDataType,
@@ -19,6 +20,8 @@ export const complexSectionValueState = selector<ComplexSectionDataType>({
         const employmentHistories = get(employmentHistoriesValueState);
         const educations = get(educationsValueState);
         const links = get(linksValueState);
+        const skills = get(skillsValueState);
+
         const sectionType: ComplexSection[] = [];
         const sectionDetails: Partial<
             Record<ComplexSection, ComplexSectionDetailsDataType>
@@ -34,6 +37,10 @@ export const complexSectionValueState = selector<ComplexSectionDataType>({
         if (links.items?.length) {
             sectionType.push('links');
             sectionDetails['links'] = links;
+        }
+        if (skills.items?.length) {
+            sectionType.push('skills');
+            sectionDetails['skills'] = skills;
         }
         return { sectionType, sectionDetails };
     },
@@ -121,6 +128,35 @@ export const linksValueState = selector<ComplexSectionDetailsDataType>({
         const header = get(linkTitleValueState);
         const { id, position, sectionType } = get(linksDetails);
         const items = get(linkItemsState);
+        return {
+            id,
+            header,
+            position,
+            sectionType,
+            items,
+        };
+    },
+});
+
+//skills
+export const skillItemsState = atom<LinkItemDataType[]>({
+    key: 'skillItemsState',
+    default: [],
+});
+export const skillsDetails = atom<ComplexSectionDetailsDataType>({
+    key: 'skillsDetails',
+    default: {
+        position: 4,
+        sectionType: 'skills',
+    },
+});
+
+export const skillsValueState = selector<ComplexSectionDetailsDataType>({
+    key: 'skillsValueState',
+    get: ({ get }) => {
+        const header = get(skillTitleValueState);
+        const { id, position, sectionType } = get(skillsDetails);
+        const items = get(skillItemsState);
         return {
             id,
             header,

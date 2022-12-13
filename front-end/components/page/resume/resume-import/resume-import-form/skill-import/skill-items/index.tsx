@@ -1,23 +1,25 @@
 import React from 'react';
-import { LinkItemDataType } from '../../../../../../../configs/interfaces/resume.interface';
+import { SkillItemDataType } from '../../../../../../../configs/interfaces/resume.interface';
 import SectionItem from '../../../../../../custom/section-item';
 
-type LinkItemsProps = {
+type SkillItemsProps = {
     className?: string;
     sectionType: string;
-    items?: LinkItemDataType[];
+    items?: SkillItemDataType[];
+    disableLevel: boolean;
     onRemoveItem: (position: number) => void;
     onChangeItem: (
-        changedData: LinkItemDataType,
-        allData: LinkItemDataType
+        changedData: SkillItemDataType,
+        allData: SkillItemDataType
     ) => void;
 };
 
-const LinkItems = (props: LinkItemsProps) => {
+const SkillItems = (props: SkillItemsProps) => {
     const {
         className,
         sectionType,
         items,
+        disableLevel,
         onRemoveItem,
         onChangeItem,
     } = props;
@@ -28,8 +30,9 @@ const LinkItems = (props: LinkItemsProps) => {
                 <SectionItem
                     key={item.position}
                     position={item.position}
-                    itemHeader={item.label ? item.label : 'Not specified'}
+                    itemHeader={item.name ? item.name : 'Not specified'}
                     sectionType={sectionType}
+                    disableLevel={disableLevel}
                     onChangeItem={onChangeItem}
                     onRemove={onRemoveItem.bind(null, item.position)}
                 />
@@ -38,4 +41,4 @@ const LinkItems = (props: LinkItemsProps) => {
     );
 };
 
-export default LinkItems;
+export default SkillItems;

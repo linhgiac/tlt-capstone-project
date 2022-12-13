@@ -6,7 +6,10 @@ import SectionForm from '../section-form';
 import { SECTION_TYPE } from '../../../configs/constants/resume.constants';
 import { Modal } from 'antd';
 import PopupModal from '../popup-modal';
-import { EmploymentHistoryItemDataType } from '../../../configs/interfaces/resume.interface';
+import {
+    ComplexSectionItemDataType,
+    EmploymentHistoryItemDataType,
+} from '../../../configs/interfaces/resume.interface';
 
 type Props = {
     position: number;
@@ -14,6 +17,8 @@ type Props = {
     itemHeader: string;
     children?: string;
     sectionType: string;
+    disableLevel?: boolean;
+    item?: ComplexSectionItemDataType;
     onRemove: () => void;
     onChangeItem: (
         changedData: EmploymentHistoryItemDataType,
@@ -28,6 +33,8 @@ const SectionItem = (props: Props) => {
         itemHeader,
         children,
         sectionType,
+        disableLevel,
+        item,
         onRemove,
         onChangeItem,
     } = props;
@@ -90,7 +97,9 @@ const SectionItem = (props: Props) => {
                 <div className={styles['section-item__form']}>
                     {isVisible && (
                         <SectionForm
+                            value={item}
                             labelList={labelList}
+                            disableLevel={disableLevel}
                             onChangeItemValue={changeItemValueHandler}
                         />
                     )}
@@ -98,12 +107,12 @@ const SectionItem = (props: Props) => {
             </div>
             <div>
                 <PopupModal
-                    title='Delete Item'
-                    description='Are you sure you want to delete this item?'
+                    title="Delete Item"
+                    description="Are you sure you want to delete this item?"
                     type={'confirm'}
                     visible={isModalOpened}
-                    okText='Delete'
-                    cancelText='Cancel'
+                    okText="Delete"
+                    cancelText="Cancel"
                     onCancel={() => {
                         setIsModalOpened(false);
                     }}

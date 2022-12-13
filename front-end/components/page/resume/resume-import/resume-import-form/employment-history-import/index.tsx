@@ -8,12 +8,16 @@ import { employmentHistoryItemsState } from '../../../../../../recoil-state/resu
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { employmentHistoryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
-import { EmploymentHistoryItemDataType } from '../../../../../../configs/interfaces/resume.interface';
+import {
+    ComplexSectionDetailsDataType,
+    EmploymentHistoryItemDataType,
+} from '../../../../../../configs/interfaces/resume.interface';
 
 type EmploymentHistoryProps = {
     className?: string;
     defaultTitle?: string;
     sectionType: any;
+    initialValue?: ComplexSectionDetailsDataType;
 };
 
 const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
@@ -21,7 +25,9 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         className,
         defaultTitle,
         sectionType = 'employmentHistories',
+        initialValue,
     } = props;
+    console.log('initialValue :>> ', initialValue);
     const [employmentHistoryTitle, setEmploymentHistoryTitle] = useRecoilState(
         employmentHistoryTitleValueState
     );
@@ -29,22 +35,28 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
     const [employmentHistoryItems, setEmploymentHistoryItems] = useRecoilState(
         employmentHistoryItemsState
     );
+    useEffect(() => {
+        if (initialValue && initialValue.items) {
+            console.log('initialValue', initialValue);
+            setEmploymentHistoryItems(initialValue.items);
+        }
+    }, [initialValue, setEmploymentHistoryItems]);
     const addItemHandler = () => {
         const newItem = {
             position: employmentHistoryItems
                 ? employmentHistoryItems.length
                 : 1,
         };
-        setEmploymentHistoryItems((prevItems) => {
+        setEmploymentHistoryItems(prevItems => {
             return prevItems.concat([newItem]);
         });
     };
     const removeItemHandler = async (position: number) => {
-        setEmploymentHistoryItems((prevItems) => {
-            return prevItems.filter((item) => item.position != position);
+        setEmploymentHistoryItems(prevItems => {
+            return prevItems.filter(item => item.position != position);
         });
 
-        setEmploymentHistoryItems((prevItems) => {
+        setEmploymentHistoryItems(prevItems => {
             return arrangePosition(prevItems);
         });
     };
@@ -53,7 +65,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
             changedData: EmploymentHistoryItemDataType,
             allData: EmploymentHistoryItemDataType
         ) => {
-            setEmploymentHistoryItems((prevItems) => {
+            setEmploymentHistoryItems(prevItems => {
                 const { position } = changedData;
 
                 if (prevItems.length === position) {
@@ -68,8 +80,6 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         },
         [setEmploymentHistoryItems]
     );
-
-
     return (
         <div className={classNames(className)}>
             <SectionImportTitle
@@ -87,6 +97,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
                 sectionType={sectionType}
                 onRemoveItem={removeItemHandler}
                 onChangeItem={changeItemHandler}
+                // initialValue={initialValue}
             />
             <SectionItemAdditionalButton
                 onAddItem={addItemHandler}

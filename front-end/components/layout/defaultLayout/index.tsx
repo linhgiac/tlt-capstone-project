@@ -14,7 +14,7 @@ const DefaultLayout = (props: Props) => {
     return (
         <>
             <DefaultHeader />
-            <div>{children}</div>
+            <div style={{ margin: '70px 0' }}>{children}</div>
         </>
     );
 };

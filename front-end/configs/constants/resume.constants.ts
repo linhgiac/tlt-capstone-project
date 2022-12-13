@@ -22,14 +22,16 @@ const EDUCATION_LABEL = {
     city: 'City',
     description: 'Description',
 };
-const LINKS = { label: 'Label', link: 'Link' };
+const LINKS_LABEL = { label: 'Label', link: 'Link' };
 
+const SKILLS_LABEL = { name: 'Skills', level: 'Level' };
 
 export const SECTION_TYPE: any = {
     personalDetails: PERSONAL_DETAILS_LABEL,
     employmentHistories: EMPLOYMENT_HISTORY_LABEL,
     educations: EDUCATION_LABEL,
-    links: LINKS,
+    links: LINKS_LABEL,
+    skills: SKILLS_LABEL,
 };
 
 export const RESUME_SIZE = {

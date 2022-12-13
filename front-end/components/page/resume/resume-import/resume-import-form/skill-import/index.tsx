@@ -5,46 +5,47 @@ import {
     EDUCATION_DESCRIPTION,
     EMPLOYMENT_HISTORY_DESCRIPTION,
 } from '../../../../../../configs/constants/description.constants';
-import LinkItems from './link-items';
+import SkillItems from './skill-items';
 import { useRecoilState } from 'recoil';
-import { linkItemsState } from '../../../../../../recoil-state/resume-state/resume-complex-section.state';
+import { skillItemsState } from '../../../../../../recoil-state/resume-state/resume-complex-section.state';
 import { arrangePosition } from '../../../../../../configs/utils/position';
-import { linkTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
+import { skillTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
-import { LinkItemDataType } from '../../../../../../configs/interfaces/resume.interface';
+import { SkillItemDataType } from '../../../../../../configs/interfaces/resume.interface';
 import { Switch } from 'antd';
 
-type LinkProps = {
+type SkillProps = {
     className?: string;
     defaultTitle?: string;
     sectionType: any;
 };
 
-const LinkImport = (props: LinkProps) => {
-    const { className, defaultTitle, sectionType = 'links' } = props;
-    const [linkTitle, setLinkTitle] = useRecoilState(linkTitleValueState);
+const SkillImport = (props: SkillProps) => {
+    const { className, defaultTitle, sectionType = 'skills' } = props;
+    const [skillTitle, setSkillTitle] = useRecoilState(skillTitleValueState);
+    const [disableLevel, setDisableLevel] = useState(false);
 
-    const [linkItems, setLinkItems] = useRecoilState(linkItemsState);
+    const [skillItems, setSkillItems] = useRecoilState(skillItemsState);
     const addItemHandler = () => {
         const newItem = {
-            position: linkItems ? linkItems.length : 1,
+            position: skillItems ? skillItems.length : 1,
         };
-        setLinkItems(prevItems => {
+        setSkillItems(prevItems => {
             return prevItems.concat([newItem]);
         });
     };
     const removeItemHandler = async (position: number) => {
-        setLinkItems(prevItems => {
+        setSkillItems(prevItems => {
             return prevItems.filter(item => item.position != position);
         });
 
-        setLinkItems(prevItems => {
+        setSkillItems(prevItems => {
             return arrangePosition(prevItems);
         });
     };
     const changeItemHandler = useCallback(
-        (changedData: LinkItemDataType, allData: LinkItemDataType) => {
-            setLinkItems(prevItems => {
+        (changedData: SkillItemDataType, allData: SkillItemDataType) => {
+            setSkillItems(prevItems => {
                 const { position } = changedData;
 
                 if (prevItems.length === position) {
@@ -57,26 +58,36 @@ const LinkImport = (props: LinkProps) => {
                 return prevItems;
             });
         },
-        [setLinkItems]
+        [setSkillItems]
     );
-
-    
+    const changeSwitchHandler = useCallback((checked: boolean) => {
+        setDisableLevel(!checked);
+    }, []);
     return (
         <div className={classNames(className)}>
             <SectionImportTitle
                 onChangeTitle={(title: string) => {
-                    setLinkTitle(title);
+                    setSkillTitle(title);
                 }}
                 defaultTitle={defaultTitle}>
-                {linkTitle}
+                {skillTitle}
             </SectionImportTitle>
             <p style={{ color: 'grey', fontSize: '12px' }}>
                 {EDUCATION_DESCRIPTION}
             </p>
-            
-            <LinkItems
-                items={linkItems}
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <Switch
+                    defaultChecked
+                    onChange={changeSwitchHandler}
+                />
+                <div style={{ paddingLeft: '10px' }}>
+                    {`Don't show experience level`}
+                </div>
+            </div>
+            <SkillItems
+                items={skillItems}
                 sectionType={sectionType}
+                disableLevel={disableLevel}
                 onRemoveItem={removeItemHandler}
                 onChangeItem={changeItemHandler}
             />
@@ -89,4 +100,4 @@ const LinkImport = (props: LinkProps) => {
     );
 };
 
-export default LinkImport;
+export default SkillImport;

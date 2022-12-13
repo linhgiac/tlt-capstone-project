@@ -5,6 +5,8 @@ import EmploymentHistoryImport from './employment-history-import';
 import LinkImport from './link-import';
 import PersonalDetailsImport from './personal-details-import';
 import ProfessionalSummaryImport from './professional-summary-import';
+import SkillImport from './skill-import';
+import { get } from 'lodash';
 
 type Props = {
     className?: string;
@@ -15,6 +17,7 @@ const ResumeImportForm = (props: Props) => {
     const { className, initialValue } = props;
     const { personalDetails, professionalSummary, complexSections } =
         initialValue;
+
     return (
         <div>
             <PersonalDetailsImport
@@ -31,6 +34,10 @@ const ResumeImportForm = (props: Props) => {
                 className="p-b-20"
                 defaultTitle="Employment History"
                 sectionType="employmentHistories"
+                initialValue={get(
+                    complexSections,
+                    'sectionDetails.employmentHistories'
+                )}
             />
             <EducationImport
                 className="p-b-20"
@@ -41,6 +48,12 @@ const ResumeImportForm = (props: Props) => {
                 className="p-b-20"
                 defaultTitle="Website & Social Links"
                 sectionType="links"
+            />
+
+            <SkillImport
+                className="p-b-20"
+                defaultTitle="Skills"
+                sectionType="skills"
             />
         </div>
     );

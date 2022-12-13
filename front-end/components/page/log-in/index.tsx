@@ -63,15 +63,7 @@ const LoginContent = (props: Props) => {
         }
         setIsLoading(false);
     };
-    // {
-    //     error &&
-    //         openNotificationWithIcon(
-    //             'error',
-    //             notification,
-    //             'Login Failed',
-    //             error
-    //         );
-    // }
+    
     return (
         <div className={styles['login-container']}>
             <div
