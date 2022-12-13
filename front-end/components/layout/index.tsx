@@ -1,6 +1,7 @@
 import React from 'react'
 import { LAYOUT } from '../../configs/constants/misc';
 import DefaultLayout from './defaultLayout';
+import EditorLayout from './editorLayout';
 import LoginLayout from './loginLayout';
 
 type LayoutProps = {
@@ -14,6 +15,8 @@ const Layout = ({ children, currentLayout }: LayoutProps) => {
             return <DefaultLayout>{children}</DefaultLayout>;
         case LAYOUT.LOGIN:
             return <LoginLayout>{children}</LoginLayout>;
+        case LAYOUT.EDITOR:
+            return <EditorLayout>{children}</EditorLayout>;
         default:
             return <DefaultLayout>{children}</DefaultLayout>;
     }

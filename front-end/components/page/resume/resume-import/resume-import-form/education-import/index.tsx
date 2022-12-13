@@ -11,22 +11,39 @@ import { educationItemsState } from '../../../../../../recoil-state/resume-state
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { educationTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
-import { EducationItemDataType } from '../../../../../../configs/interfaces/resume.interface';
+import {
+    ComplexSectionDataType,
+    ComplexSectionDetailsDataType,
+    EducationItemDataType,
+} from '../../../../../../configs/interfaces/resume.interface';
 
 type EducationProps = {
     className?: string;
     defaultTitle?: string;
     sectionType: any;
+    initialValue?: ComplexSectionDetailsDataType;
 };
 
 const EducationImport = (props: EducationProps) => {
-    const { className, defaultTitle, sectionType = 'educations' } = props;
+    const {
+        className,
+        defaultTitle,
+        sectionType = 'educations',
+        initialValue,
+    } = props;
     const [educationTitle, setEducationTitle] = useRecoilState(
         educationTitleValueState
     );
 
     const [educationItems, setEducationItems] =
         useRecoilState(educationItemsState);
+
+    useEffect(() => {
+        if (initialValue && initialValue.items) {
+            console.log('initialValue', initialValue);
+            setEducationItems(initialValue.items);
+        }
+    }, [initialValue, setEducationItems]);
     const addItemHandler = () => {
         const newItem = {
             position: educationItems ? educationItems.length : 1,

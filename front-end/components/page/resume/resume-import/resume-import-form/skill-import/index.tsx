@@ -11,21 +11,37 @@ import { skillItemsState } from '../../../../../../recoil-state/resume-state/res
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { skillTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
-import { SkillItemDataType } from '../../../../../../configs/interfaces/resume.interface';
+import {
+    ComplexSectionDetailsDataType,
+    SkillItemDataType,
+} from '../../../../../../configs/interfaces/resume.interface';
 import { Switch } from 'antd';
 
 type SkillProps = {
     className?: string;
     defaultTitle?: string;
     sectionType: any;
+    initialValue?: ComplexSectionDetailsDataType;
 };
 
 const SkillImport = (props: SkillProps) => {
-    const { className, defaultTitle, sectionType = 'skills' } = props;
+    const {
+        className,
+        defaultTitle,
+        sectionType = 'skills',
+        initialValue,
+    } = props;
     const [skillTitle, setSkillTitle] = useRecoilState(skillTitleValueState);
     const [disableLevel, setDisableLevel] = useState(false);
 
     const [skillItems, setSkillItems] = useRecoilState(skillItemsState);
+
+    useEffect(() => {
+        if (initialValue && initialValue.items) {
+            console.log('initialValue', initialValue);
+            setSkillItems(initialValue.items);
+        }
+    }, [initialValue, setSkillItems]);
     const addItemHandler = () => {
         const newItem = {
             position: skillItems ? skillItems.length : 1,

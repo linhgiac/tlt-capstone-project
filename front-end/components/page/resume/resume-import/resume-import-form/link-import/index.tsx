@@ -11,20 +11,36 @@ import { linkItemsState } from '../../../../../../recoil-state/resume-state/resu
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { linkTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
-import { LinkItemDataType } from '../../../../../../configs/interfaces/resume.interface';
+import {
+    ComplexSectionDetailsDataType,
+    LinkItemDataType,
+} from '../../../../../../configs/interfaces/resume.interface';
 import { Switch } from 'antd';
 
 type LinkProps = {
     className?: string;
     defaultTitle?: string;
     sectionType: any;
+    initialValue?: ComplexSectionDetailsDataType;
 };
 
 const LinkImport = (props: LinkProps) => {
-    const { className, defaultTitle, sectionType = 'links' } = props;
+    const {
+        className,
+        defaultTitle,
+        sectionType = 'links',
+        initialValue,
+    } = props;
     const [linkTitle, setLinkTitle] = useRecoilState(linkTitleValueState);
 
     const [linkItems, setLinkItems] = useRecoilState(linkItemsState);
+
+    useEffect(() => {
+        if (initialValue && initialValue.items) {
+            console.log('initialValue', initialValue);
+            setLinkItems(initialValue.items);
+        }
+    }, [initialValue, setLinkItems]);
     const addItemHandler = () => {
         const newItem = {
             position: linkItems ? linkItems.length : 1,
@@ -60,7 +76,6 @@ const LinkImport = (props: LinkProps) => {
         [setLinkItems]
     );
 
-    
     return (
         <div className={classNames(className)}>
             <SectionImportTitle
@@ -73,7 +88,7 @@ const LinkImport = (props: LinkProps) => {
             <p style={{ color: 'grey', fontSize: '12px' }}>
                 {EDUCATION_DESCRIPTION}
             </p>
-            
+
             <LinkItems
                 items={linkItems}
                 sectionType={sectionType}

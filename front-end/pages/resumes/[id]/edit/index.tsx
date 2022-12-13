@@ -1,12 +1,15 @@
 import { Button } from 'antd';
 import { GetServerSideProps } from 'next';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ResumeExport from '../../../../components/page/resume/resume-export';
 import ResumeImport from '../../../../components/page/resume/resume-import';
 import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
 import { server } from '../../../../configs/index';
 import mockedResume from '../../../../mock/resume.json';
 import { MOCKED_RESUME } from '../../../../mock/resume.mock';
+import { LAYOUT } from '../../../../configs/constants/misc';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
@@ -14,6 +17,10 @@ type ResumeEditorProps = {
 
 const ResumeEditor = (props: ResumeEditorProps) => {
     const { initialResumeData } = props;
+    const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
+    useEffect(() => {
+        setResumeSaved(initialResumeData);
+    }, [initialResumeData, setResumeSaved]);
     console.log('pre-rendering data', initialResumeData);
     const [isEditing, setIsEditing] = useState(true);
 
@@ -23,19 +30,21 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     return (
         <>
             {isEditing ? (
-                <div className='flex-row'>
+                <div className="flex-row">
                     <ResumeImport
-                        className='w-50 p-48'
-                        initialResume={initialResumeData}
+                        className="w-50 p-48"
+                        initialResume={resumeSaved}
                     />
                     <ResumeExport
-                        className='w-50'
+                        className="w-50"
                         onChangeLayout={changeLayoutHandler}
-                        resumeData={initialResumeData}
+                        resumeData={resumeSaved}
                     />
                 </div>
             ) : (
-                <Button type='primary' onClick={changeLayoutHandler}>
+                <Button
+                    type="primary"
+                    onClick={changeLayoutHandler}>
                     Back to Editor
                 </Button>
             )}
@@ -46,5 +55,22 @@ const ResumeEditor = (props: ResumeEditorProps) => {
 export default ResumeEditor;
 
 export async function getServerSideProps() {
-    return { props: { initialResumeData: MOCKED_RESUME } };
+    const defaultReturnProps = {
+        currentLayout: LAYOUT.EDITOR,
+    };
+    try {
+        return {
+            props: {
+                ...defaultReturnProps,
+                initialResumeData: MOCKED_RESUME,
+            },
+        };
+    } catch (error: any) {
+        return {
+            props: {
+                ...defaultReturnProps,
+                error: JSON.stringify(error),
+            },
+        };
+    }
 }

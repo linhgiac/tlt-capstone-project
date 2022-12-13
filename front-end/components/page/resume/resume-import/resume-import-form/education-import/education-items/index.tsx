@@ -23,6 +23,7 @@ const EducationItems = (props: EducationItemsProps) => {
                     key={item.position}
                     position={item.position}
                     itemHeader={item.school ? item.school : 'Not specified'}
+                    item={item}
                     sectionType={sectionType}
                     onChangeItem={onChangeItem}
                     onRemove={onRemoveItem.bind(null, item.position)}

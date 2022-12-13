@@ -29,6 +29,7 @@ const LinkItems = (props: LinkItemsProps) => {
                     key={item.position}
                     position={item.position}
                     itemHeader={item.label ? item.label : 'Not specified'}
+                    item={item}
                     sectionType={sectionType}
                     onChangeItem={onChangeItem}
                     onRemove={onRemoveItem.bind(null, item.position)}

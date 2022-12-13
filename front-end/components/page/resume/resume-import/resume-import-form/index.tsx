@@ -43,17 +43,20 @@ const ResumeImportForm = (props: Props) => {
                 className="p-b-20"
                 defaultTitle="Education"
                 sectionType="educations"
+                initialValue={get(complexSections, 'sectionDetails.educations')}
             />
             <LinkImport
                 className="p-b-20"
                 defaultTitle="Website & Social Links"
                 sectionType="links"
+                initialValue={get(complexSections, 'sectionDetails.links')}
             />
 
             <SkillImport
                 className="p-b-20"
                 defaultTitle="Skills"
                 sectionType="skills"
+                initialValue={get(complexSections, 'sectionDetails.skills')}
             />
         </div>
     );

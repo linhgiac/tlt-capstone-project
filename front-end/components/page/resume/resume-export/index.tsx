@@ -6,7 +6,7 @@ import { ResumeDataType } from '../../../../configs/interfaces/resume.interface'
 import ResumeExportMain from './resume-export-main';
 import ResumeExportPagination from './resume-export-pagination';
 import SectionImportTitle from '../resume-import/section-import-title';
-import { resumeTemplate } from '../../../../configs/utils/template.utils';
+// import { resumeTemplate } from '../../../../configs/utils/template.utils';
 // import ResumeExportContainer from './resume-export-container';
 
 type ResumeExportProps = {
@@ -22,9 +22,9 @@ const ResumeExport = ({
 }: ResumeExportProps) => {
     const changeLayoutHandler = () => {};
 
-    const chosenResumeHandler = (id: number) => {
-        console.log('resumeTemplate', resumeTemplate);
-    };
+    // const chosenResumeHandler = (id: number) => {
+    //     console.log('resumeTemplate', resumeTemplate);
+    // };
     return (
         <div className={classNames(className, styles['resume-export'])}>
             <div className={classNames(styles['resume-export-container'])}>

@@ -31,6 +31,7 @@ const SkillItems = (props: SkillItemsProps) => {
                     key={item.position}
                     position={item.position}
                     itemHeader={item.name ? item.name : 'Not specified'}
+                    item={item}
                     sectionType={sectionType}
                     disableLevel={disableLevel}
                     onChangeItem={onChangeItem}
