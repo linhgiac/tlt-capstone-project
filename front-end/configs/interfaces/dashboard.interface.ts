@@ -1,8 +1,7 @@
 export type DashboardItemType = {
     id: number,
     title: string,
-    lastUpdated: string,
-    previewImg: string,
+    thumbnail: string,
 }
 
 export type DashboardDataType = {

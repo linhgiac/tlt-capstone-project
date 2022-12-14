@@ -1,11 +1,10 @@
 export type TemplateCategoryType = 'all' | 'creative' | 'simple' | 'professional' | 'modern'
 export type TemplateDataType = {
     id: number,
-    type: TemplateCategoryType,
-    thumnail: string,
-    name: string,
     title: string,
     description: string
+    category: TemplateCategoryType,
+    get_thumbnail: string,
 }
 export type TemplatesDataType = {
     data: TemplateDataType[]

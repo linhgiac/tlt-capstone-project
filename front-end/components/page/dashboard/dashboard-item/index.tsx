@@ -7,6 +7,7 @@ import { EditOutlined } from "@ant-design/icons";
 import { EditableTitle } from "../../../custom";
 import ResumeTitle from "../../resume/resume-import/resume-title";
 import { useRouter } from "next/router";
+import Image from 'next/image'
 
 type DashboardItemProps = {
     item: DashboardItemType
@@ -21,8 +22,7 @@ const DashboardItem = (props: DashboardItemProps) => {
         router.push({
             pathname: '/resumes/[id]/edit',
             query: {
-                id: 1,
-                // id: item.id,
+                id: item.id,
             },
         });
     }
@@ -34,10 +34,12 @@ const DashboardItem = (props: DashboardItemProps) => {
     }
     return (
         <div className={classNames(styles['dashboard-item'])}>
-            <button onClick={onClick} className={classNames(styles['dashboard-item-preview'])}></button>
+            <button onClick={onClick} className={classNames(styles['dashboard-item-preview'])}>
+                <Image src={item.thumbnail} width={225} height={321} />
+            </button>
             <div className={classNames(styles['dashboard-item-body'])}>
                 <ResumeTitle initialValue={item.title}></ResumeTitle>
-                <div className={classNames(styles['dashboard-item-lastupdated'])}>Updated {item.lastUpdated}</div>
+                {/* <div className={classNames(styles['dashboard-item-lastupdated'])}>Updated {item.lastUpdated}</div> */}
                 <div className={classNames(styles['dashboard-item-button-list'])}>
                     <button className={classNames(styles['dashboard-item-button'])} onClick={onClick}>
                         Edit

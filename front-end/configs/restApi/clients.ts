@@ -14,7 +14,7 @@ export const getAuthHeader = (
 ) => {
     const { req, res } = options
     // Calling tracker
-    const accessToken = getCookie('access-token', { req, res })
+    const accessToken = getCookie('token-access', { req, res })
 
     const headers: any =
     {
@@ -22,6 +22,8 @@ export const getAuthHeader = (
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
     }
+
+    console.log(headers);
 
     return headers
 }

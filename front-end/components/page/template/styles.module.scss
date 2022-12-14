@@ -14,8 +14,7 @@
         height: 400px;
     }
     
-    .template-item-preview {
-    background-color: $medium-color;
+                                                                                                                                .template-item-preview {
     width: 216px;
         height: 384px;
         margin: auto;
@@ -43,3 +42,10 @@
         color: $medium-color;
         text-align: left;
     } 
+.template-item-button {
+    z-index: 100;
+}
+
+.template-item-image {
+    z-index: 1;
+}
