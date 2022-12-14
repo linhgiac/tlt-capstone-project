@@ -1,50 +1,54 @@
-import { selector, atom } from 'recoil';
-import {
-    ComplexSectionDataType,
-    ComplexSection,
-    ComplexSectionDetailsDataType,
-    EmploymentHistoryItemDataType,
-    EducationItemDataType,
-    LinkItemDataType,
-} from '../../configs/interfaces/resume.interface';
 import {
     educationTitleValueState,
     employmentHistoryTitleValueState,
     linkTitleValueState,
     skillTitleValueState,
-} from './resume-title.state';
+} from '../resume-title.state';
+import {
+    ComplexSectionDataType,
+    ComplexSectionDetailsDataType,
+    EmploymentHistoryItemDataType,
+    ComplexSection,
+    EducationItemDataType,
+    LinkItemDataType,
+} from '../../../configs/interfaces/resume.interface';
+import { atom, selector } from 'recoil';
 
-export const complexSectionValueState = selector<ComplexSectionDataType>({
-    key: 'complexSectionValueState',
-    get: ({ get }) => {
-        const employmentHistories = get(employmentHistoriesValueState);
-        const educations = get(educationsValueState);
-        const links = get(linksValueState);
-        const skills = get(skillsValueState);
+export const complexSectionChangedValueState = selector<ComplexSectionDataType>(
+    {
+        key: 'complexSectionChangedValueState',
+        get: ({ get }) => {
+            const employmentHistories = get(
+                employmentHistoriesChangedValueState
+            );
+            const educations = get(educationsChangedValueState);
+            const links = get(linksChangedValueState);
+            const skills = get(skillsChangedValueState);
 
-        const sectionType: ComplexSection[] = [];
-        const sectionDetails: Partial<
-            Record<ComplexSection, ComplexSectionDetailsDataType>
-        > = {};
-        if (employmentHistories.items?.length) {
-            sectionType.push('employmentHistories');
-            sectionDetails['employmentHistories'] = employmentHistories;
-        }
-        if (educations.items?.length) {
-            sectionType.push('educations');
-            sectionDetails['educations'] = educations;
-        }
-        if (links.items?.length) {
-            sectionType.push('links');
-            sectionDetails['links'] = links;
-        }
-        if (skills.items?.length) {
-            sectionType.push('skills');
-            sectionDetails['skills'] = skills;
-        }
-        return { sectionType, sectionDetails };
-    },
-});
+            const sectionType: ComplexSection[] = [];
+            const sectionDetails: Partial<
+                Record<ComplexSection, ComplexSectionDetailsDataType>
+            > = {};
+            if (employmentHistories.items?.length) {
+                sectionType.push('employmentHistories');
+                sectionDetails['employmentHistories'] = employmentHistories;
+            }
+            if (educations.items?.length) {
+                sectionType.push('educations');
+                sectionDetails['educations'] = educations;
+            }
+            if (links.items?.length) {
+                sectionType.push('links');
+                sectionDetails['links'] = links;
+            }
+            if (skills.items?.length) {
+                sectionType.push('skills');
+                sectionDetails['skills'] = skills;
+            }
+            return { sectionType, sectionDetails };
+        },
+    }
+);
 
 //employment history
 export const employmentHistoryItemsState = atom<
@@ -61,9 +65,9 @@ export const employmentHistoriesDetails = atom<ComplexSectionDetailsDataType>({
     },
 });
 
-export const employmentHistoriesValueState =
+export const employmentHistoriesChangedValueState =
     selector<ComplexSectionDetailsDataType>({
-        key: 'employmentHistoriesValueState',
+        key: 'employmentHistoriesChangedValueState',
         get: ({ get }) => {
             const header = get(employmentHistoryTitleValueState);
             const { id, position, sectionType } = get(
@@ -93,21 +97,22 @@ export const educationsDetails = atom<ComplexSectionDetailsDataType>({
     },
 });
 
-export const educationsValueState = selector<ComplexSectionDetailsDataType>({
-    key: 'educationsValueState',
-    get: ({ get }) => {
-        const header = get(educationTitleValueState);
-        const { id, position, sectionType } = get(educationsDetails);
-        const items = get(educationItemsState);
-        return {
-            id,
-            header,
-            position,
-            sectionType,
-            items,
-        };
-    },
-});
+export const educationsChangedValueState =
+    selector<ComplexSectionDetailsDataType>({
+        key: 'educationsChangedValueState',
+        get: ({ get }) => {
+            const header = get(educationTitleValueState);
+            const { id, position, sectionType } = get(educationsDetails);
+            const items = get(educationItemsState);
+            return {
+                id,
+                header,
+                position,
+                sectionType,
+                items,
+            };
+        },
+    });
 
 //links
 export const linkItemsState = atom<LinkItemDataType[]>({
@@ -122,8 +127,8 @@ export const linksDetails = atom<ComplexSectionDetailsDataType>({
     },
 });
 
-export const linksValueState = selector<ComplexSectionDetailsDataType>({
-    key: 'linksValueState',
+export const linksChangedValueState = selector<ComplexSectionDetailsDataType>({
+    key: 'linksChangedValueState',
     get: ({ get }) => {
         const header = get(linkTitleValueState);
         const { id, position, sectionType } = get(linksDetails);
@@ -151,8 +156,8 @@ export const skillsDetails = atom<ComplexSectionDetailsDataType>({
     },
 });
 
-export const skillsValueState = selector<ComplexSectionDetailsDataType>({
-    key: 'skillsValueState',
+export const skillsChangedValueState = selector<ComplexSectionDetailsDataType>({
+    key: 'skillsChangedValueState',
     get: ({ get }) => {
         const header = get(skillTitleValueState);
         const { id, position, sectionType } = get(skillsDetails);

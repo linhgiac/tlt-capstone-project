@@ -26,7 +26,6 @@ type LoginResponse = {
 const LoginContent = (props: Props) => {
     const router = useRouter();
     const [form] = Form.useForm();
-    console.log('form :>> ', form);
 
     const [isLogging, setIsLogging] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +38,6 @@ const LoginContent = (props: Props) => {
 
     const loginHandler = async (values: any) => {
         try {
-            console.log(values);
             setIsLoading(true);
             const response = await axios.post<LoginResponse>(
                 `${HOST}accounts/token/`,
@@ -51,7 +49,6 @@ const LoginContent = (props: Props) => {
                     },
                 }
             );
-            console.log(response);
             setCookie('token-access', response.data.access);
             setCookie('token-refresh', response.data.refresh);
             setIsLogged(true);
@@ -59,7 +56,6 @@ const LoginContent = (props: Props) => {
         } catch (error: any) {
             error.response.data.detail && setError(error.response.data.detail);
 
-            // console.log('error', error);
         }
         setIsLoading(false);
     };

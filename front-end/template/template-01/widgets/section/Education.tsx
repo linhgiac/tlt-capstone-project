@@ -2,6 +2,7 @@ import React from 'react';
 import { EducationItemDataType } from '../../../../configs/interfaces/resume.interface';
 import DataDisplay from '../../../shared/DataDisplay';
 import Divide from '../divide/Divide';
+import styles from './section.module.scss';
 
 type Props = {
     header?: string;
@@ -14,16 +15,20 @@ const Education = (props: Props) => {
         <div>
             <div>
                 <Divide />
-                <DataDisplay>{header}</DataDisplay>
+                <DataDisplay className={styles.header}>{header}</DataDisplay>
                 {items?.map(item => {
                     return (
                         <>
-                            <DataDisplay>{item.school}</DataDisplay>
-                            <DataDisplay>
+                            <DataDisplay className={styles['title']}>
+                                {item.school}
+                            </DataDisplay>
+                            <DataDisplay className={styles.date}>
                                 {item.startDate} -{' '}
                                 {item.endDate ? item.endDate : 'Now'}
                             </DataDisplay>
-                            <DataDisplay>{item.degree}</DataDisplay>
+                            <DataDisplay className={styles.description}>
+                                {item.degree}
+                            </DataDisplay>
                         </>
                     );
                 })}

@@ -10,7 +10,6 @@ type TemplateCategoryButtonProps = {
 const TemplateCategoryTabs = (props: TemplateCategoryButtonProps) => {
     const { activeKey, onChange } = props;
 
-    console.log('activeKey', activeKey)
     return (
         <Tabs
             activeKey={activeKey}

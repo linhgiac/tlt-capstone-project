@@ -7,7 +7,7 @@ import {
 } from '../../../../../../configs/constants/description.constants';
 import EducationItems from './education-items';
 import { useRecoilState } from 'recoil';
-import { educationItemsState } from '../../../../../../recoil-state/resume-state/resume-complex-section.state';
+import { educationItemsState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { educationTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
@@ -40,7 +40,6 @@ const EducationImport = (props: EducationProps) => {
 
     useEffect(() => {
         if (initialValue && initialValue.items) {
-            console.log('initialValue', initialValue);
             setEducationItems(initialValue.items);
         }
     }, [initialValue, setEducationItems]);

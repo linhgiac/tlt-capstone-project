@@ -1,10 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Col, Form, Input, Row, Typography } from 'antd';
 import SectionImportTitle from '../../section-import-title';
 import ImageUpload from '../../../../../custom/image-upload';
 import classNames from 'classnames';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { personalDetailFieldsState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
 import {
@@ -12,6 +11,9 @@ import {
     PersonalDetailsDataType,
 } from '../../../../../../configs/interfaces/resume.interface';
 import { personalDetailTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
+import { assignIn } from 'lodash';
+import { personalDetailChangedValueState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
+import { personalDetailValueState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
 
 type PersonalDetailsImportProps = {
     className?: string;
@@ -23,44 +25,31 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     const { className, defaultTitle, initialValue } = props;
     const [form] = Form.useForm();
 
-    const [personalDetailFields, setPersonalDetailFields] = useRecoilState(
-        personalDetailFieldsState
+    // const [personalDetailFields, setPersonalDetailFields] = useRecoilState(
+    //     personalDetailFieldsState
+    // );
+    const [personalDetailsChangedValues, setPersonalDetailsChangedValues] =
+        useRecoilState(personalDetailChangedValueState);
+    const [personalDetailsValues, setPersonalDetailsValues] = useRecoilState(
+        personalDetailValueState
     );
     const [personalDetailTitle, setPersonalDetailTitle] = useRecoilState(
         personalDetailTitleValueState
     );
 
-    // const changeFieldsHandler = useCallback(
-    //     (_: any, allFields: any) => {
-    //         setPersonalDetailFields(
-    //             allFields.map((field: any) => {
-    //                 return { name: field.name[0], value: field.value };
-    //             })
-    //         );
-    //     },
-    //     [setPersonalDetailFields]
-    // );
-
-    const changeFieldsHandler = useCallback(
-        (changeFields: any, _: any) => {
-            const personalDetailsChangeField = {
-                name: changeFields[0].name[0],
-                value: changeFields[0].value,
-            };
-            let personalDetailsChangeFields = personalDetailFields;
-            personalDetailsChangeFields = personalDetailsChangeFields.filter(
-                (field: FieldFormData) =>
-                    field.name !== personalDetailsChangeField.name
-            );
-            personalDetailsChangeFields = [
-                ...personalDetailsChangeFields,
-                personalDetailsChangeField,
-            ];
-            setPersonalDetailFields(personalDetailsChangeFields);
+    const changeValuesHandler = useCallback(
+        (changedValues: any, values: any) => {
+            setPersonalDetailsChangedValues((prev: any) => {
+                const result = { ...prev, ...changedValues };
+                return result;
+            });
+            setPersonalDetailsValues(values);
         },
-        [setPersonalDetailFields, personalDetailFields]
+        [setPersonalDetailsChangedValues, setPersonalDetailsValues]
     );
 
+    useEffect(() => {
+    }, [personalDetailsValues]);
     const getFixedField = () => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const [expand, setExpand] = useState(false);
@@ -71,19 +60,24 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
         };
         return (
             <>
-                <Row justify='start'>
-                    <Col span={12} className='p-r-24'>
+                <Row justify="start">
+                    <Col
+                        span={12}
+                        className="p-r-24">
                         <Form.Item
-                            className='no-margin'
-                            name='jobTitle'
-                            label='Wanted Job Title'>
+                            className="no-margin"
+                            name="jobTitle"
+                            label="Wanted Job Title">
                             <Input />
                         </Form.Item>
                     </Col>
                     <Col
                         span={12}
                         className={classNames('p-l-24', 'no-margin')}>
-                        <Form.Item className='no-margin' name='avatar' label=''>
+                        <Form.Item
+                            className="no-margin"
+                            name="avatar"
+                            label="">
                             <ImageUpload
                                 className={classNames(
                                     'no-margin',
@@ -93,56 +87,68 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row justify='start'>
-                    <Col span={12} className='p-r-24'>
+                <Row justify="start">
+                    <Col
+                        span={12}
+                        className="p-r-24">
                         <Form.Item
-                            className='no-margin'
-                            name='firstName'
-                            label='First Name'>
+                            className="no-margin"
+                            name="firstName"
+                            label="First Name">
                             <Input />
                         </Form.Item>
                     </Col>
-                    <Col span={12} className='p-l-24'>
+                    <Col
+                        span={12}
+                        className="p-l-24">
                         <Form.Item
-                            className='no-margin'
-                            name='lastName'
-                            label='Last Name'>
-                            <Input />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row justify='start'>
-                    <Col span={12} className='p-r-24'>
-                        <Form.Item
-                            className='no-margin'
-                            name='email'
-                            label='Email'>
-                            <Input />
-                        </Form.Item>
-                    </Col>
-                    <Col span={12} className='p-l-24'>
-                        <Form.Item
-                            className='no-margin'
-                            name='phone'
-                            label='Phone'>
+                            className="no-margin"
+                            name="lastName"
+                            label="Last Name">
                             <Input />
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row justify='start'>
-                    <Col span={12} className='p-r-24'>
+                <Row justify="start">
+                    <Col
+                        span={12}
+                        className="p-r-24">
                         <Form.Item
-                            className='no-margin'
-                            name='country'
-                            label='Country'>
+                            className="no-margin"
+                            name="email"
+                            label="Email">
                             <Input />
                         </Form.Item>
                     </Col>
-                    <Col span={12} className='p-l-24'>
+                    <Col
+                        span={12}
+                        className="p-l-24">
                         <Form.Item
-                            className='no-margin'
-                            name='city'
-                            label='City'>
+                            className="no-margin"
+                            name="phone"
+                            label="Phone">
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row justify="start">
+                    <Col
+                        span={12}
+                        className="p-r-24">
+                        <Form.Item
+                            className="no-margin"
+                            name="country"
+                            label="Country">
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                    <Col
+                        span={12}
+                        className="p-l-24">
+                        <Form.Item
+                            className="no-margin"
+                            name="city"
+                            label="City">
                             <Input />
                         </Form.Item>
                     </Col>
@@ -156,56 +162,68 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                     </Text>
                 ) : (
                     <>
-                        <Row justify='start'>
-                            <Col span={12} className='p-r-24'>
+                        <Row justify="start">
+                            <Col
+                                span={12}
+                                className="p-r-24">
                                 <Form.Item
-                                    className='no-margin'
-                                    name='address'
-                                    label='Address'>
+                                    className="no-margin"
+                                    name="address"
+                                    label="Address">
                                     <Input />
                                 </Form.Item>
                             </Col>
-                            <Col span={12} className='p-l-24'>
+                            <Col
+                                span={12}
+                                className="p-l-24">
                                 <Form.Item
-                                    className='no-margin'
-                                    name='postalCode'
-                                    label='Postal Code'>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row justify='start'>
-                            <Col span={12} className='p-r-24'>
-                                <Form.Item
-                                    className='no-margin'
-                                    name='drivingLicense'
-                                    label='Driving License'>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                            <Col span={12} className='p-l-24'>
-                                <Form.Item
-                                    className='no-margin'
-                                    name='nationality'
-                                    label='Nationality'>
+                                    className="no-margin"
+                                    name="postalCode"
+                                    label="Postal Code">
                                     <Input />
                                 </Form.Item>
                             </Col>
                         </Row>
-                        <Row justify='start'>
-                            <Col span={12} className='p-r-24'>
+                        <Row justify="start">
+                            <Col
+                                span={12}
+                                className="p-r-24">
                                 <Form.Item
-                                    className='no-margin'
-                                    name='placeOfBirth'
-                                    label='Place Of Birth'>
+                                    className="no-margin"
+                                    name="drivingLicense"
+                                    label="Driving License">
                                     <Input />
                                 </Form.Item>
                             </Col>
-                            <Col span={12} className='p-l-24'>
+                            <Col
+                                span={12}
+                                className="p-l-24">
                                 <Form.Item
-                                    className='no-margin'
-                                    name='dateOfBirth'
-                                    label='Date Of Birth'>
+                                    className="no-margin"
+                                    name="nationality"
+                                    label="Nationality">
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row justify="start">
+                            <Col
+                                span={12}
+                                className="p-r-24">
+                                <Form.Item
+                                    className="no-margin"
+                                    name="placeOfBirth"
+                                    label="Place Of Birth">
+                                    <Input />
+                                </Form.Item>
+                            </Col>
+                            <Col
+                                span={12}
+                                className="p-l-24">
+                                <Form.Item
+                                    className="no-margin"
+                                    name="dateOfBirth"
+                                    label="Date Of Birth">
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -232,11 +250,12 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
             </SectionImportTitle>
             <Form
                 form={form}
-                layout='vertical'
-                fields={personalDetailFields}
+                layout="vertical"
+                // fields={personalDetailFields}
                 initialValues={initialValue}
-                onFieldsChange={changeFieldsHandler}
-                size='large'
+                // onFieldsChange={changeFieldsHandler}
+                onValuesChange={changeValuesHandler}
+                size="large"
                 colon={false}>
                 {getFixedField()}
             </Form>

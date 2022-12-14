@@ -2,6 +2,7 @@ import React from 'react';
 import { SkillItemDataType } from '../../../../configs/interfaces/resume.interface';
 import DataDisplay from '../../../shared/DataDisplay';
 import Divide from '../divide/Divide';
+import styles from './section.module.scss';
 
 type Props = {
     header?: string;
@@ -15,20 +16,22 @@ const Skill = (props: Props) => {
         <div>
             <div>
                 <Divide />
-                <DataDisplay>{header}</DataDisplay>
-                {items?.map(item => {
-                    return (
-                        <>
-                            {isShown ? (
-                                <DataDisplay>
-                                    {item.name} - {item.level}
-                                </DataDisplay>
-                            ) : (
-                                <DataDisplay>{item.name}</DataDisplay>
-                            )}
-                        </>
-                    );
-                })}
+                <DataDisplay className={styles.header}>{header}</DataDisplay>
+                <div className={styles.skills}>
+                    {items?.map(item => {
+                        return (
+                            <>
+                                {isShown ? (
+                                    <DataDisplay>
+                                        {item.name} - {item.level}
+                                    </DataDisplay>
+                                ) : (
+                                    <DataDisplay>{item.name}</DataDisplay>
+                                )}
+                            </>
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { EditableTitle } from '../../../../../custom';
 import classNames from 'classnames';
 import SectionImportTitle from '../../section-import-title';
 import { Form, Input } from 'antd';
 import styles from './styles.module.scss';
-import { professionalSummaryFieldState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
 import { useRecoilState } from 'recoil';
 import { professionalSummaryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import { PROFESSIONAL_SUMMARY_DESCRIPTION } from '../../../../../../configs/constants/description.constants';
 import { ProfessionalSummaryDataType } from '../../../../../../configs/interfaces/resume.interface';
+import { professionalSummaryChangedValueState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 
 const { TextArea } = Input;
 
@@ -22,18 +22,26 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     const { className, defaultTitle, initialValue } = props;
 
     const [form] = Form.useForm();
-    const [professionalSummaryField, setProfessionalSummaryField] =
-        useRecoilState(professionalSummaryFieldState);
+    const [
+        professionalSummaryChangedValues,
+        setProfessionalSummaryChangedValues,
+    ] = useRecoilState(professionalSummaryChangedValueState);
     const [professionalSummaryTitle, setProfessionalSummaryTitle] =
         useRecoilState(professionalSummaryTitleValueState);
-    const changeFieldsHandler = (changeFields: any, _: any) => {
-        setProfessionalSummaryField(
-            // allFields.map((field: any) => {
-            //     return { name: field.name[0], value: field.value };
-            // })
-            [{ name: changeFields[0].name[0], value: changeFields[0].value }]
-        );
-    };
+    // const changeFieldsHandler = (changeFields: any, _: any) => {
+    //     setProfessionalSummaryField(
+    //         // allFields.map((field: any) => {
+    //         //     return { name: field.name[0], value: field.value };
+    //         // })
+    //         [{ name: changeFields[0].name[0], value: changeFields[0].value }]
+    //     );
+    // };
+    const changeValuesHandler = useCallback(
+        (changedValues: any, values: any) => {
+            setProfessionalSummaryChangedValues(changedValues);
+        },
+        [setProfessionalSummaryChangedValues]
+    );
     return (
         <div className={classNames(className)}>
             <SectionImportTitle
@@ -48,13 +56,14 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
             </p>
             <Form
                 form={form}
-                layout='vertical'
-                fields={professionalSummaryField}
+                layout="vertical"
+                // fields={professionalSummaryField}
                 initialValues={initialValue}
-                onFieldsChange={changeFieldsHandler}
-                size='large'
+                // onFieldsChange={changeFieldsHandler}
+                onValuesChange={changeValuesHandler}
+                size="large"
                 colon={false}>
-                <Form.Item name='content'>
+                <Form.Item name="content">
                     <TextArea
                         className={styles['professional-summary-input']}
                         autoSize={{ minRows: 5, maxRows: 5 }}

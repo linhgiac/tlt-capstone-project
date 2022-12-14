@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.cv-format{
+    width: 210mm;
+    min-height: 297mm;
+  }
+
 .h-100 {
     height: 100%;
 }

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import {
     Col,
@@ -11,20 +11,19 @@ import {
     RadioChangeEvent,
 } from 'antd';
 import styles from './styles.module.scss';
-import { has } from 'lodash';
-import { ComplexSectionItemDataType } from '../../../configs/interfaces/resume.interface';
+import { has, isEmpty } from 'lodash';
+import SkillLevelInput from './skill-level-input';
 
 const { Group, Button } = Radio;
 type Props = {
     className?: string;
     children?: string;
     labelList: any;
-    value?: ComplexSectionItemDataType;
+    value?: any;
     onChangeItemValue: (itemChangedFields: any, itemAllFields: any) => void;
-    disableLevel?: boolean;
-    // itemField?;
+    disabledLevel?: boolean;
 };
-const SKILL_LEVEL = ['Novice', 'Beginner', 'Skillful', 'Experienced', 'Expert'];
+
 const SectionForm = (props: Props) => {
     const {
         className,
@@ -32,32 +31,21 @@ const SectionForm = (props: Props) => {
         labelList,
         value,
         onChangeItemValue,
-        disableLevel,
+        disabledLevel = false,
     } = props;
     const [form] = Form.useForm();
-    const [skillLevel, setSkillLevel] = useState(SKILL_LEVEL[0]);
+    const [skillLevel, setSkillLevel] = useState('novice');
     const { TextArea } = Input;
 
-    const changeSkillLevelHandler = useCallback((e: RadioChangeEvent) => {
-        console.log('e.target.value', e.target.value);
-        setSkillLevel(SKILL_LEVEL[e.target.value - 1]);
-    }, []);
-    const mapLevelToLabel = () => {
-        switch (skillLevel) {
-            case 'Novice':
-                return <div className={styles.novice}>Novice</div>;
-            case 'Beginner':
-                return <div className={styles.beginner}>Beginner</div>;
-            case 'Skillful':
-                return <div className={styles.skillful}>Skillful</div>;
-            case 'Experienced':
-                return <div className={styles.experienced}>Experienced</div>;
-            case 'Expert':
-                return <div className={styles.expert}>Expert</div>;
-            default:
-                break;
+    useEffect(() => {
+        if (!isEmpty(labelList) && Object.keys(labelList).includes('level')) {
+            setSkillLevel(value?.level);
         }
-    };
+    }, [labelList, value?.level]);
+    const changeSkillLevelHandler = useCallback((e: RadioChangeEvent) => {
+        setSkillLevel(e.target.value);
+    }, []);
+  
     const getFormItemList = (labelList: any) => {
         const { RangePicker } = DatePicker;
         const itemLst: any[] = [];
@@ -84,58 +72,13 @@ const SectionForm = (props: Props) => {
                 continue;
             } else if (key === 'level') {
                 itemLst.push(
-                    <Col
-                        span={12}
-                        key={key}>
-                        <Form.Item
-                            className="p-b-15 no-margin"
-                            name={key}
-                            label={
-                                <div className={styles['skill-label']}>
-                                    {labelList[key]} - {mapLevelToLabel()}
-                                </div>
-                            }>
-                            <div className={styles['skill-level-container']}>
-                                <Group
-                                    disabled={disableLevel}
-                                    buttonStyle="solid"
-                                    size="large"
-                                    defaultValue={1}
-                                    onChange={changeSkillLevelHandler}>
-                                    <Button value={1}>
-                                        <div
-                                            className={
-                                                styles['skill-level-button']
-                                            }></div>
-                                    </Button>
-                                    <Button value={2}>
-                                        <div
-                                            className={
-                                                styles['skill-level-button']
-                                            }></div>
-                                    </Button>
-                                    <Button value={3}>
-                                        <div
-                                            className={
-                                                styles['skill-level-button']
-                                            }></div>
-                                    </Button>
-                                    <Button value={4}>
-                                        <div
-                                            className={
-                                                styles['skill-level-button']
-                                            }></div>
-                                    </Button>
-                                    <Button value={5}>
-                                        <div
-                                            className={
-                                                styles['skill-level-button']
-                                            }></div>
-                                    </Button>
-                                </Group>
-                            </div>
-                        </Form.Item>
-                    </Col>
+                    <SkillLevelInput
+                        labelKey={key}
+                        onChange={changeSkillLevelHandler}
+                        disabledLevel={disabledLevel}
+                        labelList={labelList}
+                        skillLevel={skillLevel}
+                    />
                 );
             } else {
                 itemLst.push(

@@ -3,22 +3,22 @@ import ResumeTitle from './resume-title';
 import classNames from 'classnames';
 import { Button } from 'antd';
 import ResumeImportForm from './resume-import-form';
-import {
-    personalDetailFieldsState,
-    professionalSummaryFieldState,
-    resumeValueState,
-} from '../../../../recoil-state/resume-state/resume-single-section.state';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
     educationItemsState,
     employmentHistoryItemsState,
     linkItemsState,
-} from '../../../../recoil-state/resume-state/resume-complex-section.state';
+} from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
 import { convertPayloadData } from '../../../../configs/utils/format.utils';
 import styles from './styles.module.scss';
 import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
 import { ResumeConstants } from '../../../../configs/constants/resume.constants';
 import { resumeTitleValueState } from '../../../../recoil-state/resume-state/resume-title.state';
+import {
+    personalDetailChangedValueState,
+    professionalSummaryChangedValueState,
+    resumeChangedValueState,
+} from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 
 type ResumeImportProps = {
     className?: string;
@@ -27,16 +27,17 @@ type ResumeImportProps = {
 
 const ResumeImport = (props: ResumeImportProps) => {
     const { className, initialResume } = props;
-    console.log('initialResume', initialResume);
-    const resumeValue: ResumeDataType = useRecoilValue(resumeValueState);
-
+    const resumeChangedValue: ResumeDataType = useRecoilValue(
+        resumeChangedValueState
+    );
+    
     const setResumeInitialTitle = useSetRecoilState(resumeTitleValueState);
 
     const resetPersonalDetailChangeValue = useSetRecoilState(
-        personalDetailFieldsState
+        personalDetailChangedValueState
     );
     const resetProfessionalSummaryChangeValue = useSetRecoilState(
-        professionalSummaryFieldState
+        professionalSummaryChangedValueState
     );
     const resetEmploymentHistoriesChangeValue = useSetRecoilState(
         employmentHistoryItemsState
@@ -47,8 +48,8 @@ const ResumeImport = (props: ResumeImportProps) => {
     const resetLinksChangeValue = useSetRecoilState(linkItemsState);
 
     const resetChangeValue = useCallback(async () => {
-        resetPersonalDetailChangeValue([]);
-        resetProfessionalSummaryChangeValue([]);
+        resetPersonalDetailChangeValue({});
+        resetProfessionalSummaryChangeValue({});
         resetEmploymentHistoriesChangeValue([]);
         resetEducationsChangeValue([]);
         resetLinksChangeValue([]);
@@ -60,24 +61,26 @@ const ResumeImport = (props: ResumeImportProps) => {
         resetLinksChangeValue,
     ]);
 
+    useEffect(() => {
+
+    }, []);
+
     const submitFormHandler = async () => {
-        const resumeConvertedValue = await convertPayloadData(resumeValue);
-        console.log('resumeConvertedValue', resumeConvertedValue);
+        const resumeConvertedValue = await convertPayloadData(
+            resumeChangedValue
+        );
         const response = await fetch('/api/resume-editor', {
             method: 'POST',
             body: JSON.stringify({ resumeValue: resumeConvertedValue }),
             headers: { 'Content-Type': 'application/json' },
         });
-        console.log(response);
         const data = await response.json();
-        console.log('data', data);
         await resetChangeValue();
     };
 
     const getDataHandler = async () => {
         const response = await fetch('/api/resume-editor');
         const data = await response.json();
-        console.log('get resume data', data);
     };
 
     useEffect(() => {
@@ -85,9 +88,8 @@ const ResumeImport = (props: ResumeImportProps) => {
         if (initialResume.title) {
             setResumeInitialTitle(initialResume.title);
         }
-        console.log('resumeValue', resumeValue);
     }, [
-        resumeValue,
+        resumeChangedValue,
         resetChangeValue,
         initialResume.title,
         setResumeInitialTitle,

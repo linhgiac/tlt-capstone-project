@@ -5,7 +5,6 @@ import { LAYOUT } from '../configs/constants/misc';
 import HomeContent from '../components/page/home';
 const Home: NextPage = props => {
     const router = useRouter();
-    console.log('props :>> ', props);
     return <HomeContent />;
 };
 

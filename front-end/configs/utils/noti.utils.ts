@@ -8,5 +8,4 @@ export const openNotificationWithIcon = (
         message: title,
         description: msg,
     });
-    // console.log('api', api)
 };

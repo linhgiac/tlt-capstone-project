@@ -57,15 +57,20 @@ const ImageUpload = (props: ImageUploadProps) => {
 
     return (
         <Upload
-            name='avatar'
-            listType='picture-card'
+            name="avatar"
+            listType="picture-card"
             className={classNames('avatar-uploader', { className })}
             showUploadList={false}
-            action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
             beforeUpload={beforeUpload}
+            disabled={true}
             onChange={handleChange}>
             {imageUrl ? (
-                <img src={imageUrl} alt='avatar' style={{ width: '100%' }} />
+                <img
+                    src={imageUrl}
+                    alt="avatar"
+                    style={{ width: '100%' }}
+                />
             ) : (
                 uploadButton
             )}

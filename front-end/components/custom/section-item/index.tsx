@@ -54,11 +54,15 @@ const SectionItem = (props: Props) => {
 
     const changeItemValueHandler = useCallback(
         (itemChangedFields: any, itemAllFields: any) => {
-            const changedData = { ...itemChangedFields, position };
-            const allData = { ...itemAllFields, position };
+            const changedData = {
+                ...itemChangedFields,
+                position,
+                id: item?.id,
+            };
+            const allData = { ...itemAllFields, position, id: item?.id };
             onChangeItem(changedData, allData);
         },
-        [onChangeItem, position]
+        [item?.id, onChangeItem, position]
     );
 
     return (
@@ -99,7 +103,7 @@ const SectionItem = (props: Props) => {
                         <SectionForm
                             value={item}
                             labelList={labelList}
-                            disableLevel={disableLevel}
+                            disabledLevel={disableLevel}
                             onChangeItemValue={changeItemValueHandler}
                         />
                     )}

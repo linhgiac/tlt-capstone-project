@@ -1,9 +1,8 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { Input, InputRef, Typography } from 'antd';
+import React, { useRef, useState } from 'react';
+import { Input, InputRef } from 'antd';
 import classNames from 'classnames';
 import { EditOutlined, UndoOutlined } from '@ant-design/icons';
 import styles from './styles.module.scss';
-import { ResumeConstants } from '../../../configs/constants/resume.constants';
 
 type EditableTitleProps = {
     className?: string;

@@ -5,7 +5,6 @@ import { NextApiRequestCookies } from 'next/dist/server/api-utils';
 import { GetServerSidePropsContext } from 'next'
 import axios from 'axios';
 
-<<<<<<< Updated upstream
 export const getAuthHeader = (
     options: {
         // req, res is required if using SSR
@@ -40,14 +39,3 @@ export const getInitialPageProps = async (ctx: GetServerSidePropsContext) => {
         currentUser: currentUser === null ? null : currentUser.data.currentUser,
     }
 }
-=======
-// export const getAuthHeader = (
-//     options: {
-//         req?: IncomingMessage & { cookies: NextApiRequestCookies };
-//         res?: NextApiResponse | any;
-//     } = {}
-// ) => {
-//     const { req, res } = options;
-//     const accessToken = getCookie()
-// };
->>>>>>> Stashed changes

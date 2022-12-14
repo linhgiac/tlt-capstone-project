@@ -1,5 +1,5 @@
 import { MOCKED_RESUME } from './../../../mock/resume.mock';
-import { resumeValueState } from '../../../recoil-state/resume-state/resume-single-section.state';
+import { resumeValueState } from '../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 import { ResumeDataType, PersonalDetailsDataType } from '../../../configs/interfaces/resume.interface';
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'

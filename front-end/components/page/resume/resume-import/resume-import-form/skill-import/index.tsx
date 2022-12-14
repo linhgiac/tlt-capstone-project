@@ -7,7 +7,7 @@ import {
 } from '../../../../../../configs/constants/description.constants';
 import SkillItems from './skill-items';
 import { useRecoilState } from 'recoil';
-import { skillItemsState } from '../../../../../../recoil-state/resume-state/resume-complex-section.state';
+import { skillItemsState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { skillTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
@@ -38,7 +38,6 @@ const SkillImport = (props: SkillProps) => {
 
     useEffect(() => {
         if (initialValue && initialValue.items) {
-            console.log('initialValue', initialValue);
             setSkillItems(initialValue.items);
         }
     }, [initialValue, setSkillItems]);

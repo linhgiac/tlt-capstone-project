@@ -62,7 +62,6 @@ export const convertPayloadData = async (resumeData: ResumeDataType) => {
         result = Object.assign(result, {complexSections: newComplexSections})
     }
     const convertedResult = convertCamelToSnake(result)
-    console.log('convertedResult', convertedResult)
     return convertedResult
     // console.log('result', result)
     // return result

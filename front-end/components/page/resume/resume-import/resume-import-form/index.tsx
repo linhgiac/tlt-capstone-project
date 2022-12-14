@@ -17,7 +17,7 @@ const ResumeImportForm = (props: Props) => {
     const { className, initialValue } = props;
     const { personalDetails, professionalSummary, complexSections } =
         initialValue;
-
+    
     return (
         <div>
             <PersonalDetailsImport

@@ -9,7 +9,6 @@ interface MyAppPropsType {
     currentLayout: string;
 }
 function MyApp({ Component, pageProps }: AppProps<MyAppPropsType>) {
-    console.log('pageProps', pageProps.currentLayout);
     const { currentLayout } = pageProps;
 
     return (

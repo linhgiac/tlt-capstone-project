@@ -42,6 +42,7 @@ const Template01 = (props: Props) => {
                         complexSections,
                         `sectionDetails.${sectionType}.isShownLevel`
                     );
+
                     return (
                         <Section
                             key={sectionType}

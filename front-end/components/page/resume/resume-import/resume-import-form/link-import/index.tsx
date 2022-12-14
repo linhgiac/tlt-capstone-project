@@ -7,7 +7,7 @@ import {
 } from '../../../../../../configs/constants/description.constants';
 import LinkItems from './link-items';
 import { useRecoilState } from 'recoil';
-import { linkItemsState } from '../../../../../../recoil-state/resume-state/resume-complex-section.state';
+import { linkItemsState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { linkTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
@@ -37,7 +37,6 @@ const LinkImport = (props: LinkProps) => {
 
     useEffect(() => {
         if (initialValue && initialValue.items) {
-            console.log('initialValue', initialValue);
             setLinkItems(initialValue.items);
         }
     }, [initialValue, setLinkItems]);

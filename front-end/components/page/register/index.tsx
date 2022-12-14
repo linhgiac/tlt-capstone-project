@@ -19,7 +19,6 @@ const RegisterContent = (props: Props) => {
     const [success, setSuccess] = useState(false);
     const router = useRouter();
     const registerHandler = async (values: any) => {
-        console.log('values :>> ', values);
         try {
             setIsLoading(true);
             const response = await axios.post<RegisterResponse>(
@@ -32,11 +31,9 @@ const RegisterContent = (props: Props) => {
                     },
                 }
             );
-            console.log('response:>>>>', response);
             setSuccess(true);
             router.replace('/log-in');
         } catch (error: any) {
-            console.log('error :>> ', error);
             if (error.response.data.username) {
                 setError(error.response.data.username);
             } else if (error.response.data.password) {

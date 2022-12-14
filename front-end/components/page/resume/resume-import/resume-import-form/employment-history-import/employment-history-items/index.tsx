@@ -16,7 +16,6 @@ type EmploymentHistoryItemsProps = {
 
 const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
     const { className, sectionType, items, onRemoveItem, onChangeItem } = props;
-    console.log('items :>> ', items);
     return (
         <>
             {items?.map(item => (

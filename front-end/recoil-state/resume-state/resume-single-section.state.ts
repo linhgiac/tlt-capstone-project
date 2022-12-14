@@ -1,8 +1,12 @@
-import { ComplexSectionDataType } from './../../configs/interfaces/resume.interface';
-import { employmentHistoriesValueState, complexSectionValueState } from './resume-complex-section.state';
-import { personalDetailTitleValueState, professionalSummaryTitleValueState, resumeTitleValueState } from './resume-title.state';
-import { atom, selector } from 'recoil';
-import { FieldFormData, PersonalDetailsDataType, ProfessionalSummaryDataType, ResumeDataType } from '../../configs/interfaces/resume.interface';
+import { selector, atom } from 'recoil';
+import {
+    ResumeDataType,
+    PersonalDetailsDataType,
+    ProfessionalSummaryDataType,
+    ComplexSectionDataType,
+} from '../../configs/interfaces/resume.interface';
+import { complexSectionValueState } from './resume-complex-section.state';
+import { resumeTitleValueState } from './resume-title.state';
 
 export const resumeValueState = selector<ResumeDataType>({
     key: 'resumeValueState',
@@ -19,7 +23,7 @@ export const resumeValueState = selector<ResumeDataType>({
         );
         let result = {};
         if (title) {
-        result = Object.assign(result, { title });
+            result = Object.assign(result, { title });
         }
         if (Object.keys(personalDetails).length > 1) {
             result = Object.assign(result, { personalDetails });
@@ -34,39 +38,12 @@ export const resumeValueState = selector<ResumeDataType>({
     },
 });
 
-export const personalDetailFieldsState = atom<FieldFormData[]>({
-    key: 'personalDetailFieldsState',
-    default: []
-})
-
-export const personalDetailValueState = selector<PersonalDetailsDataType>({
+export const personalDetailValueState = atom<PersonalDetailsDataType>({
     key: 'personalDetailValueState',
-    get: ({get}) => {
-        const title = get(personalDetailTitleValueState)
-        const fields = get(personalDetailFieldsState)
-        let personalDetail = {header: title}
-        fields.forEach((field) => {
-            const obj = {[field.name.toString()]: field.value}
-            personalDetail = {...personalDetail, ...obj}
-        })
-        return personalDetail
-    }
-})
+    default: {},
+});
 
-export const professionalSummaryFieldState = atom<FieldFormData[]>({
-    key: 'professionalSummaryFieldState',
-    default: []
-})
-export const professionalSummaryValueState = selector<ProfessionalSummaryDataType>({
+export const professionalSummaryValueState = atom<ProfessionalSummaryDataType>({
     key: 'professionalSummaryValueState',
-    get: ({get}) => {
-        const title = get(professionalSummaryTitleValueState)
-        const fields = get(professionalSummaryFieldState)
-        let professionalSummary = {header: title}
-        fields.forEach((field) => {
-            const obj = {content: field.value}
-            professionalSummary = {...professionalSummary, ...obj}
-        })
-        return professionalSummary
-    }
-})
+    default: {},
+});

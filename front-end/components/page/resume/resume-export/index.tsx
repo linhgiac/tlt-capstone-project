@@ -23,7 +23,6 @@ const ResumeExport = ({
     const changeLayoutHandler = () => {};
 
     // const chosenResumeHandler = (id: number) => {
-    //     console.log('resumeTemplate', resumeTemplate);
     // };
     return (
         <div className={classNames(className, styles['resume-export'])}>

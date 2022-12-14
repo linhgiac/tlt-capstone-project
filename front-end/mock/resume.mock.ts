@@ -39,7 +39,7 @@ export const MOCKED_RESUME: ResumeDataType = {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     },
     complexSections: {
-        sectionType: ['employmentHistories'],
+        sectionType: ['employmentHistories', 'educations', 'skills'],
         sectionDetails: {
             employmentHistories: {
                 id: 1,
@@ -107,6 +107,7 @@ export const MOCKED_RESUME: ResumeDataType = {
                 header: 'Skills',
                 position: 5,
                 sectionType: 'skills',
+                isShownLevel: true,
                 items: [
                     {
                         id: 1,
