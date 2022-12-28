@@ -31,6 +31,11 @@ export type ProfessionalSummaryDataType = {
     content?: string;
 };
 
+export type ProfessionalSummarySuggestionMode =
+    | 'tokens'
+    | 'sequences'
+    | 'paragraph'
+
 export type ComplexSection =
     | 'employmentHistories'
     | 'educations'

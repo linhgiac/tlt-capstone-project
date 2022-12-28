@@ -164,65 +164,57 @@ export const MOCKED_TEMPLATES: MockedTemplatesDataType = {
         data: [
             {
                 id: 1,
-                type: 'creative',
-                thumnail: './image/template.png',
-                name: 'Creative_Template',
+                category: 'creative',
+                get_thumbnail: './image/template.png',            
                 title: 'Creative Template',
                 description: 'Something creative description',
             },
             {
                 id: 2,
-                type: 'simple',
-                thumnail: './image/template.png',
-                name: 'Simple_Template',
+                category: 'simple',
+                get_thumbnail: './image/template.png',            
                 title: 'Simple Template',
                 description: 'Something simple description',
             },
             {
                 id: 3,
-                type: 'professional',
-                thumnail: './image/template.png',
-                name: 'Professional_Template',
+                category: 'professional',
+                get_thumbnail: './image/template.png',            
                 title: 'Professional Template',
                 description: 'Something professional description',
             },
             {
                 id: 4,
-                type: 'modern',
-                thumnail: './image/template.png',
-                name: 'Modern_Template',
+                category: 'modern',
+                get_thumbnail: './image/template.png',            
                 title: 'Modern Template',
                 description: 'Something modern description',
             },
             {
                 id: 5,
-                type: 'creative',
-                thumnail: './image/template.png',
-                name: 'Creative_Template',
+                category: 'creative',
+                get_thumbnail: './image/template.png',            
                 title: 'Creative Template',
                 description: 'Something creative description',
             },
             {
                 id: 6,
-                type: 'simple',
-                thumnail: './image/template.png',
-                name: 'Simple_Template',
+                category: 'simple',
+                get_thumbnail: './image/template.png',            
                 title: 'Simple Template',
                 description: 'Something simple description',
             },
             {
                 id: 7,
-                type: 'professional',
-                thumnail: './image/template.png',
-                name: 'Professional_Template',
+                category: 'professional',
+                get_thumbnail: './image/template.png',            
                 title: 'Professional Template',
                 description: 'Something professional description',
             },
             {
                 id: 8,
-                type: 'modern',
-                thumnail: './image/template.png',
-                name: 'Modern_Template',
+                category: 'modern',
+                get_thumbnail: './image/template.png',            
                 title: 'Modern Template',
                 description: 'Something modern description',
             },
@@ -232,17 +224,15 @@ export const MOCKED_TEMPLATES: MockedTemplatesDataType = {
         data: [
             {
                 id: 1,
-                type: 'creative',
-                thumnail: './image/template.png',
-                name: 'Creative_Template',
+                category: 'creative',
+                get_thumbnail: './image/template.png',            
                 title: 'Creative Template',
                 description: 'Something creative description',
             },
             {
                 id: 5,
-                type: 'creative',
-                thumnail: './image/template.png',
-                name: 'Creative_Template',
+                category: 'creative',
+                get_thumbnail: './image/template.png',            
                 title: 'Creative Template',
                 description: 'Something creative description',
             },
@@ -252,17 +242,15 @@ export const MOCKED_TEMPLATES: MockedTemplatesDataType = {
         data: [
             {
                 id: 2,
-                type: 'simple',
-                thumnail: './image/template.png',
-                name: 'Simple_Template',
+                category: 'simple',
+                get_thumbnail: './image/template.png',            
                 title: 'Simple Template',
                 description: 'Something simple description',
             },
             {
                 id: 6,
-                type: 'simple',
-                thumnail: './image/template.png',
-                name: 'Simple_Template',
+                category: 'simple',
+                get_thumbnail: './image/template.png',            
                 title: 'Simple Template',
                 description: 'Something simple description',
             },
@@ -272,17 +260,15 @@ export const MOCKED_TEMPLATES: MockedTemplatesDataType = {
         data: [
             {
                 id: 3,
-                type: 'professional',
-                thumnail: './image/template.png',
-                name: 'Professional_Template',
+                category: 'professional',
+                get_thumbnail: './image/template.png',            
                 title: 'Professional Template',
                 description: 'Something professional description',
             },
             {
                 id: 7,
-                type: 'professional',
-                thumnail: './image/template.png',
-                name: 'Professional_Template',
+                category: 'professional',
+                get_thumbnail: './image/template.png',            
                 title: 'Professional Template',
                 description: 'Something professional description',
             },
@@ -292,20 +278,48 @@ export const MOCKED_TEMPLATES: MockedTemplatesDataType = {
         data: [
             {
                 id: 4,
-                type: 'modern',
-                thumnail: './image/template.png',
-                name: 'Modern_Template',
+                category: 'modern',
+                get_thumbnail: './image/template.png',            
                 title: 'Modern Template',
                 description: 'Something modern description',
             },
             {
                 id: 8,
-                type: 'modern',
-                thumnail: './image/template.png',
-                name: 'Modern_Template',
+                category: 'modern',
+                get_thumbnail: './image/template.png',            
                 title: 'Modern Template',
                 description: 'Something modern description',
             },
         ],
     },
+};
+
+type MockedProfessionalSummarySuggestionsType = {
+    tokens: string[];
+    sequences: string[];
+    paragraph: string[];
+};
+
+export const MOCKED_SUGGESTIONS: MockedProfessionalSummarySuggestionsType = {
+    tokens: [
+        'Token1 Token1 Token1 Token1 Token1',
+        'Token2 Token2 Token2 Token2 Token2',
+        'Token3 Token3 Token3 Token3 Token3',
+        'Token4 Token4 Token4 Token4 Token4',
+        'Token5 Token5 Token5 Token5 Token5',
+    ],
+    sequences: [
+        'Sequences1 Sequences1 Sequences1 Sequences1 Sequences1',
+        'Sequences2 Sequences2 Sequences2 Sequences2 Sequences2',
+        'Sequences3 Sequences3 Sequences3 Sequences3 Sequences3',
+        'Sequences4 Sequences4 Sequences4 Sequences4 Sequences4',
+        'Sequences5 Sequences5 Sequences5 Sequences5 Sequences5',
+    ],
+    paragraph: [
+        'Paragraph1 Paragraph1 Paragraph1 Paragraph1 Paragraph1',
+        'Paragraph2 Paragraph2 Paragraph2 Paragraph2 Paragraph2',
+        'Paragraph3 Paragraph3 Paragraph3 Paragraph3 Paragraph3',
+        'Paragraph4 Paragraph4 Paragraph4 Paragraph4 Paragraph4',
+        'Paragraph5 Paragraph5 Paragraph5 Paragraph5 Paragraph5',
+    ]
 };
