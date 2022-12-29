@@ -9,7 +9,7 @@ import {
     employmentHistoryItemsState,
     linkItemsState,
 } from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
-import { convertPayloadData } from '../../../../configs/utils/format.utils';
+import { convertPayloadData, convertTest } from '../../../../configs/utils/format.utils';
 import styles from './styles.module.scss';
 import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
 import { ResumeConstants } from '../../../../configs/constants/resume.constants';
@@ -92,8 +92,10 @@ const ResumeImport = (props: ResumeImportProps) => {
     };
 
     const getDataHandler = async () => {
-        const response = await fetch('/api/resume-editor');
-        const data = await response.json();
+        // const response = await fetch('/api/resume-editor');
+        // const data = await response.json();
+        // console.log({ data });
+        convertTest();
     };
 
     useEffect(() => {
