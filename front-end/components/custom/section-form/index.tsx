@@ -14,6 +14,7 @@ import styles from './styles.module.scss';
 import { has, isEmpty } from 'lodash';
 import SkillLevelInput from './skill-level-input';
 import moment from 'moment';
+import dayjs from 'dayjs';
 
 const { Group, Button } = Radio;
 type Props = {
@@ -21,7 +22,7 @@ type Props = {
     children?: string;
     labelList: any;
     value?: any;
-    onChangeItemValue: (itemChangedFields: any, itemAllFields: any) => void;
+    onChangeItemValue: (itemChangedFields: any) => void;
     disabledLevel?: boolean;
 };
 
@@ -51,6 +52,24 @@ const SectionForm = (props: Props) => {
         const itemLst: any[] = [];
         for (const key in labelList) {
             if (key === 'startDate') {
+                itemLst.push(
+                    <Col
+                        span={12}
+                        key={key}>
+                        <Form.Item
+                            className="p-b-15 no-margin"
+                            name={key}
+                            label={labelList[key]}>
+                            <DatePicker
+                                picker="month"
+                                size="large"
+                                className="center"
+                                bordered={false}
+                            />
+                        </Form.Item>
+                    </Col>
+                );
+            } else if (key === 'endDate') {
                 itemLst.push(
                     <Col
                         span={12}
@@ -117,21 +136,33 @@ const SectionForm = (props: Props) => {
     };
 
     const changeValuesHandler = useCallback(
-        (changedValues: any, values: any) => {
+        (changedValues: any, _: any) => {
             if (changedValues.startDate) {
-                console.log(
-                    'changedValues',
-                    moment(changedValues.startDate).format('MMMM YYYY')
+                changedValues.startDate = moment(
+                    changedValues.startDate
+                ).format('YYYY/MM');
+            }
+            if (changedValues.endDate) {
+                changedValues.endDate = moment(changedValues.endDate).format(
+                    'YYYY/MM'
                 );
             }
-            // onChangeItemValue(changedValues, values);
+            console.log('changedValues', changedValues);
+            onChangeItemValue(changedValues);
         },
         []
     );
     useEffect(() => {
-        const itemFields = form.getFieldsValue(true);
-        console.log('itemFields', itemFields);
-    }, [form]);
+        const convertValue = {
+            ...value,
+            startDate: value.startDate ? dayjs(value.startDate) : undefined,
+            endDate: value.endDate ? dayjs(value.endDate) : undefined,
+        };
+        console.log('convertValue :>> ', convertValue);
+        form.setFieldsValue(convertValue);
+        // const itemFields = form.getFieldsValue(true);
+        // console.log('itemFields', itemFields);
+    }, [form, value]);
 
     return (
         <div
@@ -145,7 +176,8 @@ const SectionForm = (props: Props) => {
                 onValuesChange={changeValuesHandler}
                 size="large"
                 colon={false}
-                initialValues={value}>
+                // initialValues={value}
+            >
                 <Row gutter={24}>{getFormItemList(labelList)}</Row>
                 {has(labelList, 'description') && (
                     <Form.Item

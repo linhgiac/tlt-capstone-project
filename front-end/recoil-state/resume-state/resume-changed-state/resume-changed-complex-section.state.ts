@@ -57,13 +57,14 @@ export const employmentHistoryItemsState = atom<
     key: 'employmentHistoryItemsState',
     default: [],
 });
-export const employmentHistoriesDetails = atom<ComplexSectionDetailsDataType>({
-    key: 'employmentHistoriesDetails',
-    default: {
-        position: 2,
-        sectionType: 'employmentHistories',
-    },
-});
+export const employmentHistoriesDetailsState =
+    atom<ComplexSectionDetailsDataType>({
+        key: 'employmentHistoriesDetailsState',
+        default: {
+            position: 2,
+            sectionType: 'employmentHistories',
+        },
+    });
 
 export const employmentHistoriesChangedValueState =
     selector<ComplexSectionDetailsDataType>({
@@ -71,7 +72,7 @@ export const employmentHistoriesChangedValueState =
         get: ({ get }) => {
             const header = get(employmentHistoryTitleValueState);
             const { id, position, sectionType } = get(
-                employmentHistoriesDetails
+                employmentHistoriesDetailsState
             );
             const items = get(employmentHistoryItemsState);
             return {
@@ -89,8 +90,8 @@ export const educationItemsState = atom<EducationItemDataType[]>({
     key: 'educationItemsState',
     default: [],
 });
-export const educationsDetails = atom<ComplexSectionDetailsDataType>({
-    key: 'educationsDetails',
+export const educationsDetailsState = atom<ComplexSectionDetailsDataType>({
+    key: 'educationsDetailsState',
     default: {
         position: 3,
         sectionType: 'educations',
@@ -102,7 +103,7 @@ export const educationsChangedValueState =
         key: 'educationsChangedValueState',
         get: ({ get }) => {
             const header = get(educationTitleValueState);
-            const { id, position, sectionType } = get(educationsDetails);
+            const { id, position, sectionType } = get(educationsDetailsState);
             const items = get(educationItemsState);
             return {
                 id,
@@ -119,8 +120,8 @@ export const linkItemsState = atom<LinkItemDataType[]>({
     key: 'linkItemsState',
     default: [],
 });
-export const linksDetails = atom<ComplexSectionDetailsDataType>({
-    key: 'linksDetails',
+export const linksDetailsState = atom<ComplexSectionDetailsDataType>({
+    key: 'linksDetailsState',
     default: {
         position: 4,
         sectionType: 'links',
@@ -131,7 +132,7 @@ export const linksChangedValueState = selector<ComplexSectionDetailsDataType>({
     key: 'linksChangedValueState',
     get: ({ get }) => {
         const header = get(linkTitleValueState);
-        const { id, position, sectionType } = get(linksDetails);
+        const { id, position, sectionType } = get(linksDetailsState);
         const items = get(linkItemsState);
         return {
             id,
@@ -148,8 +149,8 @@ export const skillItemsState = atom<LinkItemDataType[]>({
     key: 'skillItemsState',
     default: [],
 });
-export const skillsDetails = atom<ComplexSectionDetailsDataType>({
-    key: 'skillsDetails',
+export const skillsDetailsState = atom<ComplexSectionDetailsDataType>({
+    key: 'skillsDetailsState',
     default: {
         position: 4,
         sectionType: 'skills',
@@ -160,7 +161,7 @@ export const skillsChangedValueState = selector<ComplexSectionDetailsDataType>({
     key: 'skillsChangedValueState',
     get: ({ get }) => {
         const header = get(skillTitleValueState);
-        const { id, position, sectionType } = get(skillsDetails);
+        const { id, position, sectionType } = get(skillsDetailsState);
         const items = get(skillItemsState);
         return {
             id,

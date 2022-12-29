@@ -57,10 +57,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         });
     };
     const changeItemHandler = useCallback(
-        (
-            changedData: EmploymentHistoryItemDataType,
-            allData: EmploymentHistoryItemDataType
-        ) => {
+        (changedData: EmploymentHistoryItemDataType) => {
             setEmploymentHistoryItems(prevItems => {
                 const { position } = changedData;
 

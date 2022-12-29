@@ -37,7 +37,7 @@ export type ProfessionalSummaryDataType = {
 export type ProfessionalSummarySuggestionMode =
     | 'tokens'
     | 'sequences'
-    | 'paragraph'
+    | 'paragraph';
 
 export type ComplexSection =
     | 'employmentHistories'
@@ -78,8 +78,8 @@ export type EmploymentHistoryItemDataType = {
     employer?: string;
     description?: string;
     city?: string;
-    startDate?: string;
-    endDate?: string;
+    startDate?: any;
+    endDate?: any;
 };
 
 export type EducationItemDataType = {
@@ -89,8 +89,8 @@ export type EducationItemDataType = {
     degree?: string;
     description?: string;
     city?: string;
-    startDate?: string;
-    endDate?: string;
+    startDate?: any;
+    endDate?: any;
 };
 
 export type WorkExperienceItemDataType = {
@@ -99,8 +99,8 @@ export type WorkExperienceItemDataType = {
     title?: string;
     role?: string;
     description?: string;
-    startDate?: string;
-    endDate?: string;
+    startDate?: any;
+    endDate?: any;
 };
 export type SkillLevelType =
     | 'novice'
@@ -124,14 +124,14 @@ export type LinkItemDataType = {
 }
 
 export type CustomItemDataType = {
-    id?: number,
-    position: number,
-    title?: string,
-    description?: string,
-    city?: string,
-    startDate?: string,
-    endDate?: string
-}
+    id?: number;
+    position: number;
+    title?: string;
+    description?: string;
+    city?: string;
+    startDate?: any;
+    endDate?: any;
+};
 
 export type FieldFormData = {
     name: string | string [],

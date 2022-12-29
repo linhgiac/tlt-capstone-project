@@ -20,10 +20,7 @@ type Props = {
     disableLevel?: boolean;
     item?: ComplexSectionItemDataType;
     onRemove: () => void;
-    onChangeItem: (
-        changedData: EmploymentHistoryItemDataType,
-        allData: EmploymentHistoryItemDataType
-    ) => void;
+    onChangeItem: (changedData: EmploymentHistoryItemDataType) => void;
 };
 
 const SectionItem = (props: Props) => {
@@ -53,14 +50,13 @@ const SectionItem = (props: Props) => {
     };
 
     const changeItemValueHandler = useCallback(
-        (itemChangedFields: any, itemAllFields: any) => {
+        (itemChangedFields: any) => {
             const changedData = {
                 ...itemChangedFields,
                 position,
                 id: item?.id,
             };
-            const allData = { ...itemAllFields, position, id: item?.id };
-            onChangeItem(changedData, allData);
+            onChangeItem(changedData);
         },
         [item?.id, onChangeItem, position]
     );

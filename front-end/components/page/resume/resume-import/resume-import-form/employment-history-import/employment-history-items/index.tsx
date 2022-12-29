@@ -9,8 +9,7 @@ type EmploymentHistoryItemsProps = {
 
     onRemoveItem: (position: number) => void;
     onChangeItem: (
-        changedData: EmploymentHistoryItemDataType,
-        allData: EmploymentHistoryItemDataType
+        changedData: EmploymentHistoryItemDataType
     ) => void;
 };
 

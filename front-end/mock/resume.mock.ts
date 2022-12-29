@@ -56,9 +56,9 @@ export const MOCKED_RESUME: ResumeDataType = {
                         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt`,
-                        // city: 'HCM',
-                        // startDate: 'June 2029',
-                        // endDate: '2023 May',
+                        city: 'HCM',
+                        startDate: '2023/05',
+                        // endDate: '2029/06',
                     },
                     {
                         id: 2,
@@ -69,8 +69,8 @@ export const MOCKED_RESUME: ResumeDataType = {
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt`,
                         // city: 'HCM',
-                        startDate: 'February 2028',
-                        endDate: 'February 2029',
+                        // startDate: 'February 2028',
+                        // endDate: 'February 2029',
                     },
                     {
                         id: 3,
@@ -81,8 +81,8 @@ export const MOCKED_RESUME: ResumeDataType = {
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt`,
                         // city: 'HCM',
-                        startDate: 'January 2027',
-                        endDate: 'January 2028',
+                        // startDate: 'January 2027',
+                        // endDate: 'January 2028',
                     },
                 ],
             },
@@ -98,8 +98,8 @@ export const MOCKED_RESUME: ResumeDataType = {
                         school: 'Really Great Universit',
                         degree: 'Bachelor of Multimedia Arts Major in Digital Design',
                         // description: 'string',
-                        startDate: '2023',
-                        endDate: '2027',
+                        // startDate: '2023',
+                        // endDate: '2027',
                     },
                 ],
             },

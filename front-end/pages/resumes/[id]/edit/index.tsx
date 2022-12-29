@@ -18,6 +18,10 @@ import {
     educationItemsState,
     linkItemsState,
     skillItemsState,
+    employmentHistoriesDetailsState,
+    educationsDetailsState,
+    linksDetailsState,
+    skillsDetailsState,
 } from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
 
 import { resumeTitleValueState } from '../../../../recoil-state/resume-state/resume-title.state';
@@ -40,6 +44,14 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     const setProfessionalSummaryChangedValues = useSetRecoilState(
         professionalSummaryChangedValueState
     );
+
+    const setEmploymentHistoryDetails = useSetRecoilState(
+        employmentHistoriesDetailsState
+    );
+    const setEducationDetails = useSetRecoilState(educationsDetailsState);
+    const setLinkDetails = useSetRecoilState(linksDetailsState);
+    const setSkillDetails = useSetRecoilState(skillsDetailsState);
+
     const setEmploymentHistoryItems = useSetRecoilState(
         employmentHistoryItemsState
     );
@@ -78,6 +90,55 @@ const ResumeEditor = (props: ResumeEditorProps) => {
         initialResumeData.professionalSummary,
         setPersonalDetailsChangedValues,
         setProfessionalSummaryChangedValues,
+    ]);
+
+    useEffect(() => {
+        const employmentHistories = get(
+            initialResumeData,
+            'complexSections.sectionDetails.employmentHistories'
+        );
+        const educations = get(
+            initialResumeData,
+            'complexSections.sectionDetails.educations'
+        );
+        const links = get(
+            initialResumeData,
+            'complexSections.sectionDetails.links'
+        );
+        const skills = get(
+            initialResumeData,
+            'complexSections.sectionDetails.skills'
+        );
+        if (employmentHistories) {
+            setEmploymentHistoryDetails((prev): any => {
+                return { ...prev, id: employmentHistories.id };
+            });
+        }
+        if (educations) {
+            setEducationDetails((prev): any => {
+                return { ...prev, id: educations.id };
+            });
+        }
+        if (links) {
+            setLinkDetails((prev): any => {
+                return { ...prev, id: links.id };
+            });
+        }
+        if (skills) {
+            setSkillDetails((prev): any => {
+                return { ...prev, id: skills.id };
+            });
+        }
+    }, [
+        initialResumeData,
+        setEducationDetails,
+        setEducationItems,
+        setEmploymentHistoryDetails,
+        setEmploymentHistoryItems,
+        setLinkDetails,
+        setLinkItems,
+        setSkillDetails,
+        setSkillItems,
     ]);
 
     useEffect(() => {
