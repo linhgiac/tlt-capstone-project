@@ -15,7 +15,7 @@ const DashboardContainer = (props: DashboardContainerProps) => {
         const items = [];
         const children = [];
         for (let i = 0; i < data.length; i++) {
-            items.push(<DashboardItem item={data[i]}></DashboardItem>)
+            items.push(<DashboardItem item={data[i]}></DashboardItem>);
             if (items.length == itemPerRow) {
                 children.push(
                     <Row className={classNames(styles['dashboard-row'])} key={children.length}>

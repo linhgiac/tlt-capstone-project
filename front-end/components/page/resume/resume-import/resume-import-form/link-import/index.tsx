@@ -21,25 +21,15 @@ type LinkProps = {
     className?: string;
     defaultTitle?: string;
     sectionType: any;
-    initialValue?: ComplexSectionDetailsDataType;
 };
 
 const LinkImport = (props: LinkProps) => {
-    const {
-        className,
-        defaultTitle,
-        sectionType = 'links',
-        initialValue,
-    } = props;
+    const { className, defaultTitle, sectionType = 'links' } = props;
     const [linkTitle, setLinkTitle] = useRecoilState(linkTitleValueState);
 
     const [linkItems, setLinkItems] = useRecoilState(linkItemsState);
 
-    useEffect(() => {
-        if (initialValue && initialValue.items) {
-            setLinkItems(initialValue.items);
-        }
-    }, [initialValue, setLinkItems]);
+    
     const addItemHandler = () => {
         const newItem = {
             position: linkItems ? linkItems.length : 1,
@@ -65,9 +55,13 @@ const LinkImport = (props: LinkProps) => {
                 if (prevItems.length === position) {
                     prevItems.push(changedData);
                 } else {
-                    const revUnChangedItems = [...prevItems];
-                    revUnChangedItems.splice(position, 1, changedData);
-                    return revUnChangedItems;
+                    const newItems = prevItems.map(item => {
+                        if (item.position === changedData.position) {
+                            item = { ...item, ...changedData };
+                        }
+                        return item;
+                    });
+                    return newItems;
                 }
                 return prevItems;
             });

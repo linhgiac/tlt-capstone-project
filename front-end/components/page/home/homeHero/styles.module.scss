@@ -1,13 +1,15 @@
 @import '../../../../styles//variables.scss';
 
     .home-hero-container{
-      padding-bottom: 0px;
+      padding-bottom: 0px !important;
     }
     .image{
       width: 770px;
-      height: 300px;
+      height: 400px;
       margin: 0 150px;
-      background-color: #fff;
+      // background-color: #fff;
+      background-image: url(../../../../public/assets/HomePage.png);
+      background-size: cover;
     }
     .button{
       height: 60px;

@@ -17,13 +17,12 @@ const ResumeImportForm = (props: Props) => {
     const { className, initialValue } = props;
     const { personalDetails, professionalSummary, complexSections } =
         initialValue;
-    
+    console.log('personalDetails :>> ', personalDetails);
     return (
         <div>
             <PersonalDetailsImport
                 className="p-b-20"
                 defaultTitle="Personal Details"
-                initialValue={personalDetails}
             />
             <ProfessionalSummaryImport
                 className="p-b-20"
@@ -34,29 +33,22 @@ const ResumeImportForm = (props: Props) => {
                 className="p-b-20"
                 defaultTitle="Employment History"
                 sectionType="employmentHistories"
-                initialValue={get(
-                    complexSections,
-                    'sectionDetails.employmentHistories'
-                )}
             />
             <EducationImport
                 className="p-b-20"
                 defaultTitle="Education"
                 sectionType="educations"
-                initialValue={get(complexSections, 'sectionDetails.educations')}
             />
             <LinkImport
                 className="p-b-20"
                 defaultTitle="Website & Social Links"
                 sectionType="links"
-                initialValue={get(complexSections, 'sectionDetails.links')}
             />
 
             <SkillImport
                 className="p-b-20"
                 defaultTitle="Skills"
                 sectionType="skills"
-                initialValue={get(complexSections, 'sectionDetails.skills')}
             />
         </div>
     );

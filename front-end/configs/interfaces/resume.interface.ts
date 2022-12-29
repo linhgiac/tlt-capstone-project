@@ -1,14 +1,17 @@
 
 
 export type ResumeDataType = {
-    id?: number,
-    title?: string,
-    templateId?: number,
-    personalDetails?: PersonalDetailsDataType,
-    professionalSummary?: ProfessionalSummaryDataType
-    complexSections?: ComplexSectionDataType
-}
-
+    id?: number;
+    title?: string;
+    template?: number;
+    personalDetails?: PersonalDetailsDataType;
+    professionalSummary?: ProfessionalSummaryDataType;
+    complexSections?: ComplexSectionDataType;
+};
+export type ResumeInfoType = {
+    id?: number;
+    template?: number;
+};
 export type PersonalDetailsDataType = {
     id?: number;
     header?: string;
@@ -30,6 +33,11 @@ export type ProfessionalSummaryDataType = {
     header?: string;
     content?: string;
 };
+
+export type ProfessionalSummarySuggestionMode =
+    | 'tokens'
+    | 'sequences'
+    | 'paragraph'
 
 export type ComplexSection =
     | 'employmentHistories'

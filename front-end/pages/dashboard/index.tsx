@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Divider } from 'antd';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { DashboardDataType } from '../../configs/interfaces/dashboard.interface';
@@ -7,16 +7,22 @@ import { MOCKED_DASHBOARD } from '../../mock/dashboard.mock';
 import DashboardContainer from '../../components/page/dashboard/dashboard-container';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
-import { HOST } from '../../configs/constants/misc';
+import { HOST, LAYOUT } from '../../configs/constants/misc';
 import axios from 'axios';
 import { getAuthHeader } from '../../configs/restApi/clients';
+import Divide from '../../template/template-01/widgets/divide/Divide';
+import { useSetRecoilState } from 'recoil';
+import { resumeInfoState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 
 type DashboardProps = {
-    dashboardData: DashboardDataType
+    dashboardData: DashboardDataType;
 };
 
 const Dashboard = (props: DashboardProps) => {
-    const { dashboardData } = props
+    const { dashboardData } = props;
+
+    const setResumeInfo = useSetRecoilState(resumeInfoState);
+
     console.log(dashboardData);
     const router = useRouter();
     const onSelect = (id: number) => {
@@ -26,19 +32,47 @@ const Dashboard = (props: DashboardProps) => {
                 id: id,
             },
         });
-    }
+    };
     const onCreate = async () => {
-        console.log("Create new resume");
-    }
+        const headers = getAuthHeader();
+        console.log('headers :>> ', headers);
+        const response = await axios.post(
+            `${HOST}resume/create/`,
+            { template: 1 },
+            {
+                headers: headers,
+            }
+        );
+        router.push({
+            pathname: '/resumes/[id]/edit',
+            query: {
+                id: response.data.id,
+            },
+        });
+        setResumeInfo({
+            id: response.data.id,
+            template: response.data.template,
+        });
+        console.log('Create new resume');
+        console.log('response', response.data);
+    };
     return (
-        (dashboardData && 
+        dashboardData && (
             <div className={classNames(styles['dashboard'])}>
                 <div className={classNames(styles['dashboard-header'])}>
-                <h1>Resumes</h1>
-                <Button onClick={onCreate}>+ Create New</Button>
+                    <h1>Resumes</h1>
+                    <Button
+                        className={styles.button}
+                        size="large"
+                        onClick={onCreate}>
+                        + Create New
+                    </Button>
+                </div>
+                <Divider />
+                <DashboardContainer
+                    data={dashboardData.data}></DashboardContainer>
             </div>
-                <DashboardContainer data={dashboardData.data}></DashboardContainer>
-            </div>)
+        )
     );
 };
 
@@ -49,15 +83,19 @@ export default Dashboard;
 // }
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-    const { req, res } = ctx
-    const headers = getAuthHeader({ req, res })
-    const resume = await axios.get(
-        `${HOST}resume/`,
-        {
-            headers: headers
-        })
+    const { req, res } = ctx;
+    const defaultReturnProps = {
+        currentLayout: LAYOUT.DEFAULT,
+    };
+    const headers = getAuthHeader({ req, res });
+    const resume = await axios.get(`${HOST}resume/`, {
+        headers: headers,
+    });
 
     return {
-        props: { dashboardData: resume === null ? null : { data: resume.data } }
-    }
-}
+        props: {
+            ...defaultReturnProps,
+            dashboardData: resume === null ? null : { data: resume.data },
+        },
+    };
+};

@@ -17,7 +17,6 @@ type EmploymentHistoryProps = {
     className?: string;
     defaultTitle?: string;
     sectionType: any;
-    initialValue?: ComplexSectionDetailsDataType;
 };
 
 const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
@@ -25,7 +24,6 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         className,
         defaultTitle,
         sectionType = 'employmentHistories',
-        initialValue,
     } = props;
     const [employmentHistoryTitle, setEmploymentHistoryTitle] = useRecoilState(
         employmentHistoryTitleValueState
@@ -34,11 +32,11 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
     const [employmentHistoryItems, setEmploymentHistoryItems] = useRecoilState(
         employmentHistoryItemsState
     );
-    useEffect(() => {
-        if (initialValue && initialValue.items) {
-            setEmploymentHistoryItems(initialValue.items);
-        }
-    }, [initialValue, setEmploymentHistoryItems]);
+    // useEffect(() => {
+    //     if (initialValue && initialValue.items) {
+    //         setEmploymentHistoryItems(initialValue.items);
+    //     }
+    // }, [initialValue, setEmploymentHistoryItems]);
     const addItemHandler = () => {
         const newItem = {
             position: employmentHistoryItems
@@ -69,9 +67,13 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
                 if (prevItems.length === position) {
                     prevItems.push(changedData);
                 } else {
-                    const revUnChangedItems = [...prevItems];
-                    revUnChangedItems.splice(position, 1, changedData);
-                    return revUnChangedItems;
+                    const newItems = prevItems.map(item => {
+                        if (item.position === changedData.position) {
+                            item = { ...item, ...changedData };
+                        }
+                        return item;
+                    });
+                    return newItems;
                 }
                 return prevItems;
             });

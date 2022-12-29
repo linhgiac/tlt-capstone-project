@@ -1,3 +1,4 @@
+import { ResumeInfoType } from './../../../configs/interfaces/resume.interface';
 import {
     ComplexSectionDataType,
     // PersonalDetailsDataType,
@@ -19,6 +20,7 @@ import { complexSectionChangedValueState } from './resume-changed-complex-sectio
 export const resumeChangedValueState = selector<ResumeDataType>({
     key: 'resumeChangedValueState',
     get: ({ get }) => {
+        const info = get(resumeInfoState);
         const title = get(resumeTitleValueState);
         const personalDetails: PersonalDetailsDataType = get(
             personalDetailChangedValueState
@@ -29,7 +31,7 @@ export const resumeChangedValueState = selector<ResumeDataType>({
         const complexSections: ComplexSectionDataType = get(
             complexSectionChangedValueState
         );
-        let result = {};
+        let result = { ...info };
         if (title) {
             result = Object.assign(result, { title });
         }
@@ -44,6 +46,11 @@ export const resumeChangedValueState = selector<ResumeDataType>({
         }
         return result;
     },
+});
+
+export const resumeInfoState = atom<ResumeInfoType>({
+    key: 'resumeInfo',
+    default: {},
 });
 
 export const personalDetailChangedValueState = atom<PersonalDetailsDataType>({

@@ -21,26 +21,15 @@ type SkillProps = {
     className?: string;
     defaultTitle?: string;
     sectionType: any;
-    initialValue?: ComplexSectionDetailsDataType;
 };
 
 const SkillImport = (props: SkillProps) => {
-    const {
-        className,
-        defaultTitle,
-        sectionType = 'skills',
-        initialValue,
-    } = props;
+    const { className, defaultTitle, sectionType = 'skills' } = props;
     const [skillTitle, setSkillTitle] = useRecoilState(skillTitleValueState);
     const [disableLevel, setDisableLevel] = useState(false);
 
     const [skillItems, setSkillItems] = useRecoilState(skillItemsState);
 
-    useEffect(() => {
-        if (initialValue && initialValue.items) {
-            setSkillItems(initialValue.items);
-        }
-    }, [initialValue, setSkillItems]);
     const addItemHandler = () => {
         const newItem = {
             position: skillItems ? skillItems.length : 1,
@@ -66,9 +55,13 @@ const SkillImport = (props: SkillProps) => {
                 if (prevItems.length === position) {
                     prevItems.push(changedData);
                 } else {
-                    const revUnChangedItems = [...prevItems];
-                    revUnChangedItems.splice(position, 1, changedData);
-                    return revUnChangedItems;
+                    const newItems = prevItems.map(item => {
+                        if (item.position === changedData.position) {
+                            item = { ...item, ...changedData };
+                        }
+                        return item;
+                    });
+                    return newItems;
                 }
                 return prevItems;
             });
