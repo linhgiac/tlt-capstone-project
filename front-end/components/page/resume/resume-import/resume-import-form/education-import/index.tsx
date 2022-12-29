@@ -21,10 +21,16 @@ type EducationProps = {
     className?: string;
     defaultTitle?: string;
     sectionType: any;
+    initialValue?: ComplexSectionDetailsDataType;
 };
 
 const EducationImport = (props: EducationProps) => {
-    const { className, defaultTitle, sectionType = 'educations' } = props;
+    const {
+        className,
+        defaultTitle,
+        sectionType = 'educations',
+        initialValue,
+    } = props;
     const [educationTitle, setEducationTitle] = useRecoilState(
         educationTitleValueState
     );
@@ -32,7 +38,11 @@ const EducationImport = (props: EducationProps) => {
     const [educationItems, setEducationItems] =
         useRecoilState(educationItemsState);
 
-    
+    useEffect(() => {
+        if (initialValue && initialValue.items) {
+            setEducationItems(initialValue.items);
+        }
+    }, [initialValue, setEducationItems]);
     const addItemHandler = () => {
         const newItem = {
             position: educationItems ? educationItems.length : 1,
@@ -61,13 +71,9 @@ const EducationImport = (props: EducationProps) => {
                 if (prevItems.length === position) {
                     prevItems.push(changedData);
                 } else {
-                    const newItems = prevItems.map(item => {
-                        if (item.position === changedData.position) {
-                            item = { ...item, ...changedData };
-                        }
-                        return item;
-                    });
-                    return newItems;
+                    const revUnChangedItems = [...prevItems];
+                    revUnChangedItems.splice(position, 1, changedData);
+                    return revUnChangedItems;
                 }
                 return prevItems;
             });

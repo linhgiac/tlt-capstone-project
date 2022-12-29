@@ -4,7 +4,6 @@ import styles from './styles.module.scss';
 import { Button, Typography } from 'antd';
 import HomeCard from '../homeCard';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 const { Text, Title } = Typography;
 type HomeHeroProps = {
     className: string;
@@ -29,9 +28,7 @@ const HomeHero = (props: HomeHeroProps) => {
                 }}>
                 Create My Resume
             </Button>
-            <div className={styles['image']}>
-                
-            </div>
+            <div className={styles['image']}></div>
         </HomeCard>
     );
 };

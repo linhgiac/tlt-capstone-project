@@ -18,11 +18,7 @@ import {
     personalDetailChangedValueState,
     professionalSummaryChangedValueState,
     resumeChangedValueState,
-    resumeInfoState,
 } from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
-import { getAuthHeader } from '../../../../configs/restApi/clients';
-import { HOST } from '../../../../configs/constants/misc';
-import axios from 'axios';
 
 type ResumeImportProps = {
     className?: string;
@@ -34,61 +30,52 @@ const ResumeImport = (props: ResumeImportProps) => {
     const resumeChangedValue: ResumeDataType = useRecoilValue(
         resumeChangedValueState
     );
-    const setResumeInfo = useSetRecoilState(resumeInfoState);
+    
     const setResumeInitialTitle = useSetRecoilState(resumeTitleValueState);
 
-    // const resetPersonalDetailChangeValue = useSetRecoilState(
-    //     personalDetailChangedValueState
-    // );
-    // const resetProfessionalSummaryChangeValue = useSetRecoilState(
-    //     professionalSummaryChangedValueState
-    // );
-    // const resetEmploymentHistoriesChangeValue = useSetRecoilState(
-    //     employmentHistoryItemsState
-    // );
+    const resetPersonalDetailChangeValue = useSetRecoilState(
+        personalDetailChangedValueState
+    );
+    const resetProfessionalSummaryChangeValue = useSetRecoilState(
+        professionalSummaryChangedValueState
+    );
+    const resetEmploymentHistoriesChangeValue = useSetRecoilState(
+        employmentHistoryItemsState
+    );
 
-    // const resetEducationsChangeValue = useSetRecoilState(educationItemsState);
+    const resetEducationsChangeValue = useSetRecoilState(educationItemsState);
 
-    // const resetLinksChangeValue = useSetRecoilState(linkItemsState);
+    const resetLinksChangeValue = useSetRecoilState(linkItemsState);
 
-    // const resetChangeValue = useCallback(async () => {
-    //     resetPersonalDetailChangeValue({});
-    //     resetProfessionalSummaryChangeValue({});
-    //     resetEmploymentHistoriesChangeValue([]);
-    //     resetEducationsChangeValue([]);
-    //     resetLinksChangeValue([]);
-    // }, [
-    //     resetPersonalDetailChangeValue,
-    //     resetProfessionalSummaryChangeValue,
-    //     resetEmploymentHistoriesChangeValue,
-    //     resetEducationsChangeValue,
-    //     resetLinksChangeValue,
-    // ]);
+    const resetChangeValue = useCallback(async () => {
+        resetPersonalDetailChangeValue({});
+        resetProfessionalSummaryChangeValue({});
+        resetEmploymentHistoriesChangeValue([]);
+        resetEducationsChangeValue([]);
+        resetLinksChangeValue([]);
+    }, [
+        resetPersonalDetailChangeValue,
+        resetProfessionalSummaryChangeValue,
+        resetEmploymentHistoriesChangeValue,
+        resetEducationsChangeValue,
+        resetLinksChangeValue,
+    ]);
 
     useEffect(() => {
-        console.log('resumeChangedValue :>> ', resumeChangedValue);
-    }, [resumeChangedValue]);
+
+    }, []);
 
     const submitFormHandler = async () => {
         const resumeConvertedValue = await convertPayloadData(
             resumeChangedValue
         );
-        console.log('resumeChangedValue', resumeChangedValue);
-
-        // try {
-        //     const response = await axios.post(
-        //         `${HOST}resume/update/`,
-        //         resumeConvertedValue,
-        //         {
-        //             headers: getAuthHeader(),
-        //         }
-        //     );
-        //     console.log('response', response);
-        // } catch (error) {
-        //     console.log('error :>> ', error);
-        // }
-
-        // await resetChangeValue();
+        const response = await fetch('/api/resume-editor', {
+            method: 'POST',
+            body: JSON.stringify({ resumeValue: resumeConvertedValue }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+        const data = await response.json();
+        await resetChangeValue();
     };
 
     const getDataHandler = async () => {
@@ -100,18 +87,13 @@ const ResumeImport = (props: ResumeImportProps) => {
 
     useEffect(() => {
         // resetChangeValue();
-        setResumeInfo({
-            id: initialResume.id,
-            template: initialResume.template,
-        });
         if (initialResume.title) {
             setResumeInitialTitle(initialResume.title);
         }
     }, [
-        initialResume.id,
-        initialResume.template,
+        resumeChangedValue,
+        resetChangeValue,
         initialResume.title,
-        setResumeInfo,
         setResumeInitialTitle,
     ]);
 

@@ -13,25 +13,26 @@ import {
 import { personalDetailTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import { assignIn } from 'lodash';
 import { personalDetailChangedValueState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
-// import { personalDetailValueState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
+import { personalDetailValueState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
 
 type PersonalDetailsImportProps = {
     className?: string;
     defaultTitle?: string;
+    initialValue: PersonalDetailsDataType | undefined;
 };
 
 const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
-    const { className, defaultTitle } = props;
+    const { className, defaultTitle, initialValue } = props;
     const [form] = Form.useForm();
 
+    // const [personalDetailFields, setPersonalDetailFields] = useRecoilState(
+    //     personalDetailFieldsState
+    // );
     const [personalDetailsChangedValues, setPersonalDetailsChangedValues] =
         useRecoilState(personalDetailChangedValueState);
-
-    console.log(
-        'personal details initial value :>> ',
-        personalDetailChangedValueState
+    const [personalDetailsValues, setPersonalDetailsValues] = useRecoilState(
+        personalDetailValueState
     );
-
     const [personalDetailTitle, setPersonalDetailTitle] = useRecoilState(
         personalDetailTitleValueState
     );
@@ -42,20 +43,13 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                 const result = { ...prev, ...changedValues };
                 return result;
             });
-            // setPersonalDetailsValues(values);
+            setPersonalDetailsValues(values);
         },
-        [setPersonalDetailsChangedValues]
+        [setPersonalDetailsChangedValues, setPersonalDetailsValues]
     );
 
     useEffect(() => {
-        console.log(
-            'personalDetailsChangedValue',
-            personalDetailsChangedValues
-        );
-        form.setFieldsValue(personalDetailsChangedValues);
-        const fields = form.getFieldsValue(true);
-        console.log('fields :>> ', fields);
-    }, [form, personalDetailsChangedValues, setPersonalDetailsChangedValues]);
+    }, [personalDetailsValues]);
     const getFixedField = () => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const [expand, setExpand] = useState(false);
@@ -258,7 +252,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                 form={form}
                 layout="vertical"
                 // fields={personalDetailFields}
-                // initialValues={personalDetailsChangedValues}
+                initialValues={initialValue}
                 // onFieldsChange={changeFieldsHandler}
                 onValuesChange={changeValuesHandler}
                 size="large"

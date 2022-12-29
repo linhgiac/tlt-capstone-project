@@ -10,10 +10,11 @@ import styles from './styles.module.scss';
 
 type ResumeExportMainProps = {
     className?: string;
+    resumeData: ResumeDataType;
 };
 
 const ResumeExportMain = (props: ResumeExportMainProps) => {
-    const { className} = props;
+    const { className, resumeData } = props;
     return (
         <div className={classNames(styles.center, '.cv-format')}>
             <TransformWrapper

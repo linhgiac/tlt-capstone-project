@@ -15,15 +15,14 @@ const ResumeTitle = (props: ResumeTitleProps) => {
     );
     return (
         <>
-            <div className={styles['resume-title']}>{resumeTitleValue}</div>
-            {/* <EditableTitle
+            <EditableTitle
                 className={styles['resume-title']}
                 onChangeTitle={(value: string) => {
                     setResumeTitleValue(value);
                 }}
                 defaultTitle={ResumeConstants.TITLE_CONSTANTS.resume}>
                 {resumeTitleValue}
-            </EditableTitle> */}
+            </EditableTitle>
         </>
     );
 };

@@ -15,59 +15,42 @@ type DashboardItemProps = {
 
 const DashboardItem = (props: DashboardItemProps) => {
     const { item } = props;
-    console.log('item :>> ', item);
     const router = useRouter();
 
     const onClick = () => {
-        console.log('On click item');
+        console.log("On click item");
         router.push({
             pathname: '/resumes/[id]/edit',
             query: {
                 id: item.id,
             },
         });
-    };
+    }
     const onRename = (value: string) => {
-        console.log('On rename: ', value);
-    };
+        console.log("On rename: ", value);
+    }
     const onDelete = () => {
-        console.log('Delete resume: ', item.id);
-    };
+        console.log("Delete resume: ", item.id);
+    }
     return (
         <div className={classNames(styles['dashboard-item'])}>
-            <div
-                // size="large"
-                onClick={onClick}
-                className={classNames(styles['dashboard-item-preview'])}>
-                <Image
-                    src={item.thumbnail}
-                    width={225}
-                    height={321}
-                />
-            </div>
+            <button onClick={onClick} className={classNames(styles['dashboard-item-preview'])}>
+                <Image src={item.thumbnail} width={225} height={321} />
+            </button>
             <div className={classNames(styles['dashboard-item-body'])}>
                 <ResumeTitle initialValue={item.title}></ResumeTitle>
                 {/* <div className={classNames(styles['dashboard-item-lastupdated'])}>Updated {item.lastUpdated}</div> */}
-                <div
-                    className={classNames(
-                        styles['dashboard-item-button-list']
-                    )}>
-                    <Button
-                        size="large"
-                        className={classNames(styles['dashboard-item-button'])}
-                        onClick={onClick}>
+                <div className={classNames(styles['dashboard-item-button-list'])}>
+                    <button className={classNames(styles['dashboard-item-button'])} onClick={onClick}>
                         Edit
-                    </Button>
-                    <Button
-                        size="large"
-                        className={classNames(styles['dashboard-item-button'])}
-                        onClick={onDelete}>
+                    </button>
+                    <button className={classNames(styles['dashboard-item-button'])} onClick={onDelete}>
                         Delete
-                    </Button>
+                    </button>
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 export default DashboardItem;

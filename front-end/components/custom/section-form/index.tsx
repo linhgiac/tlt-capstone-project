@@ -13,7 +13,6 @@ import {
 import styles from './styles.module.scss';
 import { has, isEmpty } from 'lodash';
 import SkillLevelInput from './skill-level-input';
-import moment from 'moment';
 
 const { Group, Button } = Radio;
 type Props = {
@@ -37,7 +36,7 @@ const SectionForm = (props: Props) => {
     const [form] = Form.useForm();
     const [skillLevel, setSkillLevel] = useState('novice');
     const { TextArea } = Input;
-    console.log('value :>> ', value);
+
     useEffect(() => {
         if (!isEmpty(labelList) && Object.keys(labelList).includes('level')) {
             setSkillLevel(value?.level);
@@ -46,11 +45,12 @@ const SectionForm = (props: Props) => {
     const changeSkillLevelHandler = useCallback((e: RadioChangeEvent) => {
         setSkillLevel(e.target.value);
     }, []);
-
+  
     const getFormItemList = (labelList: any) => {
+        const { RangePicker } = DatePicker;
         const itemLst: any[] = [];
         for (const key in labelList) {
-            if (key === 'startDate') {
+            if (key === 'startEndDate') {
                 itemLst.push(
                     <Col
                         span={12}
@@ -59,29 +59,11 @@ const SectionForm = (props: Props) => {
                             className="p-b-15 no-margin"
                             name={key}
                             label={labelList[key]}>
-                            <DatePicker
+                            <RangePicker
                                 picker="month"
                                 size="large"
                                 className="center"
                                 bordered={false}
-                            />
-                        </Form.Item>
-                    </Col>
-                );
-            } else if (key === 'endDate') {
-                itemLst.push(
-                    <Col
-                        span={12}
-                        key={key}>
-                        <Form.Item
-                            className="p-b-15 no-margin"
-                            name={key}
-                            label={labelList[key]}>
-                            <DatePicker
-                                picker="month"
-                                size="large"
-                                className="center"
-                                // bordered={false}
                             />
                         </Form.Item>
                     </Col>
@@ -118,20 +100,10 @@ const SectionForm = (props: Props) => {
 
     const changeValuesHandler = useCallback(
         (changedValues: any, values: any) => {
-            if (changedValues.startDate) {
-                console.log(
-                    'changedValues',
-                    moment(changedValues.startDate).format('MMMM YYYY')
-                );
-            }
-            // onChangeItemValue(changedValues, values);
+            onChangeItemValue(changedValues, values);
         },
-        []
+        [onChangeItemValue]
     );
-    useEffect(() => {
-        const itemFields = form.getFieldsValue(true);
-        console.log('itemFields', itemFields);
-    }, [form]);
 
     return (
         <div

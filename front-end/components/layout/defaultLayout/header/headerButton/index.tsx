@@ -1,14 +1,10 @@
 import { Button } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userLoginState } from '../../../../../recoil-state/user-state/user-state';
-import axios from 'axios';
-import { HOST } from '../../../../../configs/constants/misc';
-import { deleteCookie, getCookie, hasCookie } from 'cookies-next';
-import { getAuthHeader } from '../../../../../configs/restApi/clients';
 
 type HeaderButtonProps = {
     className: string;
@@ -16,35 +12,11 @@ type HeaderButtonProps = {
 
 const HeaderButton = (props: HeaderButtonProps) => {
     const { className } = props;
-    const [isLogged, setIsLogged] = useRecoilState(userLoginState);
-    console.log('isLogged ?>>:>?>', isLogged);
-    const [isLoading, setIsLoading] = useState(false);
+    const isLogged = useRecoilValue(userLoginState);
     const router = useRouter();
-    const logoutHandler = async () => {
-        try {
-            setIsLoading(true);
-            const headers = getAuthHeader();
-            const refresh = getCookie('tokenRefresh');
-            console.log('refresh :>> ', refresh);
-            const response = await axios.post<any>(
-                `${HOST}accounts/logout/`,
-                { refresh: refresh },
-                {
-                    headers: headers,
-                }
-            );
-            deleteCookie('tokenAccess');
-            deleteCookie('tokenRefresh');
-            // console.log('isLogged :>> ', isLogged);
-            router.replace('/');
-            router.reload();
-            console.log('response :>> ', response);
-        } catch (error) {
-            console.log('error :>>>>', error);
-        }
-        setIsLoading(false);
-    };
+    const onLogout = async () => {
 
+    }
     return (
         <div className={classNames(className)}>
             {!isLogged ? (
@@ -101,7 +73,7 @@ const HeaderButton = (props: HeaderButtonProps) => {
                         )}
                         size="large"
                         type="primary"
-                        onClick={logoutHandler}>
+                        onClick={onLogout}>
                         Logout
                     </Button>
                 </>

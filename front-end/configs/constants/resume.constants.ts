@@ -11,16 +11,14 @@ const PROFESSIONAL_SUMMARY_LABEL ={}
 const EMPLOYMENT_HISTORY_LABEL = {
     jobTitle: 'Job Title',
     employer: 'Employer',
-    startDate: 'Start Date',
-    endDate: 'End Date',
+    startEndDate: 'Start & End Date',
     city: 'City',
     description: 'Description',
 };
 const EDUCATION_LABEL = {
     school: 'School',
     degree: 'Degree',
-    startDate: 'Start Date',
-    endDate: 'End Date',
+    startEndDate: 'Start & End Date',
     city: 'City',
     description: 'Description',
 };

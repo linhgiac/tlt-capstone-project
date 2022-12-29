@@ -11,12 +11,14 @@ import SectionImportTitle from '../resume-import/section-import-title';
 
 type ResumeExportProps = {
     className?: string;
+    resumeData: ResumeDataType;
     onChangeLayout: () => void;
 };
 
 const ResumeExport = ({
     className,
     onChangeLayout,
+    resumeData,
 }: ResumeExportProps) => {
     const changeLayoutHandler = () => {};
 
@@ -34,6 +36,7 @@ const ResumeExport = ({
                     />
                     <ResumeExportMain
                         className={styles['resume-export-main']}
+                        resumeData={resumeData}
                     />
                     <ResumeExportSelection
                         className={styles['resume-export-selection']}
