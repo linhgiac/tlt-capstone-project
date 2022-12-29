@@ -15,7 +15,6 @@ type DashboardItemProps = {
 
 const DashboardItem = (props: DashboardItemProps) => {
     const { item } = props;
-    console.log('item :>> ', item);
     const router = useRouter();
 
     const onClick = () => {

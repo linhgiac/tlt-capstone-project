@@ -38,7 +38,6 @@ const SectionForm = (props: Props) => {
     const [form] = Form.useForm();
     const [skillLevel, setSkillLevel] = useState('novice');
     const { TextArea } = Input;
-    console.log('value :>> ', value);
     useEffect(() => {
         if (!isEmpty(labelList) && Object.keys(labelList).includes('level')) {
             setSkillLevel(value?.level);
@@ -147,7 +146,6 @@ const SectionForm = (props: Props) => {
                     'YYYY/MM'
                 );
             }
-            console.log('changedValues', changedValues);
             onChangeItemValue(changedValues);
         },
         []
@@ -158,10 +156,7 @@ const SectionForm = (props: Props) => {
             startDate: value.startDate ? dayjs(value.startDate) : undefined,
             endDate: value.endDate ? dayjs(value.endDate) : undefined,
         };
-        console.log('convertValue :>> ', convertValue);
         form.setFieldsValue(convertValue);
-        // const itemFields = form.getFieldsValue(true);
-        // console.log('itemFields', itemFields);
     }, [form, value]);
 
     return (

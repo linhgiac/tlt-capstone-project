@@ -25,7 +25,6 @@ export const getAuthHeader = (
         Authorization: `Bearer ${accessToken}`,
     };
 
-    console.log(headers);
 
     return headers;
 };

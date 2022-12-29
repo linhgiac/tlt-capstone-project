@@ -66,14 +66,12 @@ const ResumeImport = (props: ResumeImportProps) => {
     // ]);
 
     useEffect(() => {
-        console.log('resumeChangedValue :>> ', resumeChangedValue);
     }, [resumeChangedValue]);
 
     const submitFormHandler = async () => {
         const resumeConvertedValue = await convertPayloadData(
             resumeChangedValue
         );
-        console.log('resumeChangedValue', resumeChangedValue);
 
         // try {
         //     const response = await axios.post(

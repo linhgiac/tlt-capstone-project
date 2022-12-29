@@ -17,7 +17,6 @@ type HeaderButtonProps = {
 const HeaderButton = (props: HeaderButtonProps) => {
     const { className } = props;
     const [isLogged, setIsLogged] = useRecoilState(userLoginState);
-    console.log('isLogged ?>>:>?>', isLogged);
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const logoutHandler = async () => {
@@ -25,7 +24,6 @@ const HeaderButton = (props: HeaderButtonProps) => {
             setIsLoading(true);
             const headers = getAuthHeader();
             const refresh = getCookie('tokenRefresh');
-            console.log('refresh :>> ', refresh);
             const response = await axios.post<any>(
                 `${HOST}accounts/logout/`,
                 { refresh: refresh },
@@ -35,12 +33,9 @@ const HeaderButton = (props: HeaderButtonProps) => {
             );
             deleteCookie('tokenAccess');
             deleteCookie('tokenRefresh');
-            // console.log('isLogged :>> ', isLogged);
             router.replace('/');
             router.reload();
-            console.log('response :>> ', response);
         } catch (error) {
-            console.log('error :>>>>', error);
         }
         setIsLoading(false);
     };

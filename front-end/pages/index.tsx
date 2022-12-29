@@ -18,7 +18,6 @@ const Home: NextPage = props => {
     const setIsLogged = useSetRecoilState(userLoginState);
     useEffect(() => {
         const hasToken = hasCookie('tokenRefresh');
-        console.log('hasToken :>> ', hasToken);
         if (hasToken) {
             setIsLogged(true);
         }

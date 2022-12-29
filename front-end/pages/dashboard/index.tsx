@@ -23,7 +23,6 @@ const Dashboard = (props: DashboardProps) => {
 
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
-    console.log(dashboardData);
     const router = useRouter();
     const onSelect = (id: number) => {
         router.push({
@@ -35,7 +34,6 @@ const Dashboard = (props: DashboardProps) => {
     };
     const onCreate = async () => {
         const headers = getAuthHeader();
-        console.log('headers :>> ', headers);
         const response = await axios.post(
             `${HOST}resume/create/`,
             { template: 1 },
@@ -53,8 +51,6 @@ const Dashboard = (props: DashboardProps) => {
             id: response.data.id,
             template: response.data.template,
         });
-        console.log('Create new resume');
-        console.log('response', response.data);
     };
     return (
         dashboardData && (

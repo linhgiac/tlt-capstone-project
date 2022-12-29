@@ -27,11 +27,6 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     const [personalDetailsChangedValues, setPersonalDetailsChangedValues] =
         useRecoilState(personalDetailChangedValueState);
 
-    console.log(
-        'personal details initial value :>> ',
-        personalDetailChangedValueState
-    );
-
     const [personalDetailTitle, setPersonalDetailTitle] = useRecoilState(
         personalDetailTitleValueState
     );
@@ -48,13 +43,8 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     );
 
     useEffect(() => {
-        console.log(
-            'personalDetailsChangedValue',
-            personalDetailsChangedValues
-        );
         form.setFieldsValue(personalDetailsChangedValues);
         const fields = form.getFieldsValue(true);
-        console.log('fields :>> ', fields);
     }, [form, personalDetailsChangedValues, setPersonalDetailsChangedValues]);
     const getFixedField = () => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
