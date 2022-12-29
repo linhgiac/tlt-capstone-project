@@ -49,12 +49,13 @@ const LoginContent = (props: Props) => {
                     },
                 }
             );
-            setCookie('token-access', response.data.access);
-            setCookie('token-refresh', response.data.refresh);
+            setCookie('tokenAccess', response.data.access);
+            setCookie('tokenRefresh', response.data.refresh);
             setIsLogged(true);
             router.replace('/');
         } catch (error: any) {
-            error.response.data.detail && setError(error.response.data.detail);
+            error?.response?.data.detail &&
+                setError(error.response.data.detail);
 
         }
         setIsLoading(false);

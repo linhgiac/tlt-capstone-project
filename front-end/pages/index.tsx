@@ -1,10 +1,29 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import type {
+    GetServerSideProps,
+    GetServerSidePropsContext,
+    NextPage,
+} from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { LAYOUT } from '../configs/constants/misc';
 import HomeContent from '../components/page/home';
+import { useSetRecoilState } from 'recoil';
+import { userLoginState } from '../recoil-state/user-state/user-state';
+import { getAuthHeader } from '../configs/restApi/clients';
+import { hasCookie } from 'cookies-next';
+import { useEffect } from 'react';
+
 const Home: NextPage = props => {
     const router = useRouter();
+    const setIsLogged = useSetRecoilState(userLoginState);
+    useEffect(() => {
+        const hasToken = hasCookie('tokenRefresh');
+        console.log('hasToken :>> ', hasToken);
+        if (hasToken) {
+            setIsLogged(true);
+        }
+    }, [setIsLogged]);
+
     return <HomeContent />;
 };
 

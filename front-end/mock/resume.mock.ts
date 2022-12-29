@@ -22,7 +22,7 @@ export const PersonalDetailData: PersonalDetailsDataType = {
 export const MOCKED_RESUME: ResumeDataType = {
     id: 1,
     title: 'M_Resume',
-    templateId: 1,
+    template: 1,
     personalDetails: {
         header: 'Personal Details',
         jobTitle: 'Freelance Graphic Designer',
@@ -34,6 +34,7 @@ export const MOCKED_RESUME: ResumeDataType = {
         city: 'Hochiminh',
     },
     professionalSummary: {
+        id: 1,
         header: 'Professional Summary',
         content:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -56,7 +57,7 @@ export const MOCKED_RESUME: ResumeDataType = {
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt`,
                         // city: 'HCM',
-                        startDate: 'June 2029',
+                        // startDate: 'June 2029',
                         // endDate: '2023 May',
                     },
                     {
@@ -151,6 +152,127 @@ export const MOCKED_RESUME: ResumeDataType = {
     },
 };
 
+// export const MOCKED_RESUME = {
+//     id: 2,
+//     template: 1,
+//     title: 'M_Resume',
+//     personal_details: {
+//         header: 'Personal Details',
+//         job_title: 'Freelance Graphic Designer',
+//         first_name: 'Eleanor',
+//         last_name: 'Fitzgerald',
+//         email: 'hello@reallygreatsite.com',
+//         phone: '+123-456-7890',
+//         country: 'Vietnam',
+//         city: 'Hochiminh',
+//     },
+//     professional_summary: {
+//         header: 'Professional Summary',
+//         content:
+//             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+//     },
+//     complex_sections: [
+//         {
+//             id: 1,
+//             header: 'Employment History',
+//             position: 3,
+//             section_type: 'employmentHistories',
+//             employment_histories: [
+//                 {
+//                     id: 1,
+//                     position: 0,
+//                     job_title: 'Senior Graphic Designer',
+//                     employer: 'Studio Shodwe',
+//                     description:
+//                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt',
+//                     start_date: 'June 2029',
+//                 },
+//                 {
+//                     id: 2,
+//                     position: 1,
+//                     job_title: 'Freelance Graphic Designer ',
+//                     employer: 'Salford & Co. ',
+//                     description:
+//                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt',
+//                     start_date: 'February 2028',
+//                     end_date: 'February 2029',
+//                 },
+//                 {
+//                     id: 3,
+//                     position: 2,
+//                     job_title: 'Junior Graphic Designer',
+//                     employer: 'Larana, Inc.',
+//                     description:
+//                         'Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt',
+//                     start_date: 'January 2027',
+//                     end_date: 'January 2028',
+//                 },
+//             ],
+//         },
+//         {
+//             id: 1,
+//             header: 'Education',
+//             position: 3,
+//             section_type: 'educations',
+//             educations: [
+//                 {
+//                     id: 2,
+//                     position: 0,
+//                     school: 'Really Great Universit',
+//                     degree: 'Bachelor of Multimedia Arts Major in Digital Design',
+//                     start_date: '2023',
+//                     end_date: '2027',
+//                 },
+//             ],
+//         },
+//         {
+//             id: 1,
+//             header: 'Skills',
+//             position: 5,
+//             section_type: 'skills',
+//             is_shown_level: true,
+//             skills: [
+//                 {
+//                     id: 1,
+//                     position: 0,
+//                     name: 'Illustrator',
+//                     level: 'beginner',
+//                 },
+//                 {
+//                     id: 2,
+//                     position: 1,
+//                     name: 'Professional Design',
+//                     level: 'beginner',
+//                 },
+//                 {
+//                     id: 3,
+//                     position: 2,
+//                     name: 'Web Design',
+//                     level: 'beginner',
+//                 },
+//                 {
+//                     id: 4,
+//                     position: 3,
+//                     name: 'SEO Copywriting',
+//                     level: 'beginner',
+//                 },
+//                 {
+//                     id: 5,
+//                     position: 4,
+//                     name: 'Photography',
+//                     level: 'beginner',
+//                 },
+//                 {
+//                     id: 6,
+//                     position: 5,
+//                     name: 'Branding Design',
+//                     level: 'beginner',
+//                 },
+//             ],
+//         },
+//     ],
+// };
+
 type MockedTemplatesDataType = {
     all: TemplatesDataType;
     creative: TemplatesDataType;
@@ -159,167 +281,153 @@ type MockedTemplatesDataType = {
     modern: TemplatesDataType;
 };
 
-export const MOCKED_TEMPLATES: MockedTemplatesDataType = {
-    all: {
-        data: [
-            {
-                id: 1,
-                category: 'creative',
-                get_thumbnail: './image/template.png',            
-                title: 'Creative Template',
-                description: 'Something creative description',
-            },
-            {
-                id: 2,
-                category: 'simple',
-                get_thumbnail: './image/template.png',            
-                title: 'Simple Template',
-                description: 'Something simple description',
-            },
-            {
-                id: 3,
-                category: 'professional',
-                get_thumbnail: './image/template.png',            
-                title: 'Professional Template',
-                description: 'Something professional description',
-            },
-            {
-                id: 4,
-                category: 'modern',
-                get_thumbnail: './image/template.png',            
-                title: 'Modern Template',
-                description: 'Something modern description',
-            },
-            {
-                id: 5,
-                category: 'creative',
-                get_thumbnail: './image/template.png',            
-                title: 'Creative Template',
-                description: 'Something creative description',
-            },
-            {
-                id: 6,
-                category: 'simple',
-                get_thumbnail: './image/template.png',            
-                title: 'Simple Template',
-                description: 'Something simple description',
-            },
-            {
-                id: 7,
-                category: 'professional',
-                get_thumbnail: './image/template.png',            
-                title: 'Professional Template',
-                description: 'Something professional description',
-            },
-            {
-                id: 8,
-                category: 'modern',
-                get_thumbnail: './image/template.png',            
-                title: 'Modern Template',
-                description: 'Something modern description',
-            },
-        ],
-    },
-    creative: {
-        data: [
-            {
-                id: 1,
-                category: 'creative',
-                get_thumbnail: './image/template.png',            
-                title: 'Creative Template',
-                description: 'Something creative description',
-            },
-            {
-                id: 5,
-                category: 'creative',
-                get_thumbnail: './image/template.png',            
-                title: 'Creative Template',
-                description: 'Something creative description',
-            },
-        ],
-    },
-    simple: {
-        data: [
-            {
-                id: 2,
-                category: 'simple',
-                get_thumbnail: './image/template.png',            
-                title: 'Simple Template',
-                description: 'Something simple description',
-            },
-            {
-                id: 6,
-                category: 'simple',
-                get_thumbnail: './image/template.png',            
-                title: 'Simple Template',
-                description: 'Something simple description',
-            },
-        ],
-    },
-    professional: {
-        data: [
-            {
-                id: 3,
-                category: 'professional',
-                get_thumbnail: './image/template.png',            
-                title: 'Professional Template',
-                description: 'Something professional description',
-            },
-            {
-                id: 7,
-                category: 'professional',
-                get_thumbnail: './image/template.png',            
-                title: 'Professional Template',
-                description: 'Something professional description',
-            },
-        ],
-    },
-    modern: {
-        data: [
-            {
-                id: 4,
-                category: 'modern',
-                get_thumbnail: './image/template.png',            
-                title: 'Modern Template',
-                description: 'Something modern description',
-            },
-            {
-                id: 8,
-                category: 'modern',
-                get_thumbnail: './image/template.png',            
-                title: 'Modern Template',
-                description: 'Something modern description',
-            },
-        ],
-    },
-};
-
-type MockedProfessionalSummarySuggestionsType = {
-    tokens: string[];
-    sequences: string[];
-    paragraph: string[];
-};
-
-export const MOCKED_SUGGESTIONS: MockedProfessionalSummarySuggestionsType = {
-    tokens: [
-        'Token1 Token1 Token1 Token1 Token1',
-        'Token2 Token2 Token2 Token2 Token2',
-        'Token3 Token3 Token3 Token3 Token3',
-        'Token4 Token4 Token4 Token4 Token4',
-        'Token5 Token5 Token5 Token5 Token5',
-    ],
-    sequences: [
-        'Sequences1 Sequences1 Sequences1 Sequences1 Sequences1',
-        'Sequences2 Sequences2 Sequences2 Sequences2 Sequences2',
-        'Sequences3 Sequences3 Sequences3 Sequences3 Sequences3',
-        'Sequences4 Sequences4 Sequences4 Sequences4 Sequences4',
-        'Sequences5 Sequences5 Sequences5 Sequences5 Sequences5',
-    ],
-    paragraph: [
-        'Paragraph1 Paragraph1 Paragraph1 Paragraph1 Paragraph1',
-        'Paragraph2 Paragraph2 Paragraph2 Paragraph2 Paragraph2',
-        'Paragraph3 Paragraph3 Paragraph3 Paragraph3 Paragraph3',
-        'Paragraph4 Paragraph4 Paragraph4 Paragraph4 Paragraph4',
-        'Paragraph5 Paragraph5 Paragraph5 Paragraph5 Paragraph5',
-    ]
-};
+// export const MOCKED_TEMPLATES: MockedTemplatesDataType = {
+//     all: {
+//         data: [
+//             {
+//                 id: 1,
+//                 category: 'creative',
+//                 get_thumnail: './image/template.png',
+//                 name: 'Creative_Template',
+//                 title: 'Creative Template',
+//                 description: 'Something creative description',
+//             },
+//             {
+//                 id: 2,
+//                 category: 'simple',
+//                 get_thumnail: './image/template.png',
+//                 name: 'Simple_Template',
+//                 title: 'Simple Template',
+//                 description: 'Something simple description',
+//             },
+//             {
+//                 id: 3,
+//                 category: 'professional',
+//                 thumnail: './image/template.png',
+//                 name: 'Professional_Template',
+//                 title: 'Professional Template',
+//                 description: 'Something professional description',
+//             },
+//             {
+//                 id: 4,
+//                 category: 'modern',
+//                 thumnail: './image/template.png',
+//                 name: 'Modern_Template',
+//                 title: 'Modern Template',
+//                 description: 'Something modern description',
+//             },
+//             {
+//                 id: 5,
+//                 category: 'creative',
+//                 thumnail: './image/template.png',
+//                 name: 'Creative_Template',
+//                 title: 'Creative Template',
+//                 description: 'Something creative description',
+//             },
+//             {
+//                 id: 6,
+//                 category: 'simple',
+//                 thumnail: './image/template.png',
+//                 name: 'Simple_Template',
+//                 title: 'Simple Template',
+//                 description: 'Something simple description',
+//             },
+//             {
+//                 id: 7,
+//                 category: 'professional',
+//                 thumnail: './image/template.png',
+//                 name: 'Professional_Template',
+//                 title: 'Professional Template',
+//                 description: 'Something professional description',
+//             },
+//             {
+//                 id: 8,
+//                 category: 'modern',
+//                 thumnail: './image/template.png',
+//                 name: 'Modern_Template',
+//                 title: 'Modern Template',
+//                 description: 'Something modern description',
+//             },
+//         ],
+//     },
+//     creative: {
+//         data: [
+//             {
+//                 id: 1,
+//                 category: 'creative',
+//                 thumnail: './image/template.png',
+//                 name: 'Creative_Template',
+//                 title: 'Creative Template',
+//                 description: 'Something creative description',
+//             },
+//             {
+//                 id: 5,
+//                 category: 'creative',
+//                 thumnail: './image/template.png',
+//                 name: 'Creative_Template',
+//                 title: 'Creative Template',
+//                 description: 'Something creative description',
+//             },
+//         ],
+//     },
+//     simple: {
+//         data: [
+//             {
+//                 id: 2,
+//                 category: 'simple',
+//                 thumnail: './image/template.png',
+//                 name: 'Simple_Template',
+//                 title: 'Simple Template',
+//                 description: 'Something simple description',
+//             },
+//             {
+//                 id: 6,
+//                 category: 'simple',
+//                 thumnail: './image/template.png',
+//                 name: 'Simple_Template',
+//                 title: 'Simple Template',
+//                 description: 'Something simple description',
+//             },
+//         ],
+//     },
+//     professional: {
+//         data: [
+//             {
+//                 id: 3,
+//                 category: 'professional',
+//                 thumnail: './image/template.png',
+//                 name: 'Professional_Template',
+//                 title: 'Professional Template',
+//                 description: 'Something professional description',
+//             },
+//             {
+//                 id: 7,
+//                 category: 'professional',
+//                 thumnail: './image/template.png',
+//                 name: 'Professional_Template',
+//                 title: 'Professional Template',
+//                 description: 'Something professional description',
+//             },
+//         ],
+//     },
+//     modern: {
+//         data: [
+//             {
+//                 id: 4,
+//                 category: 'modern',
+//                 thumnail: './image/template.png',
+//                 name: 'Modern_Template',
+//                 title: 'Modern Template',
+//                 description: 'Something modern description',
+//             },
+//             {
+//                 id: 8,
+//                 category: 'modern',
+//                 thumnail: './image/template.png',
+//                 name: 'Modern_Template',
+//                 title: 'Modern Template',
+//                 description: 'Something modern description',
+//             },
+//         ],
+//     },
+// };
