@@ -52,7 +52,10 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
             'personalDetailsChangedValue',
             personalDetailsChangedValues
         );
-    }, [personalDetailsChangedValues, setPersonalDetailsChangedValues]);
+        form.setFieldsValue(personalDetailsChangedValues);
+        const fields = form.getFieldsValue(true);
+        console.log('fields :>> ', fields);
+    }, [form, personalDetailsChangedValues, setPersonalDetailsChangedValues]);
     const getFixedField = () => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const [expand, setExpand] = useState(false);
@@ -255,7 +258,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                 form={form}
                 layout="vertical"
                 // fields={personalDetailFields}
-                initialValues={personalDetailChangedValueState}
+                // initialValues={personalDetailsChangedValues}
                 // onFieldsChange={changeFieldsHandler}
                 onValuesChange={changeValuesHandler}
                 size="large"

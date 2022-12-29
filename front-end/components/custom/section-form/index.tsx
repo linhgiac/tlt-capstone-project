@@ -126,8 +126,12 @@ const SectionForm = (props: Props) => {
             }
             // onChangeItemValue(changedValues, values);
         },
-        [onChangeItemValue]
+        []
     );
+    useEffect(() => {
+        const itemFields = form.getFieldsValue(true);
+        console.log('itemFields', itemFields);
+    }, [form]);
 
     return (
         <div
