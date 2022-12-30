@@ -14,7 +14,7 @@ const Page = (props: Props) => {
         <div
             id={'pdf'}
             className={styles.container}>
-            <div className="cv-format">
+            <div id={'inner-pdf'} className="cv-format">
                 <TemplateMap id={resumeInfo.template} />
             </div>
         </div>

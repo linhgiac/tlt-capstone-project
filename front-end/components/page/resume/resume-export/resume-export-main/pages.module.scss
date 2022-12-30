@@ -1,10 +1,11 @@
-.container{
-  .cv-format{
+.container {
+  .cv-format {
     width: 210mm;
-    min-height: 297mm;
+    height: 297mm;
   }
+
   background-color: white;
-  // margin-top: 50px;
+  margin-top: 0px;
   border-radius: 8px;
   overflow: hidden;
 }

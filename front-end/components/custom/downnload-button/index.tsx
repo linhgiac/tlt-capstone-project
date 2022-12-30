@@ -9,11 +9,18 @@ type Props = {};
 const DownloadButton = (props: Props) => {
     const resume = useRecoilValue(resumeSavedState);
     const downloadHandler = async () => {
-        const pdf = new jsPDF('portrait', 'pt', 'a4');
-        const data: any = await document.querySelector('#pdf');
+        const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'px',
+            format: 'a4',
+            hotfixes: ['px_scaling']
+        });
+        const data: any = await document.querySelector('#inner-pdf');
         const width = pdf.internal.pageSize.getWidth();
+        const windowWidth = data.getBoundingClientRect().width;
+        console.log({ width, windowWidth });
         if (data) {
-            pdf.html(data, { x: 0, y: 0, width: width }).then(() => {
+            pdf.html(data, { x: 0, y: 0, width: windowWidth, windowWidth: windowWidth }).then(() => {
                 pdf.save(`${resume.title}.pdf`);
             });
         }

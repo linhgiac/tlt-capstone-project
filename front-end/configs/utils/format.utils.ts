@@ -43,8 +43,24 @@ export const convertPayloadData = async (resumeData: ResumeDataType) => {
     const sectionDetails = complexSections?.sectionDetails;
     const newComplexSections = complexSections?.sectionType.map(type => {
         if (sectionDetails) {
+            console.log("fkkkkkkkkkk")
             const details = { ...sectionDetails[type] };
-            const items = details.items;
+            const items = details.items?.map(item => {
+                var startDate = get(item, 'startDate');
+                var endDate = get(item, 'startDate');
+                if (startDate !== undefined) {
+                    var itemFixStartDate = { ...item, startDate: (startDate + "/01").replaceAll('/', '-') }
+                    item = itemFixStartDate;
+                    console.log({ itemFixStartDate })
+                }
+                if (endDate != undefined) {
+                    var tepmFixEndDate = { ...item, endDate: (endDate + "/01").replaceAll('/', '-') }
+                    item = tepmFixEndDate;
+                    console.log({ tepmFixEndDate })
+                }
+                console.log(item)
+                return item
+            });
             delete details.items;
             return {
                 ...details,
@@ -67,6 +83,7 @@ export const convertPayloadData = async (resumeData: ResumeDataType) => {
         result = Object.assign(result, { complexSections: newComplexSections });
     }
     const convertedResult = convertCamelToSnake(result);
+    console.log(convertedResult);
     return convertedResult;
     // return result
 };

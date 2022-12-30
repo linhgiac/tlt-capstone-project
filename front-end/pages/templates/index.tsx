@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import { MOCKED_TEMPLATES } from '../../mock/resume.mock';
+// import { MOCKED_TEMPLATES } from '../../mock/resume.mock';
 import { TemplateCategoryType, TemplatesDataType } from '../../configs/interfaces/template.interface';
 import TemplateHeader from '../../components/page/template/template-header';
 import TemplateCategoryTabs from '../../components/page/template/template-category-tabs';
@@ -63,7 +63,7 @@ const Templates = (props: TemplatesProps) => {
 export default Templates;
 
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const category = context.params === undefined || context.params.id === undefined ? 'all' : context.params.id;
-    return { props: { templatesData: MOCKED_TEMPLATES[category as TemplateCategoryType] } };
-}
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//     const category = context.params === undefined || context.params.id === undefined ? 'all' : context.params.id;
+//     return { props: { templatesData: MOCKED_TEMPLATES[category as TemplateCategoryType] } };
+// }
