@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
 import ResumeExport from '../../../../components/page/resume/resume-export';
 import ResumeImport from '../../../../components/page/resume/resume-import';
@@ -31,13 +31,15 @@ import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
 import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { convertResumeResponse } from '../../../../configs/utils/format.utils';
+import SelectTemplate from '../../../../components/page/resume/select-template';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
+    templateList?: any;
 };
 
 const ResumeEditor = (props: ResumeEditorProps) => {
-    const { initialResumeData } = props;
+    const { initialResumeData, templateList } = props;
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
 
     const resumeData = useRecoilValue(resumeChangedValueState);
@@ -198,11 +200,7 @@ const ResumeEditor = (props: ResumeEditorProps) => {
                     />
                 </div>
             ) : (
-                <Button
-                    type="primary"
-                    onClick={changeLayoutHandler}>
-                    Back to Editor
-                </Button>
+                <SelectTemplate onChangeLayout={changeLayoutHandler} templates={templateList}/>
             )}
         </>
     );
@@ -218,6 +216,13 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     const resumeId = ctx.params?.id;
 
     try {
+        const templates = await axios.get(`${HOST}resume-template/`, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log('response :>> ', templates.data);
         // const response = await axios.get(`${HOST}resume/${resumeId}/`, {
         //     headers: getAuthHeader({ req, res }),
         // });
@@ -225,6 +230,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
             props: {
                 ...defaultReturnProps,
                 initialResumeData: MOCKED_RESUME,
+                templateList: templates.data,
                 // initialResumeData: convertResumeResponse(response.data),
             },
         };

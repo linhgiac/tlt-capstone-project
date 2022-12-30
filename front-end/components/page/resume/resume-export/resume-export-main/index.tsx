@@ -10,21 +10,21 @@ import styles from './styles.module.scss';
 
 type ResumeExportMainProps = {
     className?: string;
+    scale?: any;
 };
 
 const ResumeExportMain = (props: ResumeExportMainProps) => {
-    const { className} = props;
+    const { className, scale = 0.5 } = props;
     return (
-        <div className={classNames(styles.center, '.cv-format')}>
+        <div className={classNames(styles.center, 'cv-format')}>
             <TransformWrapper
                 centerOnInit
                 minScale={0.25}
-                initialScale={0.6}
-                limitToBounds={false}
+                initialScale={scale}
+                limitToBounds={true}
                 centerZoomedOut={false}
                 // pinch={{ step: 1 }}
-                // wheel={{ step: 0.1 }}
-            >
+                wheel={{ touchPadDisabled: true }}>
                 {controllerProps => (
                     <>
                         <TransformComponent wrapperClass={styles.wrapper}>

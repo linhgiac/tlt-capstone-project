@@ -14,12 +14,7 @@ type ResumeExportProps = {
     onChangeLayout: () => void;
 };
 
-const ResumeExport = ({
-    className,
-    onChangeLayout,
-}: ResumeExportProps) => {
-    const changeLayoutHandler = () => {};
-
+const ResumeExport = ({ className, onChangeLayout }: ResumeExportProps) => {
     // const chosenResumeHandler = (id: number) => {
     // };
     return (
@@ -37,7 +32,7 @@ const ResumeExport = ({
                     />
                     <ResumeExportSelection
                         className={styles['resume-export-selection']}
-                        onChangeEditorLayout={changeLayoutHandler}
+                        onChangeEditorLayout={onChangeLayout}
                     />
                 </div>
             </div>
