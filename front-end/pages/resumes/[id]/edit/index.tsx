@@ -40,6 +40,7 @@ type ResumeEditorProps = {
 
 const ResumeEditor = (props: ResumeEditorProps) => {
     const { initialResumeData, templateList } = props;
+    console.log('initialResumeData :>> ', initialResumeData);
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
 
     const resumeData = useRecoilValue(resumeChangedValueState);
@@ -200,7 +201,10 @@ const ResumeEditor = (props: ResumeEditorProps) => {
                     />
                 </div>
             ) : (
-                <SelectTemplate onChangeLayout={changeLayoutHandler} templates={templateList}/>
+                <SelectTemplate
+                    onChangeLayout={changeLayoutHandler}
+                    templates={templateList}
+                />
             )}
         </>
     );
@@ -223,15 +227,15 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
             },
         });
         console.log('response :>> ', templates.data);
-        // const response = await axios.get(`${HOST}resume/${resumeId}/`, {
-        //     headers: getAuthHeader({ req, res }),
-        // });
+        const resume = await axios.get(`${HOST}resume/${resumeId}/`, {
+            headers: getAuthHeader({ req, res }),
+        });
         return {
             props: {
                 ...defaultReturnProps,
-                initialResumeData: MOCKED_RESUME,
+                // initialResumeData: MOCKED_RESUME,
                 templateList: templates.data,
-                // initialResumeData: convertResumeResponse(response.data),
+                initialResumeData: convertResumeResponse(resume.data),
             },
         };
     } catch (error: any) {

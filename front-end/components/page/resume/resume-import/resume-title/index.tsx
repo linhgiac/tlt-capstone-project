@@ -1,3 +1,4 @@
+import { Divider, Tooltip } from 'antd';
 import React from 'react';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import { ResumeConstants } from '../../../../../configs/constants/resume.constants';
@@ -7,6 +8,7 @@ import styles from './styles.module.scss';
 
 type ResumeTitleProps = {
     initialValue?: string;
+    onClick?: () => void;
 };
 
 const ResumeTitle = (props: ResumeTitleProps) => {
@@ -15,7 +17,18 @@ const ResumeTitle = (props: ResumeTitleProps) => {
     );
     return (
         <>
-            <div className={styles['resume-title']}>{resumeTitleValue}</div>
+            <div
+                className={styles['resume-title']}
+                onClick={props.onClick}>
+                <Tooltip
+                    placement="bottom"
+                    title="Click to change title!">
+                    {resumeTitleValue}
+                </Tooltip>
+
+                <Divider />
+            </div>
+
             {/* <EditableTitle
                 className={styles['resume-title']}
                 onChangeTitle={(value: string) => {

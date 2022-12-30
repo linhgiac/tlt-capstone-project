@@ -1,13 +1,18 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ResumeTitle from './resume-title';
 import classNames from 'classnames';
-import { Button } from 'antd';
+import { Button, Input, Modal } from 'antd';
 import ResumeImportForm from './resume-import-form';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
     educationItemsState,
+    educationsDetailsState,
+    employmentHistoriesDetailsState,
     employmentHistoryItemsState,
     linkItemsState,
+    linksDetailsState,
+    skillItemsState,
+    skillsDetailsState,
 } from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
 import {
     convertPayloadData,
@@ -27,6 +32,8 @@ import {
 import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { HOST } from '../../../../configs/constants/misc';
 import axios from 'axios';
+import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
+import { isEmpty, get } from 'lodash';
 
 type ResumeImportProps = {
     className?: string;
@@ -35,11 +42,32 @@ type ResumeImportProps = {
 
 const ResumeImport = (props: ResumeImportProps) => {
     const { className } = props;
+    const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
     const resumeChangedValue: ResumeDataType = useRecoilValue(
         resumeChangedValueState
     );
     const setResumeInfo = useSetRecoilState(resumeInfoState);
-    const resumeInitialTitle = useRecoilValue(resumeTitleValueState);
+    const [resumeTitle, setResumeTitle] = useRecoilState(resumeTitleValueState);
+    const setPersonalDetailsChangedValues = useSetRecoilState(
+        personalDetailChangedValueState
+    );
+    const setProfessionalSummaryChangedValues = useSetRecoilState(
+        professionalSummaryChangedValueState
+    );
+
+    const setEmploymentHistoryDetails = useSetRecoilState(
+        employmentHistoriesDetailsState
+    );
+    const setEducationDetails = useSetRecoilState(educationsDetailsState);
+    const setLinkDetails = useSetRecoilState(linksDetailsState);
+    const setSkillDetails = useSetRecoilState(skillsDetailsState);
+
+    const setEmploymentHistoryItems = useSetRecoilState(
+        employmentHistoryItemsState
+    );
+    const setEducationItems = useSetRecoilState(educationItemsState);
+    const setLinkItems = useSetRecoilState(linkItemsState);
+    const setSkillItems = useSetRecoilState(skillItemsState);
     useEffect(() => {}, [resumeChangedValue]);
 
     const submitFormHandler = async () => {
@@ -57,6 +85,7 @@ const ResumeImport = (props: ResumeImportProps) => {
             );
             console.log('response', response);
             const convertResponse = convertResumeResponse(response.data);
+            setResumeSaved(convertResponse);
             console.log('convertResponse :>> ', convertResponse);
         } catch (error) {
             console.log('error :>> ', error);
@@ -64,6 +93,104 @@ const ResumeImport = (props: ResumeImportProps) => {
 
         // await resetChangeValue();
     };
+
+    useEffect(() => {
+        if (!isEmpty(resumeSaved.personalDetails)) {
+            setPersonalDetailsChangedValues(resumeSaved.personalDetails);
+        }
+        if (!isEmpty(resumeSaved.professionalSummary)) {
+            setProfessionalSummaryChangedValues(
+                resumeSaved.professionalSummary
+            );
+        }
+    }, [
+        resumeSaved.personalDetails,
+        resumeSaved.professionalSummary,
+        setPersonalDetailsChangedValues,
+        setProfessionalSummaryChangedValues,
+    ]);
+
+    useEffect(() => {
+        const employmentHistories = get(
+            resumeSaved,
+            'complexSections.sectionDetails.employmentHistories'
+        );
+        const educations = get(
+            resumeSaved,
+            'complexSections.sectionDetails.educations'
+        );
+        const links = get(resumeSaved, 'complexSections.sectionDetails.links');
+        const skills = get(
+            resumeSaved,
+            'complexSections.sectionDetails.skills'
+        );
+        if (employmentHistories) {
+            setEmploymentHistoryDetails((prev): any => {
+                return { ...prev, id: employmentHistories.id };
+            });
+        }
+        if (educations) {
+            setEducationDetails((prev): any => {
+                return { ...prev, id: educations.id };
+            });
+        }
+        if (links) {
+            setLinkDetails((prev): any => {
+                return { ...prev, id: links.id };
+            });
+        }
+        if (skills) {
+            setSkillDetails((prev): any => {
+                return { ...prev, id: skills.id };
+            });
+        }
+    }, [
+        setEducationDetails,
+        setEducationItems,
+        setEmploymentHistoryDetails,
+        setEmploymentHistoryItems,
+        setLinkDetails,
+        setLinkItems,
+        setSkillDetails,
+        setSkillItems,
+    ]);
+
+    useEffect(() => {
+        const employmentHistoriesItems = get(
+            resumeSaved,
+            'complexSections.sectionDetails.employmentHistories.items'
+        );
+        const educationsItems = get(
+            resumeSaved,
+            'complexSections.sectionDetails.educations.items'
+        );
+        const linksItems = get(
+            resumeSaved,
+            'complexSections.sectionDetails.links.items'
+        );
+        const skillsItems = get(
+            resumeSaved,
+            'complexSections.sectionDetails.skills.items'
+        );
+        if (employmentHistoriesItems) {
+            setEmploymentHistoryItems(employmentHistoriesItems);
+        }
+        if (educationsItems) {
+            setEducationItems(educationsItems);
+        }
+        if (linksItems) {
+            setLinkItems(linksItems);
+        }
+        if (skillsItems) {
+            setSkillItems(skillsItems);
+        }
+    }, [
+        resumeSaved,
+        setEducationItems,
+        setEmploymentHistoryItems,
+        setLinkItems,
+        setSkillItems,
+    ]);
 
     const getDataHandler = async () => {
         // const response = await fetch('/api/resume-editor');
@@ -88,17 +215,35 @@ const ResumeImport = (props: ResumeImportProps) => {
     //     setResumeInfo,
     //     setResumeInitialTitle,
     // ]);
+    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [title, setTitle] = useState(resumeSaved.title);
+    const openModalHandler = () => {
+        setIsOpenModal(true);
+    };
 
     return (
         <div className={classNames(className)}>
-            <h2>Resume Import</h2>
-            <ResumeTitle
-                initialValue={
-                    resumeInitialTitle
-                        ? resumeInitialTitle
-                        : ResumeConstants.TITLE_CONSTANTS.resume
-                }
-            />
+            <ResumeTitle onClick={openModalHandler} />
+            <Modal
+                title={<div> Change Title </div>}
+                centered
+                open={isOpenModal}
+                onCancel={() => {
+                    setIsOpenModal(false);
+                }}
+                footer={null}>
+                <Input
+                    size="large"
+                    defaultValue={title}
+                    onChange={e => {
+                        setTitle(e.target.value);
+                    }}
+                    onPressEnter={() => {
+                        setResumeTitle(title);
+                        setIsOpenModal(false);
+                    }}
+                />
+            </Modal>
             <ResumeImportForm />
             <Button
                 className={'btn'}
