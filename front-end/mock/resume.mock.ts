@@ -87,7 +87,7 @@ export const MOCKED_RESUME: ResumeDataType = {
                 ],
             },
             educations: {
-                id: 1,
+                id: 2,
                 header: 'Education',
                 position: 3,
                 sectionType: 'educations',
@@ -104,7 +104,7 @@ export const MOCKED_RESUME: ResumeDataType = {
                 ],
             },
             skills: {
-                id: 1,
+                id: 3,
                 header: 'Skills',
                 position: 5,
                 sectionType: 'skills',

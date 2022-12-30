@@ -8,17 +8,21 @@ import { EditableTitle } from "../../../custom";
 import ResumeTitle from "../../resume/resume-import/resume-title";
 import { useRouter } from "next/router";
 import Image from 'next/image'
+import { useSetRecoilState } from 'recoil';
+import { resumeInfoState } from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 
 type DashboardItemProps = {
-    item: DashboardItemType
-}
+    item: DashboardItemType;
+};
 
 const DashboardItem = (props: DashboardItemProps) => {
     const { item } = props;
     const router = useRouter();
+    const setResumeInfo = useSetRecoilState(resumeInfoState);
 
     const onClick = () => {
         console.log('On click item');
+        setResumeInfo({ id: item.id });
         router.push({
             pathname: '/resumes/[id]/edit',
             query: {
@@ -67,6 +71,6 @@ const DashboardItem = (props: DashboardItemProps) => {
             </div>
         </div>
     );
-}
+};
 
 export default DashboardItem;

@@ -4,7 +4,7 @@ import ResumeExport from '../../../../components/page/resume/resume-export';
 import ResumeImport from '../../../../components/page/resume/resume-import';
 import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
 import { MOCKED_RESUME } from '../../../../mock/resume.mock';
-import { LAYOUT } from '../../../../configs/constants/misc';
+import { HOST, LAYOUT } from '../../../../configs/constants/misc';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
 import {
@@ -26,6 +26,11 @@ import {
 
 import { resumeTitleValueState } from '../../../../recoil-state/resume-state/resume-title.state';
 import { get, isEmpty } from 'lodash';
+import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from 'next';
+import axios from 'axios';
+import { getAuthHeader } from '../../../../configs/restApi/clients';
+import { convertResumeResponse } from '../../../../configs/utils/format.utils';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
@@ -130,7 +135,6 @@ const ResumeEditor = (props: ResumeEditorProps) => {
             });
         }
     }, [
-        initialResumeData,
         setEducationDetails,
         setEducationItems,
         setEmploymentHistoryDetails,
@@ -186,7 +190,7 @@ const ResumeEditor = (props: ResumeEditorProps) => {
                 <div className="flex-row">
                     <ResumeImport
                         className="w-50 p-48"
-                        initialResume={resumeSaved}
+                        // initialResume={resumeSaved}
                     />
                     <ResumeExport
                         className="w-50"
@@ -206,16 +210,22 @@ const ResumeEditor = (props: ResumeEditorProps) => {
 
 export default ResumeEditor;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+    const { req, res } = ctx;
     const defaultReturnProps = {
         currentLayout: LAYOUT.EDITOR,
     };
+    const resumeId = ctx.params?.id;
+
     try {
+        // const response = await axios.get(`${HOST}resume/${resumeId}/`, {
+        //     headers: getAuthHeader({ req, res }),
+        // });
         return {
             props: {
                 ...defaultReturnProps,
-                // initialResumeData: MOCKED_RESUME,
-                initialResumeData: {},
+                initialResumeData: MOCKED_RESUME,
+                // initialResumeData: convertResumeResponse(response.data),
             },
         };
     } catch (error: any) {

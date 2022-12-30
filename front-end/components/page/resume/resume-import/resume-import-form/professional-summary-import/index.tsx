@@ -29,11 +29,10 @@ const { TextArea } = Input;
 type ProfessionalSummaryImportProps = {
     className?: string;
     defaultTitle?: string;
-    initialValue: ProfessionalSummaryDataType | undefined;
 };
 
 function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
-    const { className, defaultTitle, initialValue } = props;
+    const { className, defaultTitle } = props;
 
     const [form] = Form.useForm();
     const [

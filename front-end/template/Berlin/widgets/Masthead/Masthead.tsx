@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import DataDisplay from '../../../shared/DataDisplay';
+import Divide from '../../Divide';
 import styles from '../../styles.module.scss';
 
 type Props = {
@@ -10,7 +11,6 @@ type Props = {
 
 const Masthead = (props: Props) => {
     const { value } = props;
-    console.log('value', value);
     return (
         <DataDisplay>
             <DataDisplay className={classNames(styles['name'])}>

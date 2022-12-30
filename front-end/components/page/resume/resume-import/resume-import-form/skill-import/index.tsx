@@ -6,8 +6,12 @@ import {
     EMPLOYMENT_HISTORY_DESCRIPTION,
 } from '../../../../../../configs/constants/description.constants';
 import SkillItems from './skill-items';
-import { useRecoilState } from 'recoil';
-import { skillItemsState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import {
+    skillItemsState,
+    skillsChangedValueState,
+    skillsDetailsState,
+} from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { skillTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
@@ -28,6 +32,8 @@ const SkillImport = (props: SkillProps) => {
     const [skillTitle, setSkillTitle] = useRecoilState(skillTitleValueState);
     const [disableLevel, setDisableLevel] = useState(false);
 
+    const [skillsDetails, setSkillsDetails] =
+        useRecoilState(skillsDetailsState);
     const [skillItems, setSkillItems] = useRecoilState(skillItemsState);
 
     const addItemHandler = () => {
@@ -68,9 +74,19 @@ const SkillImport = (props: SkillProps) => {
         },
         [setSkillItems]
     );
-    const changeSwitchHandler = useCallback((checked: boolean) => {
-        setDisableLevel(!checked);
-    }, []);
+    const changeSwitchHandler = useCallback(
+        (checked: boolean) => {
+            setDisableLevel(checked);
+            setSkillsDetails(prev => {
+                return {
+                    ...prev,
+                    isShownLevel: !checked,
+                };
+            });
+        },
+        [setSkillsDetails]
+    );
+
     return (
         <div className={classNames(className)}>
             <SectionImportTitle
@@ -85,7 +101,7 @@ const SkillImport = (props: SkillProps) => {
             </p>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <Switch
-                    defaultChecked
+                    defaultChecked={false}
                     onChange={changeSwitchHandler}
                 />
                 <div style={{ paddingLeft: '10px' }}>

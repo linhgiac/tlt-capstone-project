@@ -26,7 +26,6 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
 
     const [personalDetailsChangedValues, setPersonalDetailsChangedValues] =
         useRecoilState(personalDetailChangedValueState);
-
     const [personalDetailTitle, setPersonalDetailTitle] = useRecoilState(
         personalDetailTitleValueState
     );

@@ -152,8 +152,9 @@ export const skillItemsState = atom<LinkItemDataType[]>({
 export const skillsDetailsState = atom<ComplexSectionDetailsDataType>({
     key: 'skillsDetailsState',
     default: {
-        position: 4,
+        position: 5,
         sectionType: 'skills',
+        isShownLevel: true,
     },
 });
 
@@ -161,13 +162,15 @@ export const skillsChangedValueState = selector<ComplexSectionDetailsDataType>({
     key: 'skillsChangedValueState',
     get: ({ get }) => {
         const header = get(skillTitleValueState);
-        const { id, position, sectionType } = get(skillsDetailsState);
+        const { id, position, sectionType, isShownLevel } =
+            get(skillsDetailsState);
         const items = get(skillItemsState);
         return {
             id,
             header,
             position,
             sectionType,
+            isShownLevel,
             items,
         };
     },

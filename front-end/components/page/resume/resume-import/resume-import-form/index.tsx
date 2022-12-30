@@ -10,13 +10,11 @@ import { get } from 'lodash';
 
 type Props = {
     className?: string;
-    initialValue: ResumeDataType;
 };
 
 const ResumeImportForm = (props: Props) => {
-    const { className, initialValue } = props;
-    const { personalDetails, professionalSummary, complexSections } =
-        initialValue;
+    const { className } = props;
+
     return (
         <div>
             <PersonalDetailsImport
@@ -26,7 +24,6 @@ const ResumeImportForm = (props: Props) => {
             <ProfessionalSummaryImport
                 className="p-b-20"
                 defaultTitle="Professional Summary"
-                initialValue={professionalSummary}
             />
             <EmploymentHistoryImport
                 className="p-b-20"

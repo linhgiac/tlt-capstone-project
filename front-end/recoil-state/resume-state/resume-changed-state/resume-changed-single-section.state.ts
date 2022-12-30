@@ -35,10 +35,10 @@ export const resumeChangedValueState = selector<ResumeDataType>({
         if (title) {
             result = Object.assign(result, { title });
         }
-        if (Object.keys(personalDetails).length > 1) {
+        if (Object.keys(personalDetails).length > 0) {
             result = Object.assign(result, { personalDetails });
         }
-        if (Object.keys(professionalSummary).length > 1) {
+        if (Object.keys(professionalSummary).length > 0) {
             result = Object.assign(result, { professionalSummary });
         }
         if (complexSections.sectionType?.length) {

@@ -9,7 +9,11 @@ import {
     employmentHistoryItemsState,
     linkItemsState,
 } from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
-import { convertPayloadData, convertTest } from '../../../../configs/utils/format.utils';
+import {
+    convertPayloadData,
+    convertResumeResponse,
+    convertTest,
+} from '../../../../configs/utils/format.utils';
 import styles from './styles.module.scss';
 import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
 import { ResumeConstants } from '../../../../configs/constants/resume.constants';
@@ -26,38 +30,37 @@ import axios from 'axios';
 
 type ResumeImportProps = {
     className?: string;
-    initialResume: ResumeDataType;
+    // initialResume: ResumeDataType;
 };
 
 const ResumeImport = (props: ResumeImportProps) => {
-    const { className, initialResume } = props;
+    const { className } = props;
     const resumeChangedValue: ResumeDataType = useRecoilValue(
         resumeChangedValueState
     );
     const setResumeInfo = useSetRecoilState(resumeInfoState);
-    const setResumeInitialTitle = useSetRecoilState(resumeTitleValueState);
-
-
+    const resumeInitialTitle = useRecoilValue(resumeTitleValueState);
     useEffect(() => {}, [resumeChangedValue]);
 
     const submitFormHandler = async () => {
         const resumeConvertedValue = await convertPayloadData(
             resumeChangedValue
         );
-        console.log('resumeConvertedValue :>> ', resumeConvertedValue);
 
-        // try {
-        //     const response = await axios.post(
-        //         `${HOST}resume/update/`,
-        //         resumeConvertedValue,
-        //         {
-        //             headers: getAuthHeader(),
-        //         }
-        //     );
-        //     console.log('response', response);
-        // } catch (error) {
-        //     console.log('error :>> ', error);
-        // }
+        try {
+            const response = await axios.put(
+                `${HOST}resume/update/`,
+                resumeConvertedValue,
+                {
+                    headers: getAuthHeader(),
+                }
+            );
+            console.log('response', response);
+            const convertResponse = convertResumeResponse(response.data);
+            console.log('convertResponse :>> ', convertResponse);
+        } catch (error) {
+            console.log('error :>> ', error);
+        }
 
         // await resetChangeValue();
     };
@@ -69,34 +72,34 @@ const ResumeImport = (props: ResumeImportProps) => {
         convertTest();
     };
 
-    useEffect(() => {
-        // resetChangeValue();
-        setResumeInfo({
-            id: initialResume.id,
-            template: initialResume.template,
-        });
-        if (initialResume.title) {
-            setResumeInitialTitle(initialResume.title);
-        }
-    }, [
-        initialResume.id,
-        initialResume.template,
-        initialResume.title,
-        setResumeInfo,
-        setResumeInitialTitle,
-    ]);
+    // useEffect(() => {
+    //     // resetChangeValue();
+    //     setResumeInfo({
+    //         id: initialResume.id,
+    //         template: initialResume.template,
+    //     });
+    //     if (initialResume.title) {
+    //         setResumeInitialTitle(initialResume.title);
+    //     }
+    // }, [
+    //     initialResume.id,
+    //     initialResume.template,
+    //     initialResume.title,
+    //     setResumeInfo,
+    //     setResumeInitialTitle,
+    // ]);
 
     return (
         <div className={classNames(className)}>
             <h2>Resume Import</h2>
             <ResumeTitle
                 initialValue={
-                    initialResume?.title
-                        ? initialResume?.title
+                    resumeInitialTitle
+                        ? resumeInitialTitle
                         : ResumeConstants.TITLE_CONSTANTS.resume
                 }
             />
-            <ResumeImportForm initialValue={initialResume} />
+            <ResumeImportForm />
             <Button
                 className={'btn'}
                 type="primary"
