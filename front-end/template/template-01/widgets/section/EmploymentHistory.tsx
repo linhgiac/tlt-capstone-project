@@ -4,6 +4,7 @@ import { EmploymentHistoryItemDataType } from '../../../../configs/interfaces/re
 import DataDisplay from '../../../shared/DataDisplay';
 import Divide from '../divide/Divide';
 import styles from './section.module.scss';
+import moment from 'moment';
 
 type Props = {
     header?: string;
@@ -23,8 +24,15 @@ const EmploymentHistory = (props: Props) => {
                             {item.employer} | {item.jobTitle}
                         </DataDisplay>
                         <DataDisplay className={styles.date}>
-                            {item.startDate} -{' '}
-                            {item.endDate ? item.endDate : 'Now'}
+                            {moment(item.startDate, 'YYYY/MM').format(
+                                'MMMM YYYY'
+                            )}{' '}
+                            -{' '}
+                            {item.endDate
+                                ? moment(item.endDate, 'YYYY/MM').format(
+                                      'MMMM YYYY'
+                                  )
+                                : 'Now'}
                         </DataDisplay>
                         <DataDisplay className={styles.description}>
                             <Markdown>{item.description}</Markdown>

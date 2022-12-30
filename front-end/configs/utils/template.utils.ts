@@ -3,6 +3,8 @@
 //     1: defaultTemplate
 // }
 
+import Template01 from '../../template/template-01';
+
 export type PageProps = {
     page: number;
   };

@@ -43,9 +43,9 @@ export const convertPayloadData = async (resumeData: ResumeDataType) => {
     const newComplexSections = complexSections?.sectionType.map(type => {
         if (sectionDetails) {
             const details = { ...sectionDetails[type] };
-            // const items = details.items
-            // delete details.items
-            return { ...details, [type]: details.items };
+            const items = details.items;
+            delete details.items;
+            return { ...details, [type]: items };
         }
     });
     let result = {};

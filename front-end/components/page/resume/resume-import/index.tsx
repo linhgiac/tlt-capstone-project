@@ -37,41 +37,14 @@ const ResumeImport = (props: ResumeImportProps) => {
     const setResumeInfo = useSetRecoilState(resumeInfoState);
     const setResumeInitialTitle = useSetRecoilState(resumeTitleValueState);
 
-    // const resetPersonalDetailChangeValue = useSetRecoilState(
-    //     personalDetailChangedValueState
-    // );
-    // const resetProfessionalSummaryChangeValue = useSetRecoilState(
-    //     professionalSummaryChangedValueState
-    // );
-    // const resetEmploymentHistoriesChangeValue = useSetRecoilState(
-    //     employmentHistoryItemsState
-    // );
 
-    // const resetEducationsChangeValue = useSetRecoilState(educationItemsState);
-
-    // const resetLinksChangeValue = useSetRecoilState(linkItemsState);
-
-    // const resetChangeValue = useCallback(async () => {
-    //     resetPersonalDetailChangeValue({});
-    //     resetProfessionalSummaryChangeValue({});
-    //     resetEmploymentHistoriesChangeValue([]);
-    //     resetEducationsChangeValue([]);
-    //     resetLinksChangeValue([]);
-    // }, [
-    //     resetPersonalDetailChangeValue,
-    //     resetProfessionalSummaryChangeValue,
-    //     resetEmploymentHistoriesChangeValue,
-    //     resetEducationsChangeValue,
-    //     resetLinksChangeValue,
-    // ]);
-
-    useEffect(() => {
-    }, [resumeChangedValue]);
+    useEffect(() => {}, [resumeChangedValue]);
 
     const submitFormHandler = async () => {
         const resumeConvertedValue = await convertPayloadData(
             resumeChangedValue
         );
+        console.log('resumeConvertedValue :>> ', resumeConvertedValue);
 
         // try {
         //     const response = await axios.post(

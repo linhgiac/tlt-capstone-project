@@ -22,7 +22,7 @@ export const PersonalDetailData: PersonalDetailsDataType = {
 export const MOCKED_RESUME: ResumeDataType = {
     id: 1,
     title: 'M_Resume',
-    template: 1,
+    template: 2,
     personalDetails: {
         header: 'Personal Details',
         jobTitle: 'Freelance Graphic Designer',
@@ -57,7 +57,7 @@ export const MOCKED_RESUME: ResumeDataType = {
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt`,
                         city: 'HCM',
-                        startDate: '2023/05',
+                        startDate: '2029/06',
                         // endDate: '2029/06',
                     },
                     {
@@ -68,9 +68,9 @@ export const MOCKED_RESUME: ResumeDataType = {
                         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt`,
-                        // city: 'HCM',
-                        // startDate: 'February 2028',
-                        // endDate: 'February 2029',
+                        city: 'HCM',
+                        startDate: '2028/02',
+                        endDate: '2029/02',
                     },
                     {
                         id: 3,
@@ -80,9 +80,9 @@ export const MOCKED_RESUME: ResumeDataType = {
                         description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt`,
-                        // city: 'HCM',
-                        // startDate: 'January 2027',
-                        // endDate: 'January 2028',
+                        city: 'HCM',
+                        startDate: '2027/02',
+                        endDate: '2028/01',
                     },
                 ],
             },
@@ -97,9 +97,9 @@ export const MOCKED_RESUME: ResumeDataType = {
                         position: 0,
                         school: 'Really Great Universit',
                         degree: 'Bachelor of Multimedia Arts Major in Digital Design',
-                        // description: 'string',
-                        // startDate: '2023',
-                        // endDate: '2027',
+                        description: 'string',
+                        startDate: '2023/09',
+                        endDate: '2027/04',
                     },
                 ],
             },

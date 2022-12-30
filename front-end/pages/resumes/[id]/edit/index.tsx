@@ -214,7 +214,8 @@ export async function getServerSideProps() {
         return {
             props: {
                 ...defaultReturnProps,
-                initialResumeData: MOCKED_RESUME,
+                // initialResumeData: MOCKED_RESUME,
+                initialResumeData: {},
             },
         };
     } catch (error: any) {

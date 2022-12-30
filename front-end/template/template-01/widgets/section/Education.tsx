@@ -3,6 +3,7 @@ import { EducationItemDataType } from '../../../../configs/interfaces/resume.int
 import DataDisplay from '../../../shared/DataDisplay';
 import Divide from '../divide/Divide';
 import styles from './section.module.scss';
+import moment from 'moment';
 
 type Props = {
     header?: string;
@@ -23,8 +24,15 @@ const Education = (props: Props) => {
                                 {item.school}
                             </DataDisplay>
                             <DataDisplay className={styles.date}>
-                                {item.startDate} -{' '}
-                                {item.endDate ? item.endDate : 'Now'}
+                                {moment(item.startDate, 'YYYY/MM').format(
+                                    'YYYY'
+                                )}{' '}
+                                -{' '}
+                                {item.endDate
+                                    ? moment(item.endDate, 'YYYY/MM').format(
+                                          'YYYY'
+                                      )
+                                    : 'Now'}
                             </DataDisplay>
                             <DataDisplay className={styles.description}>
                                 {item.degree}
