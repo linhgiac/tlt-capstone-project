@@ -227,16 +227,16 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
             },
         });
         console.log('response :>> ', templates.data);
+        const headers = getAuthHeader({ req, res });
         const resume = await axios.get(`${HOST}resume/${resumeId}/`, {
-            headers: getAuthHeader({ req, res }),
+            headers: headers
         });
-        console.log({ data: resume.data })
         return {
             props: {
                 ...defaultReturnProps,
-                initialResumeData: MOCKED_RESUME,
+                // initialResumeData: MOCKED_RESUME,
                 templateList: templates.data,
-                // initialResumeData: convertResumeResponse(resume.data),
+                initialResumeData: convertResumeResponse(resume.data),
             },
         };
     } catch (error: any) {
