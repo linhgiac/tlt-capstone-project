@@ -43,11 +43,11 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
     const addItemHandler = () => {
         const newItem = {
             position: employmentHistoryItems
-                ? employmentHistoryItems.length
+                ? employmentHistoryItems.length + 1
                 : 1,
         };
         setEmploymentHistoryItems(prevItems => {
-            if(prevItems === undefined) return [newItem];
+            if (prevItems === undefined) return [newItem];
             return prevItems.concat([newItem]);
         });
     };
@@ -76,18 +76,13 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
             setEmploymentHistoryItems(prevItems => {
                 const { position } = changedData;
 
-                if (prevItems.length === position) {
-                    prevItems.push(changedData);
-                } else {
-                    const newItems = prevItems.map(item => {
-                        if (item.position === changedData.position) {
-                            item = { ...item, ...changedData };
-                        }
-                        return item;
-                    });
-                    return newItems;
-                }
-                return prevItems;
+                const newItems = prevItems.map(item => {
+                    if (item.position === changedData.position) {
+                        item = { ...item, ...changedData };
+                    }
+                    return item;
+                });
+                return newItems;
             });
         },
         [setEmploymentHistoryItems]

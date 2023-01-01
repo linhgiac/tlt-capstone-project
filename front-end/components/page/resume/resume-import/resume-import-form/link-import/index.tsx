@@ -34,10 +34,10 @@ const LinkImport = (props: LinkProps) => {
 
     const addItemHandler = () => {
         const newItem = {
-            position: linkItems ? linkItems.length : 1,
+            position: linkItems ? linkItems.length + 1 : 1,
         };
         setLinkItems(prevItems => {
-            if(prevItems === undefined) return [newItem];
+            if (prevItems === undefined) return [newItem];
             return prevItems.concat([newItem]);
         });
     };
@@ -63,18 +63,13 @@ const LinkImport = (props: LinkProps) => {
             setLinkItems(prevItems => {
                 const { position } = changedData;
 
-                if (prevItems.length === position) {
-                    prevItems.push(changedData);
-                } else {
-                    const newItems = prevItems.map(item => {
-                        if (item.position === changedData.position) {
-                            item = { ...item, ...changedData };
-                        }
-                        return item;
-                    });
-                    return newItems;
-                }
-                return prevItems;
+                const newItems = prevItems.map(item => {
+                    if (item.position === changedData.position) {
+                        item = { ...item, ...changedData };
+                    }
+                    return item;
+                });
+                return newItems;
             });
         },
         [setLinkItems]

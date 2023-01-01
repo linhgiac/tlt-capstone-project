@@ -37,10 +37,10 @@ const EducationImport = (props: EducationProps) => {
 
     const addItemHandler = () => {
         const newItem = {
-            position: educationItems ? educationItems.length : 1,
+            position: educationItems ? educationItems.length + 1 : 1,
         };
         setEducationItems(prevItems => {
-            if(prevItems === undefined) return [newItem];
+            if (prevItems === undefined) return [newItem];
             return prevItems.concat([newItem]);
         });
     };
@@ -62,27 +62,17 @@ const EducationImport = (props: EducationProps) => {
         } catch (error) {}
     };
     const changeItemHandler = useCallback(
-        (
-            changedData: EducationItemDataType
-        ) => {
+        (changedData: EducationItemDataType) => {
             setEducationItems(prevItems => {
                 const { position } = changedData;
 
-                if(prevItems === undefined) {
-                    prevItems = [changedData];
-                }
-                else if (prevItems.length === position) {
-                    prevItems.push(changedData);
-                } else {
-                    const newItems = prevItems.map(item => {
-                        if (item.position === changedData.position) {
-                            item = { ...item, ...changedData };
-                        }
-                        return item;
-                    });
-                    return newItems;
-                }
-                return prevItems;
+                const newItems = prevItems.map(item => {
+                    if (item.position === changedData.position) {
+                        item = { ...item, ...changedData };
+                    }
+                    return item;
+                });
+                return newItems;
             });
         },
         [setEducationItems]
