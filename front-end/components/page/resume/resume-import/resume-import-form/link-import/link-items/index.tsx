@@ -23,9 +23,9 @@ const LinkItems = (props: LinkItemsProps) => {
 
     return (
         <>
-            {items?.map(item => (
+            {items?.map((item, i) => (
                 <SectionItem
-                    key={item.position}
+                    key={i}
                     position={item.position}
                     itemHeader={item.label ? item.label : 'Not specified'}
                     item={item}

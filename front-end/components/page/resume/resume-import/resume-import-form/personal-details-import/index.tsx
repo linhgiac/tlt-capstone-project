@@ -13,6 +13,7 @@ import {
 import { personalDetailTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import { assignIn } from 'lodash';
 import { personalDetailChangedValueState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
+import { resumeSavedState } from '../../../../../../recoil-state/resume-state/resume.state';
 // import { personalDetailValueState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
 
 type PersonalDetailsImportProps = {
@@ -21,6 +22,7 @@ type PersonalDetailsImportProps = {
 };
 
 const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
+    const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
     const { className, defaultTitle } = props;
     const [form] = Form.useForm();
 
@@ -42,9 +44,13 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     );
 
     useEffect(() => {
-        form.setFieldsValue(personalDetailsChangedValues);
-        const fields = form.getFieldsValue(true);
-    }, [form, personalDetailsChangedValues, setPersonalDetailsChangedValues]);
+        form.setFieldsValue(resumeSaved.personalDetails);
+    }, [form, resumeSaved.personalDetails])
+
+    // useEffect(() => {
+    //     form.setFieldsValue(personalDetailsChangedValues);
+    //     const fields = form.getFieldsValue(true);
+    // }, [form, personalDetailsChangedValues, setPersonalDetailsChangedValues]);
     const getFixedField = () => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const [expand, setExpand] = useState(false);

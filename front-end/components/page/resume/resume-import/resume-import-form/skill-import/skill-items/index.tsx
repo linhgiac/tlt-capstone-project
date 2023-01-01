@@ -23,9 +23,9 @@ const SkillItems = (props: SkillItemsProps) => {
 
     return (
         <>
-            {items?.map(item => (
+            {items?.map((item, i) => (
                 <SectionItem
-                    key={item.position}
+                    key={i}
                     position={item.position}
                     itemHeader={item.name ? item.name : 'Not specified'}
                     item={item}

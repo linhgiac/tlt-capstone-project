@@ -12,7 +12,7 @@ const EmploymentHistory = (props: Props) => {
     const { items } = props;
     return (
         <div>
-            {items?.map(item => {
+            {items?.map((item, i) => {
                 const title = () => {
                     if (item.jobTitle && item.employer)
                         return `${item.jobTitle}, ${item.employer}`;
@@ -21,7 +21,7 @@ const EmploymentHistory = (props: Props) => {
                 };
                 return (
                     <div
-                        key={item.position}
+                        key={i}
                         className={styles.item}>
                         <div className={classNames(styles['title-container'])}>
                             <div className={styles.title}>{title()}</div>

@@ -37,6 +37,7 @@ const LinkImport = (props: LinkProps) => {
             position: linkItems ? linkItems.length : 1,
         };
         setLinkItems(prevItems => {
+            if(prevItems === undefined) return [newItem];
             return prevItems.concat([newItem]);
         });
     };

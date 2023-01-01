@@ -17,7 +17,7 @@ const Skill = (props: Props) => {
     return (
         <div>
             <div>{header}</div>
-            {items?.map(item => {
+            {items?.map((item, i) => {
                 console.log('item :>> ', item);
                 const levelProgress = () => {
                     switch (item.level) {
@@ -35,7 +35,7 @@ const Skill = (props: Props) => {
                 };
                 return (
                     <div
-                        key={item.position}
+                        key={i}
                         className={classNames(styles['item'])}>
                         <div className={styles['content']}>{item.name}</div>
                         {isShown && (

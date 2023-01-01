@@ -47,6 +47,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
                 : 1,
         };
         setEmploymentHistoryItems(prevItems => {
+            if(prevItems === undefined) return [newItem];
             return prevItems.concat([newItem]);
         });
     };

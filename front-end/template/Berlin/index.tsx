@@ -19,7 +19,7 @@ const Berlin = (props: Props) => {
         ['personalDetails', 'skills'],
         ['professionalSummary', 'employmentHistories', 'educations'],
     ];
-    const mapSectionToLayout = (sectionType: any) => {
+    const mapSectionToLayout = (key: number, sectionType: any) => {
         let header;
         let items;
         let isShownLevel;
@@ -48,7 +48,7 @@ const Berlin = (props: Props) => {
         }
         return (
             <Section
-                key={sectionType}
+                key={key}
                 sectionType={sectionType}
                 header={header}
                 items={items}
@@ -64,13 +64,13 @@ const Berlin = (props: Props) => {
             </div>
             <div className={classNames('flex-row', styles['content'])}>
                 <div className={styles['left-side']}>
-                    {layout[0].map((sectionType: any) => {
-                        return mapSectionToLayout(sectionType);
+                    {layout[0].map((sectionType: any, i: number) => {
+                        return mapSectionToLayout(i, sectionType);
                     })}
                 </div>
                 <div className={styles['right-side']}>
-                    {layout[1].map((sectionType: any) => {
-                        return mapSectionToLayout(sectionType);
+                    {layout[1].map((sectionType: any, i: number) => {
+                        return mapSectionToLayout(i ,sectionType);
                     })}
                 </div>
             </div>

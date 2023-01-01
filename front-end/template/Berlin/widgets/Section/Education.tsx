@@ -14,7 +14,7 @@ const Education = (props: Props) => {
     return (
         <div>
             <div>{header}</div>
-            {items?.map(item => {
+            {items?.map((item, i) => {
                 const title = () => {
                     if (item.school && item.degree)
                         return `${item.degree} at ${item.school}`;
@@ -23,7 +23,7 @@ const Education = (props: Props) => {
                 };
                 return (
                     <div
-                        key={item.position}
+                        key={i}
                         className={styles.item}>
                         <div className={classNames(styles['title-container'])}>
                             <div className={styles.title}>{title()}</div>

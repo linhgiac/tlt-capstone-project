@@ -40,6 +40,7 @@ const EducationImport = (props: EducationProps) => {
             position: educationItems ? educationItems.length : 1,
         };
         setEducationItems(prevItems => {
+            if(prevItems === undefined) return [newItem];
             return prevItems.concat([newItem]);
         });
     };
@@ -67,7 +68,10 @@ const EducationImport = (props: EducationProps) => {
             setEducationItems(prevItems => {
                 const { position } = changedData;
 
-                if (prevItems.length === position) {
+                if(prevItems === undefined) {
+                    prevItems = [changedData];
+                }
+                else if (prevItems.length === position) {
                     prevItems.push(changedData);
                 } else {
                     const newItems = prevItems.map(item => {

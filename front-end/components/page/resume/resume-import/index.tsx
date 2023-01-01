@@ -140,22 +140,6 @@ const ResumeImport = (props: ResumeImportProps) => {
     };
 
     useEffect(() => {
-        if (!isEmpty(resumeSaved.personalDetails)) {
-            setPersonalDetailsChangedValues(resumeSaved.personalDetails);
-        }
-        if (!isEmpty(resumeSaved.professionalSummary)) {
-            setProfessionalSummaryChangedValues(
-                resumeSaved.professionalSummary
-            );
-        }
-    }, [
-        resumeSaved.personalDetails,
-        resumeSaved.professionalSummary,
-        setPersonalDetailsChangedValues,
-        setProfessionalSummaryChangedValues,
-    ]);
-
-    useEffect(() => {
         const employmentHistoriesItems = get(
             resumeSaved,
             'complexSections.sectionDetails.employmentHistories.items'
@@ -172,25 +156,19 @@ const ResumeImport = (props: ResumeImportProps) => {
             resumeSaved,
             'complexSections.sectionDetails.skills.items'
         );
-        if (employmentHistoriesItems) {
-            setEmploymentHistoryItems(employmentHistoriesItems);
-        }
-        if (educationsItems) {
-            setEducationItems(educationsItems);
-        }
-        if (linksItems) {
-            setLinkItems(linksItems);
-        }
-        if (skillsItems) {
-            setSkillItems(skillsItems);
-        }
-    }, [
-        resumeSaved,
-        setEducationItems,
-        setEmploymentHistoryItems,
-        setLinkItems,
-        setSkillItems,
-    ]);
+        setPersonalDetailsChangedValues(resumeSaved.personalDetails);
+        setProfessionalSummaryChangedValues(resumeSaved.professionalSummary);
+        setEmploymentHistoryItems(employmentHistoriesItems);
+        setEducationItems(educationsItems);
+        setLinkItems(linksItems);
+        setSkillItems(skillsItems);
+    }, [resumeSaved, 
+        setEducationItems, 
+        setEmploymentHistoryItems, 
+        setLinkItems, 
+        setPersonalDetailsChangedValues, 
+        setProfessionalSummaryChangedValues, 
+        setSkillItems]);
 
     const getDataHandler = async () => {
         // const response = await fetch('/api/resume-editor');

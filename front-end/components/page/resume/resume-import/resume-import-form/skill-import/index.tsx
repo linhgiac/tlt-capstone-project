@@ -44,6 +44,7 @@ const SkillImport = (props: SkillProps) => {
             position: skillItems ? skillItems.length : 1,
         };
         setSkillItems(prevItems => {
+            if(prevItems === undefined) return [newItem];
             return prevItems.concat([newItem]);
         });
     };

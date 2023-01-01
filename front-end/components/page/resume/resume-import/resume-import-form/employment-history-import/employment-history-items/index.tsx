@@ -15,9 +15,9 @@ const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
     const { className, sectionType, items, onRemoveItem, onChangeItem } = props;
     return (
         <>
-            {items?.map(item => (
+            {items?.map((item, i) => (
                 <SectionItem
-                    key={item.position}
+                    key={i}
                     position={item.position}
                     itemHeader={item.jobTitle ? item.jobTitle : 'Not specified'}
                     sectionType={sectionType}
