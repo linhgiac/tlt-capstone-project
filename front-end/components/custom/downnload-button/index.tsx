@@ -20,7 +20,12 @@ const DownloadButton = (props: Props) => {
         const windowWidth = data.getBoundingClientRect().width;
         console.log({ width, windowWidth });
         if (data) {
-            pdf.html(data, { x: 0, y: 0, width: windowWidth, windowWidth: windowWidth }).then(() => {
+            pdf.html(data, {
+                x: 0,
+                y: 0,
+                width: windowWidth * 0.99,
+                windowWidth: windowWidth,
+            }).then(() => {
                 pdf.save(`${resume.title}.pdf`);
             });
         }
