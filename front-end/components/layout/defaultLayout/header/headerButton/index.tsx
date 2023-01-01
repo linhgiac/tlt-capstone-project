@@ -19,6 +19,11 @@ const HeaderButton = (props: HeaderButtonProps) => {
     const [isLogged, setIsLogged] = useRecoilState(userLoginState);
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+
+    if (getCookie('accessToken')) {
+        setIsLogged(true);
+    }
+    console.log('isLogged', isLogged);
     const logoutHandler = async () => {
         try {
             setIsLoading(true);

@@ -12,6 +12,9 @@ import {
     ComplexSectionDetailsDataType,
     EmploymentHistoryItemDataType,
 } from '../../../../../../configs/interfaces/resume.interface';
+import { HOST } from '../../../../../../configs/constants/misc';
+import axios from 'axios';
+import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 
 type EmploymentHistoryProps = {
     className?: string;
@@ -47,7 +50,12 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
             return prevItems.concat([newItem]);
         });
     };
-    const removeItemHandler = async (position: number) => {
+    const removeItemHandler = async (position: number, id: number) => {
+        // try {
+        // const response = await axios.delete(
+        //     `${HOST}resume_form/${id}/delete-employment-history`,
+        //     { headers: getAuthHeader() }
+        // );
         setEmploymentHistoryItems(prevItems => {
             return prevItems.filter(item => item.position != position);
         });
@@ -55,6 +63,9 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         setEmploymentHistoryItems(prevItems => {
             return arrangePosition(prevItems);
         });
+        // } catch (error) {
+        //     console.log('error :>> ', error);
+        // }
     };
     const changeItemHandler = useCallback(
         (changedData: EmploymentHistoryItemDataType) => {
