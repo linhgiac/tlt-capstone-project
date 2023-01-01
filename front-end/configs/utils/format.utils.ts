@@ -47,16 +47,16 @@ export const convertPayloadData = async (resumeData: ResumeDataType) => {
             const details = { ...sectionDetails[type] };
             const items = details.items?.map(item => {
                 var startDate = get(item, 'startDate', "");
-                var endDate = get(item, 'startDate', "");
+                var endDate = get(item, 'endDate', '');
                 if (startDate !== undefined && startDate.length == "1970/01".length) {
                     var itemFixStartDate = { ...item, startDate: (startDate + "/01").replaceAll('/', '-') }
                     item = itemFixStartDate;
                     console.log({ itemFixStartDate })
                 }
-                if (endDate != undefined && endDate.length == "1970/01".length) {
-                    var tepmFixEndDate = { ...item, endDate: (endDate + "/01").replaceAll('/', '-') }
-                    item = tepmFixEndDate;
-                    console.log({ tepmFixEndDate })
+                if (endDate !== undefined && endDate.length == "1970/01".length) {
+                    var itemFixEndDate = { ...item, endDate: (endDate + "/01").replaceAll('/', '-') }
+                    item = itemFixEndDate;
+                    console.log({ itemFixEndDate })
                 }
                 console.log(item)
                 return item
