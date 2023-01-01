@@ -36,7 +36,7 @@ const Dashboard = (props: DashboardProps) => {
         const headers = getAuthHeader();
         const response = await axios.post(
             `${HOST}resume/create/`,
-            { template: 1 },
+            { template: 2 },
             {
                 headers: headers,
             }

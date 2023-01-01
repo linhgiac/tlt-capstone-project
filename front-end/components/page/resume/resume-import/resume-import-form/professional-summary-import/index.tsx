@@ -140,8 +140,17 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
         } else {
             form.setFieldValue('content', suggestion);
         }
-        setProfessionalSummaryChangedValues(form.getFieldValue('content'));
+        setProfessionalSummaryChangedValues(prev => {
+            return { ...prev, content: form.getFieldValue('content') };
+        });
     };
+
+    useEffect(() => {
+        console.log(
+            'professionalSummaryChangedValues :>> ',
+            professionalSummaryChangedValues
+        );
+    }, [professionalSummaryChangedValues]);
 
     useEffect(() => {
         const interval = setInterval(() => checkStopTyping(), 1000);
@@ -156,7 +165,13 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
             setIsStopTyping(true);
             getSuggestions(suggestionMode);
         }
-    }, [lastCheckTypingTicks, lastTypingTicks, isStopTyping, suggestionMode]);
+    }, [
+        lastCheckTypingTicks,
+        lastTypingTicks,
+        isStopTyping,
+        suggestionMode,
+        getSuggestions,
+    ]);
 
     useEffect(() => {
         if (requestId === responseId) setIsLoading(false);
@@ -166,8 +181,10 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
         form.setFieldsValue(professionalSummaryChangedValues);
     }, [form, professionalSummaryChangedValues]);
     const changeValuesHandler = useCallback(
-        (changedValues: any, values: any) => {
-            setProfessionalSummaryChangedValues(changedValues);
+        (changedValues: any, _: any) => {
+            setProfessionalSummaryChangedValues(prev => {
+                return { ...prev, ...changedValues };
+            });
             typing();
         },
         [setProfessionalSummaryChangedValues]
