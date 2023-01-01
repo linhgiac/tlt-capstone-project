@@ -71,50 +71,7 @@ const ResumeImport = (props: ResumeImportProps) => {
     const setLinkItems = useSetRecoilState(linkItemsState);
     const setSkillItems = useSetRecoilState(skillItemsState);
     useEffect(() => {}, [resumeChangedValue]);
-
-    const submitFormHandler = async () => {
-        const resumeConvertedValue = await convertPayloadData(
-            resumeChangedValue
-        );
-
-        try {
-            const response = await axios.put(
-                `${HOST}resume/update/`,
-                resumeConvertedValue,
-                {
-                    headers: getAuthHeader(),
-                }
-            );
-            console.log('response', response);
-            const convertResponse = convertResumeResponse(response.data);
-            setResumeSaved(convertResponse);
-            console.log('convertResponse :>> ', convertResponse);
-
-            setIsSuccessful(true);
-        } catch (error) {
-            console.log('error :>> ', error);
-        }
-
-        // await resetChangeValue();
-    };
-
-    useEffect(() => {
-        if (!isEmpty(resumeSaved.personalDetails)) {
-            setPersonalDetailsChangedValues(resumeSaved.personalDetails);
-        }
-        if (!isEmpty(resumeSaved.professionalSummary)) {
-            setProfessionalSummaryChangedValues(
-                resumeSaved.professionalSummary
-            );
-        }
-    }, [
-        resumeSaved.personalDetails,
-        resumeSaved.professionalSummary,
-        setPersonalDetailsChangedValues,
-        setProfessionalSummaryChangedValues,
-    ]);
-
-    useEffect(() => {
+    const reloadData = useCallback(() => {
         const employmentHistories = get(
             resumeSaved,
             'complexSections.sectionDetails.employmentHistories'
@@ -149,14 +106,53 @@ const ResumeImport = (props: ResumeImportProps) => {
             });
         }
     }, [
+        resumeSaved,
         setEducationDetails,
-        setEducationItems,
         setEmploymentHistoryDetails,
-        setEmploymentHistoryItems,
         setLinkDetails,
-        setLinkItems,
         setSkillDetails,
-        setSkillItems,
+    ]);
+
+    const submitFormHandler = async () => {
+        const resumeConvertedValue = await convertPayloadData(
+            resumeChangedValue
+        );
+
+        try {
+            const response = await axios.put(
+                `${HOST}resume/update/`,
+                resumeConvertedValue,
+                {
+                    headers: getAuthHeader(),
+                }
+            );
+            console.log('response', response);
+            const convertResponse = convertResumeResponse(response.data);
+            setResumeSaved(convertResponse);
+            console.log('convertResponse :>> ', convertResponse);
+            reloadData();
+            setIsSuccessful(true);
+        } catch (error) {
+            console.log('error :>> ', error);
+        }
+
+        // await resetChangeValue();
+    };
+
+    useEffect(() => {
+        if (!isEmpty(resumeSaved.personalDetails)) {
+            setPersonalDetailsChangedValues(resumeSaved.personalDetails);
+        }
+        if (!isEmpty(resumeSaved.professionalSummary)) {
+            setProfessionalSummaryChangedValues(
+                resumeSaved.professionalSummary
+            );
+        }
+    }, [
+        resumeSaved.personalDetails,
+        resumeSaved.professionalSummary,
+        setPersonalDetailsChangedValues,
+        setProfessionalSummaryChangedValues,
     ]);
 
     useEffect(() => {
@@ -263,7 +259,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                 open={isSuccessful}
                 onCancel={() => {
                     setIsSuccessful(false);
-                    // router.reload();
+                    router.reload();
                 }}
                 footer={null}></Modal>
             {/* <Button
