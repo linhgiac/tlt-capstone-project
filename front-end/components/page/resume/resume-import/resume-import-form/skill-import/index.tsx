@@ -20,6 +20,9 @@ import {
     SkillItemDataType,
 } from '../../../../../../configs/interfaces/resume.interface';
 import { Switch } from 'antd';
+import axios from 'axios';
+import { HOST } from '../../../../../../configs/constants/misc';
+import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 
 type SkillProps = {
     className?: string;
@@ -44,17 +47,25 @@ const SkillImport = (props: SkillProps) => {
             return prevItems.concat([newItem]);
         });
     };
-    const removeItemHandler = async (position: number) => {
-        setSkillItems(prevItems => {
-            return prevItems.filter(item => item.position != position);
-        });
+    const removeItemHandler = async (position: number, id?: number) => {
+        try {
+            if (id) {
+                const response = await axios.delete(
+                    `${HOST}resume-form/${id}/delete-skill`,
+                    { headers: getAuthHeader() }
+                );
+            }
+            setSkillItems(prevItems => {
+                return prevItems.filter(item => item.position != position);
+            });
 
-        setSkillItems(prevItems => {
-            return arrangePosition(prevItems);
-        });
+            setSkillItems(prevItems => {
+                return arrangePosition(prevItems);
+            });
+        } catch (error) {}
     };
     const changeItemHandler = useCallback(
-        (changedData: SkillItemDataType, allData: SkillItemDataType) => {
+        (changedData: SkillItemDataType) => {
             setSkillItems(prevItems => {
                 const { position } = changedData;
 

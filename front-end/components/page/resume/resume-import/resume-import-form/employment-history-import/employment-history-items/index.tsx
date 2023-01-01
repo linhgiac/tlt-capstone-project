@@ -7,7 +7,7 @@ type EmploymentHistoryItemsProps = {
     sectionType: string;
     items?: EmploymentHistoryItemDataType[];
 
-    onRemoveItem: (position: number, id: number) => void;
+    onRemoveItem: (position: number, id?: number) => void;
     onChangeItem: (changedData: EmploymentHistoryItemDataType) => void;
 };
 

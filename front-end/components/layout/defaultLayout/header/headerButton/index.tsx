@@ -20,9 +20,13 @@ const HeaderButton = (props: HeaderButtonProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
-    if (getCookie('accessToken')) {
-        setIsLogged(true);
-    }
+    useEffect(() => {
+        if (hasCookie('tokenAccess')) {
+            console.log('getCookie:>> ', hasCookie('tokenAccess'));
+            setIsLogged(true);
+        }
+    }, []);
+    
     console.log('isLogged', isLogged);
     const logoutHandler = async () => {
         try {

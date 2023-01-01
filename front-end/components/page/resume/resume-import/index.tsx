@@ -34,6 +34,7 @@ import { HOST } from '../../../../configs/constants/misc';
 import axios from 'axios';
 import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
 import { isEmpty, get } from 'lodash';
+import { useRouter } from 'next/router';
 
 type ResumeImportProps = {
     className?: string;
@@ -42,6 +43,7 @@ type ResumeImportProps = {
 
 const ResumeImport = (props: ResumeImportProps) => {
     const { className } = props;
+    const router = useRouter();
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
     const resumeChangedValue: ResumeDataType = useRecoilValue(
         resumeChangedValueState
@@ -261,6 +263,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                 open={isSuccessful}
                 onCancel={() => {
                     setIsSuccessful(false);
+                    // router.reload();
                 }}
                 footer={null}></Modal>
             {/* <Button

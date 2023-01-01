@@ -21,7 +21,7 @@ type Props = {
     sectionType: string;
     disableLevel?: boolean;
     item?: ComplexSectionItemDataType;
-    onRemove: (id: number) => void;
+    onRemove: (id?: number) => void;
     onChangeItem: (changedData: EmploymentHistoryItemDataType) => void;
 };
 
@@ -47,10 +47,8 @@ const SectionItem = (props: Props) => {
         setIsModalOpened(true);
     };
     const deleteHandler = () => {
-        if (!isEmpty(item) && item.id) {
-            onRemove(item.id);
-            setIsModalOpened(false);
-        }
+        onRemove(item?.id);
+        setIsModalOpened(false);
     };
 
     const changeItemValueHandler = useCallback(

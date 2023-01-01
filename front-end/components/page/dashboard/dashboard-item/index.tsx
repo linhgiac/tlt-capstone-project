@@ -65,7 +65,9 @@ const DashboardItem = (props: DashboardItemProps) => {
                 />
             </div>
             <div className={classNames(styles['dashboard-item-body'])}>
-                <ResumeTitle></ResumeTitle>
+                <ResumeTitle
+                    editable={false}
+                    title={item.title}></ResumeTitle>
                 {/* <div className={classNames(styles['dashboard-item-lastupdated'])}>Updated {item.lastUpdated}</div> */}
                 <div
                     className={classNames(

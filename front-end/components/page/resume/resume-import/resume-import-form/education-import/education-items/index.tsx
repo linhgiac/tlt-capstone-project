@@ -6,10 +6,9 @@ type EducationItemsProps = {
     className?: string;
     sectionType: string;
     items?: EducationItemDataType[];
-    onRemoveItem: (position: number) => void;
+    onRemoveItem: (position: number, id?: number) => void;
     onChangeItem: (
         changedData: EducationItemDataType,
-        allData: EducationItemDataType
     ) => void;
 };
 

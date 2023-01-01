@@ -6,10 +6,9 @@ type LinkItemsProps = {
     className?: string;
     sectionType: string;
     items?: LinkItemDataType[];
-    onRemoveItem: (position: number) => void;
+    onRemoveItem: (position: number, id?: number) => void;
     onChangeItem: (
         changedData: LinkItemDataType,
-        allData: LinkItemDataType
     ) => void;
 };
 

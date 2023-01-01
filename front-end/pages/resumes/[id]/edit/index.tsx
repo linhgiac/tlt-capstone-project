@@ -69,12 +69,13 @@ const ResumeEditor = (props: ResumeEditorProps) => {
 
     const [isEditing, setIsEditing] = useState(true);
 
+
+    setResumeSaved(initialResumeData);
     useEffect(() => {
         console.log('resumeData', resumeData);
     }, [resumeData]);
 
     useEffect(() => {
-        setResumeSaved(initialResumeData);
         setResumeInfo({
             id: initialResumeData.id,
             template: initialResumeData.template,

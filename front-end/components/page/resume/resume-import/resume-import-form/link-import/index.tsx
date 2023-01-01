@@ -16,6 +16,9 @@ import {
     LinkItemDataType,
 } from '../../../../../../configs/interfaces/resume.interface';
 import { Switch } from 'antd';
+import axios from 'axios';
+import { HOST } from '../../../../../../configs/constants/misc';
+import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 
 type LinkProps = {
     className?: string;
@@ -29,7 +32,6 @@ const LinkImport = (props: LinkProps) => {
 
     const [linkItems, setLinkItems] = useRecoilState(linkItemsState);
 
-    
     const addItemHandler = () => {
         const newItem = {
             position: linkItems ? linkItems.length : 1,
@@ -38,17 +40,25 @@ const LinkImport = (props: LinkProps) => {
             return prevItems.concat([newItem]);
         });
     };
-    const removeItemHandler = async (position: number) => {
-        setLinkItems(prevItems => {
-            return prevItems.filter(item => item.position != position);
-        });
+    const removeItemHandler = async (position: number, id?: number) => {
+        try {
+            if (id) {
+                const response = await axios.delete(
+                    `${HOST}resume-form/${id}/delete-link`,
+                    { headers: getAuthHeader() }
+                );
+            }
+            setLinkItems(prevItems => {
+                return prevItems.filter(item => item.position != position);
+            });
 
-        setLinkItems(prevItems => {
-            return arrangePosition(prevItems);
-        });
+            setLinkItems(prevItems => {
+                return arrangePosition(prevItems);
+            });
+        } catch (error) {}
     };
     const changeItemHandler = useCallback(
-        (changedData: LinkItemDataType, allData: LinkItemDataType) => {
+        (changedData: LinkItemDataType) => {
             setLinkItems(prevItems => {
                 const { position } = changedData;
 

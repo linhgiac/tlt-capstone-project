@@ -50,22 +50,25 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
             return prevItems.concat([newItem]);
         });
     };
-    const removeItemHandler = async (position: number, id: number) => {
-        // try {
-        // const response = await axios.delete(
-        //     `${HOST}resume_form/${id}/delete-employment-history`,
-        //     { headers: getAuthHeader() }
-        // );
-        setEmploymentHistoryItems(prevItems => {
-            return prevItems.filter(item => item.position != position);
-        });
+    const removeItemHandler = async (position: number, id?: number) => {
+        try {
+            if (id) {
+                const response = await axios.delete(
+                    `${HOST}resume-form/${id}/delete-employment-history`,
+                    { headers: getAuthHeader() }
+                );
+            }
 
-        setEmploymentHistoryItems(prevItems => {
-            return arrangePosition(prevItems);
-        });
-        // } catch (error) {
-        //     console.log('error :>> ', error);
-        // }
+            setEmploymentHistoryItems(prevItems => {
+                return prevItems.filter(item => item.position != position);
+            });
+
+            setEmploymentHistoryItems(prevItems => {
+                return arrangePosition(prevItems);
+            });
+        } catch (error) {
+            console.log('error :>> ', error);
+        }
     };
     const changeItemHandler = useCallback(
         (changedData: EmploymentHistoryItemDataType) => {

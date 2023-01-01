@@ -16,6 +16,9 @@ import {
     ComplexSectionDetailsDataType,
     EducationItemDataType,
 } from '../../../../../../configs/interfaces/resume.interface';
+import axios from 'axios';
+import { HOST } from '../../../../../../configs/constants/misc';
+import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 
 type EducationProps = {
     className?: string;
@@ -32,7 +35,6 @@ const EducationImport = (props: EducationProps) => {
     const [educationItems, setEducationItems] =
         useRecoilState(educationItemsState);
 
-    
     const addItemHandler = () => {
         const newItem = {
             position: educationItems ? educationItems.length : 1,
@@ -41,19 +43,26 @@ const EducationImport = (props: EducationProps) => {
             return prevItems.concat([newItem]);
         });
     };
-    const removeItemHandler = async (position: number) => {
-        setEducationItems(prevItems => {
-            return prevItems.filter(item => item.position != position);
-        });
+    const removeItemHandler = async (position: number, id?: number) => {
+        try {
+            if (id) {
+                const response = await axios.delete(
+                    `${HOST}resume-form/${id}/delete-education`,
+                    { headers: getAuthHeader() }
+                );
+            }
+            setEducationItems(prevItems => {
+                return prevItems.filter(item => item.position != position);
+            });
 
-        setEducationItems(prevItems => {
-            return arrangePosition(prevItems);
-        });
+            setEducationItems(prevItems => {
+                return arrangePosition(prevItems);
+            });
+        } catch (error) {}
     };
     const changeItemHandler = useCallback(
         (
-            changedData: EducationItemDataType,
-            allData: EducationItemDataType
+            changedData: EducationItemDataType
         ) => {
             setEducationItems(prevItems => {
                 const { position } = changedData;

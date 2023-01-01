@@ -7,11 +7,8 @@ type SkillItemsProps = {
     sectionType: string;
     items?: SkillItemDataType[];
     disableLevel: boolean;
-    onRemoveItem: (position: number) => void;
-    onChangeItem: (
-        changedData: SkillItemDataType,
-        allData: SkillItemDataType
-    ) => void;
+    onRemoveItem: (position: number, id?: number) => void;
+    onChangeItem: (changedData: SkillItemDataType) => void;
 };
 
 const SkillItems = (props: SkillItemsProps) => {
