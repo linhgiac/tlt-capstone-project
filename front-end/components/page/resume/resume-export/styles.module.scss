@@ -16,7 +16,7 @@
     background-color: rgb(101, 110, 131);
     color: rgb(255, 255, 255);
     user-select: none;
-    z-index: 3;
+    z-index: -1;
     .resume-export-container{
         display: flex;
         -webkit-box-pack: center;

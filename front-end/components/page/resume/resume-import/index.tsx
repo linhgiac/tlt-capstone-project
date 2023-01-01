@@ -87,6 +87,8 @@ const ResumeImport = (props: ResumeImportProps) => {
             const convertResponse = convertResumeResponse(response.data);
             setResumeSaved(convertResponse);
             console.log('convertResponse :>> ', convertResponse);
+
+            setIsSuccessful(true);
         } catch (error) {
             console.log('error :>> ', error);
         }
@@ -220,6 +222,7 @@ const ResumeImport = (props: ResumeImportProps) => {
     const openModalHandler = () => {
         setIsOpenModal(true);
     };
+    const [isSuccessful, setIsSuccessful] = useState(false);
 
     return (
         <div className={classNames(className)}>
@@ -252,13 +255,21 @@ const ResumeImport = (props: ResumeImportProps) => {
                 onClick={submitFormHandler}>
                 Save Resume
             </Button>
-            <Button
+            <Modal
+                title={<div> Save Successfully</div>}
+                centered
+                open={isSuccessful}
+                onCancel={() => {
+                    setIsSuccessful(false);
+                }}
+                footer={null}></Modal>
+            {/* <Button
                 className={'btn'}
                 type="primary"
                 size="large"
                 onClick={getDataHandler}>
                 Get Resume Data
-            </Button>
+            </Button> */}
         </div>
     );
 };
