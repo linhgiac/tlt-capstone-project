@@ -86,24 +86,6 @@ const SectionForm = (props: Props) => {
                         </Form.Item>
                     </Col>
                 );
-            } else if (key === 'endDate') {
-                itemLst.push(
-                    <Col
-                        span={12}
-                        key={key}>
-                        <Form.Item
-                            className="p-b-15 no-margin"
-                            name={key}
-                            label={labelList[key]}>
-                            <DatePicker
-                                picker="month"
-                                size="large"
-                                className="center"
-                                // bordered={false}
-                            />
-                        </Form.Item>
-                    </Col>
-                );
             } else if (key === 'description') {
                 continue;
             } else if (key === 'level') {
@@ -136,25 +118,26 @@ const SectionForm = (props: Props) => {
 
     const changeValuesHandler = useCallback(
         (changedValues: any, _: any) => {
-            if (changedValues.startDate) {
-                changedValues.startDate = moment(
-                    changedValues.startDate
-                ).format('YYYY/MM');
-            }
-            if (changedValues.endDate) {
-                changedValues.endDate = moment(changedValues.endDate).format(
-                    'YYYY/MM'
-                );
-            }
+            console.log('changedValues :>> ', changedValues);
+            // if (changedValues.startDate) {
+            //     changedValues.startDate = moment(
+            //         changedValues.startDate
+            //     ).format('YYYY/MM');
+            // }
+            // if (changedValues.endDate) {
+            //     changedValues.endDate = moment(changedValues.endDate).format(
+            //         'YYYY/MM'
+            //     );
+            // }
             onChangeItemValue(changedValues);
         },
-        []
+        [onChangeItemValue]
     );
     useEffect(() => {
         const convertValue = {
             ...value,
-            startDate: value.startDate ? dayjs(value.startDate) : undefined,
-            endDate: value.endDate ? dayjs(value.endDate) : undefined,
+            startDate: value.startDate ? moment(value.startDate) : undefined,
+            endDate: value.endDate ? moment(value.endDate) : undefined,
         };
         form.setFieldsValue(convertValue);
     }, [form, value]);

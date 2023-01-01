@@ -10,6 +10,7 @@ import {
     ComplexSectionItemDataType,
     EmploymentHistoryItemDataType,
 } from '../../../configs/interfaces/resume.interface';
+import moment from 'moment';
 
 type Props = {
     position: number;
@@ -51,6 +52,16 @@ const SectionItem = (props: Props) => {
 
     const changeItemValueHandler = useCallback(
         (itemChangedFields: any) => {
+            if (itemChangedFields.startDate) {
+                itemChangedFields.startDate = moment(
+                    itemChangedFields.startDate
+                ).format('YYYY/MM');
+            }
+            if (itemChangedFields.endDate) {
+                itemChangedFields.endDate = moment(
+                    itemChangedFields.endDate
+                ).format('YYYY/MM');
+            }
             const changedData = {
                 ...itemChangedFields,
                 position,
