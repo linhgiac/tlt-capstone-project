@@ -4,3 +4,4 @@ django-cors-headers
 torch
 transformers
 sklearn
+datasets
