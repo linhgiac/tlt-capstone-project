@@ -16,8 +16,8 @@ type ResumeExportMainProps = {
 const ResumeExportMain = (props: ResumeExportMainProps) => {
     const { className, scale = 0.5 } = props;
     return (
-        <div className={classNames(styles.center, 'cv-format')}>
-            <TransformWrapper
+        <div>
+            {/* <TransformWrapper
                 centerOnInit
                 minScale={0.25}
                 initialScale={scale}
@@ -28,13 +28,13 @@ const ResumeExportMain = (props: ResumeExportMainProps) => {
                 {controllerProps => (
                     <>
                         <TransformComponent wrapperClass={styles.wrapper}>
-                            <div>
-                                <Page />
-                            </div>
+                            <div> */}
+            <Page />
+            {/* </div>
                         </TransformComponent>
                     </>
                 )}
-            </TransformWrapper>
+            </TransformWrapper> */}
         </div>
     );
 };

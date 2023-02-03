@@ -12,16 +12,19 @@ const Page = (props: Props) => {
     const resumeInfo = useRecoilValue(resumeInfoState);
 
     return (
-        <div
+        // <div style={{transform: 'scale(0.5)'}}>
+            <div
             id={'pdf'}
             className={styles.container}>
-            <div
+            {/* <div
                 id={'inner-pdf'}
                 style={{ lineHeight: '1.4' }}
-                className={classNames('cv-format')}>
+                className={classNames('cv-format')}> */}
                 <TemplateMap id={resumeInfo.template} />
-            </div>
+            {/* </div> */}
         </div>
+        // </div>
+        
     );
 };
 

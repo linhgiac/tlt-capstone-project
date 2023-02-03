@@ -2,6 +2,8 @@ import { Button } from 'antd';
 import jsPDF from 'jspdf';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
+import html2canvas from 'html2canvas';
+
 import { resumeSavedState } from '../../../recoil-state/resume-state/resume.state';
 
 type Props = {};
@@ -9,26 +11,35 @@ type Props = {};
 const DownloadButton = (props: Props) => {
     const resume = useRecoilValue(resumeSavedState);
     const downloadHandler = async () => {
-        const pdf = new jsPDF({
-            orientation: 'portrait',
-            unit: 'px',
-            format: 'a4',
-            hotfixes: ['px_scaling']
-        });
-        const data: any = await document.querySelector('#inner-pdf');
-        const width = pdf.internal.pageSize.getWidth();
-        const windowWidth = data.getBoundingClientRect().width;
-        console.log({ width, windowWidth });
-        if (data) {
-            pdf.html(data, {
-                x: 0,
-                y: 0,
-                width: windowWidth * 0.99,
-                windowWidth: windowWidth,
-            }).then(() => {
+        // const pdf = new jsPDF({
+        //     orientation: 'portrait',
+        //     unit: 'px',
+        //     format: 'a4',
+        //     hotfixes: ['px_scaling']
+        // });
+        const data: any = await document.querySelector('#pdf');
+        // const width = pdf.internal.pageSize.getWidth();
+        // const windowWidth = data.getBoundingClientRect().width;
+        // console.log({ width, windowWidth });
+        if(data){
+            try {
+                const canvas = await html2canvas(data, {})
+                const imgData = canvas.toDataURL('image/png', 1.0);
+                const pdf = new jsPDF('p', 'mm', 'a4'); 
+                pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
                 pdf.save(`${resume.title}.pdf`);
-            });
+            }catch (error){
+                console.log(error)
+            }
         }
+        
+        // if (data) {
+        //     pdf.html(data, {
+
+        //     }).then(() => {
+        //         pdf.save(`${resume.title}.pdf`);
+        //     });
+        // }
 
         // const input: any = document.getElementById('pdf');
 

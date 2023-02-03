@@ -58,7 +58,7 @@ const Berlin = (props: Props) => {
     };
 
     return (
-        <div className={classNames('cv-format', styles.container)}>
+        <div className={classNames(styles.container)}>
             <div className={styles['masthead']}>
                 <Masthead value={personalDetails} />
             </div>

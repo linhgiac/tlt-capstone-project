@@ -1,11 +1,16 @@
 import { Button, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { get, isEmpty } from 'lodash';
+import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from 'next';
+import axios from 'axios';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+
 import ResumeExport from '../../../../components/page/resume/resume-export';
 import ResumeImport from '../../../../components/page/resume/resume-import';
 import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
 import { MOCKED_RESUME } from '../../../../mock/resume.mock';
 import { HOST, LAYOUT } from '../../../../configs/constants/misc';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
 import {
     personalDetailChangedValueState,
@@ -25,10 +30,6 @@ import {
 } from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
 
 import { resumeTitleValueState } from '../../../../recoil-state/resume-state/resume-title.state';
-import { get, isEmpty } from 'lodash';
-import { useRouter } from 'next/router';
-import { GetServerSidePropsContext } from 'next';
-import axios from 'axios';
 import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { convertResumeResponse } from '../../../../configs/utils/format.utils';
 import SelectTemplate from '../../../../components/page/resume/select-template';
@@ -235,9 +236,9 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         return {
             props: {
                 ...defaultReturnProps,
-                // initialResumeData: MOCKED_RESUME,
+                initialResumeData: MOCKED_RESUME,
                 templateList: templates.data,
-                initialResumeData: convertResumeResponse(resume.data),
+                // initialResumeData: convertResumeResponse(resume.data),
             },
         };
     } catch (error: any) {
