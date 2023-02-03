@@ -5,8 +5,32 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Net;
 
+public enum NetworkUrlEnum
+{
+    Tokenize
+}
+
+public class NetworkData
+{
+    private string data;
+
+    public string Data => data;
+
+    public NetworkData(string data)
+    {
+        this.data = data;
+    }
+
+    public string ToJson()
+    {
+        Debug.Log($"{{\"data\":\"{data}\"}}");
+        return $"{{\"data\":\"{data}\"}}";
+    }
+}
+
 public class Network
 {
+    public static string Host = "http://localhost:8000/";
     public static IObservable<UnityWebRequest> SendRequest(
     string url,
     Func<string, UnityWebRequest> webRequestFunc,
@@ -71,8 +95,19 @@ public class Network
         return SendRequest(url, UnityWebRequest.Get).Subscribe(callback);
     }
 
-    public static IDisposable Post(string url, string data, Action<UnityWebRequest> callback)
+    public static IDisposable Put(string url, string data, Action<UnityWebRequest> callback)
     {
-        return SendRequest(url, uri => UnityWebRequest.Post(uri, data)).Subscribe(callback);
+        return SendRequest(url, uri => UnityWebRequest.Put(uri, data)).Subscribe(callback);
+    }
+
+    public static string GetUrl(NetworkUrlEnum type)
+    {
+        switch (type)
+        {
+            case NetworkUrlEnum.Tokenize:
+                return Host + "bert_tokenizer/tokenize/";
+            default:
+                return Host;
+        }
     }
 }

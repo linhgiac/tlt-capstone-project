@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class NERToken : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TMP_InputField tokenText;
+    [SerializeField] private TMP_InputField tokenLabel;
 
-    // Update is called once per frame
-    void Update()
+    public int Label => int.Parse(tokenLabel.text);
+
+    public void Init(string text, System.Action onLabelChange)
     {
-        
+        tokenText.text = text;
+        tokenLabel.onEndEdit.AddListener(_ => onLabelChange());
     }
 }
