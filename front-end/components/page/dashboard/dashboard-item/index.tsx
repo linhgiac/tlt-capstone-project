@@ -1,17 +1,18 @@
-import { DashboardItemType } from "../../../../configs/interfaces/dashboard.interface";
+import { useState } from 'react';
 import classNames from 'classnames';
-import styles from '../styles.module.scss';
-import { useState } from "react";
-import { Button } from "antd";
-import { EditOutlined } from "@ant-design/icons";
-import { EditableTitle } from "../../../custom";
-import ResumeTitle from "../../resume/resume-import/resume-title";
-import { useRouter } from "next/router";
-import Image from 'next/image'
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
+import { Button } from 'antd';
+import { CopyOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons';
+
+import { DashboardItemType } from '../../../../configs/interfaces/dashboard.interface';
+import styles from '../styles.module.scss';
+import { EditableTitle } from '../../../custom';
+import ResumeTitle from '../../resume/resume-import/resume-title';
 import { resumeInfoState } from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 import { HOST } from '../../../../configs/constants/misc';
-import axios from 'axios';
 import PopupModal from '../../../custom/popup-modal';
 import { getAuthHeader } from '../../../../configs/restApi/clients';
 
@@ -25,7 +26,7 @@ const DashboardItem = (props: DashboardItemProps) => {
     const [isModalOpened, setIsModalOpened] = useState(false);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
-    const onClick = () => {
+    const editHandler = () => {
         console.log('On click item');
         setResumeInfo({ id: item.id });
         router.push({
@@ -34,6 +35,10 @@ const DashboardItem = (props: DashboardItemProps) => {
                 id: item.id,
             },
         });
+    };
+
+    const duplicateHandler = () => {
+        console.log('On click duplicate');
     };
     const onRename = (value: string) => {
         console.log('On rename: ', value);
@@ -56,7 +61,7 @@ const DashboardItem = (props: DashboardItemProps) => {
         <div className={classNames(styles['dashboard-item'])}>
             <div
                 // size="large"
-                onClick={onClick}
+                onClick={editHandler}
                 className={classNames(styles['dashboard-item-preview'])}>
                 <Image
                     src={item.thumbnail}
@@ -75,12 +80,24 @@ const DashboardItem = (props: DashboardItemProps) => {
                     )}>
                     <Button
                         size="large"
+                        type="text"
                         className={classNames(styles['dashboard-item-button'])}
-                        onClick={onClick}>
+                        icon={<EditOutlined />}
+                        onClick={editHandler}>
                         Edit
                     </Button>
                     <Button
                         size="large"
+                        icon={<CopyOutlined />}
+                        type="text"
+                        className={classNames(styles['dashboard-item-button'])}
+                        onClick={duplicateHandler}>
+                        Duplicate
+                    </Button>
+                    <Button
+                        size="large"
+                        icon={<DeleteOutlined />}
+                        type="text"
                         className={classNames(styles['dashboard-item-button'])}
                         onClick={() => {
                             setIsModalOpened(true);

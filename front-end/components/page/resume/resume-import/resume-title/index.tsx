@@ -34,7 +34,7 @@ const ResumeTitle = (props: ResumeTitleProps) => {
             ) : (
                 <div className={styles['resume-title']}>
                     {title}
-                    <Divider />
+                    {/* <Divider /> */}
                 </div>
             )}
 
