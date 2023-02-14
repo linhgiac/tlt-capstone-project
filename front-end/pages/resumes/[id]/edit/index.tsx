@@ -236,9 +236,9 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         return {
             props: {
                 ...defaultReturnProps,
-                initialResumeData: MOCKED_RESUME,
+                // initialResumeData: MOCKED_RESUME,
                 templateList: templates.data,
-                // initialResumeData: convertResumeResponse(resume.data),
+                initialResumeData: convertResumeResponse(resume.data),
             },
         };
     } catch (error: any) {
