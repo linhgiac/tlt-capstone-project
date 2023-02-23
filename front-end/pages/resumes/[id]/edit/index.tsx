@@ -96,8 +96,8 @@ const ResumeEditor = (props: ResumeEditorProps) => {
             );
         }
     }, [
-        initialResumeData.personalDetails,
-        initialResumeData.professionalSummary,
+        initialResumeData?.personalDetails,
+        initialResumeData?.professionalSummary,
         setPersonalDetailsChangedValues,
         setProfessionalSummaryChangedValues,
     ]);

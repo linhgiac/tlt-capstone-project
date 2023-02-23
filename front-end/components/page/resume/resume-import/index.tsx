@@ -194,7 +194,7 @@ const ResumeImport = (props: ResumeImportProps) => {
     //     setResumeInitialTitle,
     // ]);
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [title, setTitle] = useState(resumeSaved.title);
+    const [title, setTitle] = useState(resumeSaved?.title);
     const openModalHandler = () => {
         setIsOpenModal(true);
     };

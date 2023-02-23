@@ -76,8 +76,15 @@ const DashboardContainer = (props: DashboardContainerProps) => {
             const response = await axios.get(`${HOST}resume/${id}/duplicate/`, {
                 headers: getAuthHeader(),
             });
+            const thumbnail = itemList.filter((item: any) => item.id === id)[0]
+                .thumbnail;
+            console.log('thumbnail', thumbnail);
             console.log('response', response);
-            setItemList((prevItems: any) => [...prevItems, response.data]);
+            console.log('itemList', itemList);
+            setItemList((prevItems: any) => [
+                ...prevItems,
+                { ...response.data, thumbnail },
+            ]);
         } catch (error) {
             console.log('error :>> ', error);
         }
