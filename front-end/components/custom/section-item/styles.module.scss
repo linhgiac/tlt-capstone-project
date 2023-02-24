@@ -1,8 +1,12 @@
 @import './../../../styles/variables.scss';
+
+
+
 .section-item__container{
     border: 1px solid $light-color;
     margin: 10px;
     border-radius: 5px;
+    width: 100%;
     .section-item__content{
         position: relative;
         .section-item__header{

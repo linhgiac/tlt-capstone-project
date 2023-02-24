@@ -1,4 +1,9 @@
-import { DeleteOutlined, DownOutlined, UpOutlined } from '@ant-design/icons';
+import {
+    DeleteOutlined,
+    DownOutlined,
+    HolderOutlined,
+    UpOutlined,
+} from '@ant-design/icons';
 import React, { useCallback, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
@@ -12,8 +17,10 @@ import {
 } from '../../../configs/interfaces/resume.interface';
 import moment from 'moment';
 import { isEmpty } from 'lodash';
+import DraggableCard from '../draggable-card';
 
 type Props = {
+    index: number;
     position: number;
     className?: string;
     itemHeader: string;
@@ -27,6 +34,7 @@ type Props = {
 
 const SectionItem = (props: Props) => {
     const {
+        index,
         position,
         className,
         itemHeader,
@@ -74,7 +82,12 @@ const SectionItem = (props: Props) => {
     );
 
     return (
-        <>
+        <DraggableCard
+            key={position}
+            index={index}
+            item={item}
+            position={position}
+            isVisibleForm={isVisible}>
             <div
                 className={classNames(
                     className,
@@ -131,7 +144,7 @@ const SectionItem = (props: Props) => {
                     onOk={deleteHandler}
                 />
             </div>
-        </>
+        </DraggableCard>
     );
 };
 

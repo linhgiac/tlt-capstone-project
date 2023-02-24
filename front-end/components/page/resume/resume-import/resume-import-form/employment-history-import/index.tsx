@@ -3,8 +3,11 @@ import classNames from 'classnames';
 import SectionItemAdditionalButton from '../../../../../custom/section-item-additional-button';
 import { EMPLOYMENT_HISTORY_DESCRIPTION } from '../../../../../../configs/constants/description.constants';
 import EmploymentHistoryItems from './employment-history-items';
-import { useRecoilState } from 'recoil';
-import { employmentHistoryItemsState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+    employmentHistoriesDetailsState,
+    employmentHistoryItemsState,
+} from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
 import { arrangePosition } from '../../../../../../configs/utils/position';
 import { employmentHistoryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
 import SectionImportTitle from '../../section-import-title';
@@ -31,6 +34,12 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
     const [employmentHistoryTitle, setEmploymentHistoryTitle] = useRecoilState(
         employmentHistoryTitleValueState
     );
+
+    const employmentHistoryDetails = useRecoilValue(
+        employmentHistoriesDetailsState
+    );
+
+    console.log('111111111', employmentHistoryDetails);
 
     const [employmentHistoryItems, setEmploymentHistoryItems] = useRecoilState(
         employmentHistoryItemsState
@@ -99,6 +108,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
             <p style={{ color: 'grey', fontSize: '12px' }}>
                 {EMPLOYMENT_HISTORY_DESCRIPTION}
             </p>
+
             <EmploymentHistoryItems
                 items={employmentHistoryItems}
                 sectionType={sectionType}
