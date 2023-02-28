@@ -99,7 +99,11 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
     );
 
     const dragItemHandler = (items: any) => {
-        setEmploymentHistoryItems(items);
+        setEmploymentHistoryItems(
+            items.map((item: any, i: number) => {
+                return { ...item, position: i + 1 };
+            })
+        );
     };
     return (
         <DndContainer
