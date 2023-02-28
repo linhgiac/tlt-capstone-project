@@ -61,7 +61,7 @@ export const employmentHistoriesDetailsState =
     atom<ComplexSectionDetailsDataType>({
         key: 'employmentHistoriesDetailsState',
         default: {
-            position: 2,
+            position: 3,
             sectionType: 'employmentHistories',
         },
     });
@@ -93,7 +93,7 @@ export const educationItemsState = atom<EducationItemDataType[]>({
 export const educationsDetailsState = atom<ComplexSectionDetailsDataType>({
     key: 'educationsDetailsState',
     default: {
-        position: 3,
+        position: 4,
         sectionType: 'educations',
     },
 });
@@ -123,7 +123,7 @@ export const linkItemsState = atom<LinkItemDataType[]>({
 export const linksDetailsState = atom<ComplexSectionDetailsDataType>({
     key: 'linksDetailsState',
     default: {
-        position: 4,
+        position: 5,
         sectionType: 'links',
     },
 });
@@ -152,7 +152,7 @@ export const skillItemsState = atom<LinkItemDataType[]>({
 export const skillsDetailsState = atom<ComplexSectionDetailsDataType>({
     key: 'skillsDetailsState',
     default: {
-        position: 5,
+        position: 6,
         sectionType: 'skills',
         isShownLevel: true,
     },

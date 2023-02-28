@@ -23,13 +23,6 @@ type Props = {
 
 const ResumeImportForm = (props: Props) => {
     const { className } = props;
-    const sensors = useSensors(
-        useSensor(MouseSensor),
-        useSensor(TouchSensor),
-        useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates,
-        })
-    );
 
     return (
             <div>
