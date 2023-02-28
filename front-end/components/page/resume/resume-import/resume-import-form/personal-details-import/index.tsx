@@ -44,8 +44,8 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     );
 
     useEffect(() => {
-        form.setFieldsValue(resumeSaved.personalDetails);
-    }, [form, resumeSaved.personalDetails])
+        form.setFieldsValue(resumeSaved?.personalDetails);
+    }, [form, resumeSaved?.personalDetails]);
 
     // useEffect(() => {
     //     form.setFieldsValue(personalDetailsChangedValues);

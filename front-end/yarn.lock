@@ -56,6 +56,37 @@
   resolved "https://registry.npmjs.org/@ctrl/tinycolor/-/tinycolor-3.4.1.tgz"
   integrity sha512-ej5oVy6lykXsvieQtqZxCOaLT+xD4+QNarq78cIYISHmZXshCvROLudpQN3lfL8G0NL7plMSSK+zlyvCaIJ4Iw==
 
+"@dnd-kit/accessibility@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/@dnd-kit/accessibility/-/accessibility-3.0.1.tgz"
+  integrity sha512-HXRrwS9YUYQO9lFRc/49uO/VICbM+O+ZRpFDe9Pd1rwVv2PCNkRiTZRdxrDgng/UkvdC3Re9r2vwPpXXrWeFzg==
+  dependencies:
+    tslib "^2.0.0"
+
+"@dnd-kit/core@^6.0.7", "@dnd-kit/core@^6.0.8":
+  version "6.0.8"
+  resolved "https://registry.npmjs.org/@dnd-kit/core/-/core-6.0.8.tgz"
+  integrity sha512-lYaoP8yHTQSLlZe6Rr9qogouGUz9oRUj4AHhDQGQzq/hqaJRpFo65X+JKsdHf8oUFBzx5A+SJPUvxAwTF2OabA==
+  dependencies:
+    "@dnd-kit/accessibility" "^3.0.0"
+    "@dnd-kit/utilities" "^3.2.1"
+    tslib "^2.0.0"
+
+"@dnd-kit/sortable@^7.0.2":
+  version "7.0.2"
+  resolved "https://registry.npmjs.org/@dnd-kit/sortable/-/sortable-7.0.2.tgz"
+  integrity sha512-wDkBHHf9iCi1veM834Gbk1429bd4lHX4RpAwT0y2cHLf246GAvU2sVw/oxWNpPKQNQRQaeGXhAVgrOl1IT+iyA==
+  dependencies:
+    "@dnd-kit/utilities" "^3.2.0"
+    tslib "^2.0.0"
+
+"@dnd-kit/utilities@^3.2.0", "@dnd-kit/utilities@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.npmjs.org/@dnd-kit/utilities/-/utilities-3.2.1.tgz"
+  integrity sha512-OOXqISfvBw/1REtkSK2N3Fi2EQiLMlWUlqnOK/UpOISqBZPWpE6TqL+jcPtMOkE8TqYGiURvRdPSI9hltNUjEA==
+  dependencies:
+    tslib "^2.0.0"
+
 "@eslint/eslintrc@^1.3.2":
   version "1.3.2"
   resolved "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-1.3.2.tgz"
@@ -249,13 +280,6 @@
   version "3.4.0"
   resolved "https://registry.npmjs.org/@types/raf/-/raf-3.4.0.tgz"
   integrity sha512-taW5/WYqo36N7V39oYyHP9Ipfd5pNFvGTIQsNGj86xV88YQ7GnI30/yMfKDF7Zgin0m3e+ikX88FvImnK4RjGw==
-
-"@types/react-beautiful-dnd@^13.1.3":
-  version "13.1.3"
-  resolved "https://registry.npmjs.org/@types/react-beautiful-dnd/-/react-beautiful-dnd-13.1.3.tgz"
-  integrity sha512-BNdmvONKtsrZq3AGrujECQrIn8cDT+fZsxBLXuX3YWY/nHfZinUFx4W88eS0rkcXzuLbXpKOsu/1WCMPMLEpPg==
-  dependencies:
-    "@types/react" "*"
 
 "@types/react-dom@18.0.6":
   version "18.0.6"
@@ -2928,7 +2952,7 @@ react-beautiful-dnd@^13.1.1:
     redux "^4.0.4"
     use-memo-one "^1.1.1"
 
-react-dom@*, "react-dom@^16.8.5 || ^17.0.0 || ^18.0.0", react-dom@^17.0.2, "react-dom@^17.0.2 || ^18.0.0-0", react-dom@>=16.0.0, react-dom@>=16.11.0, react-dom@>=16.9.0, react-dom@18.2.0:
+react-dom@*, "react-dom@^16.8.5 || ^17.0.0 || ^18.0.0", react-dom@^17.0.2, "react-dom@^17.0.2 || ^18.0.0-0", react-dom@>=16.0.0, react-dom@>=16.11.0, react-dom@>=16.8.0, react-dom@>=16.9.0, react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   integrity sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==
@@ -2989,7 +3013,7 @@ react-zoom-pan-pinch@^2.1.3:
   resolved "https://registry.npmjs.org/react-zoom-pan-pinch/-/react-zoom-pan-pinch-2.1.3.tgz"
   integrity sha512-a5AChOWhjo0RmxsNZXGQIlNh3e3nLU6m4V6M+6dlbPNk5d+MtMxgKWyA5zpR06Lp3OZkZVF9nR8JeWSvKwck9g==
 
-react@*, "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.3 || ^17 || ^18", "react@^16.8.5 || ^17.0.0 || ^18.0.0", react@^17.0.2, "react@^17.0.2 || ^18.0.0-0", react@^18.2.0, "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", react@>=16, react@>=16.0.0, react@>=16.11.0, react@>=16.13.1, react@>=16.3, react@>=16.9.0, react@18.2.0:
+react@*, "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.3 || ^17 || ^18", "react@^16.8.5 || ^17.0.0 || ^18.0.0", react@^17.0.2, "react@^17.0.2 || ^18.0.0-0", react@^18.2.0, "react@>= 16.8.0 || 17.x.x || ^18.0.0-0", react@>=16, react@>=16.0.0, react@>=16.11.0, react@>=16.13.1, react@>=16.3, react@>=16.8.0, react@>=16.9.0, react@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   integrity sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==
@@ -3421,7 +3445,7 @@ tslib@^1.8.1:
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.4.0:
+tslib@^2.0.0, tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==

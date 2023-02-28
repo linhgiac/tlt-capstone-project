@@ -30,7 +30,6 @@ const DashboardItem = (props: DashboardItemProps) => {
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
     const editHandler = () => {
-        console.log('On click item');
         setResumeInfo({ id: item.id });
         router.push({
             pathname: '/resumes/[id]/edit',
@@ -41,14 +40,11 @@ const DashboardItem = (props: DashboardItemProps) => {
     };
 
     const duplicateItemHandler = async () => {
-        console.log('On click duplicate');
-        console.log('item.id', item.id);
         try {
             onDuplicate(item.id);
         } catch (error) {}
     };
     const onRename = (value: string) => {
-        console.log('On rename: ', value);
     };
 
     const deleteItemHandler = async () => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Droppable } from 'react-beautiful-dnd';
 import { EducationItemDataType } from '../../../../../../../configs/interfaces/resume.interface';
 import SectionItem from '../../../../../../custom/section-item';
 
@@ -15,29 +14,20 @@ const EducationItems = (props: EducationItemsProps) => {
     const { className, sectionType, items, onRemoveItem, onChangeItem } = props;
 
     return (
-        <Droppable droppableId="education">
-            {(provided, snapshot) => (
-                <div
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}>
-                    {items?.map((item, i) => (
-                        <SectionItem
-                            key={i}
-                            index={i}
-                            position={item.position}
-                            itemHeader={
-                                item.school ? item.school : 'Not specified'
-                            }
-                            item={item}
-                            sectionType={sectionType}
-                            onChangeItem={onChangeItem}
-                            onRemove={onRemoveItem.bind(null, item.position)}
-                        />
-                    ))}
-                    {provided.placeholder}
-                </div>
-            )}
-        </Droppable>
+        <div>
+            {items?.map((item, i) => (
+                <SectionItem
+                    key={i}
+                    index={i}
+                    position={item.position}
+                    itemHeader={item.school ? item.school : 'Not specified'}
+                    item={item}
+                    sectionType={sectionType}
+                    onChangeItem={onChangeItem}
+                    onRemove={onRemoveItem.bind(null, item.position)}
+                />
+            ))}
+        </div>
     );
 };
 

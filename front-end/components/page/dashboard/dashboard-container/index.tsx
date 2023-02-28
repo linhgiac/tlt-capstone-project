@@ -16,8 +16,6 @@ type DashboardContainerProps = {
 const DashboardContainer = (props: DashboardContainerProps) => {
     const { data } = props;
     const [itemList, setItemList] = useState<any>(data);
-    console.log('data :>> ', data);
-    console.log('itemList', itemList);
     // const layoutItems = () => {
     //     const itemPerRow = 2;
     //     const items: any[] = [];
@@ -61,12 +59,9 @@ const DashboardContainer = (props: DashboardContainerProps) => {
             const response = await axios.delete(`${HOST}resume/${id}/delete/`, {
                 headers: getAuthHeader(),
             });
-            console.log('response', response);
-            console.log('id :>> ', id);
             setItemList((prevItems: any[]) =>
                 prevItems.filter((item: { id: number }) => item.id !== id)
             );
-            console.log('itemList :>> ', itemList);
         } catch (error) {
             console.log('error :>> ', error);
         }
@@ -78,9 +73,6 @@ const DashboardContainer = (props: DashboardContainerProps) => {
             });
             const thumbnail = itemList.filter((item: any) => item.id === id)[0]
                 .thumbnail;
-            console.log('thumbnail', thumbnail);
-            console.log('response', response);
-            console.log('itemList', itemList);
             setItemList((prevItems: any) => [
                 ...prevItems,
                 { ...response.data, thumbnail },

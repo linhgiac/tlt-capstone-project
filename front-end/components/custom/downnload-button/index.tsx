@@ -24,7 +24,6 @@ const DownloadButton = (props: Props) => {
 
         // const width = pdf.internal.pageSize.getWidth();
         // const windowWidth = data.getBoundingClientRect().width;
-        // console.log({ width, windowWidth });
         if(data){
             try {
                 data.style.transform = 'scale(1)'

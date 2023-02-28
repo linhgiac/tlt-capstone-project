@@ -18,7 +18,6 @@ const Skill = (props: Props) => {
         <div>
             <div>{header}</div>
             {items?.map((item, i) => {
-                console.log('item :>> ', item);
                 const levelProgress = () => {
                     switch (item.level) {
                         case 'novice':

@@ -118,7 +118,6 @@ const SectionForm = (props: Props) => {
 
     const changeValuesHandler = useCallback(
         (changedValues: any, _: any) => {
-            console.log('changedValues :>> ', changedValues);
             // if (changedValues.startDate) {
             //     changedValues.startDate = moment(
             //         changedValues.startDate

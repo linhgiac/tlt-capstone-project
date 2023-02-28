@@ -18,6 +18,7 @@ import {
 import { HOST } from '../../../../../../configs/constants/misc';
 import axios from 'axios';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
+import DndContainer from '../../../../../custom/dndcontainer';
 
 type EmploymentHistoryProps = {
     className?: string;
@@ -96,32 +97,40 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         },
         [setEmploymentHistoryItems]
     );
-    return (
-        <div className={classNames(className)}>
-            <SectionImportTitle
-                onChangeTitle={(title: string) => {
-                    setEmploymentHistoryTitle(title);
-                }}
-                defaultTitle={defaultTitle}>
-                {employmentHistoryTitle}
-            </SectionImportTitle>
-            <p style={{ color: 'grey', fontSize: '12px' }}>
-                {EMPLOYMENT_HISTORY_DESCRIPTION}
-            </p>
 
-            <EmploymentHistoryItems
-                items={employmentHistoryItems}
-                sectionType={sectionType}
-                onRemoveItem={removeItemHandler}
-                onChangeItem={changeItemHandler}
-                // initialValue={initialValue}
-            />
-            <SectionItemAdditionalButton
-                onAddItem={addItemHandler}
-                className={classNames(className)}
-                sectionType={sectionType}
-            />
-        </div>
+    const dragItemHandler = (items: any) => {
+        setEmploymentHistoryItems(items);
+    };
+    return (
+        <DndContainer
+            onDragEnd={dragItemHandler}
+            items={employmentHistoryItems}>
+            <div className={classNames(className)}>
+                <SectionImportTitle
+                    onChangeTitle={(title: string) => {
+                        setEmploymentHistoryTitle(title);
+                    }}
+                    defaultTitle={defaultTitle}>
+                    {employmentHistoryTitle}
+                </SectionImportTitle>
+                <p style={{ color: 'grey', fontSize: '12px' }}>
+                    {EMPLOYMENT_HISTORY_DESCRIPTION}
+                </p>
+                <EmploymentHistoryItems
+                    items={employmentHistoryItems}
+                    sectionType={sectionType}
+                    onRemoveItem={removeItemHandler}
+                    onChangeItem={changeItemHandler}
+                    // initialValue={initialValue}
+                />
+
+                <SectionItemAdditionalButton
+                    onAddItem={addItemHandler}
+                    className={classNames(className)}
+                    sectionType={sectionType}
+                />
+            </div>
+        </DndContainer>
     );
 };
 

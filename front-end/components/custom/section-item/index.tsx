@@ -17,7 +17,7 @@ import {
 } from '../../../configs/interfaces/resume.interface';
 import moment from 'moment';
 import { isEmpty } from 'lodash';
-import DraggableCard from '../draggable-card';
+import Draggable from '../draggable';
 
 type Props = {
     index: number;
@@ -82,12 +82,7 @@ const SectionItem = (props: Props) => {
     );
 
     return (
-        <DraggableCard
-            key={position}
-            index={index}
-            item={item}
-            position={position}
-            isVisibleForm={isVisible}>
+        <div className="w-100">
             <div
                 className={classNames(
                     className,
@@ -144,7 +139,7 @@ const SectionItem = (props: Props) => {
                     onOk={deleteHandler}
                 />
             </div>
-        </DraggableCard>
+        </div>
     );
 };
 

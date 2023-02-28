@@ -16,6 +16,7 @@ import {
     ResumeDataType,
 } from '../../../configs/interfaces/resume.interface';
 import { complexSectionChangedValueState } from './resume-changed-complex-section.state';
+import { isEmpty } from 'lodash';
 
 export const resumeChangedValueState = selector<ResumeDataType>({
     key: 'resumeChangedValueState',
@@ -35,10 +36,16 @@ export const resumeChangedValueState = selector<ResumeDataType>({
         if (title) {
             result = Object.assign(result, { title });
         }
-        if (Object.keys(personalDetails).length > 0) {
+        if (
+            !isEmpty(personalDetails) &&
+            Object.keys(personalDetails).length > 0
+        ) {
             result = Object.assign(result, { personalDetails });
         }
-        if (Object.keys(professionalSummary).length > 0) {
+        if (
+            !isEmpty(professionalSummary) &&
+            Object.keys(professionalSummary).length > 0
+        ) {
             result = Object.assign(result, { professionalSummary });
         }
         if (complexSections.sectionType?.length) {

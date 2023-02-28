@@ -70,7 +70,6 @@ const ResumeEditor = (props: ResumeEditorProps) => {
 
     const [isEditing, setIsEditing] = useState(true);
 
-
     setResumeSaved(initialResumeData);
     useEffect(() => {
         console.log('resumeData', resumeData);
@@ -78,21 +77,21 @@ const ResumeEditor = (props: ResumeEditorProps) => {
 
     useEffect(() => {
         setResumeInfo({
-            id: initialResumeData.id,
-            template: initialResumeData.template,
+            id: initialResumeData?.id,
+            template: initialResumeData?.template,
         });
         setResumeTitle(
-            initialResumeData.title ? initialResumeData.title : 'Untitled'
+            initialResumeData?.title ? initialResumeData?.title : 'Untitled'
         );
     }, [initialResumeData, setResumeInfo, setResumeSaved, setResumeTitle]);
 
     useEffect(() => {
-        if (!isEmpty(initialResumeData.personalDetails)) {
-            setPersonalDetailsChangedValues(initialResumeData.personalDetails);
+        if (!isEmpty(initialResumeData?.personalDetails)) {
+            setPersonalDetailsChangedValues(initialResumeData?.personalDetails);
         }
-        if (!isEmpty(initialResumeData.professionalSummary)) {
+        if (!isEmpty(initialResumeData?.professionalSummary)) {
             setProfessionalSummaryChangedValues(
-                initialResumeData.professionalSummary
+                initialResumeData?.professionalSummary
             );
         }
     }, [
@@ -168,16 +167,32 @@ const ResumeEditor = (props: ResumeEditorProps) => {
             'complexSections.sectionDetails.skills.items'
         );
         if (employmentHistoriesItems) {
-            setEmploymentHistoryItems(employmentHistoriesItems);
+            setEmploymentHistoryItems(
+                employmentHistoriesItems.map((item, i) => {
+                    return { ...item, position: i + 1 };
+                })
+            );
         }
         if (educationsItems) {
-            setEducationItems(educationsItems);
+            setEducationItems(
+                educationsItems.map((item, i) => {
+                    return { ...item, position: i + 1 };
+                })
+            );
         }
         if (linksItems) {
-            setLinkItems(linksItems);
+            setLinkItems(
+                linksItems.map((item, i) => {
+                    return { ...item, position: i + 1 };
+                })
+            );
         }
         if (skillsItems) {
-            setSkillItems(skillsItems);
+            setSkillItems(
+                skillsItems.map((item, i) => {
+                    return { ...item, position: i + 1 };
+                })
+            );
         }
     }, [
         initialResumeData,
@@ -220,6 +235,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         currentLayout: LAYOUT.EDITOR,
     };
     const resumeId = ctx.params?.id;
+    // const resumeId = 1;
 
     try {
         const templates = await axios.get(`${HOST}resume-template/`, {
@@ -231,7 +247,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         console.log('response :>> ', templates.data);
         const headers = getAuthHeader({ req, res });
         const resume = await axios.get(`${HOST}resume/${resumeId}/`, {
-            headers: headers
+            headers: headers,
         });
         return {
             props: {

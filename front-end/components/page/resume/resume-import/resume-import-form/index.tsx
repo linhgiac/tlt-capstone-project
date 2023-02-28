@@ -1,6 +1,12 @@
 import React from 'react';
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-
+import {
+    DndContext,
+    KeyboardSensor,
+    MouseSensor,
+    TouchSensor,
+    useSensor,
+    useSensors,
+} from '@dnd-kit/core';
 import { ResumeDataType } from '../../../../../configs/interfaces/resume.interface';
 import EducationImport from './education-import';
 import EmploymentHistoryImport from './employment-history-import';
@@ -8,6 +14,8 @@ import LinkImport from './link-import';
 import PersonalDetailsImport from './personal-details-import';
 import ProfessionalSummaryImport from './professional-summary-import';
 import SkillImport from './skill-import';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import DndContainer from '../../../../custom/dndcontainer';
 
 type Props = {
     className?: string;
@@ -15,10 +23,15 @@ type Props = {
 
 const ResumeImportForm = (props: Props) => {
     const { className } = props;
+    const sensors = useSensors(
+        useSensor(MouseSensor),
+        useSensor(TouchSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
 
-    const dragEndHandler = (result: DropResult) => {};
     return (
-        <DragDropContext onDragEnd={dragEndHandler}>
             <div>
                 <PersonalDetailsImport
                     className="p-b-20"
@@ -50,7 +63,6 @@ const ResumeImportForm = (props: Props) => {
                     sectionType="skills"
                 />
             </div>
-        </DragDropContext>
     );
 };
 

@@ -14,7 +14,6 @@ type Props = {
 const TemplateItem = (props: Props) => {
     const { className, value } = props;
     const setResumeInfo = useSetRecoilState(resumeInfoState);
-    console.log('value', value);
     const clickHandler = () => {
         setResumeInfo((prev: any) => {
             return { ...prev, template: value.id };

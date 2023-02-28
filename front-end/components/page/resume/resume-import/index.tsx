@@ -126,10 +126,8 @@ const ResumeImport = (props: ResumeImportProps) => {
                     headers: getAuthHeader(),
                 }
             );
-            console.log('response', response);
             const convertResponse = convertResumeResponse(response.data);
             setResumeSaved(convertResponse);
-            console.log('convertResponse :>> ', convertResponse);
             reloadData();
             setIsSuccessful(true);
         } catch (error) {
@@ -156,8 +154,8 @@ const ResumeImport = (props: ResumeImportProps) => {
             resumeSaved,
             'complexSections.sectionDetails.skills.items'
         );
-        setPersonalDetailsChangedValues(resumeSaved.personalDetails);
-        setProfessionalSummaryChangedValues(resumeSaved.professionalSummary);
+        setPersonalDetailsChangedValues(resumeSaved?.personalDetails);
+        setProfessionalSummaryChangedValues(resumeSaved?.professionalSummary);
         setEmploymentHistoryItems(employmentHistoriesItems);
         setEducationItems(educationsItems);
         setLinkItems(linksItems);
@@ -173,7 +171,6 @@ const ResumeImport = (props: ResumeImportProps) => {
     const getDataHandler = async () => {
         // const response = await fetch('/api/resume-editor');
         // const data = await response.json();
-        // console.log({ data });
         convertTest();
     };
 
