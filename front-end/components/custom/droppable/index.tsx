@@ -8,12 +8,11 @@ import React from 'react';
 type Props = {
     id: string;
     items: any[];
-    acceptableItemType: string;
     children: React.ReactNode;
 };
 
 const Droppable = (props: Props) => {
-    const { id, items, acceptableItemType, children } = props;
+    const { id, items, children } = props;
     return (
         <SortableContext
             items={items?.map((_, index) => index + 1)}

@@ -19,6 +19,8 @@ import {
 import axios from 'axios';
 import { HOST } from '../../../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
+import DndContainer from '../../../../../custom/dndcontainer';
+import { isEmpty } from 'lodash';
 
 type EducationProps = {
     className?: string;
@@ -77,31 +79,45 @@ const EducationImport = (props: EducationProps) => {
         },
         [setEducationItems]
     );
+    const dragItemHandler = (items: any) => {
+        setEducationItems(
+            items.map((item: any, i: number) => {
+                return { ...item, position: i + 1 };
+            })
+        );
+    };
 
     return (
-        <div className={classNames(className)}>
-            <SectionImportTitle
-                onChangeTitle={(title: string) => {
-                    setEducationTitle(title);
-                }}
-                defaultTitle={defaultTitle}>
-                {educationTitle}
-            </SectionImportTitle>
-            <p style={{ color: 'grey', fontSize: '12px' }}>
-                {EDUCATION_DESCRIPTION}
-            </p>
-            <EducationItems
-                items={educationItems}
-                sectionType={sectionType}
-                onRemoveItem={removeItemHandler}
-                onChangeItem={changeItemHandler}
-            />
-            <SectionItemAdditionalButton
-                onAddItem={addItemHandler}
-                className={classNames(className)}
-                sectionType={sectionType}
-            />
-        </div>
+        <DndContainer
+            onDragEnd={dragItemHandler}
+            items={educationItems}>
+            <div className={classNames(className)}>
+                <SectionImportTitle
+                    onChangeTitle={(title: string) => {
+                        setEducationTitle(title);
+                    }}
+                    defaultTitle={defaultTitle}>
+                    {educationTitle}
+                </SectionImportTitle>
+                <p style={{ color: 'grey', fontSize: '12px' }}>
+                    {EDUCATION_DESCRIPTION}
+                </p>
+                {!isEmpty(educationItems) && (
+                    <EducationItems
+                        items={educationItems}
+                        sectionType={sectionType}
+                        onRemoveItem={removeItemHandler}
+                        onChangeItem={changeItemHandler}
+                    />
+                )}
+
+                <SectionItemAdditionalButton
+                    onAddItem={addItemHandler}
+                    className={classNames(className)}
+                    sectionType={sectionType}
+                />
+            </div>
+        </DndContainer>
     );
 };
 

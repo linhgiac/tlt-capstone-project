@@ -19,6 +19,7 @@ import { HOST } from '../../../../../../configs/constants/misc';
 import axios from 'axios';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 import DndContainer from '../../../../../custom/dndcontainer';
+import { isEmpty } from 'lodash';
 
 type EmploymentHistoryProps = {
     className?: string;
@@ -120,13 +121,15 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
                 <p style={{ color: 'grey', fontSize: '12px' }}>
                     {EMPLOYMENT_HISTORY_DESCRIPTION}
                 </p>
-                <EmploymentHistoryItems
-                    items={employmentHistoryItems}
-                    sectionType={sectionType}
-                    onRemoveItem={removeItemHandler}
-                    onChangeItem={changeItemHandler}
-                    // initialValue={initialValue}
-                />
+                {!isEmpty(employmentHistoryItems) && (
+                    <EmploymentHistoryItems
+                        items={employmentHistoryItems}
+                        sectionType={sectionType}
+                        onRemoveItem={removeItemHandler}
+                        onChangeItem={changeItemHandler}
+                        // initialValue={initialValue}
+                    />
+                )}
 
                 <SectionItemAdditionalButton
                     onAddItem={addItemHandler}

@@ -23,6 +23,8 @@ import { Switch } from 'antd';
 import axios from 'axios';
 import { HOST } from '../../../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
+import DndContainer from '../../../../../custom/dndcontainer';
+import { isEmpty } from 'lodash';
 
 type SkillProps = {
     className?: string;
@@ -93,41 +95,55 @@ const SkillImport = (props: SkillProps) => {
         },
         [setSkillsDetails]
     );
+    const dragItemHandler = (items: any) => {
+        setSkillItems(
+            items.map((item: any, i: number) => {
+                return { ...item, position: i + 1 };
+            })
+        );
+    };
 
     return (
-        <div className={classNames(className)}>
-            <SectionImportTitle
-                onChangeTitle={(title: string) => {
-                    setSkillTitle(title);
-                }}
-                defaultTitle={defaultTitle}>
-                {skillTitle}
-            </SectionImportTitle>
-            <p style={{ color: 'grey', fontSize: '12px' }}>
-                {EDUCATION_DESCRIPTION}
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <Switch
-                    defaultChecked={false}
-                    onChange={changeSwitchHandler}
-                />
-                <div style={{ paddingLeft: '10px' }}>
-                    {`Don't show experience level`}
+        <DndContainer
+            onDragEnd={dragItemHandler}
+            items={skillItems}>
+            <div className={classNames(className)}>
+                <SectionImportTitle
+                    onChangeTitle={(title: string) => {
+                        setSkillTitle(title);
+                    }}
+                    defaultTitle={defaultTitle}>
+                    {skillTitle}
+                </SectionImportTitle>
+                <p style={{ color: 'grey', fontSize: '12px' }}>
+                    {EDUCATION_DESCRIPTION}
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <Switch
+                        defaultChecked={false}
+                        onChange={changeSwitchHandler}
+                    />
+                    <div style={{ paddingLeft: '10px' }}>
+                        {`Don't show experience level`}
+                    </div>
                 </div>
+                {!isEmpty(skillItems) && (
+                    <SkillItems
+                        items={skillItems}
+                        sectionType={sectionType}
+                        disableLevel={disableLevel}
+                        onRemoveItem={removeItemHandler}
+                        onChangeItem={changeItemHandler}
+                    />
+                )}
+
+                <SectionItemAdditionalButton
+                    onAddItem={addItemHandler}
+                    className={classNames(className)}
+                    sectionType={sectionType}
+                />
             </div>
-            <SkillItems
-                items={skillItems}
-                sectionType={sectionType}
-                disableLevel={disableLevel}
-                onRemoveItem={removeItemHandler}
-                onChangeItem={changeItemHandler}
-            />
-            <SectionItemAdditionalButton
-                onAddItem={addItemHandler}
-                className={classNames(className)}
-                sectionType={sectionType}
-            />
-        </div>
+        </DndContainer>
     );
 };
 

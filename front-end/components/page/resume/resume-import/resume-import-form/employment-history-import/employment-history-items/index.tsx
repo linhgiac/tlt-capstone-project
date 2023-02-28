@@ -20,8 +20,7 @@ const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
     return (
         <Droppable
             id={sectionType}
-            items={items}
-            acceptableItemType={'employmentHistoryItem'}>
+            items={items}>
             <div>
                 {items?.map((item, i) => {
                     return (

@@ -19,6 +19,8 @@ import { Switch } from 'antd';
 import axios from 'axios';
 import { HOST } from '../../../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
+import DndContainer from '../../../../../custom/dndcontainer';
+import { isEmpty } from 'lodash';
 
 type LinkProps = {
     className?: string;
@@ -74,32 +76,44 @@ const LinkImport = (props: LinkProps) => {
         },
         [setLinkItems]
     );
-
+    const dragItemHandler = (items: any) => {
+        setLinkItems(
+            items.map((item: any, i: number) => {
+                return { ...item, position: i + 1 };
+            })
+        );
+    };
     return (
-        <div className={classNames(className)}>
-            <SectionImportTitle
-                onChangeTitle={(title: string) => {
-                    setLinkTitle(title);
-                }}
-                defaultTitle={defaultTitle}>
-                {linkTitle}
-            </SectionImportTitle>
-            <p style={{ color: 'grey', fontSize: '12px' }}>
-                {EDUCATION_DESCRIPTION}
-            </p>
+        <DndContainer
+            onDragEnd={dragItemHandler}
+            items={linkItems}>
+            <div className={classNames(className)}>
+                <SectionImportTitle
+                    onChangeTitle={(title: string) => {
+                        setLinkTitle(title);
+                    }}
+                    defaultTitle={defaultTitle}>
+                    {linkTitle}
+                </SectionImportTitle>
+                <p style={{ color: 'grey', fontSize: '12px' }}>
+                    {EDUCATION_DESCRIPTION}
+                </p>
+                {!isEmpty(linkItems) && (
+                    <LinkItems
+                        items={linkItems}
+                        sectionType={sectionType}
+                        onRemoveItem={removeItemHandler}
+                        onChangeItem={changeItemHandler}
+                    />
+                )}
 
-            <LinkItems
-                items={linkItems}
-                sectionType={sectionType}
-                onRemoveItem={removeItemHandler}
-                onChangeItem={changeItemHandler}
-            />
-            <SectionItemAdditionalButton
-                onAddItem={addItemHandler}
-                className={classNames(className)}
-                sectionType={sectionType}
-            />
-        </div>
+                <SectionItemAdditionalButton
+                    onAddItem={addItemHandler}
+                    className={classNames(className)}
+                    sectionType={sectionType}
+                />
+            </div>
+        </DndContainer>
     );
 };
 
