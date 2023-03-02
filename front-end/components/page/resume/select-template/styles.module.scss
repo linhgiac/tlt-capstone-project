@@ -1,11 +1,13 @@
+
+
 .header{
   background-color: #000;
-  height: 60px;
+  height: 70px;
   position: fixed;
   top: 0px;
   right: 0px;
   left: 0px;
-  line-height: 60px;
+  line-height: 70px;
   z-index: 99;
   div{
     padding: 10px 20px;
@@ -22,25 +24,46 @@
     background-color: rgba(15, 20, 30, 0.15);
   }
 }
+
 .container{
+  height: 100vh;
+  position: fixed;
+  inset: 0px;
+  z-index: 999;
+}
+.layout{
   background-color: #495163;
-  // height: 100vh;
-  display: flex;
-  flex-direction: row;
-  .template{
-    width: 30%;
-    border-right: #fff 1px solid;
-    padding: 30px;
-    padding-top: 90px;
+  height: 100%;
+  // height: calc(100vh - 70px);
+  
+  .template-container{
+    float: left;
+    overflow: scroll;
+    min-height: 100%;
+    // background-color: #495163;
+    width: 40%;
+    // border-right: #fff 1px solid;
+    // padding: 30px;
+    // padding-top: 90px;
+    
+  }
+  .template-list{
+    // padding-top: 90px;
+    padding-bottom: 30px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    overflow-y: auto;
   }
   .resume{
-    padding: 30px;
-    padding-top: 60px;
-    padding-left: 100px;
-    width: 70%;
+    float: right;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    .resume-preview{
+      transform-origin: top center;
+      padding-top: 40px;
+    }
     
   }
 }
@@ -54,4 +77,14 @@
   .thumbnail{
     background-color: #fff;
   }
+}
+
+.action-item{
+  padding: 8px 0px;
+}
+
+.action-item-header{
+  color: white;
+  font-size: 28px;
+  font-weight: 600;
 }

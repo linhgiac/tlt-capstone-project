@@ -16,7 +16,9 @@ type ResumeExportMainProps = {
 const ResumeExportMain = (props: ResumeExportMainProps) => {
     const { className, scale = 0.5 } = props;
     return (
-        <div>
+        <div
+            className={classNames(className)}
+            style={{ transform: `scale(${scale})` }}>
             {/* <TransformWrapper
                 centerOnInit
                 minScale={0.25}

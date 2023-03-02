@@ -27,9 +27,7 @@ const ResumeExport = ({ className, onChangeLayout }: ResumeExportProps) => {
                             styles['resume-export-pagination']
                         )}
                     />
-                    <ResumeExportMain
-                        className={styles['resume-export-main']}
-                    />
+                    <ResumeExportMain />
                     <ResumeExportSelection
                         className={styles['resume-export-selection']}
                         onChangeEditorLayout={onChangeLayout}

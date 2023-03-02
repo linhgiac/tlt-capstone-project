@@ -32,7 +32,7 @@ import {
 import { resumeTitleValueState } from '../../../../recoil-state/resume-state/resume-title.state';
 import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { convertResumeResponse } from '../../../../configs/utils/format.utils';
-import SelectTemplate from '../../../../components/page/resume/select-template';
+import TemplateSelector from '../../../../components/page/resume/select-template';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
@@ -218,7 +218,7 @@ const ResumeEditor = (props: ResumeEditorProps) => {
                     />
                 </div>
             ) : (
-                <SelectTemplate
+                <TemplateSelector
                     onChangeLayout={changeLayoutHandler}
                     templates={templateList}
                 />
