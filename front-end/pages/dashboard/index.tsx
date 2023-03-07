@@ -1,6 +1,6 @@
-import { Button, Divider } from 'antd';
+import { Button, Divider, message, Modal, Upload } from 'antd';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import { DashboardDataType } from '../../configs/interfaces/dashboard.interface';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { MOCKED_DASHBOARD } from '../../mock/dashboard.mock';
@@ -13,6 +13,7 @@ import { getAuthHeader } from '../../configs/restApi/clients';
 import Divide from '../../template/template-01/widgets/divide/Divide';
 import { useSetRecoilState } from 'recoil';
 import { resumeInfoState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
+import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 
 type DashboardProps = {
     dashboardData: DashboardDataType;
@@ -20,7 +21,7 @@ type DashboardProps = {
 
 const Dashboard = (props: DashboardProps) => {
     const { dashboardData } = props;
-
+    const [isImportModalOpen, setIsImportModalOpen] = useState(false);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
     const router = useRouter();
@@ -32,6 +33,7 @@ const Dashboard = (props: DashboardProps) => {
             },
         });
     };
+
     const onCreate = async () => {
         const headers = getAuthHeader();
         const response = await axios.post(
@@ -52,21 +54,67 @@ const Dashboard = (props: DashboardProps) => {
             template: response.data.template,
         });
     };
+
+    const importHandler = () => {};
+
+    const importCancelHanlder = () => {
+        setIsImportModalOpen(false);
+    };
+
+    const uploadChangeHanlder = (info: any) => {
+        if (info.file.status !== 'uploading') {
+            console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+            message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+    };
     return (
         dashboardData && (
             <div className={classNames(styles['dashboard'])}>
                 <div className={classNames(styles['dashboard-header'])}>
                     <h1>Resumes</h1>
-                    <Button
-                        className={styles.button}
-                        size="large"
-                        onClick={onCreate}>
-                        + Create New
-                    </Button>
+                    <div>
+                        <Button
+                            className={styles.button}
+                            size="large"
+                            onClick={() => setIsImportModalOpen(true)}
+                            style={{ marginRight: '10px' }}>
+                            + Import
+                        </Button>
+                        <Button
+                            className={styles.button}
+                            size="large"
+                            onClick={onCreate}>
+                            + Create New
+                        </Button>
+                    </div>
                 </div>
                 <Divider />
                 <DashboardContainer
                     data={dashboardData.data}></DashboardContainer>
+                <Modal
+                    centered
+                    title="Import Resume"
+                    open={isImportModalOpen}
+                    onOk={importHandler}
+                    onCancel={importCancelHanlder}>
+                    <div>
+                        <Upload.Dragger
+                            name={'file'}
+                            onChange={uploadChangeHanlder}
+                            maxCount={1}>
+                            <p style={{ fontSize: '36px' }}>
+                                <InboxOutlined />
+                            </p>
+                            <p className="ant-upload-text">
+                                Click or drag file to this area to upload
+                            </p>
+                        </Upload.Dragger>
+                    </div>
+                </Modal>
             </div>
         )
     );
