@@ -1,6 +1,6 @@
 import { Button, Divider, message, Modal, Upload } from 'antd';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DashboardDataType } from '../../configs/interfaces/dashboard.interface';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { MOCKED_DASHBOARD } from '../../mock/dashboard.mock';
@@ -14,17 +14,26 @@ import Divide from '../../template/template-01/widgets/divide/Divide';
 import { useSetRecoilState } from 'recoil';
 import { resumeInfoState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import { isEmpty } from 'lodash';
 
 type DashboardProps = {
     dashboardData: DashboardDataType;
+    error: any;
 };
 
 const Dashboard = (props: DashboardProps) => {
-    const { dashboardData } = props;
+    const { dashboardData, error } = props;
+
     const [isImportModalOpen, setIsImportModalOpen] = useState(false);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
     const router = useRouter();
+    useEffect(() => {
+        if (error) {
+            router.push('/');
+        }
+    }, [error, router]);
+
     const onSelect = (id: number) => {
         router.push({
             pathname: '/resumes/[id]/edit',
@@ -131,15 +140,25 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const defaultReturnProps = {
         currentLayout: LAYOUT.DEFAULT,
     };
-    const headers = getAuthHeader({ req, res });
-    const resume = await axios.get(`${HOST}resume/`, {
-        headers: headers,
-    });
+    try {
+        const headers = getAuthHeader({ req, res });
 
-    return {
-        props: {
-            ...defaultReturnProps,
-            dashboardData: resume === null ? null : { data: resume.data },
-        },
-    };
+        const resume = await axios.get(`${HOST}resume/`, {
+            headers: headers,
+        });
+
+        return {
+            props: {
+                ...defaultReturnProps,
+                dashboardData: resume === null ? null : { data: resume.data },
+            },
+        };
+    } catch (error: any) {
+        return {
+            props: {
+                ...defaultReturnProps,
+                error: JSON.stringify(error),
+            },
+        };
+    }
 };

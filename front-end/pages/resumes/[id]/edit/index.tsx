@@ -33,15 +33,19 @@ import { resumeTitleValueState } from '../../../../recoil-state/resume-state/res
 import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { convertResumeResponse } from '../../../../configs/utils/format.utils';
 import TemplateSelector from '../../../../components/page/resume/select-template';
+import { userLoginState } from '../../../../recoil-state/user-state/user-state';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
     templateList?: any;
+    error?: any;
 };
 
 const ResumeEditor = (props: ResumeEditorProps) => {
-    const { initialResumeData, templateList } = props;
+    const { initialResumeData, templateList, error } = props;
     console.log('initialResumeData :>> ', initialResumeData);
+
+    const isLogged = useRecoilValue(userLoginState);
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
 
     const resumeData = useRecoilValue(resumeChangedValueState);
@@ -71,6 +75,15 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     const [isEditing, setIsEditing] = useState(true);
 
     setResumeSaved(initialResumeData);
+
+    const router = useRouter();
+
+    useEffect(() => {
+        if (error || isEmpty(initialResumeData) || !isLogged) {
+            router.push('/');
+        }
+    }, [error, initialResumeData, isLogged, router]);
+
     useEffect(() => {
         console.log('resumeData', resumeData);
     }, [resumeData]);
