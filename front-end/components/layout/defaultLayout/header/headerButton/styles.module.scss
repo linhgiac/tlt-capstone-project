@@ -10,3 +10,9 @@
     background-color: transparent;
   }
 }
+
+.logged-button__container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

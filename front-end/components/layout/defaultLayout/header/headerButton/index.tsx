@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Avatar, Button, Dropdown } from 'antd';
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
@@ -9,6 +9,9 @@ import axios from 'axios';
 import { HOST } from '../../../../../configs/constants/misc';
 import { deleteCookie, getCookie, hasCookie } from 'cookies-next';
 import { getAuthHeader } from '../../../../../configs/restApi/clients';
+import { UserOutlined } from '@ant-design/icons';
+import LoginButton from './loginButton';
+import LoggedButton from './loggedButton';
 
 type HeaderButtonProps = {
     className: string;
@@ -26,7 +29,7 @@ const HeaderButton = (props: HeaderButtonProps) => {
             setIsLogged(true);
         }
     }, []);
-    
+
     console.log('isLogged', isLogged);
     const logoutHandler = async () => {
         try {
@@ -42,73 +45,18 @@ const HeaderButton = (props: HeaderButtonProps) => {
             );
             deleteCookie('tokenAccess');
             deleteCookie('tokenRefresh');
-            router.replace('/');
+            router.push('/');
             router.reload();
-        } catch (error) {
-        }
+        } catch (error) {}
         setIsLoading(false);
     };
 
     return (
         <div className={classNames(className)}>
             {!isLogged ? (
-                <>
-                    <Button
-                        className={classNames(
-                            'm-l-8',
-                            'h-40px',
-                            styles['text-button'],
-                            styles['button']
-                        )}
-                        size="large"
-                        type="text"
-                        onClick={() => {
-                            router.push('/log-in');
-                        }}>
-                        Log in
-                    </Button>
-                    <Button
-                        className={classNames(
-                            'm-l-8',
-                            'h-40px ',
-                            'btn-lg-b-r-6',
-                            styles['button']
-                        )}
-                        size="large"
-                        type="primary"
-                        onClick={() => router.push('/register')}>
-                        Sign Up
-                    </Button>
-                </>
+                <LoginButton />
             ) : (
-                <>
-                    <Button
-                        className={classNames(
-                            'm-l-8',
-                            'h-40px',
-                            styles['text-button'],
-                            styles['button']
-                        )}
-                        size="large"
-                        type="text"
-                        onClick={() => {
-                            router.push('/dashboard');
-                        }}>
-                        My Resume
-                    </Button>
-                    <Button
-                        className={classNames(
-                            'm-l-8',
-                            'h-40px ',
-                            'btn-lg-b-r-6',
-                            styles['button']
-                        )}
-                        size="large"
-                        type="primary"
-                        onClick={logoutHandler}>
-                        Logout
-                    </Button>
-                </>
+                <LoggedButton onLogout={logoutHandler} />
             )}
         </div>
     );
