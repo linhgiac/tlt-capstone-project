@@ -21,7 +21,14 @@ const LoggedButton = (props: Props) => {
             children: [
                 {
                     key: 'settings',
-                    label: <div>Account Settings</div>,
+                    label: (
+                        <div
+                            onClick={() => {
+                                router.push('/account');
+                            }}>
+                            Account Settings
+                        </div>
+                    ),
                 },
                 {
                     key: 'logout',
@@ -54,6 +61,7 @@ const LoggedButton = (props: Props) => {
 
             <Menu
                 items={items}
+                selectedKeys={[]}
                 mode="horizontal"
             />
 
