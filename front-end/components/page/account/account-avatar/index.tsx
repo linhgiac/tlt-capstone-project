@@ -8,10 +8,11 @@ import styles from './styles.module.scss';
 
 type Props = {
     className?: string;
+    onChangeAvatar: (value: any) => void;
 };
 
 const AccountAvatar = (props: Props) => {
-    const { className } = props;
+    const { className, onChangeAvatar } = props;
     const [file, setFile] = useState<UploadFile>();
     const [avatarURL, setAvatarURL] = useState('');
 
@@ -24,6 +25,7 @@ const AccountAvatar = (props: Props) => {
         setFile(info.file);
         if (info.file.originFileObj) {
             setAvatarURL(URL.createObjectURL(info.file.originFileObj));
+            onChangeAvatar(info.file.originFileObj);
         }
         console.log('info', info.file);
     };

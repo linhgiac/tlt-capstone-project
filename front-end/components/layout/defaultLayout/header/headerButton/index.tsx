@@ -27,6 +27,8 @@ const HeaderButton = (props: HeaderButtonProps) => {
         if (hasCookie('tokenAccess')) {
             console.log('getCookie:>> ', hasCookie('tokenAccess'));
             setIsLogged(true);
+        } else {
+            setIsLogged(false);
         }
     }, []);
 

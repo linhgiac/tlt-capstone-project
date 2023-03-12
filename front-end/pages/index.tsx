@@ -20,6 +20,8 @@ const Home: NextPage = props => {
         const hasToken = hasCookie('tokenRefresh');
         if (hasToken) {
             setIsLogged(true);
+        } else {
+            setIsLogged(false);
         }
     }, [setIsLogged]);
 
