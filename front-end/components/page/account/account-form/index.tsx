@@ -29,6 +29,7 @@ const AccountForm = (props: Props) => {
                     if (avatar) {
                         value.avatar = avatar;
                     }
+                    console.log('value', value);
                 }}>
                 <Form.Item name="avatar">
                     <AccountAvatar
@@ -53,16 +54,27 @@ const AccountForm = (props: Props) => {
                             type: 'email',
                             message: 'The input is not valid E-mail!',
                         },
-                        {
-                            required: true,
-                            message: 'Please input your E-mail!',
-                        },
                     ]}>
                     <Input />
                 </Form.Item>
                 <Form.Item
                     name="phone"
                     label="Phone">
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="country"
+                    label="Country">
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="city"
+                    label="City">
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="address"
+                    label="Address">
                     <Input />
                 </Form.Item>
                 <Form.Item>

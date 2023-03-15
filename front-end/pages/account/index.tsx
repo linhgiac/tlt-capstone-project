@@ -23,19 +23,29 @@ const AccountSettings = (props: Props) => {
     }, [userData]);
 
     return (
-        <div className={classNames(styles['setting__container'])}>
-            <div className={classNames(styles['setting-title'])}>
-                Account Settings
-            </div>
-            <div className={classNames(styles['account__container'])}>
-                <div className={classNames(styles['account-title'])}>
-                    Account
+        <div
+            style={{
+                backgroundColor: 'rgb(239, 242, 249)',
+                display: 'flex',
+                justifyContent: 'center',
+            }}>
+            <div className={classNames(styles['setting__container'])}>
+                <div className={classNames(styles['setting-title'])}>
+                    Account Settings
                 </div>
-                <div className={classNames(styles['account-form__container'])}>
-                    {/* <AccountAvatar
+                <div className={classNames(styles['account__container'])}>
+                    <div className={classNames(styles['account-title'])}>
+                        Account
+                    </div>
+                    <div
+                        className={classNames(
+                            styles['account-form__container']
+                        )}>
+                        {/* <AccountAvatar
                         className={classNames(styles['account-avatar'])}
                     /> */}
-                    <AccountForm data={user} />
+                        <AccountForm data={user} />
+                    </div>
                 </div>
             </div>
         </div>

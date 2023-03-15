@@ -2,7 +2,7 @@
   padding: 50px 0px;
   padding-bottom: 70px;
   width: 100vw;
-  background-color:rgb(239, 242, 249);
+  // background-color:rgb(239, 242, 249);
 }
 .setting-title{
   font-size: 24px;
@@ -27,5 +27,15 @@
 .account-form__container{
   background-color: white;
   width: 100%;
-  padding: 20px
+  padding: 20px;
+  padding-top: 40px;
 }
+
+@media (min-width: 768px) {
+  .setting__container{
+    width: 656px;
+  }
+  .account-form__container{
+    border-radius: 8px;
+  }
+ }
