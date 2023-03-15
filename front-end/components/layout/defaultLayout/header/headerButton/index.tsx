@@ -24,11 +24,9 @@ const HeaderButton = (props: HeaderButtonProps) => {
     const router = useRouter();
 
     useEffect(() => {
-        if (hasCookie('tokenAccess')) {
-            console.log('getCookie:>> ', hasCookie('tokenAccess'));
+        if (hasCookie('accessToken')) {
+            console.log('getCookie:>> ', hasCookie('accessToken'));
             setIsLogged(true);
-        } else {
-            setIsLogged(false);
         }
     }, []);
 
@@ -37,7 +35,7 @@ const HeaderButton = (props: HeaderButtonProps) => {
         try {
             setIsLoading(true);
             const headers = getAuthHeader();
-            const refresh = getCookie('tokenRefresh');
+            const refresh = getCookie('refreshToken');
             const response = await axios.post<any>(
                 `${HOST}accounts/logout/`,
                 { refresh: refresh },
@@ -45,8 +43,8 @@ const HeaderButton = (props: HeaderButtonProps) => {
                     headers: headers,
                 }
             );
-            deleteCookie('tokenAccess');
-            deleteCookie('tokenRefresh');
+            deleteCookie('accessToken');
+            deleteCookie('refreshToken');
             router.push('/');
             router.reload();
         } catch (error) {}

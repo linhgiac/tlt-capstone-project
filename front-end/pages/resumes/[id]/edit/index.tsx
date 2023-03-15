@@ -34,6 +34,7 @@ import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { convertResumeResponse } from '../../../../configs/utils/format.utils';
 import TemplateSelector from '../../../../components/page/resume/select-template';
 import { userLoginState } from '../../../../recoil-state/user-state/user-state';
+import { hasCookie } from 'cookies-next';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
@@ -79,10 +80,10 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     const router = useRouter();
 
     useEffect(() => {
-        if (error || isEmpty(initialResumeData) || !isLogged) {
+        if (error || isEmpty(initialResumeData) || !hasCookie('accessToken')) {
             router.push('/');
         }
-    }, [error, initialResumeData, isLogged, router]);
+    }, [error, initialResumeData, router]);
 
     useEffect(() => {
         console.log('resumeData', resumeData);

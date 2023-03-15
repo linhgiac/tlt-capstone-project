@@ -15,6 +15,7 @@ import { useSetRecoilState } from 'recoil';
 import { resumeInfoState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import { isEmpty } from 'lodash';
+import { hasCookie } from 'cookies-next';
 
 type DashboardProps = {
     dashboardData: DashboardDataType;
@@ -29,7 +30,7 @@ const Dashboard = (props: DashboardProps) => {
 
     const router = useRouter();
     useEffect(() => {
-        if (error) {
+        if (error || !hasCookie('accessToken')) {
             router.push('/');
         }
     }, [error, router]);

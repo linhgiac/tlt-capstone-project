@@ -49,8 +49,8 @@ const LoginContent = (props: Props) => {
                     },
                 }
             );
-            setCookie('tokenAccess', response.data.access);
-            setCookie('tokenRefresh', response.data.refresh);
+            setCookie('accessToken', response.data.access);
+            setCookie('refreshToken', response.data.refresh);
             setIsLogged(true);
             router.replace('/');
         } catch (error: any) {

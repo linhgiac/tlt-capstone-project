@@ -17,7 +17,7 @@ export const getAuthHeader = (
 ) => {
     const { req, res } = options;
     // Calling tracker
-    const accessToken = getCookie('tokenAccess', { req, res });
+    const accessToken = getCookie('accessToken', { req, res });
 
     const headers: any = {
         'Access-Control-Allow-Origin': '*',
