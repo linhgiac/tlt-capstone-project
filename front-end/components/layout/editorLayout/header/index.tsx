@@ -2,6 +2,7 @@ import { Button } from 'antd';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import React from 'react';
+import ATSRecommendations from './ats-recommendations';
 import styles from './styles.module.scss';
 
 type Props = {};
@@ -28,6 +29,7 @@ const EditorHeader = (props: Props) => {
                 }}>
                 My resume
             </Button>
+            <ATSRecommendations></ATSRecommendations>
         </div>
     );
 };
