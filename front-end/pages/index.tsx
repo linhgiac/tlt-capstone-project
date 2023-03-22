@@ -17,12 +17,10 @@ const Home: NextPage = props => {
     const router = useRouter();
     const setIsLogged = useSetRecoilState(userLoginState);
     useEffect(() => {
-        const hasToken = hasCookie('tokenRefresh');
+        const hasToken = hasCookie('refreshToken');
         if (hasToken) {
             setIsLogged(true);
-        } else {
-            setIsLogged(false);
-        }
+        } 
     }, [setIsLogged]);
 
     return <HomeContent />;
