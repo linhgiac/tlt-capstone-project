@@ -5,7 +5,7 @@ import React, { useRef, useState } from 'react';
 import DownloadButton from '../../../custom/downnload-button';
 import ResumeExportMain from '../resume-export/resume-export-main';
 import ActionList from './action-list';
-import LayoutEditor from './edit-layout';
+import LayoutEditor from './layout-editor';
 import styles from './styles.module.scss';
 import TemplateItem from './template-list';
 import TemplateList from './template-list';
@@ -115,6 +115,7 @@ const TemplateSelector = (props: Props) => {
                                         border: 'solid 0.5px white',
                                         marginBottom: '20px',
                                     }}></div>
+                                <LayoutEditor />
                             </div>
                         </div>
                     </Sider>
