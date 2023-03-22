@@ -1,7 +1,7 @@
 import React from 'react';
 import { LinkItemDataType } from '../../../../../../../configs/interfaces/resume.interface';
 import Draggable from '../../../../../../custom/draggable';
-import Droppable from '../../../../../../custom/droppable';
+import SingleDroppable from '../../../../../../custom/single-sortable/single-droppable';
 import SectionItem from '../../../../../../custom/section-item';
 
 type LinkItemsProps = {
@@ -16,7 +16,7 @@ const LinkItems = (props: LinkItemsProps) => {
     const { className, sectionType, items, onRemoveItem, onChangeItem } = props;
 
     return (
-        <Droppable
+        <SingleDroppable
             id={sectionType}
             items={items}>
             <div>
@@ -25,7 +25,8 @@ const LinkItems = (props: LinkItemsProps) => {
                         key={i}
                         index={i}
                         position={item.position}
-                        item={item}>
+                        item={item}
+                        dragIcon={true}>
                         <SectionItem
                             key={i}
                             index={i}
@@ -41,7 +42,7 @@ const LinkItems = (props: LinkItemsProps) => {
                     </Draggable>
                 ))}
             </div>
-        </Droppable>
+        </SingleDroppable>
     );
 };
 

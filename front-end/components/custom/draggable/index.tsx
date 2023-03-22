@@ -13,9 +13,17 @@ type Props = {
     children: React.ReactNode;
     item: any;
     isVisibleForm?: boolean;
+    dragIcon?: boolean;
 };
 const Draggable = (props: Props) => {
-    const { children, isVisibleForm, position, index, item } = props;
+    const {
+        children,
+        isVisibleForm,
+        position,
+        index,
+        item,
+        dragIcon = false,
+    } = props;
     const { attributes, listeners, setNodeRef, transform, transition } =
         useSortable({
             id: position,
@@ -26,17 +34,20 @@ const Draggable = (props: Props) => {
     };
     return (
         <div
-            key={item.id}
             style={style}
             ref={setNodeRef}>
-            <div className={classNames(styles.container)}>
-                <div
-                    className={classNames({ hidden: isVisibleForm })}
-                    {...listeners}>
-                    <HolderOutlined />
+            {dragIcon ? (
+                <div className={classNames(styles.container)}>
+                    <div
+                        className={classNames({ hidden: isVisibleForm })}
+                        {...listeners}>
+                        <HolderOutlined />
+                    </div>
+                    {children}
                 </div>
-                {children}
-            </div>
+            ) : (
+                <div {...listeners}>{children}</div>
+            )}
         </div>
     );
 };

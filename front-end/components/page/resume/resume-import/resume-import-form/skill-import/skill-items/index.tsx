@@ -2,7 +2,7 @@ import { position } from 'html2canvas/dist/types/css/property-descriptors/positi
 import React from 'react';
 import { SkillItemDataType } from '../../../../../../../configs/interfaces/resume.interface';
 import Draggable from '../../../../../../custom/draggable';
-import Droppable from '../../../../../../custom/droppable';
+import SingleDroppable from '../../../../../../custom/single-sortable/single-droppable';
 import SectionItem from '../../../../../../custom/section-item';
 
 type SkillItemsProps = {
@@ -25,7 +25,7 @@ const SkillItems = (props: SkillItemsProps) => {
     } = props;
 
     return (
-        <Droppable
+        <SingleDroppable
             id={sectionType}
             items={items}>
             <div>
@@ -34,7 +34,8 @@ const SkillItems = (props: SkillItemsProps) => {
                         key={i}
                         index={i}
                         position={item.position}
-                        item={item}>
+                        item={item}
+                        dragIcon={true}>
                         <SectionItem
                             key={i}
                             index={i}
@@ -49,7 +50,7 @@ const SkillItems = (props: SkillItemsProps) => {
                     </Draggable>
                 ))}
             </div>
-        </Droppable>
+        </SingleDroppable>
     );
 };
 

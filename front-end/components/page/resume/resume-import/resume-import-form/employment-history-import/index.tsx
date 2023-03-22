@@ -18,8 +18,9 @@ import {
 import { HOST } from '../../../../../../configs/constants/misc';
 import axios from 'axios';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
-import DndContainer from '../../../../../custom/dndcontainer';
 import { isEmpty } from 'lodash';
+import SingleDndContainer from '../../../../../custom/single-sortable/single-dndcontainer';
+import { DragOverlay } from '@dnd-kit/core';
 
 type EmploymentHistoryProps = {
     className?: string;
@@ -100,6 +101,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
     );
 
     const dragItemHandler = (items: any) => {
+        console.log('employment items', items);
         setEmploymentHistoryItems(
             items.map((item: any, i: number) => {
                 return { ...item, position: i + 1 };
@@ -107,7 +109,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         );
     };
     return (
-        <DndContainer
+        <SingleDndContainer
             onDragEnd={dragItemHandler}
             items={employmentHistoryItems}>
             <div className={classNames(className)}>
@@ -137,7 +139,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
                     sectionType={sectionType}
                 />
             </div>
-        </DndContainer>
+        </SingleDndContainer>
     );
 };
 

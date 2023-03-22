@@ -15,7 +15,6 @@ import PersonalDetailsImport from './personal-details-import';
 import ProfessionalSummaryImport from './professional-summary-import';
 import SkillImport from './skill-import';
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
-import DndContainer from '../../../../custom/dndcontainer';
 
 type Props = {
     className?: string;

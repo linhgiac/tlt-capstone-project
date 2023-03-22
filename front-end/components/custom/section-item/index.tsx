@@ -17,7 +17,6 @@ import {
 } from '../../../configs/interfaces/resume.interface';
 import moment from 'moment';
 import { isEmpty } from 'lodash';
-import Draggable from '../draggable';
 
 type Props = {
     index: number;

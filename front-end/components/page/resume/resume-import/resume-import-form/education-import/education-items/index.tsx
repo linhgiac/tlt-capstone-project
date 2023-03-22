@@ -1,8 +1,8 @@
 import React from 'react';
 import { EducationItemDataType } from '../../../../../../../configs/interfaces/resume.interface';
 import Draggable from '../../../../../../custom/draggable';
-import Droppable from '../../../../../../custom/droppable';
 import SectionItem from '../../../../../../custom/section-item';
+import SingleDroppable from '../../../../../../custom/single-sortable/single-droppable';
 
 type EducationItemsProps = {
     className?: string;
@@ -16,7 +16,7 @@ const EducationItems = (props: EducationItemsProps) => {
     const { className, sectionType, items, onRemoveItem, onChangeItem } = props;
 
     return (
-        <Droppable
+        <SingleDroppable
             id={sectionType}
             items={items}>
             <div>
@@ -26,7 +26,8 @@ const EducationItems = (props: EducationItemsProps) => {
                             key={i}
                             index={i}
                             position={item.position}
-                            item={item}>
+                            item={item}
+                            dragIcon={true}>
                             <SectionItem
                                 key={i}
                                 index={i}
@@ -46,7 +47,7 @@ const EducationItems = (props: EducationItemsProps) => {
                     );
                 })}
             </div>
-        </Droppable>
+        </SingleDroppable>
     );
 };
 

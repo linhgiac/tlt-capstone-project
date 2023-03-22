@@ -11,10 +11,11 @@ type Props = {
     children: React.ReactNode;
 };
 
-const Droppable = (props: Props) => {
+const SingleDroppable = (props: Props) => {
     const { id, items, children } = props;
     return (
         <SortableContext
+            id={id}
             items={items?.map((_, index) => index + 1)}
             strategy={verticalListSortingStrategy}>
             {children}
@@ -22,4 +23,4 @@ const Droppable = (props: Props) => {
     );
 };
 
-export default Droppable;
+export default SingleDroppable;

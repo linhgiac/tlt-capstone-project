@@ -23,8 +23,8 @@ import { Switch } from 'antd';
 import axios from 'axios';
 import { HOST } from '../../../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
-import DndContainer from '../../../../../custom/dndcontainer';
 import { isEmpty } from 'lodash';
+import SingleDndContainer from '../../../../../custom/single-sortable/single-dndcontainer';
 
 type SkillProps = {
     className?: string;
@@ -104,7 +104,7 @@ const SkillImport = (props: SkillProps) => {
     };
 
     return (
-        <DndContainer
+        <SingleDndContainer
             onDragEnd={dragItemHandler}
             items={skillItems}>
             <div className={classNames(className)}>
@@ -143,7 +143,7 @@ const SkillImport = (props: SkillProps) => {
                     sectionType={sectionType}
                 />
             </div>
-        </DndContainer>
+        </SingleDndContainer>
     );
 };
 

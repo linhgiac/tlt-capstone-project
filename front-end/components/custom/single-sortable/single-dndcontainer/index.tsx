@@ -13,10 +13,11 @@ type Props = {
     children: React.ReactNode;
     items: any;
     onDragEnd: (items: any[]) => void;
+    isMultiDrop?: boolean;
 };
 
-const DndContainer = (props: Props) => {
-    const { children, items, onDragEnd } = props;
+const SingleDndContainer = (props: Props) => {
+    const { children, items, onDragEnd, isMultiDrop = false } = props;
     const [newItems, setNewItems] = useState<any[]>([]);
     console.log('itemssssssss', items);
 
@@ -29,8 +30,8 @@ const DndContainer = (props: Props) => {
 
     const dragEndHandler = (event: any) => {
         const { active, over } = event;
-        console.log('active', active.id);
-        console.log('over', over.id);
+        console.log('active', active);
+        console.log('over', over);
         if (active.id !== over.id) {
             setNewItems((prevItems: any) => {
                 const oldIndex = +active.id - 1;
@@ -52,4 +53,4 @@ const DndContainer = (props: Props) => {
     );
 };
 
-export default DndContainer;
+export default SingleDndContainer;

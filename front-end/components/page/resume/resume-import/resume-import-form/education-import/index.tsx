@@ -19,8 +19,8 @@ import {
 import axios from 'axios';
 import { HOST } from '../../../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
-import DndContainer from '../../../../../custom/dndcontainer';
 import { isEmpty } from 'lodash';
+import SingleDndContainer from '../../../../../custom/single-sortable/single-dndcontainer';
 
 type EducationProps = {
     className?: string;
@@ -88,7 +88,7 @@ const EducationImport = (props: EducationProps) => {
     };
 
     return (
-        <DndContainer
+        <SingleDndContainer
             onDragEnd={dragItemHandler}
             items={educationItems}>
             <div className={classNames(className)}>
@@ -117,7 +117,7 @@ const EducationImport = (props: EducationProps) => {
                     sectionType={sectionType}
                 />
             </div>
-        </DndContainer>
+        </SingleDndContainer>
     );
 };
 

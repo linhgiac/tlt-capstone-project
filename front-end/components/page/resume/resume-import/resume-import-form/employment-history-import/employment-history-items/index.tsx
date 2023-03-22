@@ -2,7 +2,7 @@ import { isEmpty } from 'lodash';
 import React from 'react';
 import { EmploymentHistoryItemDataType } from '../../../../../../../configs/interfaces/resume.interface';
 import Draggable from '../../../../../../custom/draggable';
-import Droppable from '../../../../../../custom/droppable';
+import SingleDroppable from '../../../../../../custom/single-sortable/single-droppable';
 import SectionItem from '../../../../../../custom/section-item';
 
 type EmploymentHistoryItemsProps = {
@@ -18,7 +18,7 @@ const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
     const { className, sectionType, items, onRemoveItem, onChangeItem } = props;
 
     return (
-        <Droppable
+        <SingleDroppable
             id={sectionType}
             items={items}>
             <div>
@@ -28,7 +28,8 @@ const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
                             key={i}
                             index={i}
                             position={item.position}
-                            item={item}>
+                            item={item}
+                            dragIcon={true}>
                             <SectionItem
                                 index={i}
                                 position={item.position}
@@ -49,7 +50,7 @@ const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
                     );
                 })}
             </div>
-        </Droppable>
+        </SingleDroppable>
     );
 };
 

@@ -19,8 +19,8 @@ import { Switch } from 'antd';
 import axios from 'axios';
 import { HOST } from '../../../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
-import DndContainer from '../../../../../custom/dndcontainer';
 import { isEmpty } from 'lodash';
+import SingleDndContainer from '../../../../../custom/single-sortable/single-dndcontainer';
 
 type LinkProps = {
     className?: string;
@@ -84,7 +84,7 @@ const LinkImport = (props: LinkProps) => {
         );
     };
     return (
-        <DndContainer
+        <SingleDndContainer
             onDragEnd={dragItemHandler}
             items={linkItems}>
             <div className={classNames(className)}>
@@ -113,7 +113,7 @@ const LinkImport = (props: LinkProps) => {
                     sectionType={sectionType}
                 />
             </div>
-        </DndContainer>
+        </SingleDndContainer>
     );
 };
 
