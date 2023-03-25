@@ -4,6 +4,7 @@ import { Layout } from 'antd';
 import styles from './styles.module.scss';
 import HeaderRouter from './headerRouter';
 import HeaderButton from './headerButton';
+import ChangeLanguageButton from '../../../custom/change-language-button';
 
 const { Header } = Layout;
 type Props = {};
@@ -20,6 +21,7 @@ const DefaultHeader = (props: Props) => {
             <div className={styles['right-header']}>
                 <HeaderRouter />
                 <HeaderButton className={styles.button} />
+                <ChangeLanguageButton></ChangeLanguageButton>
             </div>
         </Header>
     );

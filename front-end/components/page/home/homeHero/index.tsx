@@ -5,20 +5,22 @@ import { Button, Typography } from 'antd';
 import HomeCard from '../homeCard';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { useTranslation } from 'next-i18next'
 const { Text, Title } = Typography;
 type HomeHeroProps = {
     className: string;
 };
 
 const HomeHero = (props: HomeHeroProps) => {
+    const { t } = useTranslation();
     const { className } = props;
     const router = useRouter();
-    const DESCRIPTION =
-        'Use professional field-tested resume templates that follow the exact ‘resume rules’ employers look for';
+    const TITLE = t('home-title');
+    const DESCRIPTION = t("home-description");
     return (
         <HomeCard
             className={styles['home-hero-container']}
-            title={'Online Resume Builder'}
+            title={TITLE}
             description={DESCRIPTION}>
             <Button
                 type="primary"
@@ -27,7 +29,7 @@ const HomeHero = (props: HomeHeroProps) => {
                 onClick={() => {
                     router.push('/templates');
                 }}>
-                Create My Resume
+                {t('home-create-button')}
             </Button>
             <div className={styles['image']}>
                 
