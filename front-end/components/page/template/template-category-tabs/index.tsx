@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Tabs } from 'antd';
+import { useTranslation, UseTranslation } from 'next-i18next';
 
 type TemplateCategoryButtonProps = {
     activeKey: string,
@@ -9,30 +10,30 @@ type TemplateCategoryButtonProps = {
 
 const TemplateCategoryTabs = (props: TemplateCategoryButtonProps) => {
     const { activeKey, onChange } = props;
-
+    const { t } = useTranslation();
     return (
         <Tabs
             activeKey={activeKey}
             onChange={onChange}
             items={[
                 {
-                    label: `All templates`,
+                    label: t('template-all-tab', {ns: 'template'}),
                     key: 'all',
                 },
                 {
-                    label: `Creative`,
+                    label:  t('template-creative-tab', {ns: 'template'}),
                     key: 'creative',
                 },
                 {
-                    label: `Simple`,
+                    label:  t('template-simple-tab', {ns: 'template'}),
                     key: 'simple',
                 },
                 {
-                    label: `Professional`,
+                    label: t('template-professional-tab', {ns: 'template'}),
                     key: 'professional',
                 },
                 {
-                    label: `Modern`,
+                    label: t('template-modern-tab', {ns: 'template'}),
                     key: 'modern',
                 },
             ]}>

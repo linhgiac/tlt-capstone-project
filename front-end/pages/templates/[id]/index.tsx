@@ -3,7 +3,6 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.scss'
-import { MOCKED_TEMPLATES } from '../../../mock/resume.mock';
 import {
     TemplateCategoryType,
     TemplatesDataType,
@@ -13,6 +12,8 @@ import TemplateCategoryTabs from '../../../components/page/template/template-cat
 import TemplateContainer from '../../../components/page/template/template-container';
 import axios from 'axios';
 import { HOST } from '../../../configs/constants/misc';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 type TemplatesProps = {
     templatesData: TemplatesDataType;
@@ -20,18 +21,13 @@ type TemplatesProps = {
 
 const Templates = (props: TemplatesProps) => {
     const { templatesData } = props;
-
+    const {t} = useTranslation();
     const router = useRouter();
     const id = router.query.id as string;
-    // const [category, setCategory] = useState('all')
-    // console.log('category', category);
-    // console.log('pre-rendering data', templatesData);
+
 
     const onChangeCategory = (newId: string) => {
         console.log('Change category');
-        // if (category === "all")
-        //     router.replace("/templates");
-        // else
         router.replace('/templates/' + newId);
     };
 
@@ -62,7 +58,7 @@ const Templates = (props: TemplatesProps) => {
                             pathname: '/dashboard',
                         });
                     }}>
-                    Create My Resume
+                    {t('template-create-button', {ns: 'template'})}
                 </Button>
             </div>
             <div className="center p-t-32">
@@ -79,18 +75,6 @@ const Templates = (props: TemplatesProps) => {
 };
 
 export default Templates;
-
-// export const getServerSideProps: GetServerSideProps = async context => {
-//     const category =
-//         context.params === undefined || context.params.id === undefined
-//             ? 'all'
-//             : context.params.id;
-//     return {
-//         props: {
-//             templatesData: MOCKED_TEMPLATES[category as TemplateCategoryType],
-//         },
-//     };
-// };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const getUrl = (category: any) => {
@@ -110,9 +94,20 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
             },
         })
 
-    console.log(templates.data);
-
-    return {
-        props: { templatesData: templates === null ? null : { data: templates.data } }
+    // console.log(templates.data);
+    if(ctx.params === undefined || ctx.params.id === undefined) {
+        return {
+            props: { 
+                templatesData: templates === null ? null : { data: templates.data },
+            }
+        }    
+    } else {
+        const {locale} = ctx;
+        return {
+            props: { 
+                templatesData: templates === null ? null : { data: templates.data },
+                ...await serverSideTranslations(locale as string, ['template']),
+            }
+        }
     }
 }

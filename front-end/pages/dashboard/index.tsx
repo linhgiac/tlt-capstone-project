@@ -16,6 +16,9 @@ import { resumeInfoState } from '../../recoil-state/resume-state/resume-changed-
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import { isEmpty } from 'lodash';
 import { hasCookie } from 'cookies-next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { locale } from 'dayjs';
 
 type DashboardProps = {
     dashboardData: DashboardDataType;
@@ -24,7 +27,7 @@ type DashboardProps = {
 
 const Dashboard = (props: DashboardProps) => {
     const { dashboardData, error } = props;
-
+    const { t } = useTranslation();
     const [isImportModalOpen, setIsImportModalOpen] = useState(false);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
@@ -85,20 +88,20 @@ const Dashboard = (props: DashboardProps) => {
         dashboardData && (
             <div className={classNames(styles['dashboard'])}>
                 <div className={classNames(styles['dashboard-header'])}>
-                    <h1>Resumes</h1>
+                    <h1>{t('dashboard-header', {ns: 'dashboard'})}</h1>
                     <div>
                         <Button
                             className={styles.button}
                             size="large"
                             onClick={() => setIsImportModalOpen(true)}
                             style={{ marginRight: '10px' }}>
-                            + Import
+                            {t('dashboard-import', {ns: 'dashboard'})}
                         </Button>
                         <Button
                             className={styles.button}
                             size="large"
                             onClick={onCreate}>
-                            + Create New
+                            {t('dashboard-create-new', {ns: 'dashboard'})}
                         </Button>
                     </div>
                 </div>
@@ -107,10 +110,12 @@ const Dashboard = (props: DashboardProps) => {
                     data={dashboardData.data}></DashboardContainer>
                 <Modal
                     centered
-                    title="Import Resume"
+                    title={t('dashboard-import-title', {ns: 'dashboard'})}
                     open={isImportModalOpen}
                     onOk={importHandler}
-                    onCancel={importCancelHanlder}>
+                    onCancel={importCancelHanlder}
+                    okText={t('dashboard-confirm-text', {ns: 'dashboard'}) as string}
+                    cancelText={t('dashboard-cancel-text', {ns: 'dashboard'}) as string}>
                     <div>
                         <Upload.Dragger
                             name={'file'}
@@ -120,7 +125,7 @@ const Dashboard = (props: DashboardProps) => {
                                 <InboxOutlined />
                             </p>
                             <p className="ant-upload-text">
-                                Click or drag file to this area to upload
+                                {t('dashboard-upload-file', {ns: 'dashboard'})}
                             </p>
                         </Upload.Dragger>
                     </div>
@@ -147,10 +152,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         const resume = await axios.get(`${HOST}resume/`, {
             headers: headers,
         });
-
+        const {locale} = ctx
         return {
             props: {
                 ...defaultReturnProps,
+                ...await serverSideTranslations(locale as string, ['dashboard']),
                 dashboardData: resume === null ? null : { data: resume.data },
             },
         };

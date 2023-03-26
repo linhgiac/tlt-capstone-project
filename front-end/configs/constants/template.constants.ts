@@ -1,27 +1,27 @@
 export const TEMPLATE_HEADER = {
     "all": {
         "logo": "/image/all_template.png",
-        "header": "Job-winning resume templates",
-        "description": "Each resume template is expertly designed and follows the exact “resume rules” hiring managers look for. Stand out and get hired faster with field-tested resume templates."
+        "header": "template-all-header",
+        "description": "template-all-description"
     },
     "creative": {
         "logo": "/image/creative_template.png",
-        "header": "Job-winning creative resume templates",
-        "description": "Each template is expertly designed and follows the exact “resume rules” hiring managers look for. Stand out and get hired faster with field-tested resume templates."
+        "header": "template-creative-header",
+        "description": "template-creative-description"
     },
     "simple": {
         "logo": "/image/simple_template.png",
-        "header": "Job-winning simple resume templates",
-        "description": "Each template is expertly designed and follows the exact “resume rules” hiring managers look for. Stand out and get hired faster with field-tested resume templates."
+        "header": "template-simple-header",
+        "description": "template-simple-description"
     },
     "professional": {
         "logo": "/image/professional_template.png",
-        "header": "Job-winning professional resume templates",
-        "description": "Each template is expertly designed and follows the exact “resume rules” hiring managers look for. Stand out and get hired faster with field-tested resume templates."
+        "header": "template-professional-header",
+        "description": "template-professional-description"
     },
     "modern": {
         "logo": "/image/modern_template.png",
-        "header": "Job-winning modern resume templates",
-        "description": "Each template is expertly designed and follows the exact “resume rules” hiring managers look for. Stand out and get hired faster with field-tested resume templates."
+        "header": "template-modern-header",
+        "description": "template-modern-description"
     }
 }

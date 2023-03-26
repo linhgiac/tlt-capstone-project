@@ -1,0 +1,15 @@
+{
+    "dashboard-header": "Sơ yếu lý lịch",
+    "dashboard-import": "+ Nhập",
+    "dashboard-create-new": "+ Tạo mới",
+    "dashboard-upload-file": "Nhấp hoặc kéo tệp đến khu vực này để tải lên",
+    "dashboard-import-title": "Nhập sơ yếu lý lịch",
+    "dashboard-edit": "Chỉnh sửa",
+    "dashboard-duplicate": "Nhân bản",
+    "dashboard-delete": "Xóa bỏ",
+    "dashboard-delete-text": "Xóa bỏ",
+    "dashboard-cancel-text": "Hủy bỏ",
+    "dashboard-confirm-text": "OK",
+    "dashboard-delete-title": "Xóa sơ yếu lý lịch",
+    "dashboard-delete-description": "Bạn có chắc là bạn muốn xóa sơ yếu lý lịch này?"
+}

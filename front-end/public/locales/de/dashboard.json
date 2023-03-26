@@ -1,0 +1,15 @@
+{
+    "dashboard-header": "Lebensläufe",
+    "dashboard-import": "+ Import",
+    "dashboard-create-new": "+ Neu erstellen",
+    "dashboard-upload-file": "Klicken oder ziehen Sie Datei in diesen Bereich, um hochzuladen",
+    "dashboard-import-title": "Lebenslauf importieren",
+    "dashboard-edit": "Bearbeiten",
+    "dashboard-duplicate": "Duplikat",
+    "dashboard-delete": "Löschen",
+    "dashboard-delete-text": "Löschen",
+    "dashboard-cancel-text": "Stornieren",
+    "dashboard-confirm-text": "OK",
+    "dashboard-delete-title": "Lebenslauf löschen",
+    "dashboard-delete-description": "Sind Sie sicher, dass Sie diesen Lebenslauf löschen möchten?"
+}
