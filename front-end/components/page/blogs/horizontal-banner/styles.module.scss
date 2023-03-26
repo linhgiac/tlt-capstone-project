@@ -1,0 +1,38 @@
+.horizontal-banner-container {
+    margin: 40px 0;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.horizontal-banner-container:hover .horizontal-banner-btn {
+    opacity: 0.8;
+}
+
+.horizontal-banner-main {
+    padding: 24px 32px;
+    background-color: #f3f1eb;
+    border-radius: 6px 6px 0 0;
+}
+
+.horizontal-banner-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.horizontal-banner-btn {
+    display: flex;
+    justify-content: center;
+    padding: 16px 0;
+    color: #fff;
+    background-color: #000;
+    border-radius: 0 0 6px 6px;
+}
+
+.horizontal-banner-btn-text {
+    font-weight: 500;
+}
+
+.horizontal-banner-btn-icon {
+    padding: 4px;
+    font-size: 14px;
+}
