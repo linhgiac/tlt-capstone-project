@@ -13,16 +13,16 @@ const HomeInstructionStep = (props: Props) => {
     const {t} = useTranslation();
     const STEP_CONTENT = [
     {
-        title: t('home-instruction-step-title-1'),
-        description:t('home-instruction-step-description-1'),
+        title: t('home-instruction-step-title-1', {ns: 'home'}),
+        description:t('home-instruction-step-description-1', {ns: 'home'}),
     },
     {
-        title: t('home-instruction-step-title-2'),
-        description:t('home-instruction-step-description-2'),
+        title: t('home-instruction-step-title-2', {ns: 'home'}),
+        description:t('home-instruction-step-description-2', {ns: 'home'}),
     },
     {
-        title: t('home-instruction-step-title-3'),
-        description:t('home-instruction-step-description-3'),
+        title: t('home-instruction-step-title-3', {ns: 'home'}),
+        description:t('home-instruction-step-description-3', {ns: 'home'}),
     },
 ];
     const { className } = props;
@@ -43,7 +43,7 @@ const HomeInstructionStep = (props: Props) => {
                     {
                         label: (
                             <div className={styles['step-title']}>
-                                {t('home-instruction-step-1')}
+                                {t('home-instruction-step-1', {ns: 'home'})}
                             </div>
                         ),
                         key: '1',
@@ -57,7 +57,7 @@ const HomeInstructionStep = (props: Props) => {
                     {
                         label: (
                             <div className={styles['step-title']}>
-                                {t('home-instruction-step-2')}
+                                {t('home-instruction-step-2', {ns: 'home'})}
                             </div>
                         ),
                         key: '2',
@@ -71,7 +71,7 @@ const HomeInstructionStep = (props: Props) => {
                     {
                         label: (
                             <div className={styles['step-title']}>
-                                {t('home-instruction-step-3')}
+                                {t('home-instruction-step-3', {ns: 'home'})}
                             </div>
                         ),
                         key: '3',

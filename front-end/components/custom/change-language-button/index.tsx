@@ -9,7 +9,7 @@ const ChangeLanguageButton = () => {
         const onChangeLanguage: MenuProps['onClick'] = e => {
         console.log('click ', e);
         setCookie('language', e.key);
-        router.replace(router.query, undefined, {locale: e.key});
+        router.replace(router.asPath, undefined, {locale: e.key});
     };
     const menu = (
         <Menu

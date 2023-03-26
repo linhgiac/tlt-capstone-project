@@ -12,8 +12,8 @@ type Props = {};
 const HomeInstruction = (props: Props) => {
     const {t} = useTranslation();
     const router = useRouter();
-    const TITLE = t('home-card-title');
-    const DESCRIPTION =t('home-card-description');
+    const TITLE = t('home-card-title', {ns: 'home'});
+    const DESCRIPTION =t('home-card-description', {ns: 'home'});
     return (
         <HomeCard
             title={TITLE}
@@ -24,7 +24,7 @@ const HomeInstruction = (props: Props) => {
                 onClick={() => {
                     router.push('/templates');
                 }}>
-                {t('home-create-button')}
+                {t('home-create-button', {ns: 'home'})}
             </Button>
             <HomeInstructionStep
                 className={classNames(

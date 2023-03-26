@@ -39,14 +39,14 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => {
         return {
             props: {
                 ...defaultReturnProps,
-                ...await serverSideTranslations(locale as string, ['common']),
+                ...await serverSideTranslations(locale as string, ['home']),
             },
         };
     } catch (error: any) {
         return {
             props: {
                 ...defaultReturnProps,
-                ...await serverSideTranslations(locale as string, ['common']),
+                ...await serverSideTranslations(locale as string, ['home']),
                 error: JSON.stringify(error),
             },
         };

@@ -15,8 +15,8 @@ const HomeHero = (props: HomeHeroProps) => {
     const { t } = useTranslation();
     const { className } = props;
     const router = useRouter();
-    const TITLE = t('home-title');
-    const DESCRIPTION = t("home-description");
+    const TITLE = t('home-title', {ns: 'home'});
+    const DESCRIPTION = t("home-description", {ns: 'home'});
     return (
         <HomeCard
             className={styles['home-hero-container']}
@@ -29,7 +29,7 @@ const HomeHero = (props: HomeHeroProps) => {
                 onClick={() => {
                     router.push('/templates');
                 }}>
-                {t('home-create-button')}
+                {t('home-create-button', {ns: 'home'})}
             </Button>
             <div className={styles['image']}>
                 
