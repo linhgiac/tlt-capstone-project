@@ -4,6 +4,7 @@ import { MenuProps } from 'antd';
 import { getItem } from '../../../../../configs/utils/antd.utils';
 import { DownOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
+import { HOW_TO_WRITE_A_RESUME } from '../../../../../configs/constants/blog.constants';
 
 type MenuItem = Required<MenuProps>['items'][number];
 type HeaderRouterProps = {};
@@ -18,11 +19,16 @@ const HeaderRouter = (props: HeaderRouterProps) => {
             getItem('Professional', 'templates/professional'),
             getItem('Modern', 'templates/modern'),
         ]),
-        getItem('Blog', 'blog'),
+        getItem('Blogs', 'blogs'), getItem('', 'login', null, false)
     ];
 
     const clickHandler: MenuProps['onClick'] = e => {
-        if (e.key !== 'resume')
+        if (e.key === 'blogs') {
+            router.push({
+                pathname: `/blogs/${HOW_TO_WRITE_A_RESUME}`
+            })
+        }
+        else if (e.key !== 'resume')
             router.push({
                 pathname: `/${e.key}`,
             });

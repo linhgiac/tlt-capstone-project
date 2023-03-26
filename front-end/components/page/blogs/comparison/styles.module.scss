@@ -1,0 +1,36 @@
+.comparison-container {
+    margin: 40px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    row-gap: 8px;
+}
+
+.comparison-item {
+    flex: 1;
+    padding: 20px 24px 24px;
+    background-color: #eff2f9;
+    border-radius: 6px;
+}
+
+.comparison-title {
+    margin-bottom: 12px;
+    display: flex;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.comparison-icon {
+    margin-right: 12px;
+    font-size: 28px;
+}
+
+.comparison-text {
+    padding: 4px 0;
+}
+
+.comparison-list ul {
+    padding-left: 16px;
+}
