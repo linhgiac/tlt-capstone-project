@@ -3,28 +3,28 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import HomeInstructionStepContent from './homeInstructionStepContent';
 import styles from './styles.module.scss';
+import { useTranslation } from 'next-i18next';
 
 type Props = {
     className: string;
 };
-const STEP_CONTENT = [
+
+const HomeInstructionStep = (props: Props) => {
+    const {t} = useTranslation();
+    const STEP_CONTENT = [
     {
-        title: 'Your First Step',
-        description:
-            'We’ve made sure that signing up to our resume maker tools is even more convenient than usual. Use one of the most common networks used by professionals (LinkedIn, Facebook or your Google account) or simply skip this step and enter your name and email address. We keep your data strictly confidential.',
+        title: t('home-instruction-step-title-1', {ns: 'home'}),
+        description:t('home-instruction-step-description-1', {ns: 'home'}),
     },
     {
-        title: 'Achieve Beauty With Ease',
-        description:
-            'Choose one of our beautiful, professionally designed resume or cover letter formats. Add your personal info and choose and edit the necessary sections. Customize the layout and visuals as much (or as little) as you want. We provide a ton of ready content with lots of room for your own creativity and needs.',
+        title: t('home-instruction-step-title-2', {ns: 'home'}),
+        description:t('home-instruction-step-description-2', {ns: 'home'}),
     },
     {
-        title: 'Now It’s Yours!',
-        description:
-            'Export your new resume, CV or application letter in one of the available formats. PDF will provide you with the best and most consistent visual formatting. Word files allow you to edit the document further or submit the resume to an online application system. You can also share your career updates online.',
+        title: t('home-instruction-step-title-3', {ns: 'home'}),
+        description:t('home-instruction-step-description-3', {ns: 'home'}),
     },
 ];
-const HomeInstructionStep = (props: Props) => {
     const { className } = props;
     const [currentKey, setCurrentKey] = useState('1');
 
@@ -43,7 +43,7 @@ const HomeInstructionStep = (props: Props) => {
                     {
                         label: (
                             <div className={styles['step-title']}>
-                                1. Sign up
+                                {t('home-instruction-step-1', {ns: 'home'})}
                             </div>
                         ),
                         key: '1',
@@ -57,7 +57,7 @@ const HomeInstructionStep = (props: Props) => {
                     {
                         label: (
                             <div className={styles['step-title']}>
-                                2. Create
+                                {t('home-instruction-step-2', {ns: 'home'})}
                             </div>
                         ),
                         key: '2',
@@ -71,7 +71,7 @@ const HomeInstructionStep = (props: Props) => {
                     {
                         label: (
                             <div className={styles['step-title']}>
-                                3. Download
+                                {t('home-instruction-step-3', {ns: 'home'})}
                             </div>
                         ),
                         key: '3',

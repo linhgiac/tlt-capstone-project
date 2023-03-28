@@ -5,6 +5,8 @@ import { RecoilRoot } from 'recoil';
 import Layout from '../components/layout';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { appWithTranslation } from 'next-i18next'
+import nextI18NextConfig from '../next-i18next.config.js'
 
 interface MyAppPropsType {
     currentLayout: string;
@@ -26,4 +28,4 @@ function MyApp({ Component, pageProps }: AppProps<MyAppPropsType>) {
     );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp, nextI18NextConfig);

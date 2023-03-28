@@ -15,6 +15,7 @@ import { resumeInfoState } from '../../../../recoil-state/resume-state/resume-ch
 import { HOST } from '../../../../configs/constants/misc';
 import PopupModal from '../../../custom/popup-modal';
 import { getAuthHeader } from '../../../../configs/restApi/clients';
+import { useTranslation } from 'next-i18next';
 
 type DashboardItemProps = {
     className?: string;
@@ -28,6 +29,7 @@ const DashboardItem = (props: DashboardItemProps) => {
     const router = useRouter();
     const [isModalOpened, setIsModalOpened] = useState(false);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
+    const { t } = useTranslation();
 
     const editHandler = () => {
         setResumeInfo({ id: item.id });
@@ -87,7 +89,7 @@ const DashboardItem = (props: DashboardItemProps) => {
                             )}
                             icon={<EditOutlined />}
                             onClick={editHandler}>
-                            Edit
+                            {t('dashboard-edit', {ns: 'dashboard'})}
                         </Button>
                         <Button
                             size="large"
@@ -97,7 +99,7 @@ const DashboardItem = (props: DashboardItemProps) => {
                                 styles['dashboard-item-button']
                             )}
                             onClick={duplicateItemHandler}>
-                            Duplicate
+                            {t('dashboard-duplicate', {ns: 'dashboard'})}
                         </Button>
                         <Button
                             size="large"
@@ -109,15 +111,15 @@ const DashboardItem = (props: DashboardItemProps) => {
                             onClick={() => {
                                 setIsModalOpened(true);
                             }}>
-                            Delete
+                            {t('dashboard-delete', {ns: 'dashboard'})}
                         </Button>
                         <PopupModal
-                            title="Delete Resume"
-                            description="Are you sure you want to delete this resume?"
+                            title={t('dashboard-delete-title', {ns: 'dashboard'})}
+                            description={t('dashboard-delete-description', {ns: 'dashboard'}) as string}
                             type={'confirm'}
                             visible={isModalOpened}
-                            okText="Delete"
-                            cancelText="Cancel"
+                            okText={t('dashboard-delete-text', {ns: 'dashboard'}) as string}
+                            cancelText={t('dashboard-cancel-text', {ns: 'dashboard'}) as string}
                             onCancel={() => {
                                 setIsModalOpened(false);
                             }}

@@ -1,0 +1,15 @@
+{
+    "dashboard-header": "Curriculum vitae",
+    "dashboard-import": "+ Importation",
+    "dashboard-create-new": "+ Créer nouveau",
+    "dashboard-upload-file": "Cliquez sur ou faites glisser le fichier vers cette zone pour télécharger",
+    "dashboard-import-title": "CV IMPORT",
+    "dashboard-edit": "Modifier",
+    "dashboard-duplicate": "Dupliquer",
+    "dashboard-delete": "Supprimer",
+    "dashboard-delete-text": "Supprimer",
+    "dashboard-cancel-text": "Annuler",
+    "dashboard-confirm-text": "D'ACCORD",
+    "dashboard-delete-title": "Supprimer le CV",
+    "dashboard-delete-description": "Êtes-vous sûr de vouloir supprimer ce curriculum vitae?"
+}

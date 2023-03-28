@@ -5,14 +5,15 @@ import React from 'react';
 import HomeCard from '../homeCard';
 import HomeInstructionStep from './homeInstructionStep';
 import styles from './styles.module.scss';
+import { useTranslation } from 'next-i18next';
 
 type Props = {};
 
 const HomeInstruction = (props: Props) => {
+    const {t} = useTranslation();
     const router = useRouter();
-    const TITLE = 'Create perfect resumes for the modern job market';
-    const DESCRIPTION =
-        'Creating a resume or cover letter has never been this easy! In three simple steps, create the perfect document to impress hiring managers and employers. Minimum time, maximum professional quality.';
+    const TITLE = t('home-card-title', {ns: 'home'});
+    const DESCRIPTION =t('home-card-description', {ns: 'home'});
     return (
         <HomeCard
             title={TITLE}
@@ -23,7 +24,7 @@ const HomeInstruction = (props: Props) => {
                 onClick={() => {
                     router.push('/templates');
                 }}>
-                Create My Button
+                {t('home-create-button', {ns: 'home'})}
             </Button>
             <HomeInstructionStep
                 className={classNames(

@@ -10,8 +10,10 @@ import HomeContent from '../components/page/home';
 import { useSetRecoilState } from 'recoil';
 import { userLoginState } from '../recoil-state/user-state/user-state';
 import { getAuthHeader } from '../configs/restApi/clients';
-import { hasCookie } from 'cookies-next';
+import { getCookie, hasCookie } from 'cookies-next';
 import { useEffect } from 'react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 
 const Home: NextPage = props => {
     const router = useRouter();
@@ -28,20 +30,23 @@ const Home: NextPage = props => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({locale}) => {
     const defaultReturnProps = {
         currentLayout: LAYOUT.DEFAULT,
     };
+
     try {
         return {
             props: {
                 ...defaultReturnProps,
+                ...await serverSideTranslations(locale as string, ['home']),
             },
         };
     } catch (error: any) {
         return {
             props: {
                 ...defaultReturnProps,
+                ...await serverSideTranslations(locale as string, ['home']),
                 error: JSON.stringify(error),
             },
         };
