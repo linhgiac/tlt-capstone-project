@@ -1,11 +1,13 @@
 import { get, snakeCase } from 'lodash';
 import { ResumeDataType } from './../interfaces/resume.interface';
 import camelCase from 'camelcase';
+import { AccountSettingType } from '../interfaces/user.interface';
+import { HOST } from '../constants/misc';
 
 export const convertCamelToSnake = (obj: any, newObj = {}) => {
     for (let key in obj) {
         let value = null;
-        if (typeof obj[key] === 'object' && typeof obj[key] !== null) {
+        if (!(obj[key] instanceof File) && typeof obj[key] === 'object' && typeof obj[key] !== null) {
             value = convertCamelToSnake(obj[key], {});
         } else {
             value = obj[key];
@@ -213,3 +215,24 @@ const data_test: any = {
         }
     ]
 };
+
+export const convertProfilePayloadData = (payloadData: AccountSettingType) => {
+    return convertCamelToSnake(payloadData);
+};
+
+export const convertProfileResponse = (responseData: any) => {
+    const { profile, ...dataWithoutProfile } = responseData;
+    const avatar = `${HOST}${profile.avatar.replace('/', '')}`;
+    const phone = profile.phone;
+    const address = profile.address;
+    const city = profile.city;
+    const country = profile.country;
+    return convertSnakeToCamel({
+        ...dataWithoutProfile,
+        avatar,
+        phone,
+        address,
+        city,
+        country,
+    })
+}
