@@ -6,15 +6,19 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
 
-type Props = {
+type AccountAvatarProps = {
     className?: string;
     onChangeAvatar: (value: any) => void;
+    fetchingURL: string;
 };
 
-const AccountAvatar = (props: Props) => {
-    const { className, onChangeAvatar } = props;
+const AccountAvatar = (props: AccountAvatarProps) => {
+    const { className, onChangeAvatar, fetchingURL } = props;
     const [file, setFile] = useState<UploadFile>();
-    const [avatarURL, setAvatarURL] = useState('');
+    const [avatarURL, setAvatarURL] = useState(fetchingURL);
+
+    // console.log(avatarURL)
+    console.log(fetchingURL)
 
     useEffect(() => {
         return () => {
@@ -40,7 +44,7 @@ const AccountAvatar = (props: Props) => {
                 {avatarURL ? (
                     <Avatar
                         size={64}
-                        src={<img src={avatarURL} />}
+                        src={<img src={avatarURL || fetchingURL} />}
                     />
                 ) : (
                     <Avatar
