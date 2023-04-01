@@ -47,7 +47,7 @@ const AccountForm = (props: AccountFormProps) => {
             error?.response?.data.detail &&
                 // setError(error.response.data.detail);
                 // Error Handling
-                console.warn(error.response.data.detail);
+                console.log(error.response.data.detail);
         }
     };
 
@@ -63,7 +63,7 @@ const AccountForm = (props: AccountFormProps) => {
                 <Form.Item name="avatar">
                     <AccountAvatar
                         onChangeAvatar={(value: File) => setAvatar(value)}
-                        fetchingURL = {data.avatar ? data.avatar : ""}
+                        fetchingURL = {data?.avatar ? data?.avatar : ""}
                     />
                 </Form.Item>
                 <Form.Item name="firstName" label="First Name">

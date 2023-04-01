@@ -15,10 +15,12 @@ type AccountAvatarProps = {
 const AccountAvatar = (props: AccountAvatarProps) => {
     const { className, onChangeAvatar, fetchingURL } = props;
     const [file, setFile] = useState<UploadFile>();
-    const [avatarURL, setAvatarURL] = useState(fetchingURL);
+    const [avatarURL, setAvatarURL] = useState("");
 
-    // console.log(avatarURL)
-    console.log(fetchingURL)
+    // More consideration
+    useEffect(() => {
+        setAvatarURL(fetchingURL);
+    }, [fetchingURL]);
 
     useEffect(() => {
         return () => {
@@ -44,7 +46,7 @@ const AccountAvatar = (props: AccountAvatarProps) => {
                 {avatarURL ? (
                     <Avatar
                         size={64}
-                        src={<img src={avatarURL || fetchingURL} />}
+                        src={<img src={avatarURL} />}
                     />
                 ) : (
                     <Avatar
