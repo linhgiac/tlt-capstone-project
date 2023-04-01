@@ -11,5 +11,10 @@ export const resumeSavedState = atom<any>({
 
 export const resumeLayoutState = atom<ResumeLayoutType>({
     key: 'resumeLayoutState',
-    default: [{ main: [], sidebar: [] }],
+    default: [
+        {
+            main: ['employmentHistories', 'educations'],
+            sidebar: ['skills'],
+        },
+    ],
 });

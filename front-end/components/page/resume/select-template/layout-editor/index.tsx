@@ -1,22 +1,15 @@
 import { Button } from 'antd';
 import { get } from 'lodash';
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { resumeLayoutState } from '../../../../../recoil-state/resume-state/resume.state';
 import MultiDndContainer from '../../../../custom/multi-sortable/multi-dndcontainer';
 import LayoutPage from './layout-page';
 
 type Props = {};
 
 const LayoutEditor = (props: Props) => {
-    const [pages, setPages] = useState([
-        {
-            main: ['emplotmentHistories', 'emplotmentHistories 2'],
-            sidebar: ['links'],
-        },
-        {
-            main: ['education'],
-            sidebar: ['skills'],
-        },
-    ]);
+    const [pages, setPages] = useRecoilState(resumeLayoutState);
 
     const addPageHandler = () => {
         setPages((prevPages: any) => {

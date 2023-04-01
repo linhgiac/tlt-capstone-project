@@ -20,7 +20,7 @@ const Page = (props: Props) => {
                 id={'inner-pdf'}
                 style={{ lineHeight: '1.4' }}
                 className={classNames('cv-format')}> */}
-                <TemplateMap id={resumeInfo.template} />
+                <TemplateMap id={resumeInfo.template}/>
             {/* </div> */}
         </div>
         // </div>
