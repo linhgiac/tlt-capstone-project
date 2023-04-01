@@ -27,7 +27,7 @@ const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
                         <Draggable
                             key={i}
                             index={i}
-                            position={item.position}
+                            id={item.position}
                             item={item}
                             dragIcon={true}>
                             <SectionItem

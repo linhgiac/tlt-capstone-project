@@ -9,7 +9,7 @@ import { useDraggable } from '@dnd-kit/core';
 
 type Props = {
     index: number;
-    position: number;
+    id: number;
     children: React.ReactNode;
     item: any;
     isVisibleForm?: boolean;
@@ -19,14 +19,14 @@ const Draggable = (props: Props) => {
     const {
         children,
         isVisibleForm,
-        position,
+        id,
         index,
         item,
         dragIcon = false,
     } = props;
     const { attributes, listeners, setNodeRef, transform, transition } =
         useSortable({
-            id: position,
+            id: id,
         });
     const style = {
         transform: CSS.Transform.toString(transform),
