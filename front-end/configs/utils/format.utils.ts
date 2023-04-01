@@ -1,8 +1,9 @@
-import { get, isEmpty, snakeCase } from 'lodash';
+import { get, isEmpty, omit, snakeCase } from 'lodash';
 import { ResumeDataType } from './../interfaces/resume.interface';
 import camelCase from 'camelcase';
 import { AccountSettingType } from '../interfaces/user.interface';
 import { HOST } from '../constants/misc';
+import dateFormat from 'dateformat';
 
 export const convertCamelToSnake = (obj: any, newObj = {}) => {
     for (let key in obj) {
@@ -213,11 +214,34 @@ export const convertProfilePayloadData = (payloadData: AccountSettingType) => {
     return convertCamelToSnake(payloadData);
 };
 
+// export const convertProfileResponse = (responseData: any) => {
+//     const { profile, ...dataWithoutProfile } = responseData;
+//     // more consideration
+//     const newProfile = profile;
+//     Object.keys(profile).map((key: any) => {
+//         if (isEmpty(newProfile[key])) {
+//             newProfile[key] = '';
+//         }
+//         if (key === 'avatar' && newProfile[key]) {
+//             newProfile[key] = `${HOST}${profile.avatar.replace('/', '')}`;
+//         }
+//     });
+//     return convertSnakeToCamel({
+//         ...dataWithoutProfile,
+//         ...newProfile,
+//     });
+// };
 export const convertProfileResponse = (responseData: any) => {
     const { profile, ...dataWithoutProfile } = responseData;
     if (profile.avatar) {
         profile.avatar = `${HOST}${profile.avatar.replace('/', '')}`;
     }
+    // if (profile.avatar) {
+    //     const newUrl = `${HOST}${profile.avatar.replace('/', '')}`;
+    //     console.log("newUrl", newUrl);
+    //     profile.avatar = newUrl;
+    //     console.log("avatar", profile.avatar);
+    // }
     return convertSnakeToCamel({
         ...dataWithoutProfile,
         ...profile,
@@ -226,11 +250,18 @@ export const convertProfileResponse = (responseData: any) => {
 
 export const convertDashboardResponse = (responseData: any) => {
     
+    const convertedResponseData = []
     for (let dashboardItem of responseData) {
-        // const thumbnail = `${HOST}${dashboardItem.thumbnail?.replace('/', '')}`;
-        // console.log(thumbnail);
-        // dashboardItem
+        const { thumbnail, created_at, updated_at, ...restDashboardItem } = dashboardItem
+        const fullThumbnailURL = `${HOST}${thumbnail.replace('/', '')}`;
+        const createdAt = dateFormat(new Date(created_at.replace('/', ' ')), "mmm dd, HH:MM");
+        const updatedAt = dateFormat(new Date(updated_at.replace('/', ' ')), "mmm dd, HH:MM");
+        convertedResponseData.push({
+            ...restDashboardItem,
+            createdAt,
+            updatedAt,
+            thumbnail: fullThumbnailURL,
+        });
     }
-        
-    return responseData;
+    return convertedResponseData;
 }
