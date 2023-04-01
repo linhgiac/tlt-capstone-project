@@ -9,7 +9,7 @@ type Props = {};
 const LayoutEditor = (props: Props) => {
     const [pages, setPages] = useState([
         {
-            main: ['emplotmentHistories'],
+            main: ['emplotmentHistories', 'emplotmentHistories 2'],
             sidebar: ['links'],
         },
         {

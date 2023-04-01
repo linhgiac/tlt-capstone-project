@@ -144,3 +144,10 @@ export type ComplexItemsFieldFormData = {
     position: number
     data?: FieldFormData[] 
 }
+
+export type ResumePageLayoutType = {
+    main: string[];
+    sidebar: string[];
+};
+
+export type ResumeLayoutType = ResumePageLayoutType[];

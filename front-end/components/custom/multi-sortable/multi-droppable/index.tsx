@@ -8,18 +8,18 @@ import LayoutItem from '../../../page/resume/select-template/layout-editor/layou
 
 type Props = {
     id: string;
-    items: any[];
+    itemId: any;
     children: React.ReactNode;
 };
 
 const MultiDroppable = (props: Props) => {
-    const { id, items, children } = props;
+    const { id, children, itemId } = props;
 
     const { setNodeRef } = useDroppable({ id });
     return (
         <SortableContext
             id={id}
-            items={items?.map(item => item.position)}
+            items={itemId}
             strategy={verticalListSortingStrategy}>
             <div ref={setNodeRef}>{children}</div>
         </SortableContext>

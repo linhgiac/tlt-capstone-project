@@ -6,9 +6,8 @@ import {
     useSensors,
 } from '@dnd-kit/core';
 import classNames from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import Draggable from '../../../../../custom/draggable';
-import DroppableLayoutItem from '../../../../../custom/multi-sortable/multi-droppable';
 import LayoutItem from '../layout-item';
 
 import styles from '../styles.module.scss';
@@ -27,69 +26,54 @@ type Props = {
 const LayoutPage = (props: Props) => {
     const { index, items, onRemovePage } = props;
 
-    const sensors = useSensors(useSensor(MouseSensor));
-
-    const dragItemHandler = (items: any) => {
-        console.log('items', items);
-    };
     return (
-        <MultiDndContainer
-            onDragEnd={dragItemHandler}
-            items={items}>
-            <div className={classNames(styles['layout-page__container'])}>
-                <div className={classNames(styles['layout-page__title'])}>
-                    <div>Page {index}</div>
-                    <div
-                        className={classNames(
-                            styles['layout-page__title-close']
-                        )}
-                        onClick={() => {
-                            onRemovePage(index - 1);
-                        }}>
-                        <CloseOutlined />
-                    </div>
-                </div>
-                <div className={classNames(styles['layout-page__columns'])}>
-                    {Object.keys(items).map((item: any, index: number) => {
-                        return (
-                            <div
-                                className={classNames(
-                                    styles['layout-page__column']
-                                )}
-                                key={index}>
-                                <div
-                                    className={classNames(
-                                        styles['layout-page__columns_title']
-                                    )}>
-                                    {upperFirst(item)}
-                                </div>
-                                <MultiDroppable
-                                    id={`item-${index + 1}`}
-                                    items={items[item]}>
-                                    <div>
-                                        {items[item].map(
-                                            (item: any, i: number) => {
-                                                return (
-                                                    <Draggable
-                                                        key={i}
-                                                        index={item.position}
-                                                        position={item.position}
-                                                        item={item}>
-                                                        <LayoutItem
-                                                            name={item.position}
-                                                        />
-                                                    </Draggable>
-                                                );
-                                            }
-                                        )}
-                                    </div>
-                                </MultiDroppable>
-                            </div>
-                        );
-                    })}
+        <div className={classNames(styles['layout-page__container'])}>
+            <div className={classNames(styles['layout-page__title'])}>
+                <div>Page {index + 1}</div>
+                <div
+                    className={classNames(styles['layout-page__title-close'])}
+                    onClick={() => {
+                        onRemovePage(index);
+                    }}>
+                    <CloseOutlined />
                 </div>
             </div>
-        </MultiDndContainer>
+            <div className={classNames(styles['layout-page__columns'])}>
+                {Object.keys(items).map((item: any, i: number) => {
+                    return (
+                        <div
+                            className={classNames(
+                                styles['layout-page__column']
+                            )}
+                            key={i}>
+                            <div
+                                className={classNames(
+                                    styles['layout-page__columns_title']
+                                )}>
+                                {upperFirst(item)}
+                            </div>
+                            <MultiDroppable
+                                id={`${item}-${index}`}
+                                itemId={items[item]}>
+                                <div>
+                                    {items[item].map((item: any, i: number) => {
+                                        return (
+                                            <Draggable
+                                                key={i}
+                                                index={i}
+                                                id={item}
+                                                item={item}>
+                                                <LayoutItem item={item} />
+                                            </Draggable>
+                                        );
+                                    })}
+                                </div>
+                            </MultiDroppable>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
     );
 };
 

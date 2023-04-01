@@ -45,7 +45,6 @@ export const convertPayloadData = async (resumeData: ResumeDataType) => {
     const sectionDetails = complexSections?.sectionDetails;
     const newComplexSections = complexSections?.sectionType.map(type => {
         if (sectionDetails) {
-            console.log("fkkkkkkkkkk")
             const details = { ...sectionDetails[type] };
             const items = details.items?.map(item => {
                 var startDate = get(item, 'startDate', "");
@@ -53,14 +52,11 @@ export const convertPayloadData = async (resumeData: ResumeDataType) => {
                 if (startDate !== undefined && startDate.length == "1970/01".length) {
                     var itemFixStartDate = { ...item, startDate: (startDate + "/01").replaceAll('/', '-') }
                     item = itemFixStartDate;
-                    console.log({ itemFixStartDate })
                 }
                 if (endDate !== undefined && endDate.length == "1970/01".length) {
                     var itemFixEndDate = { ...item, endDate: (endDate + "/01").replaceAll('/', '-') }
                     item = itemFixEndDate;
-                    console.log({ itemFixEndDate })
                 }
-                console.log(item)
                 return item
             });
             delete details.items;
@@ -85,7 +81,6 @@ export const convertPayloadData = async (resumeData: ResumeDataType) => {
         result = Object.assign(result, { complexSections: newComplexSections });
     }
     const convertedResult = convertCamelToSnake(result);
-    console.log(convertedResult);
     return convertedResult;
     // return result
 };
@@ -145,7 +140,6 @@ const convertComplexSectionsToFE = (complex_sections: any) => {
 
 export const convertTest = () => {
     const test = convertResumeResponse(data_test);
-    console.log('converted: ', test);
 };
 
 export const convertResumeResponse = (resume: any) => {
@@ -155,7 +149,6 @@ export const convertResumeResponse = (resume: any) => {
     const personalDetails = convertSnakeToCamel(
         get(resume, 'personal_details')
     );
-    console.log('personalDetails', personalDetails)
     const professionalSummary = convertSnakeToCamel(
         get(resume, 'professional_summary')
     );
@@ -222,24 +215,16 @@ export const convertProfilePayloadData = (payloadData: AccountSettingType) => {
 
 export const convertProfileResponse = (responseData: any) => {
     const { profile, ...dataWithoutProfile } = responseData;
-    // more consideration
-    const newProfile = profile;
-    Object.keys(profile).map((key: any) => {
-        if (isEmpty(newProfile[key])) {
-            newProfile[key] = '';
-        }
-        if (key === 'avatar' && newProfile[key]) {
-            newProfile[key] = `${HOST}${profile.avatar.replace('/', '')}`;
-        }
-    });
+    if (profile.avatar) {
+        profile.avatar = `${HOST}${profile.avatar.replace('/', '')}`;
+    }
     return convertSnakeToCamel({
         ...dataWithoutProfile,
-        ...newProfile,
+        ...profile,
     });
 };
 
 export const convertDashboardResponse = (responseData: any) => {
-    console.log("from TVT with love", responseData);
     
     for (let dashboardItem of responseData) {
         // const thumbnail = `${HOST}${dashboardItem.thumbnail?.replace('/', '')}`;
