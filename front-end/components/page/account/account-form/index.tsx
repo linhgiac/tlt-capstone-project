@@ -32,6 +32,7 @@ const AccountForm = (props: AccountFormProps) => {
             value.avatar = avatar;
         }
         const convertedValue = convertProfilePayloadData(value);
+        console.log(value);
         // convert Profile Payload Data
         // call API
         const authHeader = Object.assign(getAuthHeader(), { 'Content-Type': 'multipart/form-data' });

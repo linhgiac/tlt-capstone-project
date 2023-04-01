@@ -5,6 +5,7 @@ import { isEmpty } from 'lodash';
 import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
+import { HOST } from '../../../../configs/constants/misc';
 
 type AccountAvatarProps = {
     className?: string;
@@ -19,7 +20,8 @@ const AccountAvatar = (props: AccountAvatarProps) => {
 
     // More consideration
     useEffect(() => {
-        setAvatarURL(fetchingURL);
+        console.log("TvT fetchingURL", `${HOST}${fetchingURL.replace('/', '')}`);
+        setAvatarURL(`${HOST}${fetchingURL.replace('/', '')}`);
     }, [fetchingURL]);
 
     useEffect(() => {
