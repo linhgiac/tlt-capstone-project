@@ -42,7 +42,6 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
         employmentHistoriesDetailsState
     );
 
-    console.log('111111111', employmentHistoryDetails);
 
     const [employmentHistoryItems, setEmploymentHistoryItems] = useRecoilState(
         employmentHistoryItemsState
@@ -101,7 +100,6 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
     );
 
     const dragItemHandler = (items: any) => {
-        console.log('employment items', items);
         setEmploymentHistoryItems(
             items.map((item: any, i: number) => {
                 return { ...item, position: i + 1 };

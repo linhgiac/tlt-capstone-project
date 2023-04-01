@@ -19,7 +19,6 @@ type Props = {
 const SingleDndContainer = (props: Props) => {
     const { children, items, onDragEnd, isMultiDrop = false } = props;
     const [newItems, setNewItems] = useState<any[]>([]);
-    console.log('itemssssssss', items);
 
     useEffect(() => {
         setNewItems(items);
@@ -30,8 +29,6 @@ const SingleDndContainer = (props: Props) => {
 
     const dragEndHandler = (event: any) => {
         const { active, over } = event;
-        console.log('active', active);
-        console.log('over', over);
         if (active.id !== over.id) {
             setNewItems((prevItems: any) => {
                 const oldIndex = +active.id - 1;

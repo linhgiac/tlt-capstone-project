@@ -33,7 +33,6 @@ const AccountAvatar = (props: AccountAvatarProps) => {
             setAvatarURL(URL.createObjectURL(info.file.originFileObj));
             onChangeAvatar(info.file.originFileObj);
         }
-        console.log('info', info.file);
     };
     return (
         <div
