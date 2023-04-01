@@ -67,7 +67,7 @@ const DashboardItem = (props: DashboardItemProps) => {
                     onClick={editHandler}
                     className={classNames(styles['dashboard-item-preview'])}>
                     <Image
-                        src={item.thumbnail}
+                        src={item?.thumbnail}
                         width={225}
                         height={321}
                     />
@@ -77,6 +77,8 @@ const DashboardItem = (props: DashboardItemProps) => {
                         editable={false}
                         title={item.title}></ResumeTitle>
                     {/* <div className={classNames(styles['dashboard-item-lastupdated'])}>Updated {item.lastUpdated}</div> */}
+                    <div className={styles['dashboard-item-date']}>Created {item.createdAt}</div>
+                    <div className={styles['dashboard-item-date']}>Updated {item.updatedAt}</div>
                     <div
                         className={classNames(
                             styles['dashboard-item-button-list']

@@ -32,14 +32,12 @@ const Dashboard = (props: DashboardProps) => {
     const [isImportModalOpen, setIsImportModalOpen] = useState(false);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
-    convertDashboardResponse(dashboardData.data);
-
     const router = useRouter();
-    useEffect(() => {
-        if (error || !hasCookie('accessToken')) {
-            router.push('/');
-        }
-    }, [error, router]);
+    // useEffect(() => {
+    //     if (error || !hasCookie('accessToken')) {
+    //         router.push('/');
+    //     }
+    // }, [error, router]);
 
     const onSelect = (id: number) => {
         router.push({
@@ -160,7 +158,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
             props: {
                 ...defaultReturnProps,
                 ...await serverSideTranslations(locale as string, ['dashboard']),
-                dashboardData: resume === null ? null : { data: resume.data },
+                dashboardData: resume === null ? null : { data: convertDashboardResponse(resume.data) },
             },
         };
     } catch (error: any) {

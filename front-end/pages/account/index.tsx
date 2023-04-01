@@ -23,8 +23,8 @@ const AccountSettings = (props: AccountSettingsProps) => {
     const { userData } = props;
     const [user, setUser] = useRecoilState(userState);
     useEffect(() => {
+        console.log("user data", userData);
         setUser(userData);
-        console.log("TvT", userData);
     }, [userData]);
 
     return (
@@ -67,12 +67,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
         const response = await axios.get(`${HOST}accounts/user-details/`, {
             headers: headers,
         });
-        console.log("Tvdsfdsfsdfs", response);
+        console.log("aaaaaaa", response.data)
         return {
             props: {
                 ...defaultReturnProps,
                 userData: convertProfileResponse(response.data),
-                // userData: response.data,
             },
         };
     } catch (error: any) {
