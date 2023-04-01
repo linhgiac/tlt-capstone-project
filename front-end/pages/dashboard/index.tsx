@@ -19,6 +19,7 @@ import { hasCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { locale } from 'dayjs';
+import { convertDashboardResponse } from '../../configs/utils/format.utils';
 
 type DashboardProps = {
     dashboardData: DashboardDataType;
@@ -30,6 +31,8 @@ const Dashboard = (props: DashboardProps) => {
     const { t } = useTranslation();
     const [isImportModalOpen, setIsImportModalOpen] = useState(false);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
+
+    convertDashboardResponse(dashboardData.data);
 
     const router = useRouter();
     useEffect(() => {

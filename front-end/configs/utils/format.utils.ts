@@ -1,4 +1,4 @@
-import { get, snakeCase } from 'lodash';
+import { get, isEmpty, snakeCase } from 'lodash';
 import { ResumeDataType } from './../interfaces/resume.interface';
 import camelCase from 'camelcase';
 import { AccountSettingType } from '../interfaces/user.interface';
@@ -222,17 +222,30 @@ export const convertProfilePayloadData = (payloadData: AccountSettingType) => {
 
 export const convertProfileResponse = (responseData: any) => {
     const { profile, ...dataWithoutProfile } = responseData;
-    const avatar = `${HOST}${profile.avatar.replace('/', '')}`;
-    const phone = profile.phone;
-    const address = profile.address;
-    const city = profile.city;
-    const country = profile.country;
+    // more consideration
+    const newProfile = profile;
+    Object.keys(profile).map((key: any) => {
+        if (isEmpty(newProfile[key])) {
+            newProfile[key] = '';
+        }
+        if (key === 'avatar' && newProfile[key]) {
+            newProfile[key] = `${HOST}${profile.avatar.replace('/', '')}`;
+        }
+    });
     return convertSnakeToCamel({
         ...dataWithoutProfile,
-        avatar,
-        phone,
-        address,
-        city,
-        country,
-    })
+        ...newProfile,
+    });
+};
+
+export const convertDashboardResponse = (responseData: any) => {
+    console.log("from TVT with love", responseData);
+    
+    for (let dashboardItem of responseData) {
+        // const thumbnail = `${HOST}${dashboardItem.thumbnail?.replace('/', '')}`;
+        // console.log(thumbnail);
+        // dashboardItem
+    }
+        
+    return responseData;
 }
