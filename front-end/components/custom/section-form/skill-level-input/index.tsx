@@ -1,5 +1,6 @@
 import { Col, Form, Radio } from 'antd';
 import { RadioChangeEvent } from 'antd';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 import styles from '../styles.module.scss';
 type Props = {
@@ -11,19 +12,20 @@ type Props = {
 };
 
 const SkillLevelInput = (props: Props) => {
+    const { t } = useTranslation();
     const { labelKey, labelList, skillLevel, disabledLevel, onChange } = props;
     const mapLevelToLabel = () => {
         switch (skillLevel) {
             case 'novice':
-                return <div className={styles.novice}>Novice</div>;
+                return <div className={styles.novice}>{t('edit-level-1', {ns: 'edit'})}</div>;
             case 'beginner':
-                return <div className={styles.beginner}>Beginner</div>;
+                return <div className={styles.beginner}>{t('edit-level-2', {ns: 'edit'})}</div>;
             case 'skillful':
-                return <div className={styles.skillful}>Skillful</div>;
+                return <div className={styles.skillful}>{t('edit-level-3', {ns: 'edit'})}</div>;
             case 'experienced':
-                return <div className={styles.experienced}>Experienced</div>;
+                return <div className={styles.experienced}>{t('edit-level-4', {ns: 'edit'})}</div>;
             case 'expert':
-                return <div className={styles.expert}>Expert</div>;
+                return <div className={styles.expert}>{t('edit-level-5', {ns: 'edit'})}</div>;
             default:
                 break;
         }
@@ -59,7 +61,7 @@ const SkillLevelInput = (props: Props) => {
                 name={labelKey}
                 label={
                     <div className={styles['skill-label']}>
-                        {labelList[labelKey]} - {mapLevelToLabel()}
+                        {t(labelList[labelKey], {ns: 'edit'})} - {mapLevelToLabel()}
                     </div>
                 }>
                 <div className={styles['skill-level-container']}>

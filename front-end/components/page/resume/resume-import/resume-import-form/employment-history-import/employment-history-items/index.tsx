@@ -4,6 +4,7 @@ import { EmploymentHistoryItemDataType } from '../../../../../../../configs/inte
 import Draggable from '../../../../../../custom/draggable';
 import SingleDroppable from '../../../../../../custom/single-sortable/single-droppable';
 import SectionItem from '../../../../../../custom/section-item';
+import { useTranslation } from 'next-i18next';
 
 type EmploymentHistoryItemsProps = {
     className?: string;
@@ -16,7 +17,7 @@ type EmploymentHistoryItemsProps = {
 
 const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
     const { className, sectionType, items, onRemoveItem, onChangeItem } = props;
-
+    const { t } = useTranslation();
     return (
         <SingleDroppable
             id={sectionType}
@@ -36,7 +37,7 @@ const EmploymentHistoryItems = (props: EmploymentHistoryItemsProps) => {
                                 itemHeader={
                                     item.jobTitle
                                         ? item.jobTitle
-                                        : 'Not specified'
+                                        : t('edit-not-specified', {ns: 'edit'})
                                 }
                                 sectionType={sectionType}
                                 item={item}

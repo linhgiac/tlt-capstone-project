@@ -15,6 +15,7 @@ import { assignIn } from 'lodash';
 import { personalDetailChangedValueState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 import { resumeSavedState } from '../../../../../../recoil-state/resume-state/resume.state';
 // import { personalDetailValueState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
+import { useTranslation } from 'next-i18next';
 
 type PersonalDetailsImportProps = {
     className?: string;
@@ -25,7 +26,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
     const { className, defaultTitle } = props;
     const [form] = Form.useForm();
-
+    const { t } = useTranslation();
     const [personalDetailsChangedValues, setPersonalDetailsChangedValues] =
         useRecoilState(personalDetailChangedValueState);
     const [personalDetailTitle, setPersonalDetailTitle] = useRecoilState(
@@ -68,7 +69,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="jobTitle"
-                            label="Wanted Job Title">
+                            label={t('edit-wanted-job-title', {ns: 'edit'})}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -95,7 +96,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="firstName"
-                            label="First Name">
+                            label={t('edit-first-name', {ns: 'edit'})}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -105,7 +106,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="lastName"
-                            label="Last Name">
+                            label={t('edit-last-name', {ns: 'edit'})}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -117,7 +118,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="email"
-                            label="Email">
+                            label={t('edit-email', {ns: 'edit'})}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -127,7 +128,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="phone"
-                            label="Phone">
+                            label={t('edit-phone', {ns: 'edit'})}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -139,7 +140,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="country"
-                            label="Country">
+                            label={t('edit-country', {ns: 'edit'})}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -149,7 +150,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="city"
-                            label="City">
+                            label={t('edit-city', {ns: 'edit'})}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -159,7 +160,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         className={styles['expand-details-text']}
                         onClick={expandHandler}>
                         <br />
-                        Edit additional details <DownOutlined />
+                        {t('edit-show-add-details', {ns: 'edit'})} <DownOutlined />
                     </Text>
                 ) : (
                     <>
@@ -170,7 +171,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="address"
-                                    label="Address">
+                                    label={t('edit-address', {ns: 'edit'})}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -180,7 +181,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="postalCode"
-                                    label="Postal Code">
+                                    label={t('edit-postal-code', {ns: 'edit'})}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -192,7 +193,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="drivingLicense"
-                                    label="Driving License">
+                                    label={t('edit-driving-license', {ns: 'edit'})}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -202,7 +203,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="nationality"
-                                    label="Nationality">
+                                    label={t('edit-nationality', {ns: 'edit'})}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -214,7 +215,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="placeOfBirth"
-                                    label="Place Of Birth">
+                                    label={t('edit-place-of-birth', {ns: 'edit'})}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -224,7 +225,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="dateOfBirth"
-                                    label="Date Of Birth">
+                                    label={t('eidt-date-of-birth', {ns: 'edit'})}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -233,7 +234,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                             className={styles['expand-details-text']}
                             onClick={expandHandler}>
                             <br />
-                            Hide additional details <UpOutlined />
+                            {t('edit-hide-add-details', {ns: 'edit'})} <UpOutlined />
                         </Text>
                     </>
                 )}

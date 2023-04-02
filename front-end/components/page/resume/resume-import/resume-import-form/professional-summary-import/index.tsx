@@ -6,7 +6,6 @@ import { Button, Form, Input } from 'antd';
 import styles from './styles.module.scss';
 import { useRecoilState } from 'recoil';
 import { professionalSummaryTitleValueState } from '../../../../../../recoil-state/resume-state/resume-title.state';
-import { PROFESSIONAL_SUMMARY_DESCRIPTION } from '../../../../../../configs/constants/description.constants';
 import { ProfessionalSummaryDataType, ProfessionalSummarySuggestionMode } from '../../../../../../configs/interfaces/resume.interface';
 import { professionalSummaryChangedValueState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 import { setInterval, clearInterval } from 'timers';
@@ -16,6 +15,7 @@ import axios from 'axios';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import { remove } from 'lodash';
+import { useTranslation } from 'next-i18next';
 
 const loadingIcon = (
     <LoadingOutlined
@@ -33,7 +33,7 @@ type ProfessionalSummaryImportProps = {
 
 function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     const { className, defaultTitle } = props;
-
+    const { t } = useTranslation();
     const [form] = Form.useForm();
     const [
         professionalSummaryChangedValues,
@@ -199,7 +199,7 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
                 {professionalSummaryTitle}
             </SectionImportTitle>
             <p style={{ color: 'grey', fontSize: '12px' }}>
-                {PROFESSIONAL_SUMMARY_DESCRIPTION}
+                {t('edit-summary-description', {ns: 'edit'})}
             </p>
             {/* <div>
                 <Button onClick={() => changeSuggestionMode('tokens')}>Tokens</Button>
