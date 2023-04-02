@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 import DownloadButton from '../../../custom/downnload-button';
 import ResumeExportMain from '../resume-export/resume-export-main';
+import ResumeExportPagination from '../resume-export/resume-export-pagination';
 import ActionList from './action-list';
 import LayoutEditor from './layout-editor';
 import styles from './styles.module.scss';
@@ -121,6 +122,9 @@ const TemplateSelector = (props: Props) => {
                     </Sider>
                     <Content>
                         <div className={classNames(styles['resume'])}>
+                            <div className={styles['resume-change-index-button']}>
+                                <ResumeExportPagination />
+                            </div>    
                             <ResumeExportMain
                                 className={styles['resume-preview']}
                                 scale={0.8}
