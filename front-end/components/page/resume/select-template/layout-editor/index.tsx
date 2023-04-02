@@ -1,21 +1,15 @@
 import { Button } from 'antd';
 import { get } from 'lodash';
 import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { resumeLayoutState } from '../../../../../recoil-state/resume-state/resume.state';
+import MultiDndContainer from '../../../../custom/multi-sortable/multi-dndcontainer';
 import LayoutPage from './layout-page';
 
 type Props = {};
 
 const LayoutEditor = (props: Props) => {
-    const [pages, setPages] = useState([
-        {
-            main: [{ position: 1 }, { position: 2 }, { position: 3 }],
-            sidebar: [{ position: 4 }, { position: 5 }, { position: 6 }],
-        },
-        {
-            main: [{ position: 7 }, { position: 8 }, { position: 9 }],
-            sidebar: [{ position: 10 }, { position: 11 }, { position: 12 }],
-        },
-    ]);
+    const [pages, setPages] = useRecoilState(resumeLayoutState);
 
     const addPageHandler = () => {
         setPages((prevPages: any) => {
@@ -27,26 +21,37 @@ const LayoutEditor = (props: Props) => {
         if (pages.length === 1) {
             return;
         }
-        const removedMainItems = get(pages, [`${index}`, 'main']);
-        const removedSidebarItems = get(pages, [`${index}`, 'sidebar']);
-        const newPages = pages.filter((_: any, i: number) => i !== index);
-        newPages[newPages.length - 1]['main'] = [
+        const removedPages = pages[index];
+        let newPages = pages.filter((_: any, i: number) => i !== index);
+
+        newPages[0]['main'] = [
             ...newPages[0]['main'],
-            ...removedMainItems,
-            ...removedSidebarItems,
+            ...removedPages['main'],
+            ...removedPages['sidebar'],
         ];
+
         setPages(newPages);
-        console.log('new page', newPages);
+    };
+
+    const dragEndHandler = (items: any) => {
+        setPages(items);
+    };
+
+    const dragOverHandler = (items: any) => {
+        setPages(items);
     };
     return (
-        <div>
+        <MultiDndContainer
+            onDragOver={dragOverHandler}
+            onDragEnd={dragEndHandler}
+            items={pages}>
             {pages.map((page: any, index: number) => {
                 return (
                     <div
                         key={index}
                         style={{ marginBottom: '10px' }}>
                         <LayoutPage
-                            index={index + 1}
+                            index={index}
                             items={page}
                             onRemovePage={removePageHandler}
                         />
@@ -54,7 +59,7 @@ const LayoutEditor = (props: Props) => {
                 );
             })}
             <Button onClick={addPageHandler}>Add more page</Button>
-        </div>
+        </MultiDndContainer>
     );
 };
 

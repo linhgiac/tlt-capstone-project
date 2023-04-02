@@ -1,17 +1,18 @@
 import classNames from 'classnames';
+import { startCase } from 'lodash';
 import React from 'react';
 
 import styles from '../styles.module.scss';
 
 type Props = {
-    name: string | number;
+    item: string;
 };
 
 const LayoutItem = (props: Props) => {
-    const { name } = props;
+    const { item } = props;
     return (
         <div className={classNames(styles['layout-item__container'])}>
-            {name}
+            {startCase(item)}
         </div>
     );
 };

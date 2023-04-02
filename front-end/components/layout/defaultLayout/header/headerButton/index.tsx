@@ -25,12 +25,10 @@ const HeaderButton = (props: HeaderButtonProps) => {
 
     useEffect(() => {
         if (hasCookie('accessToken')) {
-            console.log('getCookie:>> ', hasCookie('accessToken'));
             setIsLogged(true);
         }
     }, []);
 
-    console.log('isLogged', isLogged);
     const logoutHandler = async () => {
         try {
             setIsLoading(true);

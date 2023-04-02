@@ -67,7 +67,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
         const response = await axios.get(`${HOST}accounts/user-details/`, {
             headers: headers,
         });
-        console.log("aaaaaaa", response.data)
         return {
             props: {
                 ...defaultReturnProps,

@@ -33,7 +33,7 @@ const SkillItems = (props: SkillItemsProps) => {
                     <Draggable
                         key={i}
                         index={i}
-                        position={item.position}
+                        id={item.position}
                         item={item}
                         dragIcon={true}>
                         <SectionItem
