@@ -18,3 +18,8 @@ export const resumeLayoutState = atom<ResumeLayoutType>({
         },
     ],
 });
+
+export const resumeSelectedPageIndexState = atom<number>({
+    key: 'resumeSelectedPageIndexState',
+    default: 0
+})
