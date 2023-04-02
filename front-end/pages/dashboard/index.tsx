@@ -86,53 +86,51 @@ const Dashboard = (props: DashboardProps) => {
         }
     };
     return (
-        dashboardData && (
-            <div className={classNames(styles['dashboard'])}>
-                <div className={classNames(styles['dashboard-header'])}>
-                    <h1>{t('dashboard-header', {ns: 'dashboard'})}</h1>
-                    <div>
-                        <Button
-                            className={styles.button}
-                            size="large"
-                            onClick={() => setIsImportModalOpen(true)}
-                            style={{ marginRight: '10px' }}>
-                            {t('dashboard-import', {ns: 'dashboard'})}
-                        </Button>
-                        <Button
-                            className={styles.button}
-                            size="large"
-                            onClick={onCreate}>
-                            {t('dashboard-create-new', {ns: 'dashboard'})}
-                        </Button>
-                    </div>
+        <div className={classNames(styles['dashboard'])}>
+            <div className={classNames(styles['dashboard-header'])}>
+                <h1>{t('dashboard-header', {ns: 'dashboard'})}</h1>
+                <div>
+                    <Button
+                        className={styles.button}
+                        size="large"
+                        onClick={() => setIsImportModalOpen(true)}
+                        style={{ marginRight: '10px' }}>
+                        {t('dashboard-import', {ns: 'dashboard'})}
+                    </Button>
+                    <Button
+                        className={styles.button}
+                        size="large"
+                        onClick={onCreate}>
+                        {t('dashboard-create-new', {ns: 'dashboard'})}
+                    </Button>
                 </div>
-                <Divider />
-                <DashboardContainer
-                    data={dashboardData.data}></DashboardContainer>
-                <Modal
-                    centered
-                    title={t('dashboard-import-title', {ns: 'dashboard'})}
-                    open={isImportModalOpen}
-                    onOk={importHandler}
-                    onCancel={importCancelHanlder}
-                    okText={t('dashboard-confirm-text', {ns: 'dashboard'}) as string}
-                    cancelText={t('dashboard-cancel-text', {ns: 'dashboard'}) as string}>
-                    <div>
-                        <Upload.Dragger
-                            name={'file'}
-                            onChange={uploadChangeHanlder}
-                            maxCount={1}>
-                            <p style={{ fontSize: '36px' }}>
-                                <InboxOutlined />
-                            </p>
-                            <p className="ant-upload-text">
-                                {t('dashboard-upload-file', {ns: 'dashboard'})}
-                            </p>
-                        </Upload.Dragger>
-                    </div>
-                </Modal>
             </div>
-        )
+            <Divider />
+            {dashboardData && (<DashboardContainer
+                data={dashboardData.data}></DashboardContainer>)}
+            <Modal
+                centered
+                title={t('dashboard-import-title', {ns: 'dashboard'})}
+                open={isImportModalOpen}
+                onOk={importHandler}
+                onCancel={importCancelHanlder}
+                okText={t('dashboard-confirm-text', {ns: 'dashboard'}) as string}
+                cancelText={t('dashboard-cancel-text', {ns: 'dashboard'}) as string}>
+                <div>
+                    <Upload.Dragger
+                        name={'file'}
+                        onChange={uploadChangeHanlder}
+                        maxCount={1}>
+                        <p style={{ fontSize: '36px' }}>
+                            <InboxOutlined />
+                        </p>
+                        <p className="ant-upload-text">
+                            {t('dashboard-upload-file', {ns: 'dashboard'})}
+                        </p>
+                    </Upload.Dragger>
+                </div>
+            </Modal>
+        </div>      
     );
 };
 

@@ -49,7 +49,8 @@ const ResumeImport = (props: ResumeImportProps) => {
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
     const resumeChangedValue: ResumeDataType = useRecoilValue(
         resumeChangedValueState
-    );
+        );
+    const resumeInfo = useRecoilValue(resumeInfoState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
     const [resumeTitle, setResumeTitle] = useRecoilState(resumeTitleValueState);
     const setPersonalDetailsChangedValues = useSetRecoilState(
@@ -142,7 +143,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                     const thumbnailBase64URL = canvas.toDataURL('image/png', 1.0);
                     const thumbnail = await dataUrlToFile(thumbnailBase64URL, "hello.png")
                     const imagesUploadingResponse = await axios.put(
-                        `${HOST}resume/53/images-uploading/`,
+                        `${HOST}resume/${resumeInfo.id}/images-uploading/`,
                         { thumbnail: thumbnail },
                         {
                             headers: authHeader,
