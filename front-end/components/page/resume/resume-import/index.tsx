@@ -36,6 +36,8 @@ import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.s
 import { isEmpty, get } from 'lodash';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
+import html2canvas from 'html2canvas';
+import { dataUrlToFile } from '../../../../configs/utils/images.utils';
 
 type ResumeImportProps = {
     className?: string;
@@ -49,7 +51,8 @@ const ResumeImport = (props: ResumeImportProps) => {
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
     const resumeChangedValue: ResumeDataType = useRecoilValue(
         resumeChangedValueState
-    );
+        );
+    const resumeInfo = useRecoilValue(resumeInfoState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
     const [resumeTitle, setResumeTitle] = useRecoilState(resumeTitleValueState);
     const setPersonalDetailsChangedValues = useSetRecoilState(
@@ -133,7 +136,25 @@ const ResumeImport = (props: ResumeImportProps) => {
             reloadData();
             setIsSuccessful(true);
             // TO-DO TVT
-            
+            const authHeader = Object.assign(getAuthHeader(), { 'Content-Type': 'multipart/form-data' });
+            const data2ExportThumbnail: any = await document.querySelector('#pdf');
+            if (data2ExportThumbnail) {
+                try {
+                    data2ExportThumbnail.style.transform = 'scale(1)';
+                    const canvas = await html2canvas(data2ExportThumbnail, {});
+                    const thumbnailBase64URL = canvas.toDataURL('image/png', 1.0);
+                    const thumbnail = await dataUrlToFile(thumbnailBase64URL, "hello.png")
+                    const imagesUploadingResponse = await axios.put(
+                        `${HOST}resume/${resumeInfo.id}/images-uploading/`,
+                        { thumbnail: thumbnail },
+                        {
+                            headers: authHeader,
+                        }
+                    );
+                } catch (error) {
+                    console.log(error);
+                }
+            }            
         } catch (error) {
             console.log('error :>> ', error);
         }
