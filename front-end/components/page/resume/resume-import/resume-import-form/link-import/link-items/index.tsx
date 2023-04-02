@@ -3,6 +3,7 @@ import { LinkItemDataType } from '../../../../../../../configs/interfaces/resume
 import Draggable from '../../../../../../custom/draggable';
 import SingleDroppable from '../../../../../../custom/single-sortable/single-droppable';
 import SectionItem from '../../../../../../custom/section-item';
+import { useTranslation } from 'next-i18next';
 
 type LinkItemsProps = {
     className?: string;
@@ -14,7 +15,7 @@ type LinkItemsProps = {
 
 const LinkItems = (props: LinkItemsProps) => {
     const { className, sectionType, items, onRemoveItem, onChangeItem } = props;
-
+    const { t } = useTranslation();
     return (
         <SingleDroppable
             id={sectionType}
@@ -32,7 +33,7 @@ const LinkItems = (props: LinkItemsProps) => {
                             index={i}
                             position={item.position}
                             itemHeader={
-                                item.label ? item.label : 'Not specified'
+                                item.label ? item.label : t('edit-not-specified', {ns: 'edit'})
                             }
                             item={item}
                             sectionType={sectionType}

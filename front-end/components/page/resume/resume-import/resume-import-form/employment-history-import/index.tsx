@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 import SectionItemAdditionalButton from '../../../../../custom/section-item-additional-button';
-import { EMPLOYMENT_HISTORY_DESCRIPTION } from '../../../../../../configs/constants/description.constants';
 import EmploymentHistoryItems from './employment-history-items';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
@@ -21,6 +20,7 @@ import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 import { isEmpty } from 'lodash';
 import SingleDndContainer from '../../../../../custom/single-sortable/single-dndcontainer';
 import { DragOverlay } from '@dnd-kit/core';
+import { useTranslation } from 'next-i18next';
 
 type EmploymentHistoryProps = {
     className?: string;
@@ -41,7 +41,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
     const employmentHistoryDetails = useRecoilValue(
         employmentHistoriesDetailsState
     );
-
+    const { t } = useTranslation();
 
     const [employmentHistoryItems, setEmploymentHistoryItems] = useRecoilState(
         employmentHistoryItemsState
@@ -119,7 +119,7 @@ const EmploymentHistoryImport = (props: EmploymentHistoryProps) => {
                     {employmentHistoryTitle}
                 </SectionImportTitle>
                 <p style={{ color: 'grey', fontSize: '12px' }}>
-                    {EMPLOYMENT_HISTORY_DESCRIPTION}
+                    {t('edit-employment-description', {ns: 'edit'})}
                 </p>
                 {!isEmpty(employmentHistoryItems) && (
                     <EmploymentHistoryItems

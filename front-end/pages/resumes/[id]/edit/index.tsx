@@ -35,6 +35,7 @@ import { convertResumeResponse } from '../../../../configs/utils/format.utils';
 import TemplateSelector from '../../../../components/page/resume/select-template';
 import { userLoginState } from '../../../../recoil-state/user-state/user-state';
 import { hasCookie } from 'cookies-next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
@@ -263,10 +264,12 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         const resume = await axios.get(`${HOST}resume/${resumeId}/`, {
             headers: headers,
         });
+        const {locale} = ctx
         return {
             props: {
                 ...defaultReturnProps,
                 // initialResumeData: MOCKED_RESUME,
+                ...await serverSideTranslations(locale as string, ['edit']),
                 templateList: templates.data,
                 initialResumeData: convertResumeResponse(resume.data),
             },

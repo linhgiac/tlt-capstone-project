@@ -1,10 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import SectionItemAdditionalButton from '../../../../../custom/section-item-additional-button';
-import {
-    EDUCATION_DESCRIPTION,
-    EMPLOYMENT_HISTORY_DESCRIPTION,
-} from '../../../../../../configs/constants/description.constants';
 import SkillItems from './skill-items';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
@@ -25,6 +21,7 @@ import { HOST } from '../../../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 import { isEmpty } from 'lodash';
 import SingleDndContainer from '../../../../../custom/single-sortable/single-dndcontainer';
+import { useTranslation } from 'next-i18next';
 
 type SkillProps = {
     className?: string;
@@ -33,6 +30,7 @@ type SkillProps = {
 };
 
 const SkillImport = (props: SkillProps) => {
+    const { t } = useTranslation();
     const { className, defaultTitle, sectionType = 'skills' } = props;
     const [skillTitle, setSkillTitle] = useRecoilState(skillTitleValueState);
     const [disableLevel, setDisableLevel] = useState(false);
@@ -116,7 +114,7 @@ const SkillImport = (props: SkillProps) => {
                     {skillTitle}
                 </SectionImportTitle>
                 <p style={{ color: 'grey', fontSize: '12px' }}>
-                    {EDUCATION_DESCRIPTION}
+                    {t('eidt-skill-description', {ns: 'edit'})}
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <Switch
@@ -124,7 +122,7 @@ const SkillImport = (props: SkillProps) => {
                         onChange={changeSwitchHandler}
                     />
                     <div style={{ paddingLeft: '10px' }}>
-                        {`Don't show experience level`}
+                        {t('edit-dont-show-experience-level', {ns: 'edit'})}
                     </div>
                 </div>
                 {!isEmpty(skillItems) && (

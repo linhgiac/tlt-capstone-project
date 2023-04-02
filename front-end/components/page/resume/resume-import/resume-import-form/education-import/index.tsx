@@ -1,10 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import classNames from 'classnames';
 import SectionItemAdditionalButton from '../../../../../custom/section-item-additional-button';
-import {
-    EDUCATION_DESCRIPTION,
-    EMPLOYMENT_HISTORY_DESCRIPTION,
-} from '../../../../../../configs/constants/description.constants';
 import EducationItems from './education-items';
 import { useRecoilState } from 'recoil';
 import { educationItemsState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
@@ -21,6 +17,7 @@ import { HOST } from '../../../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 import { isEmpty } from 'lodash';
 import SingleDndContainer from '../../../../../custom/single-sortable/single-dndcontainer';
+import { useTranslation } from 'next-i18next';
 
 type EducationProps = {
     className?: string;
@@ -33,6 +30,7 @@ const EducationImport = (props: EducationProps) => {
     const [educationTitle, setEducationTitle] = useRecoilState(
         educationTitleValueState
     );
+    const { t } = useTranslation();
 
     const [educationItems, setEducationItems] =
         useRecoilState(educationItemsState);
@@ -100,7 +98,7 @@ const EducationImport = (props: EducationProps) => {
                     {educationTitle}
                 </SectionImportTitle>
                 <p style={{ color: 'grey', fontSize: '12px' }}>
-                    {EDUCATION_DESCRIPTION}
+                    {t('edit-education-description', {ns: 'edit'})}
                 </p>
                 {!isEmpty(educationItems) && (
                     <EducationItems

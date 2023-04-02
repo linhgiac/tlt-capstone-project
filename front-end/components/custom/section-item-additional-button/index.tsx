@@ -3,6 +3,7 @@ import { Typography } from 'antd';
 import React from 'react';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
+import { useTranslation } from 'next-i18next';
 
 type Props = {
     className?: string;
@@ -21,6 +22,7 @@ enum Type {
 const SectionItemAdditionalButton = (props: Props) => {
     const { className, sectionType, onAddItem } = props;
     const { Text } = Typography;
+    const { t } = useTranslation();
 
     return (
         <div
@@ -29,7 +31,7 @@ const SectionItemAdditionalButton = (props: Props) => {
                 onAddItem(sectionType);
             }}>
             <Text className={styles['section-item-add-button']}>
-                <PlusOutlined /> Add one more {Type[sectionType]}
+                <PlusOutlined /> {t('edit-add-one-more-' + Type[sectionType], {ns: 'edit'})}
             </Text>
         </div>
     );

@@ -35,6 +35,7 @@ import axios from 'axios';
 import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
 import { isEmpty, get } from 'lodash';
 import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 type ResumeImportProps = {
     className?: string;
@@ -42,6 +43,7 @@ type ResumeImportProps = {
 };
 
 const ResumeImport = (props: ResumeImportProps) => {
+    const { t } = useTranslation();
     const { className } = props;
     const router = useRouter();
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
@@ -228,7 +230,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                 type="primary"
                 size="large"
                 onClick={submitFormHandler}>
-                Save Resume
+                {t('edit-save-resume', {ns: 'edit'})}
             </Button>
             <Modal
                 title={<div> Save Successfully</div>}

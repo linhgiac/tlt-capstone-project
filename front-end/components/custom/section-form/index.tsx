@@ -15,6 +15,7 @@ import { has, isEmpty } from 'lodash';
 import SkillLevelInput from './skill-level-input';
 import moment from 'moment';
 import dayjs from 'dayjs';
+import { useTranslation } from 'next-i18next';
 
 const { Group, Button } = Radio;
 type Props = {
@@ -35,6 +36,7 @@ const SectionForm = (props: Props) => {
         onChangeItemValue,
         disabledLevel = false,
     } = props;
+    const { t } = useTranslation();
     const [form] = Form.useForm();
     const [skillLevel, setSkillLevel] = useState('novice');
     const { TextArea } = Input;
@@ -58,7 +60,7 @@ const SectionForm = (props: Props) => {
                         <Form.Item
                             className="p-b-15 no-margin"
                             name={key}
-                            label={labelList[key]}>
+                            label={t(labelList[key], {ns: 'edit'})}>
                             <DatePicker
                                 picker="month"
                                 size="large"
@@ -76,7 +78,7 @@ const SectionForm = (props: Props) => {
                         <Form.Item
                             className="p-b-15 no-margin"
                             name={key}
-                            label={labelList[key]}>
+                            label={t(labelList[key], {ns: 'edit'})}>
                             <DatePicker
                                 picker="month"
                                 size="large"
@@ -106,7 +108,7 @@ const SectionForm = (props: Props) => {
                         <Form.Item
                             className="p-b-15 no-margin"
                             name={key}
-                            label={labelList[key]}>
+                            label={t(labelList[key], {ns: 'edit'})}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -159,7 +161,7 @@ const SectionForm = (props: Props) => {
                 {has(labelList, 'description') && (
                     <Form.Item
                         name="description"
-                        label="Description">
+                        label={t('edit-description', {ns: 'edit'})}>
                         <TextArea
                             className={classNames(
                                 className,

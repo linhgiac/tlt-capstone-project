@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { EducationItemDataType } from '../../../../../../../configs/interfaces/resume.interface';
 import Draggable from '../../../../../../custom/draggable';
@@ -14,7 +15,7 @@ type EducationItemsProps = {
 
 const EducationItems = (props: EducationItemsProps) => {
     const { className, sectionType, items, onRemoveItem, onChangeItem } = props;
-
+    const { t } = useTranslation();
     return (
         <SingleDroppable
             id={sectionType}
@@ -33,7 +34,7 @@ const EducationItems = (props: EducationItemsProps) => {
                                 index={i}
                                 position={item.position}
                                 itemHeader={
-                                    item.school ? item.school : 'Not specified'
+                                    item.school ? item.school : t('edit-not-specified', {ns: 'edit'})
                                 }
                                 item={item}
                                 sectionType={sectionType}
