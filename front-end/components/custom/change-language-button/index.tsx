@@ -37,8 +37,18 @@ const ChangeLanguageButton = (props: ChangeLanguageButtonProps) => {
     const onChangeLanguage: MenuProps['onClick'] = async e => {
         console.log('click ', e);
         setCookie('language', e.key);
-        await router.replace(router.asPath, undefined, {locale: e.key, shallow: true});
-        router.reload();
+        if (forceReload) {
+            await router.replace(router.asPath, undefined, {
+                locale: e.key,
+                shallow: true,
+            });
+            router.reload();
+        } else {
+            router.replace(router.asPath, undefined, {
+                locale: e.key,
+                shallow: false,
+            });
+        }
     };
      
     const menu = (
