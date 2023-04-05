@@ -59,25 +59,61 @@ const Berlin = (props: Props) => {
         );
     };
 
+    const Layout = () => (
+        <>
+            {' '}
+            {pageIndex === 0 ? (
+                <>
+                    <div className={styles['masthead']}>
+                        <Masthead value={personalDetails} />
+                    </div>
+
+                    <div className={classNames('flex-row', styles['content'])}>
+                        <div className={styles['side-bar']}>
+                            {mapSectionToLayout('persionalDetails')}
+                            {mapSectionToLayout('professionalSummary')}
+                            {resumeLayout[0]['sidebar'].map(
+                                (type: any, i: number) => {
+                                    console.log('resumeLayout', resumeLayout);
+                                    console.log('aaaasasadasdsas', type);
+                                    return mapSectionToLayout(type, i);
+                                }
+                            )}
+                        </div>
+                        <div className={styles['main']}>
+                            {resumeLayout[0]['main'].map(
+                                (type: any, i: number) => {
+                                    return mapSectionToLayout(type, i);
+                                }
+                            )}
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <div className={classNames('flex-row', styles['content'])}>
+                    <div className={styles['side-bar']}>
+                        {resumeLayout[pageIndex]['sidebar'].map(
+                            (type: any, i: number) => {
+                                console.log('aaaasasadasdsas', type);
+                                return mapSectionToLayout(type, i);
+                            }
+                        )}
+                    </div>
+                    <div className={styles['main']}>
+                        {resumeLayout[pageIndex]['main'].map(
+                            (type: any, i: number) => {
+                                return mapSectionToLayout(type, i);
+                            }
+                        )}
+                    </div>
+                </div>
+            )}
+        </>
+    );
+
     return (
         <div className={classNames(styles.container)}>
-            {pageIndex === 0 && <div className={styles['masthead']}>
-                <Masthead value={personalDetails} />
-            </div>}
-            <div className={classNames('flex-row', styles['content'])}>
-                <div className={styles['side-bar']}>
-                    {mapSectionToLayout('professionalSummary')}
-                    {resumeLayout[pageIndex]['sidebar'].map((sectionType: any, i: number) => {
-                        console.log('aaaasasadasdsas', sectionType);
-                        return mapSectionToLayout(sectionType, i);
-                    })}
-                </div>
-                <div className={styles['main']}>
-                    {resumeLayout[pageIndex]['main'].map((sectionType: any, i: number) => {
-                        return mapSectionToLayout(sectionType, i);
-                    })}
-                </div>
-            </div>
+            <Layout />
         </div>
     );
 };
