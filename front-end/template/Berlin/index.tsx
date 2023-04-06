@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { get, isElement, isEmpty } from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { resumeChangedValueState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
-import { resumeLayoutState } from '../../recoil-state/resume-state/resume.state';
+import { resumeLayoutState, resumeSelectedPageIndexState } from '../../recoil-state/resume-state/resume.state';
 import DataDisplay from '../shared/DataDisplay';
 import styles from './styles.module.scss';
 import Masthead from './widgets/Masthead/Masthead';
@@ -15,7 +15,8 @@ const Berlin = (props: Props) => {
     const resumeData = useRecoilValue(resumeChangedValueState);
     const { personalDetails, professionalSummary, complexSections } =
         resumeData;
-    const layout = useRecoilValue(resumeLayoutState);
+    const pageIndex = useRecoilValue(resumeSelectedPageIndexState);
+    const resumeLayout = useRecoilValue(resumeLayoutState);
     // const layout: any = [
     //     ['personalDetails', 'skills'],
     //     ['professionalSummary', 'employmentHistories', 'educations'],
@@ -60,19 +61,20 @@ const Berlin = (props: Props) => {
 
     return (
         <div className={classNames(styles.container)}>
-            <div className={styles['masthead']}>
+            {pageIndex === 0 && <div className={styles['masthead']}>
                 <Masthead value={personalDetails} />
-            </div>
+            </div>}
             <div className={classNames('flex-row', styles['content'])}>
                 <div className={styles['side-bar']}>
+                    {mapSectionToLayout('personalDetails')}
                     {mapSectionToLayout('professionalSummary')}
-                    {layout[0]['sidebar'].map((sectionType: any, i: number) => {
+                    {resumeLayout[pageIndex]['sidebar'].map((sectionType: any, i: number) => {
                         console.log('aaaasasadasdsas', sectionType);
                         return mapSectionToLayout(sectionType, i);
                     })}
                 </div>
                 <div className={styles['main']}>
-                    {layout[0]['main'].map((sectionType: any, i: number) => {
+                    {resumeLayout[pageIndex]['main'].map((sectionType: any, i: number) => {
                         return mapSectionToLayout(sectionType, i);
                     })}
                 </div>

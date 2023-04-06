@@ -9,24 +9,24 @@ export namespace ResumeConstants {
 const PERSONAL_DETAILS_LABEL = {}
 const PROFESSIONAL_SUMMARY_LABEL ={}
 const EMPLOYMENT_HISTORY_LABEL = {
-    jobTitle: 'Job Title',
-    employer: 'Employer',
-    startDate: 'Start Date',
-    endDate: 'End Date',
-    city: 'City',
-    description: 'Description',
+    jobTitle: 'edit-job-title',
+    employer: 'edit-employer',
+    startDate: 'edit-start-date',
+    endDate: 'edit-end-date',
+    city: 'edit-city',
+    description: 'edit-description',
 };
 const EDUCATION_LABEL = {
-    school: 'School',
-    degree: 'Degree',
-    startDate: 'Start Date',
-    endDate: 'End Date',
-    city: 'City',
-    description: 'Description',
+    school: 'edit-school',
+    degree: 'edit-degree',
+    startDate: 'edit-start-date',
+    endDate: 'edit-end-date',
+    city: 'edit-city',
+    description: 'edit-description',
 };
-const LINKS_LABEL = { label: 'Label', link: 'Link' };
+const LINKS_LABEL = { label: 'edit-label', link: 'edit-link' };
 
-const SKILLS_LABEL = { name: 'Skills', level: 'Level' };
+const SKILLS_LABEL = { name: 'edit-skills', level: 'edit-level' };
 
 export const SECTION_TYPE: any = {
     personalDetails: PERSONAL_DETAILS_LABEL,

@@ -214,34 +214,11 @@ export const convertProfilePayloadData = (payloadData: AccountSettingType) => {
     return convertCamelToSnake(payloadData);
 };
 
-// export const convertProfileResponse = (responseData: any) => {
-//     const { profile, ...dataWithoutProfile } = responseData;
-//     // more consideration
-//     const newProfile = profile;
-//     Object.keys(profile).map((key: any) => {
-//         if (isEmpty(newProfile[key])) {
-//             newProfile[key] = '';
-//         }
-//         if (key === 'avatar' && newProfile[key]) {
-//             newProfile[key] = `${HOST}${profile.avatar.replace('/', '')}`;
-//         }
-//     });
-//     return convertSnakeToCamel({
-//         ...dataWithoutProfile,
-//         ...newProfile,
-//     });
-// };
 export const convertProfileResponse = (responseData: any) => {
     const { profile, ...dataWithoutProfile } = responseData;
     if (profile.avatar) {
         profile.avatar = `${HOST}${profile.avatar.replace('/', '')}`;
     }
-    // if (profile.avatar) {
-    //     const newUrl = `${HOST}${profile.avatar.replace('/', '')}`;
-    //     console.log("newUrl", newUrl);
-    //     profile.avatar = newUrl;
-    //     console.log("avatar", profile.avatar);
-    // }
     return convertSnakeToCamel({
         ...dataWithoutProfile,
         ...profile,

@@ -23,14 +23,19 @@ const LayoutEditor = (props: Props) => {
         }
         const removedPages = pages[index];
         let newPages = pages.filter((_: any, i: number) => i !== index);
+        let newFirstMain = [...newPages[0]['main']];
+        const newFirstSidebar = [...newPages[0]['sidebar']];
 
-        newPages[0]['main'] = [
-            ...newPages[0]['main'],
+        newFirstMain = [
+            ...newFirstMain,
             ...removedPages['main'],
             ...removedPages['sidebar'],
         ];
-
-        setPages(newPages);
+        console.log('newpages', newPages.slice(0));
+        setPages([
+            { main: newFirstMain, sidebar: newFirstSidebar },
+            ...newPages.slice(1),
+        ]);
     };
 
     const dragEndHandler = (items: any) => {

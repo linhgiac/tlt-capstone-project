@@ -21,7 +21,7 @@ const DefaultHeader = (props: Props) => {
             <div className={styles['right-header']}>
                 <HeaderRouter />
                 <HeaderButton className={styles.button} />
-                <ChangeLanguageButton></ChangeLanguageButton>
+                <ChangeLanguageButton forceReload={false}></ChangeLanguageButton>
             </div>
         </Header>
     );

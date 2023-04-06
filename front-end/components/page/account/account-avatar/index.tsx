@@ -20,8 +20,7 @@ const AccountAvatar = (props: AccountAvatarProps) => {
 
     // More consideration
     useEffect(() => {
-        console.log("TvT fetchingURL", `${HOST}${fetchingURL.replace('/', '')}`);
-        setAvatarURL(`${HOST}${fetchingURL.replace('/', '')}`);
+        setAvatarURL(fetchingURL);
     }, [fetchingURL]);
 
     useEffect(() => {
@@ -36,6 +35,7 @@ const AccountAvatar = (props: AccountAvatarProps) => {
             onChangeAvatar(info.file.originFileObj);
         }
     };
+    
     return (
         <div
             className={classNames(

@@ -19,7 +19,7 @@ const HeaderRouter = (props: HeaderRouterProps) => {
             getItem('Professional', 'templates/professional'),
             getItem('Modern', 'templates/modern'),
         ]),
-        getItem('Blogs', 'blogs'), getItem('', 'login', null, false)
+        getItem('Blogs', 'blogs')
     ];
 
     const clickHandler: MenuProps['onClick'] = e => {

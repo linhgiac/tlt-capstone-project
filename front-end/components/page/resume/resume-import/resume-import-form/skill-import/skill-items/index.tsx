@@ -4,6 +4,7 @@ import { SkillItemDataType } from '../../../../../../../configs/interfaces/resum
 import Draggable from '../../../../../../custom/draggable';
 import SingleDroppable from '../../../../../../custom/single-sortable/single-droppable';
 import SectionItem from '../../../../../../custom/section-item';
+import { useTranslation } from 'next-i18next';
 
 type SkillItemsProps = {
     className?: string;
@@ -23,7 +24,7 @@ const SkillItems = (props: SkillItemsProps) => {
         onRemoveItem,
         onChangeItem,
     } = props;
-
+    const { t } = useTranslation();
     return (
         <SingleDroppable
             id={sectionType}
@@ -40,7 +41,7 @@ const SkillItems = (props: SkillItemsProps) => {
                             key={i}
                             index={i}
                             position={item.position}
-                            itemHeader={item.name ? item.name : 'Not specified'}
+                            itemHeader={item.name ? item.name : t('edit-not-specified', {ns: 'edit'})}
                             item={item}
                             sectionType={sectionType}
                             disableLevel={disableLevel}

@@ -21,18 +21,34 @@ const ChangeLanguageItem = (props : ChangeLanguageItemProps) => {
     const {language} = props;
     return (
         <div>
-            <img className={styles.flag} src={"./assets/flags/" + language +".png"}/>
+            <img className={styles.flag} src={"/assets/flags/" + language +".png"}/>
             <span className={styles.name}>{NativeLanguageName[language]}</span>
         </div>
     )
 }
 
-const ChangeLanguageButton = () => {
+type ChangeLanguageButtonProps = {
+    forceReload: boolean
+}
+
+const ChangeLanguageButton = (props: ChangeLanguageButtonProps) => {
+    const {forceReload} = props;
     const router = useRouter();
-        const onChangeLanguage: MenuProps['onClick'] = e => {
+    const onChangeLanguage: MenuProps['onClick'] = async e => {
         console.log('click ', e);
         setCookie('language', e.key);
-        router.replace(router.asPath, undefined, {locale: e.key});
+        if (forceReload) {
+            await router.replace(router.asPath, undefined, {
+                locale: e.key,
+                shallow: true,
+            });
+            router.reload();
+        } else {
+            router.replace(router.asPath, undefined, {
+                locale: e.key,
+                shallow: false,
+            });
+        }
     };
      
     const menu = (
@@ -44,7 +60,7 @@ const ChangeLanguageButton = () => {
                         key: lng,
                         label: (
                             <div>
-                                 <ChangeLanguageItem language={lng}></ChangeLanguageItem>
+                                <ChangeLanguageItem language={lng}></ChangeLanguageItem>
                             </div>)
                     }
                 )
@@ -53,11 +69,8 @@ const ChangeLanguageButton = () => {
     )
 
     return (
-        <Dropdown overlay={menu}>
-            {/* <Button> */}
-                {/* <ChangeLanguageItem language={router.locale ?? 'en'}></ChangeLanguageItem> */}
-                <img className={styles.biggerFlag} src={"./assets/flags/" + router.locale +".png"}/>
-            {/* </Button> */}
+        <Dropdown overlay={menu} placement="bottomRight">
+            <img className={styles.biggerFlag} src={"/assets/flags/" + router.locale +".png"}/>
         </Dropdown>
     )
 }

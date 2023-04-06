@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { GetServerSidePropsContext } from 'next';
 import axios from 'axios';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import styles from './styles.module.scss';
 
 import ResumeExport from '../../../../components/page/resume/resume-export';
 import ResumeImport from '../../../../components/page/resume/resume-import';
@@ -35,6 +36,8 @@ import { convertResumeResponse } from '../../../../configs/utils/format.utils';
 import TemplateSelector from '../../../../components/page/resume/select-template';
 import { userLoginState } from '../../../../recoil-state/user-state/user-state';
 import { hasCookie } from 'cookies-next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import classNames from 'classnames';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
@@ -223,7 +226,11 @@ const ResumeEditor = (props: ResumeEditorProps) => {
             {isEditing ? (
                 <div className="flex-row">
                     <ResumeImport
-                        className="w-50 p-48"
+                        className={classNames(
+                            'w-50 p-48',
+                            styles['resume-import']
+                        )}
+
                         // initialResume={resumeSaved}
                     />
                     <ResumeExport
@@ -263,10 +270,12 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         const resume = await axios.get(`${HOST}resume/${resumeId}/`, {
             headers: headers,
         });
+        const {locale} = ctx
         return {
             props: {
                 ...defaultReturnProps,
                 // initialResumeData: MOCKED_RESUME,
+                ...await serverSideTranslations(locale as string, ['edit']),
                 templateList: templates.data,
                 initialResumeData: convertResumeResponse(resume.data),
             },

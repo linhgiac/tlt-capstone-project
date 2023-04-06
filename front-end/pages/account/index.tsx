@@ -23,7 +23,6 @@ const AccountSettings = (props: AccountSettingsProps) => {
     const { userData } = props;
     const [user, setUser] = useRecoilState(userState);
     useEffect(() => {
-        console.log("user data", userData);
         setUser(userData);
     }, [userData]);
 

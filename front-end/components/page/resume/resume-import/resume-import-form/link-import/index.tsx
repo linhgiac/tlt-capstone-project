@@ -1,10 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import SectionItemAdditionalButton from '../../../../../custom/section-item-additional-button';
-import {
-    EDUCATION_DESCRIPTION,
-    EMPLOYMENT_HISTORY_DESCRIPTION,
-} from '../../../../../../configs/constants/description.constants';
 import LinkItems from './link-items';
 import { useRecoilState } from 'recoil';
 import { linkItemsState } from '../../../../../../recoil-state/resume-state/resume-changed-state/resume-changed-complex-section.state';
@@ -21,6 +17,7 @@ import { HOST } from '../../../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 import { isEmpty } from 'lodash';
 import SingleDndContainer from '../../../../../custom/single-sortable/single-dndcontainer';
+import { useTranslation } from 'next-i18next';
 
 type LinkProps = {
     className?: string;
@@ -29,6 +26,7 @@ type LinkProps = {
 };
 
 const LinkImport = (props: LinkProps) => {
+    const { t } = useTranslation();
     const { className, defaultTitle, sectionType = 'links' } = props;
     const [linkTitle, setLinkTitle] = useRecoilState(linkTitleValueState);
 
@@ -96,7 +94,7 @@ const LinkImport = (props: LinkProps) => {
                     {linkTitle}
                 </SectionImportTitle>
                 <p style={{ color: 'grey', fontSize: '12px' }}>
-                    {EDUCATION_DESCRIPTION}
+                    {t('edit-link-description', {ns: 'edit'})}
                 </p>
                 {!isEmpty(linkItems) && (
                     <LinkItems
