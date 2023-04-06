@@ -12,29 +12,10 @@ type ResumeExportMainProps = {
 };
 
 const ResumeExportMain = (props: ResumeExportMainProps) => {
-    const { className, scale = 0.5 } = props;
+    const { className, scale = 1 } = props;
     return (
-        <div
-            className={classNames(className)}
-            style={{ transform: `scale(${scale})` }}>
-            {/* <TransformWrapper
-                centerOnInit
-                minScale={0.25}
-                initialScale={scale}
-                limitToBounds={true}
-                centerZoomedOut={false}
-                // pinch={{ step: 1 }}
-                wheel={{ touchPadDisabled: true }}>
-                {controllerProps => (
-                    <>
-                        <TransformComponent wrapperClass={styles.wrapper}>
-                            <div> */}
+        <div>
             <Page />
-            {/* </div>
-                        </TransformComponent>
-                    </>
-                )}
-            </TransformWrapper> */}
         </div>
     );
 };

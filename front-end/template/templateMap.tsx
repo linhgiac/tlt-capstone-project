@@ -8,7 +8,7 @@ type Props = {
 
 const TemplateMap = (props: Props) => {
     const { id = 1 } = props;
-
+    
     const templateMappingHandler = () => {
         switch (id) {
             case 1:
@@ -17,7 +17,18 @@ const TemplateMap = (props: Props) => {
                 return <Berlin />;
         }
     };
-    return <>{templateMappingHandler()}</>;
+    
+    return (
+        <div
+            className={'cv-format'}
+            // style={{
+            //     transform: `scale(${scale})`,
+            //     transformOrigin: 'top left',
+            // }}
+            >
+            {templateMappingHandler()}
+        </div>
+    );
 };
 
 export default TemplateMap;
