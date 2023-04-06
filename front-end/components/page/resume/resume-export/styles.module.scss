@@ -8,63 +8,29 @@
     width: 50%;
     flex: 1 1 0%;
     display: flex;
-    -webkit-box-align: center;
     align-items: center;
-    -webkit-box-pack: center;
     justify-content: center;
     flex-flow: column nowrap;
     background-color: rgb(101, 110, 131);
     color: rgb(255, 255, 255);
     user-select: none;
     // z-index: -1;
-    .resume-export-container{
+    .resume-export__container{
+        height: 100%;
+        width: 100%;
         display: flex;
-        -webkit-box-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
         align-items: center;
-        position: absolute;
-        inset: 40px 74px 72px;
-        div{
-            // display: inline-block;
-            // position: relative;
-            // width: 100%;
-            // height: 100%;
-           .resume-export-pagination{
-                position: absolute;
-                top: -40px;
-                left: 0px;
-                right: 0px;
-                display: flex;
-                flex-flow: row nowrap;
-                height: 40px;
-                -webkit-box-align: center;
-                align-items: center;
-                -webkit-box-pack: center;
-                justify-content: center;
-            }
-            .resume-export-main{
-                position: relative;
-                border-radius: 6px;
-                background-color: rgb(255, 255, 255);
-                overflow: hidden;
-                width: $canvas-scale-width;
-                height: $canvas-scale-height;
-                
-            }
-            .resume-export-selection{
-                position: absolute;
-                bottom: -50px;
-                display: flex;
-                -webkit-box-align: center;
-                align-items: center;
-                -webkit-box-pack: justify;
-                justify-content: space-between;
-                left: 50%;
-                margin-left: -225px;
-                width: 450px;
-            } 
-            }
-        
+        flex-direction: column;
+        .resume-export-pagination{
+            margin: 10px 0px;
+        }
+        .resume-export-main{
+            height: calc(100% - 32px - 40px - 70px);
+            overflow: hidden;
+        }
+        .resume-export-selection{
+            margin: 10px 0px 30px 10px;
+        }
     }
+
 }

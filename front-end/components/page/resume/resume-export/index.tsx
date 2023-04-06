@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import classNames from 'classnames';
 import ResumeExportSelection from './resume-export-selection';
@@ -15,24 +15,19 @@ type ResumeExportProps = {
 };
 
 const ResumeExport = ({ className, onChangeLayout }: ResumeExportProps) => {
-    // const chosenResumeHandler = (id: number) => {
-    // };
     return (
         <div className={classNames(className, styles['resume-export'])}>
-            <div className={classNames(styles['resume-export-container'])}>
-                <div>
-                    <ResumeExportPagination
-                        className={classNames(
-                            'center',
-                            styles['resume-export-pagination']
-                        )}
-                    />
-                    <ResumeExportMain />
-                    <ResumeExportSelection
-                        className={styles['resume-export-selection']}
-                        onChangeEditorLayout={onChangeLayout}
-                    />
-                </div>
+            <div
+                className={classNames(styles['resume-export__container'])}
+                id="resume-export-main">
+                <ResumeExportPagination
+                    className={styles['resume-export-pagination']}
+                />
+                <ResumeExportMain className={styles['resume-export-main']} />
+                <ResumeExportSelection
+                    className={styles['resume-export-selection']}
+                    onChangeEditorLayout={onChangeLayout}
+                />
             </div>
         </div>
     );

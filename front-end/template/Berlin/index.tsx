@@ -70,8 +70,7 @@ const Berlin = (props: Props) => {
 
                     <div className={classNames('flex-row', styles['content'])}>
                         <div className={styles['side-bar']}>
-                            {mapSectionToLayout('persionalDetails')}
-                            {mapSectionToLayout('professionalSummary')}
+                            {mapSectionToLayout('personalDetails')}
                             {resumeLayout[0]['sidebar'].map(
                                 (type: any, i: number) => {
                                     console.log('resumeLayout', resumeLayout);
@@ -81,6 +80,7 @@ const Berlin = (props: Props) => {
                             )}
                         </div>
                         <div className={styles['main']}>
+                            {mapSectionToLayout('professionalSummary')}
                             {resumeLayout[0]['main'].map(
                                 (type: any, i: number) => {
                                     return mapSectionToLayout(type, i);
