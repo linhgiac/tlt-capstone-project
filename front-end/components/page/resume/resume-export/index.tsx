@@ -17,9 +17,7 @@ type ResumeExportProps = {
 const ResumeExport = ({ className, onChangeLayout }: ResumeExportProps) => {
     return (
         <div className={classNames(className, styles['resume-export'])}>
-            <div
-                className={classNames(styles['resume-export__container'])}
-                id="resume-export-main">
+            <div className={classNames(styles['resume-export__container'])}>
                 <ResumeExportPagination
                     className={styles['resume-export-pagination']}
                 />

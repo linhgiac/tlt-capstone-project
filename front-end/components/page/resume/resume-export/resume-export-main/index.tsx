@@ -1,10 +1,6 @@
 import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { RESUME_SIZE } from '../../../../../configs/constants/resume.constants';
-import { ResumeDataType } from '../../../../../configs/interfaces/resume.interface';
-import Canvas from '../../../../custom/canvas';
 import Page from './Page';
-import styles from './styles.module.scss';
 
 type ResumeExportMainProps = {
     className?: string;
@@ -42,20 +38,14 @@ const ResumeExportMain = (props: ResumeExportMainProps) => {
     }, []);
 
     useEffect(() => {
-        // const flag = (resumeExportContainerSize.height * 16) / 9;
-        // if (resumeExportContainerSize.height > 486) {
-        //     setScale(0.45);
-        // } else if (resumeExportContainerSize.width < flag) {
-        //     setScale(resumeExportContainerSize.width / 1920);
-        // } else setScale(resumeExportContainerSize.height / 1080);
+        setScale(resumeExportContainerSize.height / 1122);
         console.log('resumeexport', resumeExportContainerSize);
     }, [resumeExportContainerSize]);
-
-    // console.log('width', resumeExportContainerSize.width);
-    // console.log('height', resumeExportContainerSize.height);
     return (
-        <div className={classNames(className)}>
-            <Page scale={scale} />;
+        <div
+            className={classNames(className)}
+            id="resume-export-main">
+            <Page scale={scale} />
         </div>
     );
 };
