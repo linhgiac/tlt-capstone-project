@@ -6,6 +6,7 @@ import {
     UserOutlined,
 } from '@ant-design/icons';
 import { Avatar, Button, Tooltip } from 'antd';
+import { useRouter } from 'next/router';
 import React from 'react';
 import DownloadButton from '../../../../custom/downnload-button';
 
@@ -17,18 +18,22 @@ type Props = {
 
 const ActionList = (props: Props) => {
     const { onAction } = props;
+    const router = useRouter();
     return (
         <div>
             <div className={styles['action-item']}>
                 <Tooltip
                     placement="right"
-                    title={'Template'}>
+                    title={'Account Settings'}>
                     <Button
                         style={{
                             backgroundColor: 'transparent',
                             color: 'white',
                             border: 'none',
                             fontSize: '18px',
+                        }}
+                        onClick={() => {
+                            router.push('/account');
                         }}>
                         <Avatar
                             size={18}
@@ -97,7 +102,7 @@ const ActionList = (props: Props) => {
                 <Tooltip
                     placement="right"
                     title={'Export'}>
-                    <DownloadButton icon={true}/>
+                    <DownloadButton icon={true} />
                 </Tooltip>
             </div>
         </div>

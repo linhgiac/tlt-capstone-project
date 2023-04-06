@@ -16,6 +16,8 @@ import { personalDetailChangedValueState } from '../../../../../../recoil-state/
 import { resumeSavedState } from '../../../../../../recoil-state/resume-state/resume.state';
 // import { personalDetailValueState } from '../../../../../../recoil-state/resume-state/resume-single-section.state';
 import { useTranslation } from 'next-i18next';
+import axios from 'axios';
+import { HOST } from '../../../../../../configs/constants/misc';
 
 type PersonalDetailsImportProps = {
     className?: string;
@@ -44,6 +46,17 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
         [setPersonalDetailsChangedValues]
     );
 
+    const uploadImageHandler = async (image: any) => {
+        try {
+            const response = await axios.put(
+                `${HOST}resume/${resumeSaved.id}/images-uploading/`
+            );
+            console.log('response', response.data);
+        } catch (error: any) {
+            console.log('error', error);
+        }
+    };
+
     useEffect(() => {
         form.setFieldsValue(resumeSaved?.personalDetails);
     }, [form, resumeSaved?.personalDetails]);
@@ -69,7 +82,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="jobTitle"
-                            label={t('edit-wanted-job-title', {ns: 'edit'})}>
+                            label={t('edit-wanted-job-title', { ns: 'edit' })}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -78,13 +91,15 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         className={classNames('p-l-24', 'no-margin')}>
                         <Form.Item
                             className="no-margin"
-                            name="avatar"
+                            name="image"
                             label="">
                             <ImageUpload
                                 className={classNames(
                                     'no-margin',
                                     'no-padding'
                                 )}
+                                onUpload={uploadImageHandler}
+                                fetchingURL={''}
                             />
                         </Form.Item>
                     </Col>
@@ -96,7 +111,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="firstName"
-                            label={t('edit-first-name', {ns: 'edit'})}>
+                            label={t('edit-first-name', { ns: 'edit' })}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -106,7 +121,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="lastName"
-                            label={t('edit-last-name', {ns: 'edit'})}>
+                            label={t('edit-last-name', { ns: 'edit' })}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -118,7 +133,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="email"
-                            label={t('edit-email', {ns: 'edit'})}>
+                            label={t('edit-email', { ns: 'edit' })}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -128,7 +143,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="phone"
-                            label={t('edit-phone', {ns: 'edit'})}>
+                            label={t('edit-phone', { ns: 'edit' })}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -140,7 +155,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="country"
-                            label={t('edit-country', {ns: 'edit'})}>
+                            label={t('edit-country', { ns: 'edit' })}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -150,7 +165,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <Form.Item
                             className="no-margin"
                             name="city"
-                            label={t('edit-city', {ns: 'edit'})}>
+                            label={t('edit-city', { ns: 'edit' })}>
                             <Input />
                         </Form.Item>
                     </Col>
@@ -160,7 +175,8 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         className={styles['expand-details-text']}
                         onClick={expandHandler}>
                         <br />
-                        {t('edit-show-add-details', {ns: 'edit'})} <DownOutlined />
+                        {t('edit-show-add-details', { ns: 'edit' })}{' '}
+                        <DownOutlined />
                     </Text>
                 ) : (
                     <>
@@ -171,7 +187,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="address"
-                                    label={t('edit-address', {ns: 'edit'})}>
+                                    label={t('edit-address', { ns: 'edit' })}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -181,7 +197,9 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="postalCode"
-                                    label={t('edit-postal-code', {ns: 'edit'})}>
+                                    label={t('edit-postal-code', {
+                                        ns: 'edit',
+                                    })}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -193,7 +211,9 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="drivingLicense"
-                                    label={t('edit-driving-license', {ns: 'edit'})}>
+                                    label={t('edit-driving-license', {
+                                        ns: 'edit',
+                                    })}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -203,7 +223,9 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="nationality"
-                                    label={t('edit-nationality', {ns: 'edit'})}>
+                                    label={t('edit-nationality', {
+                                        ns: 'edit',
+                                    })}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -215,7 +237,9 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="placeOfBirth"
-                                    label={t('edit-place-of-birth', {ns: 'edit'})}>
+                                    label={t('edit-place-of-birth', {
+                                        ns: 'edit',
+                                    })}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -225,7 +249,9 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                                 <Form.Item
                                     className="no-margin"
                                     name="dateOfBirth"
-                                    label={t('eidt-date-of-birth', {ns: 'edit'})}>
+                                    label={t('eidt-date-of-birth', {
+                                        ns: 'edit',
+                                    })}>
                                     <Input />
                                 </Form.Item>
                             </Col>
@@ -234,7 +260,8 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                             className={styles['expand-details-text']}
                             onClick={expandHandler}>
                             <br />
-                            {t('edit-hide-add-details', {ns: 'edit'})} <UpOutlined />
+                            {t('edit-hide-add-details', { ns: 'edit' })}{' '}
+                            <UpOutlined />
                         </Text>
                     </>
                 )}
