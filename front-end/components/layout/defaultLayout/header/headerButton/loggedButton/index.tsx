@@ -6,6 +6,8 @@ import React from 'react';
 
 import styles from '../styles.module.scss';
 import { UserOutlined } from '@ant-design/icons';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../../../../../recoil-state/user-state/user-state';
 type Props = {
     onLogout: () => void;
 };
@@ -13,11 +15,20 @@ type Props = {
 const LoggedButton = (props: Props) => {
     const { onLogout } = props;
     const router = useRouter();
+    const user = useRecoilValue(userState);
 
     const items: MenuProps['items'] = [
         {
             key: 'account',
-            label: <Avatar icon={<UserOutlined />} />,
+            label: (
+                <>
+                    {user.avatar ? (
+                        <Avatar src={user.avatar} />
+                    ) : (
+                        <Avatar icon={<UserOutlined />} />
+                    )}
+                </>
+            ),
             children: [
                 {
                     key: 'settings',
