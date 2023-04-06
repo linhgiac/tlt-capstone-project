@@ -29,6 +29,9 @@ const SingleDndContainer = (props: Props) => {
 
     const dragEndHandler = (event: any) => {
         const { active, over } = event;
+        if (!over) {
+            return;
+        }
         if (active.id !== over.id) {
             setNewItems((prevItems: any) => {
                 const oldIndex = +active.id - 1;

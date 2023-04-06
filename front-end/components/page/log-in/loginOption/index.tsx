@@ -7,6 +7,7 @@ import {
 import { Button, Typography } from 'antd';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
+import { signIn } from "next-auth/react";
 
 import React from 'react';
 import styles from './styles.module.scss';
@@ -26,7 +27,10 @@ const LoginOption = (props: Props) => {
                     <FacebookFilled />
                     Facebook
                 </Button>
-                <Button type="primary">
+                <Button
+                    type="primary"
+                    onClick={() => signIn("google")}
+                >
                     <GoogleOutlined />
                     Google
                 </Button>

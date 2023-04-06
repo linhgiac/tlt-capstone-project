@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -20,6 +20,7 @@ type SaveAccountSettingResponse = {};
 const AccountForm = (props: AccountFormProps) => {
     const { className, data } = props;
     const [avatar, setAvatar] = useState<File>();
+    const [isSuccessful, setIsSuccessful] = useState(false)
     const [form] = Form.useForm();
     const router = useRouter()
 
@@ -28,11 +29,13 @@ const AccountForm = (props: AccountFormProps) => {
     }, [data]);
 
     const saveProfileHandler = async (value: any) => {
+        if (value.avatar) {
+            delete value.avatar;
+        }
         if (avatar) {
             value.avatar = avatar;
         }
         const convertedValue = convertProfilePayloadData(value);
-        console.log(value);
         // convert Profile Payload Data
         // call API
         const authHeader = Object.assign(getAuthHeader(), { 'Content-Type': 'multipart/form-data' });
@@ -44,6 +47,7 @@ const AccountForm = (props: AccountFormProps) => {
                     headers: authHeader,
                 }
             );
+            setIsSuccessful(true)
         } catch (error: any) {
             error?.response?.data.detail &&
                 // setError(error.response.data.detail);
@@ -108,6 +112,14 @@ const AccountForm = (props: AccountFormProps) => {
                     </Button>
                 </Form.Item>
             </Form>
+            <Modal
+                title={<div> Save Successfully</div>}
+                centered
+                open={isSuccessful}
+                onCancel={() => {
+                    setIsSuccessful(false);
+                }}
+                footer={null}></Modal>
         </div>
     );
 };
