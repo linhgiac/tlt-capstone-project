@@ -9,8 +9,8 @@ type ResumeExportMainProps = {
 const ResumeExportMain = (props: ResumeExportMainProps) => {
     const { className } = props;
     const [resumeExportContainerSize, setResumeExportContainerSize] = useState({
-        width: 0,
-        height: 0,
+        width: 436,
+        height: 617,
     });
     const [scale, setScale] = useState(0.55);
 

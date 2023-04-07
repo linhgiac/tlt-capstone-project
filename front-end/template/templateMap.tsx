@@ -21,6 +21,7 @@ const TemplateMap = (props: Props) => {
 
     return (
         <div
+            id="pdf"
             className={'cv-format'}
             style={{
                 backgroundColor: '#fff',

@@ -28,13 +28,14 @@ const DownloadButton = (props: Props) => {
         // const windowWidth = data.getBoundingClientRect().width;
         if (data) {
             try {
-                // data.style.transform = 'scale(1)';
+                console.log('hello', data.style);
+                data.style.transform = 'scale(1)';
                 const canvas = await html2canvas(data, {});
                 const imgData = canvas.toDataURL('image/png', 1.0);
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
                 pdf.save(`${resume.title}.pdf`);
-                data.style.removeProperty('transform');
+                // data.style.removeProperty('transform');
             } catch (error) {
                 console.log(error);
             }
