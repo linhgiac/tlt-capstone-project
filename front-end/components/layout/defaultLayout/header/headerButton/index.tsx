@@ -34,19 +34,22 @@ const HeaderButton = (props: HeaderButtonProps) => {
         }
     }, []);
     useEffect(() => {
-        try {
-            const headers = getAuthHeader({});
-            axios
-                .get(`${HOST}accounts/user-details/`, {
-                    headers: headers,
-                })
-                .then((response: any) => {
-                    console.log('user response', response);
-                    setUser(convertProfileResponse(response.data));
-                });
-        } catch (error: any) {
-            console.log('error', error);
+        if (isLogged) {
+            try {
+                const headers = getAuthHeader({});
+                axios
+                    .get(`${HOST}accounts/user-details/`, {
+                        headers: headers,
+                    })
+                    .then((response: any) => {
+                        console.log('user response', response);
+                        setUser(convertProfileResponse(response.data));
+                    });
+            } catch (error: any) {
+                console.log('error', error);
+            }
         }
+        
     }, [isLogged, setUser]);
 
     const logoutHandler = async () => {
