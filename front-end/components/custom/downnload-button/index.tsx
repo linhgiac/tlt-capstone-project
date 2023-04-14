@@ -28,7 +28,7 @@ const DownloadButton = (props: Props) => {
         // const windowWidth = data.getBoundingClientRect().width;
         if (data) {
             try {
-                data.style.transform = 'scale(1)';
+                // data.style.transform = 'scale(1)';
                 const canvas = await html2canvas(data, {});
                 const imgData = canvas.toDataURL('image/png', 1.0);
                 const pdf = new jsPDF('p', 'mm', 'a4');

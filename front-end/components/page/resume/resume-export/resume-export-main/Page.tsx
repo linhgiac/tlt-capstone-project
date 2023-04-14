@@ -6,25 +6,24 @@ import Template01 from '../../../../../template/template-01';
 import TemplateMap from '../../../../../template/templateMap';
 import styles from './pages.module.scss';
 
-type Props = {};
+type Props = {
+    className?: string;
+    scale?: number;
+};
 
 const Page = (props: Props) => {
+    const { className, scale } = props;
     const resumeInfo = useRecoilValue(resumeInfoState);
 
     return (
-        // <div style={{transform: 'scale(0.5)'}}>
-            <div
-            id={'pdf'}
-            className={styles.container}>
-            {/* <div
-                id={'inner-pdf'}
-                style={{ lineHeight: '1.4' }}
-                className={classNames('cv-format')}> */}
-                <TemplateMap id={resumeInfo.template}/>
+        <div id={'pdf'}>
+            <TemplateMap
+                id={resumeInfo.template}
+                scale={scale}
+            />
             {/* </div> */}
         </div>
         // </div>
-        
     );
 };
 

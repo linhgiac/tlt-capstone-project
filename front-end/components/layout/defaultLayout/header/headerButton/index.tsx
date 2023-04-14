@@ -4,7 +4,10 @@ import classNames from 'classnames';
 import styles from './styles.module.scss';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { userLoginState } from '../../../../../recoil-state/user-state/user-state';
+import {
+    userLoginState,
+    userState,
+} from '../../../../../recoil-state/user-state/user-state';
 import axios from 'axios';
 import { HOST } from '../../../../../configs/constants/misc';
 import { deleteCookie, getCookie, hasCookie } from 'cookies-next';
@@ -12,6 +15,7 @@ import { getAuthHeader } from '../../../../../configs/restApi/clients';
 import { UserOutlined } from '@ant-design/icons';
 import LoginButton from './loginButton';
 import LoggedButton from './loggedButton';
+import { convertProfileResponse } from '../../../../../configs/utils/format.utils';
 
 type HeaderButtonProps = {
     className: string;
@@ -20,6 +24,7 @@ type HeaderButtonProps = {
 const HeaderButton = (props: HeaderButtonProps) => {
     const { className } = props;
     const [isLogged, setIsLogged] = useRecoilState(userLoginState);
+    const [user, setUser] = useRecoilState(userState);
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
@@ -28,6 +33,24 @@ const HeaderButton = (props: HeaderButtonProps) => {
             setIsLogged(true);
         }
     }, []);
+    useEffect(() => {
+        if (isLogged) {
+            try {
+                const headers = getAuthHeader({});
+                axios
+                    .get(`${HOST}accounts/user-details/`, {
+                        headers: headers,
+                    })
+                    .then((response: any) => {
+                        console.log('user response', response);
+                        setUser(convertProfileResponse(response.data));
+                    });
+            } catch (error: any) {
+                console.log('error', error);
+            }
+        }
+        
+    }, [isLogged, setUser]);
 
     const logoutHandler = async () => {
         try {

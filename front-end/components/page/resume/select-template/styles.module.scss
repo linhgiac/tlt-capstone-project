@@ -60,6 +60,7 @@
     height: 100%;
     width: 100%;
     overflow: scroll;
+    padding-bottom: 40px;
     .resume-change-index-button {
       display: flex;
       justify-content: center;
@@ -67,7 +68,11 @@
     }
     .resume-preview{
       transform-origin: top center;
-      padding-top: 40px;
+      display: flex;
+      justify-content: center;
+      padding-top: 20px;
+      height: 1072px;
+      overflow: hidden;
     }
     
   }
