@@ -46,7 +46,7 @@ const HeaderButton = (props: HeaderButtonProps) => {
                         setUser(convertProfileResponse(response.data));
                     });
             } catch (error: any) {
-                console.log('error', error);
+                console.log('error errorrrr', error);
             }
         }
         

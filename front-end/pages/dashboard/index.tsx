@@ -11,7 +11,7 @@ import { HOST, LAYOUT } from '../../configs/constants/misc';
 import axios from 'axios';
 import { getAuthHeader } from '../../configs/restApi/clients';
 import Divide from '../../template/template-01/widgets/divide/Divide';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { resumeInfoState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import { isEmpty } from 'lodash';
@@ -19,7 +19,11 @@ import { hasCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { locale } from 'dayjs';
-import { convertDashboardResponse } from '../../configs/utils/format.utils';
+import {
+    convertDashboardResponse,
+    convertPayloadData,
+} from '../../configs/utils/format.utils';
+import { userState } from '../../recoil-state/user-state/user-state';
 
 type DashboardProps = {
     dashboardData: DashboardDataType;
@@ -30,6 +34,7 @@ const Dashboard = (props: DashboardProps) => {
     const { dashboardData, error } = props;
     const { t } = useTranslation();
     const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+    const { id, avatar, ...userDetails } = useRecoilValue(userState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
     const router = useRouter();
@@ -69,6 +74,51 @@ const Dashboard = (props: DashboardProps) => {
         });
     };
 
+    const onCreateWithDetails = async () => {
+        try {
+            const headers = getAuthHeader();
+            const resumeResponse = await axios.post(
+                `${HOST}resume/create/`,
+                { template: 2 },
+                {
+                    headers: headers,
+                }
+            );
+            const resumeValue = await convertPayloadData({
+                ...resumeResponse.data,
+                personalDetails: userDetails,
+            });
+            console.log('resume value', resumeValue);
+            try {
+                const response = await axios.put(
+                    `${HOST}resume/update/`,
+                    resumeValue,
+                    {
+                        headers: getAuthHeader(),
+                    }
+                );
+            } catch (error: any) {
+                console.log('errorrrr', error);
+            }
+
+            console.log('resume value', resumeValue);
+            console.log('resumeReponse', resumeResponse);
+            console.log('userrrrrr', userDetails);
+            router.push({
+                pathname: '/resumes/[id]/edit',
+                query: {
+                    id: resumeResponse.data.id,
+                },
+            });
+            setResumeInfo({
+                id: resumeResponse.data.id,
+                template: resumeResponse.data.template,
+            });
+        } catch (error: any) {
+            console.log('error', error);
+        }
+    };
+
     const importHandler = () => {};
 
     const importCancelHanlder = () => {
@@ -88,34 +138,47 @@ const Dashboard = (props: DashboardProps) => {
     return (
         <div className={classNames(styles['dashboard'])}>
             <div className={classNames(styles['dashboard-header'])}>
-                <h1>{t('dashboard-header', {ns: 'dashboard'})}</h1>
+                <h1>{t('dashboard-header', { ns: 'dashboard' })}</h1>
                 <div>
                     <Button
                         className={styles.button}
                         size="large"
                         onClick={() => setIsImportModalOpen(true)}
                         style={{ marginRight: '10px' }}>
-                        {t('dashboard-import', {ns: 'dashboard'})}
+                        {t('dashboard-import', { ns: 'dashboard' })}
                     </Button>
                     <Button
                         className={styles.button}
                         size="large"
-                        onClick={onCreate}>
-                        {t('dashboard-create-new', {ns: 'dashboard'})}
+                        onClick={onCreate}
+                        style={{ marginRight: '10px' }}>
+                        {t('dashboard-create-new', { ns: 'dashboard' })}
+                    </Button>
+                    <Button
+                        className={styles.button}
+                        size="large"
+                        onClick={onCreateWithDetails}>
+                        + Create new with Personal Details
                     </Button>
                 </div>
             </div>
             <Divider />
-            {dashboardData && (<DashboardContainer
-                data={dashboardData.data}></DashboardContainer>)}
+            {dashboardData && (
+                <DashboardContainer
+                    data={dashboardData.data}></DashboardContainer>
+            )}
             <Modal
                 centered
-                title={t('dashboard-import-title', {ns: 'dashboard'})}
+                title={t('dashboard-import-title', { ns: 'dashboard' })}
                 open={isImportModalOpen}
                 onOk={importHandler}
                 onCancel={importCancelHanlder}
-                okText={t('dashboard-confirm-text', {ns: 'dashboard'}) as string}
-                cancelText={t('dashboard-cancel-text', {ns: 'dashboard'}) as string}>
+                okText={
+                    t('dashboard-confirm-text', { ns: 'dashboard' }) as string
+                }
+                cancelText={
+                    t('dashboard-cancel-text', { ns: 'dashboard' }) as string
+                }>
                 <div>
                     <Upload.Dragger
                         name={'file'}
@@ -125,12 +188,12 @@ const Dashboard = (props: DashboardProps) => {
                             <InboxOutlined />
                         </p>
                         <p className="ant-upload-text">
-                            {t('dashboard-upload-file', {ns: 'dashboard'})}
+                            {t('dashboard-upload-file', { ns: 'dashboard' })}
                         </p>
                     </Upload.Dragger>
                 </div>
             </Modal>
-        </div>      
+        </div>
     );
 };
 

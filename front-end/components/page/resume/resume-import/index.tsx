@@ -119,6 +119,7 @@ const ResumeImport = (props: ResumeImportProps) => {
     ]);
 
     const submitFormHandler = async () => {
+        console.log('resume valueeee', resumeChangedValue);
         const resumeConvertedValue = await convertPayloadData(
             resumeChangedValue
         );
