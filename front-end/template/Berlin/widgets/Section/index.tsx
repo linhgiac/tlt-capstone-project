@@ -7,6 +7,7 @@ import Skill from './Skill';
 import PersonalDetails from './PersonalDetails';
 import ProfessionalSummary from './ProfessionalSummary';
 import Divide from '../../Divide';
+import DataDisplay from '../../../shared/DataDisplay';
 
 type Props = {
     header?: string;

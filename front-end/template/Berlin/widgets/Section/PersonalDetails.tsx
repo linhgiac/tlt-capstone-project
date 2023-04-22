@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { remove } from 'lodash';
+import { isEmpty, remove } from 'lodash';
 import React from 'react';
 import DataDisplay from '../../../shared/DataDisplay';
 import styles from './styles.module.scss';
@@ -12,15 +12,25 @@ const PersonalDetails = (props: Props) => {
     const { items } = props;
     const keys = remove(Object.keys(items), key => {
         if (
+            key === 'id' ||
+            key === 'position' ||
             key === 'header' ||
             key === 'jobTitle' ||
             key === 'firstName' ||
-            key === 'lastName'
+            key === 'lastName' ||
+            (key && isEmpty(items[key]))
+            // (key === 'city' && isEmpty(items.city)) ||
+            // (key === 'country' && isEmpty(items.country)) ||
+            // (key === 'phone' && isEmpty(items.phone)) ||
+            // (key === 'email' && isEmpty(items.email)) ||
+            // (key === 'nationality' && isEmpty(items.nationality))
         ) {
             return false;
         }
         return true;
     });
+    console.log('keys', keys);
+    if (isEmpty(keys)) return null;
     // console.log('check', check);
     return (
         <div>

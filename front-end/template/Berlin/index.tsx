@@ -22,23 +22,42 @@ const Berlin = (props: Props) => {
     //     ['professionalSummary', 'employmentHistories', 'educations'],
     // ];
     const mapSectionToLayout = (sectionType: any, key?: number) => {
-        let header;
+        let sectionHeader;
         let items;
         let isShownLevel;
         if (sectionType === 'personalDetails') {
             if (!isEmpty(personalDetails)) {
-                header = get(personalDetails, 'header');
-                items = personalDetails;
+                console.log('persional Details', personalDetails);
+                const {
+                    id,
+                    firstName,
+                    lastName,
+                    jobTitle,
+                    position,
+                    header = 'Personal Details',
+                    ...details
+                } = personalDetails;
+                if (
+                    !isEmpty(
+                        Object.values(details).filter(value => value !== '')
+                    )
+                ) {
+                    items = details;
+                }
+                sectionHeader = header;
+                console.log('itemssssss', items);
             }
         }
         if (sectionType === 'professionalSummary') {
             if (!isEmpty(professionalSummary)) {
-                header = get(professionalSummary, 'header');
-                items = professionalSummary;
+                sectionHeader = get(professionalSummary, 'header');
+                if (professionalSummary.content === '') {
+                    items = { content: professionalSummary.content };
+                }
             }
         }
         if (complexSections?.sectionType.includes(sectionType)) {
-            header = get(
+            sectionHeader = get(
                 complexSections,
                 `sectionDetails.${sectionType}.header`
             );
@@ -52,7 +71,7 @@ const Berlin = (props: Props) => {
             <Section
                 key={key ? key : 0}
                 sectionType={sectionType}
-                header={header}
+                header={sectionHeader}
                 items={items}
                 isShown={isShownLevel}
             />

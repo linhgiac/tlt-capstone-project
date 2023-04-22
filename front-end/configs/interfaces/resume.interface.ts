@@ -14,6 +14,7 @@ export type ResumeInfoType = {
 };
 export type PersonalDetailsDataType = {
     id?: number;
+    position?: number;
     header?: string;
     jobTitle?: string;
     firstName?: string;
@@ -31,6 +32,7 @@ export type PersonalDetailsDataType = {
 export type ProfessionalSummaryDataType = {
     id?: number;
     header?: string;
+    position?: number;
     content?: string;
 };
 
