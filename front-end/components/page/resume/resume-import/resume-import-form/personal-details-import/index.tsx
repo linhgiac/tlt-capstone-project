@@ -51,7 +51,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
             const response = await axios.put(
                 `${HOST}resume/${resumeSaved.id}/images-uploading/`
             );
-            console.log('response', response.data);
+            console.log('responseeeeeeeee', response.data);
         } catch (error: any) {
             console.log('error', error);
         }

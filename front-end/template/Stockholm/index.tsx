@@ -1,17 +1,20 @@
 import classNames from 'classnames';
-import { get, isElement, isEmpty } from 'lodash';
-import React, { useEffect } from 'react';
+import { isEmpty, get } from 'lodash';
+import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { resumeChangedValueState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
-import { resumeLayoutState, resumeSelectedPageIndexState } from '../../recoil-state/resume-state/resume.state';
-import DataDisplay from '../shared/DataDisplay';
+
 import styles from './styles.module.scss';
-import Masthead from './widgets/Masthead/Masthead';
+import {
+    resumeSelectedPageIndexState,
+    resumeLayoutState,
+} from '../../recoil-state/resume-state/resume.state';
+import Masthead from './widgets/Masthead';
 import Section from './widgets/Section';
+import { resumeChangedValueState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 
 type Props = {};
 
-const Berlin = (props: Props) => {
+const Stockholm = (props: Props) => {
     const resumeData = useRecoilValue(resumeChangedValueState);
     const { personalDetails, professionalSummary, complexSections } =
         resumeData;
@@ -80,53 +83,26 @@ const Berlin = (props: Props) => {
 
     const Layout = () => (
         <>
-            {' '}
-            {pageIndex === 0 ? (
-                <>
-                    <div className={styles['masthead']}>
-                        <Masthead value={personalDetails} />
-                    </div>
-
-                    <div className={classNames('flex-row', styles['content'])}>
-                        <div className={styles['side-bar']}>
-                            {mapSectionToLayout('personalDetails')}
-                            {resumeLayout[0]['sidebar'].map(
-                                (type: any, i: number) => {
-                                    console.log('resumeLayout', resumeLayout);
-                                    console.log('aaaasasadasdsas', type);
-                                    return mapSectionToLayout(type, i);
-                                }
-                            )}
-                        </div>
-                        <div className={styles['main']}>
-                            {mapSectionToLayout('professionalSummary')}
-                            {resumeLayout[0]['main'].map(
-                                (type: any, i: number) => {
-                                    return mapSectionToLayout(type, i);
-                                }
-                            )}
-                        </div>
-                    </div>
-                </>
-            ) : (
-                <div className={classNames('flex-row', styles['content'])}>
-                    <div className={styles['side-bar']}>
-                        {resumeLayout[pageIndex]['sidebar'].map(
-                            (type: any, i: number) => {
-                                console.log('aaaasasadasdsas', type);
-                                return mapSectionToLayout(type, i);
-                            }
-                        )}
-                    </div>
-                    <div className={styles['main']}>
-                        {resumeLayout[pageIndex]['main'].map(
-                            (type: any, i: number) => {
-                                return mapSectionToLayout(type, i);
-                            }
-                        )}
-                    </div>
+            <Masthead
+                className={styles.masthead}
+                value={personalDetails}
+            />
+            <div className="flex-row">
+                <div className={styles.main}>
+                    {mapSectionToLayout('professionalSummary')}
+                    {resumeLayout[0]['main'].map((type: any, i: number) => {
+                        return mapSectionToLayout(type, i);
+                    })}
                 </div>
-            )}
+                <div className={styles.sidebar}>
+                    {mapSectionToLayout('personalDetails')}
+                    {resumeLayout[0]['sidebar'].map((type: any, i: number) => {
+                        console.log('resumeLayout', resumeLayout);
+                        console.log('aaaasasadasdsas', type);
+                        return mapSectionToLayout(type, i);
+                    })}
+                </div>
+            </div>
         </>
     );
 
@@ -137,4 +113,4 @@ const Berlin = (props: Props) => {
     );
 };
 
-export default Berlin;
+export default Stockholm;

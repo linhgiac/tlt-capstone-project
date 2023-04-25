@@ -1,5 +1,6 @@
 import React from 'react';
 import Berlin from './Berlin';
+import Stockholm from './Stockholm';
 import Template01 from './template-01';
 
 type Props = {
@@ -16,6 +17,8 @@ const TemplateMap = (props: Props) => {
                 return <Template01 />;
             case 2:
                 return <Berlin />;
+            case 3:
+                return <Stockholm />;
         }
     };
 
