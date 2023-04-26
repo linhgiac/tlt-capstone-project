@@ -83,26 +83,56 @@ const Stockholm = (props: Props) => {
 
     const Layout = () => (
         <>
-            <Masthead
-                className={styles.masthead}
-                value={personalDetails}
-            />
-            <div className="flex-row">
-                <div className={styles.main}>
-                    {mapSectionToLayout('professionalSummary')}
-                    {resumeLayout[0]['main'].map((type: any, i: number) => {
-                        return mapSectionToLayout(type, i);
-                    })}
-                </div>
-                <div className={styles.sidebar}>
-                    {mapSectionToLayout('personalDetails')}
-                    {resumeLayout[0]['sidebar'].map((type: any, i: number) => {
-                        console.log('resumeLayout', resumeLayout);
-                        console.log('aaaasasadasdsas', type);
-                        return mapSectionToLayout(type, i);
-                    })}
-                </div>
-            </div>
+            {' '}
+            {pageIndex === 0 ? (
+                <>
+                    <Masthead
+                        className={styles.masthead}
+                        value={personalDetails}
+                    />
+                    <div className="flex-row">
+                        <div className={styles.main}>
+                            {mapSectionToLayout('professionalSummary')}
+                            {resumeLayout[0]['main'].map(
+                                (type: any, i: number) => {
+                                    return mapSectionToLayout(type, i);
+                                }
+                            )}
+                        </div>
+                        <div className={styles.sidebar}>
+                            {mapSectionToLayout('personalDetails')}
+                            {resumeLayout[0]['sidebar'].map(
+                                (type: any, i: number) => {
+                                    console.log('resumeLayout', resumeLayout);
+                                    console.log('aaaasasadasdsas', type);
+                                    return mapSectionToLayout(type, i);
+                                }
+                            )}
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div className="flex-row">
+                        <div className={styles.main}>
+                            {resumeLayout[pageIndex]['main'].map(
+                                (type: any, i: number) => {
+                                    return mapSectionToLayout(type, i);
+                                }
+                            )}
+                        </div>
+                        <div className={styles.sidebar}>
+                            {resumeLayout[pageIndex]['sidebar'].map(
+                                (type: any, i: number) => {
+                                    console.log('resumeLayout', resumeLayout);
+                                    console.log('aaaasasadasdsas', type);
+                                    return mapSectionToLayout(type, i);
+                                }
+                            )}
+                        </div>
+                    </div>
+                </>
+            )}
         </>
     );
 
