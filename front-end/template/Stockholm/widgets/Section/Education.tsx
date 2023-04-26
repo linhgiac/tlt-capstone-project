@@ -3,6 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.scss';
 import DataDisplay from '../../../shared/DataDisplay';
+import moment from 'moment';
 
 type Props = {
     header?: string;
@@ -58,7 +59,19 @@ const Education = (props: Props) => {
                             )}
                         </DataDisplay>
                         <DataDisplay className={styles['item-date']}>
-                            Date
+                            {item.startDate && (
+                                <>
+                                    {moment(item.startDate, 'YYYY/MM').format(
+                                        'MMMM YYYY'
+                                    )}
+                                    {' - '}
+                                </>
+                            )}
+                            {item.endDate
+                                ? moment(item.endDate, 'YYYY/MM').format(
+                                      'MMMM YYYY'
+                                  )
+                                : `now`}
                         </DataDisplay>
                         <DataDisplay>{item.description}</DataDisplay>
                     </DataDisplay>
