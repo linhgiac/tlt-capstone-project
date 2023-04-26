@@ -74,102 +74,75 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
             setExpand(!expand);
         };
         return (
-            <>
-                <Row justify="start">
-                    <Col
-                        span={12}
-                        className="p-r-24">
-                        <Form.Item
-                            className="no-margin"
-                            name="jobTitle"
-                            label={t('edit-wanted-job-title', { ns: 'edit' })}>
-                            <Input />
-                        </Form.Item>
-                    </Col>
-                    <Col
-                        span={12}
-                        className={classNames('p-l-24', 'no-margin')}>
-                        <Form.Item
-                            className="no-margin"
-                            name="image"
-                            label="">
-                            <ImageUpload
-                                className={classNames(
-                                    'no-margin',
-                                    'no-padding'
-                                )}
-                                onUpload={uploadImageHandler}
-                                fetchingURL={''}
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row justify="start">
-                    <Col
-                        span={12}
-                        className="p-r-24">
-                        <Form.Item
-                            className="no-margin"
-                            name="firstName"
-                            label={t('edit-first-name', { ns: 'edit' })}>
-                            <Input />
-                        </Form.Item>
-                    </Col>
-                    <Col
-                        span={12}
-                        className="p-l-24">
-                        <Form.Item
-                            className="no-margin"
-                            name="lastName"
-                            label={t('edit-last-name', { ns: 'edit' })}>
-                            <Input />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row justify="start">
-                    <Col
-                        span={12}
-                        className="p-r-24">
-                        <Form.Item
-                            className="no-margin"
-                            name="email"
-                            label={t('edit-email', { ns: 'edit' })}>
-                            <Input />
-                        </Form.Item>
-                    </Col>
-                    <Col
-                        span={12}
-                        className="p-l-24">
-                        <Form.Item
-                            className="no-margin"
-                            name="phone"
-                            label={t('edit-phone', { ns: 'edit' })}>
-                            <Input />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row justify="start">
-                    <Col
-                        span={12}
-                        className="p-r-24">
-                        <Form.Item
-                            className="no-margin"
-                            name="country"
-                            label={t('edit-country', { ns: 'edit' })}>
-                            <Input />
-                        </Form.Item>
-                    </Col>
-                    <Col
-                        span={12}
-                        className="p-l-24">
-                        <Form.Item
-                            className="no-margin"
-                            name="city"
-                            label={t('edit-city', { ns: 'edit' })}>
-                            <Input />
-                        </Form.Item>
-                    </Col>
-                </Row>
+            <div className={styles['form-layout']}>
+                <Form.Item
+                    className={classNames('no-margin', styles['form-item'])}
+                    name="jobTitle"
+                    label={t('edit-wanted-job-title', { ns: 'edit' })}>
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    className={classNames('no-margin', styles['form-item'])}
+                    style={{ paddingTop: '17px' }}
+                    name="image"
+                    label="">
+                    <div className={styles['upload-image__container']}>
+                        <ImageUpload
+                            className={classNames('no-margin', 'no-padding')}
+                            onUpload={uploadImageHandler}
+                            fetchingURL={''}
+                        />
+                        <span
+                            onClick={uploadImageHandler}
+                            className={styles['upload-image__text']}>
+                            Upload image
+                        </span>
+                    </div>
+                </Form.Item>
+
+                <Form.Item
+                    className={classNames('no-margin', styles['form-item'])}
+                    name="firstName"
+                    label={t('edit-first-name', { ns: 'edit' })}>
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    className={classNames('no-margin', styles['form-item'])}
+                    name="lastName"
+                    label={t('edit-last-name', { ns: 'edit' })}>
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    className={classNames('no-margin', styles['form-item'])}
+                    name="email"
+                    label={t('edit-email', { ns: 'edit' })}>
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    className={classNames('no-margin', styles['form-item'])}
+                    name="phone"
+                    label={t('edit-phone', { ns: 'edit' })}>
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    className={classNames('no-margin', styles['form-item'])}
+                    name="country"
+                    label={t('edit-country', { ns: 'edit' })}>
+                    <Input />
+                </Form.Item>
+
+                <Form.Item
+                    className={classNames('no-margin', styles['form-item'])}
+                    name="city"
+                    label={t('edit-city', { ns: 'edit' })}>
+                    <Input />
+                </Form.Item>
+
                 {!expand ? (
                     <Text
                         className={styles['expand-details-text']}
@@ -180,82 +153,76 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                     </Text>
                 ) : (
                     <>
-                        <Row justify="start">
-                            <Col
-                                span={12}
-                                className="p-r-24">
-                                <Form.Item
-                                    className="no-margin"
-                                    name="address"
-                                    label={t('edit-address', { ns: 'edit' })}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                            <Col
-                                span={12}
-                                className="p-l-24">
-                                <Form.Item
-                                    className="no-margin"
-                                    name="postalCode"
-                                    label={t('edit-postal-code', {
-                                        ns: 'edit',
-                                    })}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row justify="start">
-                            <Col
-                                span={12}
-                                className="p-r-24">
-                                <Form.Item
-                                    className="no-margin"
-                                    name="drivingLicense"
-                                    label={t('edit-driving-license', {
-                                        ns: 'edit',
-                                    })}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                            <Col
-                                span={12}
-                                className="p-l-24">
-                                <Form.Item
-                                    className="no-margin"
-                                    name="nationality"
-                                    label={t('edit-nationality', {
-                                        ns: 'edit',
-                                    })}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row justify="start">
-                            <Col
-                                span={12}
-                                className="p-r-24">
-                                <Form.Item
-                                    className="no-margin"
-                                    name="placeOfBirth"
-                                    label={t('edit-place-of-birth', {
-                                        ns: 'edit',
-                                    })}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                            <Col
-                                span={12}
-                                className="p-l-24">
-                                <Form.Item
-                                    className="no-margin"
-                                    name="dateOfBirth"
-                                    label={t('eidt-date-of-birth', {
-                                        ns: 'edit',
-                                    })}>
-                                    <Input />
-                                </Form.Item>
-                            </Col>
-                        </Row>
+                        <Form.Item
+                            className={classNames(
+                                'no-margin',
+                                styles['form-item']
+                            )}
+                            name="address"
+                            label={t('edit-address', { ns: 'edit' })}>
+                            <Input />
+                        </Form.Item>
+
+                        <Form.Item
+                            className={classNames(
+                                'no-margin',
+                                styles['form-item']
+                            )}
+                            name="postalCode"
+                            label={t('edit-postal-code', {
+                                ns: 'edit',
+                            })}>
+                            <Input />
+                        </Form.Item>
+
+                        <Form.Item
+                            className={classNames(
+                                'no-margin',
+                                styles['form-item']
+                            )}
+                            name="drivingLicense"
+                            label={t('edit-driving-license', {
+                                ns: 'edit',
+                            })}>
+                            <Input />
+                        </Form.Item>
+
+                        <Form.Item
+                            className={classNames(
+                                'no-margin',
+                                styles['form-item']
+                            )}
+                            name="nationality"
+                            label={t('edit-nationality', {
+                                ns: 'edit',
+                            })}>
+                            <Input />
+                        </Form.Item>
+
+                        <Form.Item
+                            className={classNames(
+                                'no-margin',
+                                styles['form-item']
+                            )}
+                            name="placeOfBirth"
+                            label={t('edit-place-of-birth', {
+                                ns: 'edit',
+                            })}>
+                            <Input />
+                        </Form.Item>
+
+                        <Form.Item
+                            className={classNames(
+                                'no-margin',
+                                styles['form-item']
+                            )}
+                            name="dateOfBirth"
+                            label={t('eidt-date-of-birth', {
+                                ns: 'edit',
+                            })}>
+                            <Input />
+                        </Form.Item>
+
                         <Text
                             className={styles['expand-details-text']}
                             onClick={expandHandler}>
@@ -265,7 +232,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         </Text>
                     </>
                 )}
-            </>
+            </div>
         );
     };
     return (

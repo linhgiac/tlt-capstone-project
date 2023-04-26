@@ -38,6 +38,7 @@ import { userLoginState } from '../../../../recoil-state/user-state/user-state';
 import { hasCookie } from 'cookies-next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import classNames from 'classnames';
+import { FileTextOutlined } from '@ant-design/icons';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
@@ -226,17 +227,24 @@ const ResumeEditor = (props: ResumeEditorProps) => {
             {isEditing ? (
                 <div className="flex-row">
                     <ResumeImport
-                        className={classNames(
-                            'w-50 p-48',
-                            styles['resume-import']
-                        )}
+                        className={classNames(styles['resume-import'])}
 
                         // initialResume={resumeSaved}
                     />
                     <ResumeExport
-                        className="w-50"
+                        className={classNames(styles['resume-export'])}
                         onChangeLayout={changeLayoutHandler}
                     />
+                    <Button
+                        type="text"
+                        shape="round"
+                        size="large"
+                        style={{ height: '50px', fontWeight: '600' }}
+                        icon={<FileTextOutlined />}
+                        onClick={changeLayoutHandler}
+                        className={styles['preview-btn']}>
+                        Preview & Download
+                    </Button>
                 </div>
             ) : (
                 <TemplateSelector

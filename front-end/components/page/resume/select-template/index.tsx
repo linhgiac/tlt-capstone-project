@@ -70,9 +70,9 @@ const TemplateSelector = (props: Props) => {
                         </div>
                     </Sider>
                     <Sider
-                        breakpoint="md"
+                        breakpoint="lg"
                         collapsedWidth={0}
-                        width={'30%'}
+                        width={'25%'}
                         className={styles['template-container']}>
                         <div
                             style={{

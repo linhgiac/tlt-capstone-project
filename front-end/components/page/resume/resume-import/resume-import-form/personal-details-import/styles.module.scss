@@ -1,5 +1,30 @@
 @import '../../../../../../styles/variables.scss';
+@import '../../../../../../styles/responsive.scss';
 
+.form-layout{
+    padding-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    overflow-y: auto;
+    @include mobile{
+      grid-template-columns: repeat(1, 1fr);
+    }
+}
+.upload-image__container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.upload-image__text{
+    display: none;
+    color: $primary-color;
+    @include mobile{
+        display: block;
+    }
+
+}
 .expand-details-text{
     color: $primary-color;
     font-weight: 600;
