@@ -64,10 +64,11 @@ const HeaderButton = (props: HeaderButtonProps) => {
                     headers: headers,
                 }
             );
+            router.push('/');
             deleteCookie('accessToken');
             deleteCookie('refreshToken');
-            router.push('/');
-            router.reload();
+            setIsLogged(false);
+            // router.reload();
         } catch (error) {}
         setIsLoading(false);
     };
