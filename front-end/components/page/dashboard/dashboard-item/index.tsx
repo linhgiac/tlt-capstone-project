@@ -59,7 +59,7 @@ const DashboardItem = (props: DashboardItemProps) => {
     };
     return (
         <div
-            style={{ display: 'inline-block' }}
+            // style={{ display: 'inline-block' }}
             className={classNames(className)}>
             <div className={classNames(styles['dashboard-item'])}>
                 <div
@@ -77,8 +77,12 @@ const DashboardItem = (props: DashboardItemProps) => {
                         editable={false}
                         title={item.title}></ResumeTitle>
                     {/* <div className={classNames(styles['dashboard-item-lastupdated'])}>Updated {item.lastUpdated}</div> */}
-                    <div className={styles['dashboard-item-date']}>Created {item.createdAt}</div>
-                    <div className={styles['dashboard-item-date']}>Updated {item.updatedAt}</div>
+                    <div className={styles['dashboard-item-date']}>
+                        Created {item.createdAt}
+                    </div>
+                    <div className={styles['dashboard-item-date']}>
+                        Updated {item.updatedAt}
+                    </div>
                     <div
                         className={classNames(
                             styles['dashboard-item-button-list']
@@ -91,7 +95,7 @@ const DashboardItem = (props: DashboardItemProps) => {
                             )}
                             icon={<EditOutlined />}
                             onClick={editHandler}>
-                            {t('dashboard-edit', {ns: 'dashboard'})}
+                            {t('dashboard-edit', { ns: 'dashboard' })}
                         </Button>
                         <Button
                             size="large"
@@ -101,7 +105,7 @@ const DashboardItem = (props: DashboardItemProps) => {
                                 styles['dashboard-item-button']
                             )}
                             onClick={duplicateItemHandler}>
-                            {t('dashboard-duplicate', {ns: 'dashboard'})}
+                            {t('dashboard-duplicate', { ns: 'dashboard' })}
                         </Button>
                         <Button
                             size="large"
@@ -113,15 +117,29 @@ const DashboardItem = (props: DashboardItemProps) => {
                             onClick={() => {
                                 setIsModalOpened(true);
                             }}>
-                            {t('dashboard-delete', {ns: 'dashboard'})}
+                            {t('dashboard-delete', { ns: 'dashboard' })}
                         </Button>
                         <PopupModal
-                            title={t('dashboard-delete-title', {ns: 'dashboard'})}
-                            description={t('dashboard-delete-description', {ns: 'dashboard'}) as string}
+                            title={t('dashboard-delete-title', {
+                                ns: 'dashboard',
+                            })}
+                            description={
+                                t('dashboard-delete-description', {
+                                    ns: 'dashboard',
+                                }) as string
+                            }
                             type={'confirm'}
                             visible={isModalOpened}
-                            okText={t('dashboard-delete-text', {ns: 'dashboard'}) as string}
-                            cancelText={t('dashboard-cancel-text', {ns: 'dashboard'}) as string}
+                            okText={
+                                t('dashboard-delete-text', {
+                                    ns: 'dashboard',
+                                }) as string
+                            }
+                            cancelText={
+                                t('dashboard-cancel-text', {
+                                    ns: 'dashboard',
+                                }) as string
+                            }
                             onCancel={() => {
                                 setIsModalOpened(false);
                             }}

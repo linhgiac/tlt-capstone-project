@@ -1,15 +1,25 @@
 @import '../../../styles/variables.scss';
+@import '../../../styles/responsive.scss';
 
 .dashboard-container {
     padding-top: 30px;
-}
-
-.dashboard-row {
-    width: 100%;
-    justify-content: space-between;
     flex-direction: row;
     display: flex;
+    @include tablet{
+        flex-direction: column;
+    }
 }
+
+// .dashboard-row {
+//     width: 100%;
+//     justify-content: space-between;
+//     flex-direction: row;
+//     display: flex;
+//     @include tablet{
+//         flex-direction: column;
+//     }
+
+// }
 
 .dashboard-item {
     // width: 400px;

@@ -89,7 +89,6 @@ const DashboardContainer = (props: DashboardContainerProps) => {
         <div className={classNames(styles['dashboard-container'])}>
             {itemList.map((item: any, index: number) => (
                 <DashboardItem
-                    className={classNames('w-50')}
                     key={index}
                     item={item}
                     onDelete={deleteHandler}
