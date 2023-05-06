@@ -10,10 +10,11 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../../../../../recoil-state/user-state/user-state';
 type Props = {
     onLogout: () => void;
+    isInline: boolean;
 };
 
 const LoggedButton = (props: Props) => {
-    const { onLogout } = props;
+    const { onLogout, isInline } = props;
     const router = useRouter();
     const user = useRecoilValue(userState);
 
@@ -73,7 +74,7 @@ const LoggedButton = (props: Props) => {
             <Menu
                 items={items}
                 selectedKeys={[]}
-                mode="horizontal"
+                mode={isInline ? 'inline' : 'horizontal'}
             />
 
             {/* <Button

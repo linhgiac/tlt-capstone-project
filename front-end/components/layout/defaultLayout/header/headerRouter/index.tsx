@@ -7,9 +7,13 @@ import { useRouter } from 'next/router';
 import { HOW_TO_WRITE_A_RESUME } from '../../../../../configs/constants/blog.constants';
 
 type MenuItem = Required<MenuProps>['items'][number];
-type HeaderRouterProps = {};
+type HeaderRouterProps = {
+    isInline: boolean;
+};
 
 const HeaderRouter = (props: HeaderRouterProps) => {
+    const { isInline } = props;
+    console.log('isOpen', isInline);
     const router = useRouter();
     const headerRouterItems: MenuItem[] = [
         getItem('Resume', 'resume', <DownOutlined />, false, [
@@ -19,27 +23,27 @@ const HeaderRouter = (props: HeaderRouterProps) => {
             getItem('Professional', 'templates/professional'),
             getItem('Modern', 'templates/modern'),
         ]),
-        getItem('Blogs', 'blogs')
+        getItem('Blogs', 'blogs'),
     ];
 
     const clickHandler: MenuProps['onClick'] = e => {
         if (e.key === 'blogs') {
             router.push({
-                pathname: `/blogs/${HOW_TO_WRITE_A_RESUME}`
-            })
-        }
-        else if (e.key !== 'resume')
+                pathname: `/blogs/${HOW_TO_WRITE_A_RESUME}`,
+            });
+        } else if (e.key !== 'resume')
             router.push({
                 pathname: `/${e.key}`,
             });
     };
     return (
         <Menu
-            mode="horizontal"
+            mode={isInline ? 'inline' : 'horizontal'}
             items={headerRouterItems}
             onClick={clickHandler}
             style={{
                 borderBottom: 'none',
+                borderRight: 'none',
                 fontSize: '16px',
                 fontWeight: '400',
             }}

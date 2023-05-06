@@ -9,7 +9,7 @@ type Props = {};
 const LoginButton = (props: Props) => {
     const router = useRouter();
     return (
-        <div>
+        <div className={styles['login-button__container']}>
             <Button
                 className={classNames(
                     'm-l-8',

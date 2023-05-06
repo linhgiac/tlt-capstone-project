@@ -19,10 +19,11 @@ import { convertProfileResponse } from '../../../../../configs/utils/format.util
 
 type HeaderButtonProps = {
     className: string;
+    isInline: boolean;
 };
 
 const HeaderButton = (props: HeaderButtonProps) => {
-    const { className } = props;
+    const { className, isInline } = props;
     const [isLogged, setIsLogged] = useRecoilState(userLoginState);
     const [user, setUser] = useRecoilState(userState);
     const [isLoading, setIsLoading] = useState(false);
@@ -49,7 +50,6 @@ const HeaderButton = (props: HeaderButtonProps) => {
                 console.log('error errorrrr', error);
             }
         }
-        
     }, [isLogged, setUser]);
 
     const logoutHandler = async () => {
@@ -78,7 +78,10 @@ const HeaderButton = (props: HeaderButtonProps) => {
             {!isLogged ? (
                 <LoginButton />
             ) : (
-                <LoggedButton onLogout={logoutHandler} />
+                <LoggedButton
+                    isInline={isInline}
+                    onLogout={logoutHandler}
+                />
             )}
         </div>
     );
