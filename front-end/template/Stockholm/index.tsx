@@ -93,7 +93,7 @@ const Stockholm = (props: Props) => {
                     <div className="flex-row">
                         <div className={styles.main}>
                             {mapSectionToLayout('professionalSummary')}
-                            {resumeLayout[0]['main'].map(
+                            {resumeLayout[0]['main']?.map(
                                 (type: any, i: number) => {
                                     return mapSectionToLayout(type, i);
                                 }
@@ -101,7 +101,7 @@ const Stockholm = (props: Props) => {
                         </div>
                         <div className={styles.sidebar}>
                             {mapSectionToLayout('personalDetails')}
-                            {resumeLayout[0]['sidebar'].map(
+                            {resumeLayout[0]['sidebar']?.map(
                                 (type: any, i: number) => {
                                     console.log('resumeLayout', resumeLayout);
                                     console.log('aaaasasadasdsas', type);
@@ -115,14 +115,14 @@ const Stockholm = (props: Props) => {
                 <>
                     <div className="flex-row">
                         <div className={styles.main}>
-                            {resumeLayout[pageIndex]['main'].map(
+                            {resumeLayout[pageIndex]['main']?.map(
                                 (type: any, i: number) => {
                                     return mapSectionToLayout(type, i);
                                 }
                             )}
                         </div>
                         <div className={styles.sidebar}>
-                            {resumeLayout[pageIndex]['sidebar'].map(
+                            {resumeLayout[pageIndex]['sidebar']?.map(
                                 (type: any, i: number) => {
                                     console.log('resumeLayout', resumeLayout);
                                     console.log('aaaasasadasdsas', type);

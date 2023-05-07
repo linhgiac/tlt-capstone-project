@@ -17,12 +17,14 @@ import {
 } from '../../../configs/interfaces/resume.interface';
 import { complexSectionChangedValueState } from './resume-changed-complex-section.state';
 import { isEmpty } from 'lodash';
+import { resumeLayoutState } from '../resume.state';
 
 export const resumeChangedValueState = selector<ResumeDataType>({
     key: 'resumeChangedValueState',
     get: ({ get }) => {
         const info = get(resumeInfoState);
         const title = get(resumeTitleValueState);
+        const layout = get(resumeLayoutState);
         const personalDetails: PersonalDetailsDataType = get(
             personalDetailChangedValueState
         );
@@ -32,7 +34,7 @@ export const resumeChangedValueState = selector<ResumeDataType>({
         const complexSections: ComplexSectionDataType = get(
             complexSectionChangedValueState
         );
-        let result = { ...info };
+        let result = { ...info, layout: layout };
         if (title) {
             result = Object.assign(result, { title });
         }

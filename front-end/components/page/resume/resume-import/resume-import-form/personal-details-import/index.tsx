@@ -18,6 +18,7 @@ import { resumeSavedState } from '../../../../../../recoil-state/resume-state/re
 import { useTranslation } from 'next-i18next';
 import axios from 'axios';
 import { HOST } from '../../../../../../configs/constants/misc';
+import { getAuthHeader } from '../../../../../../configs/restApi/clients';
 
 type PersonalDetailsImportProps = {
     className?: string;
@@ -47,9 +48,17 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     );
 
     const uploadImageHandler = async (image: any) => {
+        console.log('images', image);
+        const authHeader = Object.assign(getAuthHeader(), {
+            'Content-Type': 'multipart/form-data',
+        });
         try {
             const response = await axios.put(
-                `${HOST}resume/${resumeSaved.id}/images-uploading/`
+                `${HOST}resume/${resumeSaved.id}/images-uploading/`,
+                { image },
+                {
+                    headers: authHeader,
+                }
             );
             console.log('responseeeeeeeee', response.data);
         } catch (error: any) {

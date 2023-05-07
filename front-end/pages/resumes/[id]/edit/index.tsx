@@ -12,7 +12,10 @@ import ResumeImport from '../../../../components/page/resume/resume-import';
 import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
 import { MOCKED_RESUME } from '../../../../mock/resume.mock';
 import { HOST, LAYOUT } from '../../../../configs/constants/misc';
-import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
+import {
+    resumeLayoutState,
+    resumeSavedState,
+} from '../../../../recoil-state/resume-state/resume.state';
 import {
     personalDetailChangedValueState,
     professionalSummaryChangedValueState,
@@ -44,10 +47,12 @@ type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
     templateList?: any;
     error?: any;
+    reee: any;
 };
 
 const ResumeEditor = (props: ResumeEditorProps) => {
-    const { initialResumeData, templateList, error } = props;
+    const { initialResumeData, templateList, error, reee } = props;
+    console.log('reee', reee);
     console.log('initialResumeData :>> ', initialResumeData);
 
     const isLogged = useRecoilValue(userLoginState);
@@ -56,6 +61,8 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     const resumeData = useRecoilValue(resumeChangedValueState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
     const setResumeTitle = useSetRecoilState(resumeTitleValueState);
+    const setResumeLayout = useSetRecoilState(resumeLayoutState);
+
     const setPersonalDetailsChangedValues = useSetRecoilState(
         personalDetailChangedValueState
     );
@@ -101,7 +108,23 @@ const ResumeEditor = (props: ResumeEditorProps) => {
         setResumeTitle(
             initialResumeData?.title ? initialResumeData?.title : 'Untitled'
         );
-    }, [initialResumeData, setResumeInfo, setResumeSaved, setResumeTitle]);
+        setResumeLayout(
+            initialResumeData?.layout
+                ? initialResumeData?.layout
+                : [
+                      {
+                          main: ['employmentHistories', 'educations'],
+                          sidebar: ['skills'],
+                      },
+                  ]
+        );
+    }, [
+        initialResumeData,
+        setResumeInfo,
+        setResumeLayout,
+        setResumeSaved,
+        setResumeTitle,
+    ]);
 
     useEffect(() => {
         if (!isEmpty(initialResumeData?.personalDetails)) {
@@ -278,14 +301,15 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
         const resume = await axios.get(`${HOST}resume/${resumeId}/`, {
             headers: headers,
         });
-        const {locale} = ctx
+        const { locale } = ctx;
         return {
             props: {
                 ...defaultReturnProps,
                 // initialResumeData: MOCKED_RESUME,
-                ...await serverSideTranslations(locale as string, ['edit']),
+                ...(await serverSideTranslations(locale as string, ['edit'])),
                 templateList: templates.data,
                 initialResumeData: convertResumeResponse(resume.data),
+                reee: resume.data,
             },
         };
     } catch (error: any) {

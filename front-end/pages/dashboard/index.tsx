@@ -37,6 +37,8 @@ const Dashboard = (props: DashboardProps) => {
     const { id, avatar, ...userDetails } = useRecoilValue(userState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
+
+    console.log('dashboardddd', dashboardData);
     const router = useRouter();
     useEffect(() => {
         if (error || !hasCookie('accessToken')) {

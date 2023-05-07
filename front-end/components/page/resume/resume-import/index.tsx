@@ -123,6 +123,7 @@ const ResumeImport = (props: ResumeImportProps) => {
         const resumeConvertedValue = await convertPayloadData(
             resumeChangedValue
         );
+        console.log('resumeeeeeeeeeeeee', resumeConvertedValue);
 
         try {
             const response = await axios.put(
