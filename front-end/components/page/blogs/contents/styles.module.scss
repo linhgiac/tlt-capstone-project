@@ -1,3 +1,5 @@
+@import '../../../../styles/responsive.scss';
+
 .title {
     margin-bottom: 40px;
     font-size: 28px;
@@ -49,4 +51,11 @@
 
 .strong-font {
     font-weight: 700;
+}
+
+.blog-menu__tablet{
+    display: none;
+    @include tablet{
+        display: block;
+    }
 }

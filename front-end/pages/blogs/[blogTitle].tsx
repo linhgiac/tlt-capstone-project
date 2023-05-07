@@ -30,6 +30,7 @@ const Blogs: React.FC = () => {
                 <BlogMenu />
             </Sider>
             <AntdContent className={styles['content']}>
+                
                 {blogPath && <Content blogTitle={blogPath} />}
             </AntdContent>
             <Sider
