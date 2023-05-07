@@ -7,7 +7,9 @@ import ResumeExportMain from '../resume-export/resume-export-main';
 import Page from '../resume-export/resume-export-main/Page';
 import ResumeExportPagination from '../resume-export/resume-export-pagination';
 import ActionList from './action-list';
+import FooterTemplateList from './footer-template-list';
 import LayoutEditor from './layout-editor';
+import SelectTemplateFooter from './select-template-footer';
 import styles from './styles.module.scss';
 import TemplateItem from './template-list';
 import TemplateList from './template-list';
@@ -22,6 +24,7 @@ type Props = {
 
 const TemplateSelector = (props: Props) => {
     const { onChangeLayout, templates } = props;
+    const [isFooterDisplay, setIsFooterDisplay] = useState(false);
     const templateRef = useRef<any>(null);
     const layoutRef = useRef<any>(null);
     const actionHandler = (action: string) => {
@@ -34,16 +37,19 @@ const TemplateSelector = (props: Props) => {
                 if (templateRef.current) {
                     templateRef.current.scrollIntoView();
                 }
+                setIsFooterDisplay(!isFooterDisplay);
                 break;
             case 'layout':
                 if (layoutRef.current) {
                     layoutRef.current.scrollIntoView();
                 }
+                setIsFooterDisplay(!isFooterDisplay);
                 break;
             case 'export':
                 break;
         }
     };
+    console.log(isFooterDisplay);
     return (
         <div>
             {/* <div className={styles.header}>
@@ -99,6 +105,7 @@ const TemplateSelector = (props: Props) => {
                                                 <TemplateItem
                                                     key={i}
                                                     value={template}
+                                                    thumbnail={true}
                                                 />
                                             );
                                         }
@@ -135,6 +142,12 @@ const TemplateSelector = (props: Props) => {
                                 </div>
                             </div>
                         </div>
+                        {isFooterDisplay && (
+                            <SelectTemplateFooter
+                                className={classNames(styles['resume-option'])}
+                                templates={templates}
+                            />
+                        )}
                     </Content>
                 </Layout>
             </div>

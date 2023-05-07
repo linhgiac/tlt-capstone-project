@@ -11,10 +11,11 @@ import { userState } from '../../../../../../recoil-state/user-state/user-state'
 type Props = {
     onLogout: () => void;
     isInline: boolean;
+    onCloseDrawer: () => void;
 };
 
 const LoggedButton = (props: Props) => {
-    const { onLogout, isInline } = props;
+    const { onLogout, isInline, onCloseDrawer } = props;
     const router = useRouter();
     const user = useRecoilValue(userState);
 
@@ -36,6 +37,7 @@ const LoggedButton = (props: Props) => {
                     label: (
                         <div
                             onClick={() => {
+                                onCloseDrawer();
                                 router.push('/account');
                             }}>
                             Account Settings
@@ -44,7 +46,15 @@ const LoggedButton = (props: Props) => {
                 },
                 {
                     key: 'logout',
-                    label: <div onClick={onLogout}>Logout</div>,
+                    label: (
+                        <div
+                            onClick={() => {
+                                onCloseDrawer();
+                                onLogout();
+                            }}>
+                            Logout
+                        </div>
+                    ),
                 },
             ],
         },

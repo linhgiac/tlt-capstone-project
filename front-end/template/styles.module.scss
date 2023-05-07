@@ -1,0 +1,10 @@
+@import '../styles/responsive.scss';
+
+.cv-scale{
+  @include mobile{
+    transform: scale(0.5) !important;
+  }
+  @include xs-mobile{
+    transform: scale(0.4) !important;
+  }
+}

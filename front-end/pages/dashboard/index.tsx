@@ -38,11 +38,11 @@ const Dashboard = (props: DashboardProps) => {
     const setResumeInfo = useSetRecoilState(resumeInfoState);
 
     const router = useRouter();
-    // useEffect(() => {
-    //     if (error || !hasCookie('accessToken')) {
-    //         router.push('/');
-    //     }
-    // }, [error, router]);
+    useEffect(() => {
+        if (error || !hasCookie('accessToken')) {
+            router.push('/');
+        }
+    }, [error, router]);
 
     const onSelect = (id: number) => {
         router.push({
@@ -214,15 +214,21 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         const resume = await axios.get(`${HOST}resume/`, {
             headers: headers,
         });
-        const {locale} = ctx
+        const { locale } = ctx;
         return {
             props: {
                 ...defaultReturnProps,
-                ...await serverSideTranslations(locale as string, ['dashboard']),
-                dashboardData: resume === null ? null : { data: convertDashboardResponse(resume.data) },
+                ...(await serverSideTranslations(locale as string, [
+                    'dashboard',
+                ])),
+                dashboardData:
+                    resume === null
+                        ? null
+                        : { data: convertDashboardResponse(resume.data) },
             },
         };
     } catch (error: any) {
+        console.log('erorrrrr', error);
         return {
             props: {
                 ...defaultReturnProps,

@@ -9,10 +9,11 @@ import { HOW_TO_WRITE_A_RESUME } from '../../../../../configs/constants/blog.con
 type MenuItem = Required<MenuProps>['items'][number];
 type HeaderRouterProps = {
     isInline: boolean;
+    onCloseDrawer: () => void;
 };
 
 const HeaderRouter = (props: HeaderRouterProps) => {
-    const { isInline } = props;
+    const { isInline, onCloseDrawer } = props;
     console.log('isOpen', isInline);
     const router = useRouter();
     const headerRouterItems: MenuItem[] = [
@@ -27,6 +28,7 @@ const HeaderRouter = (props: HeaderRouterProps) => {
     ];
 
     const clickHandler: MenuProps['onClick'] = e => {
+        onCloseDrawer();
         if (e.key === 'blogs') {
             router.push({
                 pathname: `/blogs/${HOW_TO_WRITE_A_RESUME}`,

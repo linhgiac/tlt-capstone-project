@@ -13,6 +13,7 @@
 .resume-export{
   width: 50%;
   @include tablet{
+    width: 0%;
     display: none;
   }
 }

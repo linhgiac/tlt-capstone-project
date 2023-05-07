@@ -1,4 +1,5 @@
 @import '../../../../styles/variables.scss';
+@import '../../../../styles/responsive.scss';
 
 .resume-export{
     position: fixed;
@@ -14,6 +15,9 @@
     background-color: rgb(101, 110, 131);
     color: rgb(255, 255, 255);
     user-select: none;
+    @include tablet{
+        display: none;
+    }
     // z-index: -1;
     .resume-export__container{
         height: 100%;

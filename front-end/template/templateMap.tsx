@@ -1,7 +1,10 @@
+import classNames from 'classnames';
 import React from 'react';
 import Berlin from './Berlin';
 import Stockholm from './Stockholm';
 import Template01 from './template-01';
+
+import styles from './styles.module.scss';
 
 type Props = {
     id?: number;
@@ -25,7 +28,7 @@ const TemplateMap = (props: Props) => {
     return (
         <div
             id="pdf"
-            className={'cv-format'}
+            className={classNames('cv-format', styles['cv-scale'])}
             style={{
                 backgroundColor: '#fff',
                 transform: `scale(${scale})`,

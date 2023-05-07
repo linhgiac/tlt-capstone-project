@@ -16,31 +16,52 @@ type Props = {};
 type RightHeaderProps = {
     className?: string;
     isInline?: boolean;
+    onCloseDrawer: () => void;
 };
-const RightHeader = ({ isInline = false, className }: RightHeaderProps) => {
+const RightHeader = ({
+    isInline = false,
+    className,
+    onCloseDrawer,
+}: RightHeaderProps) => {
     return (
         <div className={classNames(className)}>
-            <HeaderRouter isInline={isInline} />
+            <HeaderRouter
+                isInline={isInline}
+                onCloseDrawer={onCloseDrawer}
+            />
             <HeaderButton
                 className={styles.button}
                 isInline={isInline}
+                onCloseDrawer={onCloseDrawer}
             />
-            <ChangeLanguageButton forceReload={false}></ChangeLanguageButton>
+            <ChangeLanguageButton
+                forceReload={false}
+                onCloseDrawer={onCloseDrawer}></ChangeLanguageButton>
         </div>
     );
 };
 
 const DefaultHeader = (props: Props) => {
     const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+
+    const closeDrawerHandler = () => {
+        setIsOpenDrawer(false);
+    };
     return (
         <Header className={styles.header}>
             <div
                 className={styles.logo}
-                onClick={() => router.push('/')}>
+                onClick={() => {
+                    closeDrawerHandler();
+                    router.push('/');
+                }}>
                 Logo
             </div>
             <span>
-                <RightHeader className={styles['right-header__horizontal']} />
+                <RightHeader
+                    onCloseDrawer={closeDrawerHandler}
+                    className={styles['right-header__horizontal']}
+                />
             </span>
 
             <MenuOutlined
@@ -57,6 +78,7 @@ const DefaultHeader = (props: Props) => {
                 placement="right"
                 open={isOpenDrawer}>
                 <RightHeader
+                    onCloseDrawer={closeDrawerHandler}
                     isInline
                     className={styles['right-header__inline']}
                 />

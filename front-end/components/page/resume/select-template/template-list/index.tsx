@@ -9,28 +9,32 @@ import { resumeInfoState } from '../../../../../recoil-state/resume-state/resume
 type Props = {
     className?: string;
     value?: any;
+    thumbnail?: boolean;
 };
 
 const TemplateItem = (props: Props) => {
-    const { className, value } = props;
+    const { className, value, thumbnail = false } = props;
     const setResumeInfo = useSetRecoilState(resumeInfoState);
     const clickHandler = () => {
         setResumeInfo((prev: any) => {
             return { ...prev, template: value.id };
         });
     };
+    console.log('thumbnails', thumbnail);
     return (
         <div
             className={styles['item']}
             onClick={clickHandler}>
             <div className={styles.name}>{value.title}</div>
-            <div className={styles['thumbnail']}>
-                <Image
-                    src={value.get_thumbnail}
-                    width={225}
-                    height={321}
-                />
-            </div>
+            {thumbnail && (
+                <div className={styles['thumbnail']}>
+                    <Image
+                        src={value.get_thumbnail}
+                        width={225}
+                        height={321}
+                    />
+                </div>
+            )}
         </div>
     );
 };
