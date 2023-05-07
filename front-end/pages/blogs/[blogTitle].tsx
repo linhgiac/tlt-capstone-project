@@ -14,9 +14,10 @@ const Blogs: React.FC = () => {
     const blogPath = last(router.asPath.split('/'));
 
     return (
-        <Layout
-        >
+        <Layout className={styles['container']}>
             <Sider
+                breakpoint="lg"
+                collapsedWidth="0"
                 width={'20%'}
                 style={{
                     overflow: 'auto',
@@ -25,15 +26,16 @@ const Blogs: React.FC = () => {
                     left: 0,
                     top: 70,
                     bottom: 0,
-                }}
-            >
+                }}>
                 <BlogMenu />
             </Sider>
-            <AntdContent className={styles["content"]}>
+            <AntdContent className={styles['content']}>
                 {blogPath && <Content blogTitle={blogPath} />}
             </AntdContent>
             <Sider
-                className={styles["right-sidebar"]}
+                className={styles['right-sidebar']}
+                breakpoint="lg"
+                collapsedWidth="0"
                 width={'25%'}
                 style={{
                     backgroundColor: 'white',
@@ -43,16 +45,19 @@ const Blogs: React.FC = () => {
                     right: 0,
                     top: 70,
                     bottom: 0,
-
-                }}
-            >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}>
                     <VerticalBanner />
                     <BlogAsideAction />
                 </div>
             </Sider>
         </Layout>
-    )
+    );
 };
 
 export default Blogs;

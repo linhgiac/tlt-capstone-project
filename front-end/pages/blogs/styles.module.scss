@@ -1,9 +1,16 @@
+@import '../../styles/responsive.scss';
+
 .container {
-    padding: 0px 40px;
+    margin: 20px 0px;
 }
 
 .content {
     margin: 0 25% 0 20%;
     padding-left: 5%;
     background-color: #fff;
+    @include tablet{
+        margin: 0px;
+        padding: 0 10%;
+    }
+    text-align: justify;
 }
