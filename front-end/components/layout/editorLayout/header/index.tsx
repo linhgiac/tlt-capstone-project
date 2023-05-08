@@ -29,9 +29,9 @@ const EditorHeader = (props: Props) => {
                 }}>
                 My resume
             </Button>
-            <span className={classNames(styles['change-language-button'])}>
+            {/* <span className={classNames(styles['change-language-button'])}>
                 <ChangeLanguageButton forceReload={true}></ChangeLanguageButton>
-            </span>
+            </span> */}
         </div>
     );
 };
