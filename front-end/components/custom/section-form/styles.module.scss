@@ -1,0 +1,38 @@
+@import './../../../styles/variables.scss';
+.section-form__container{
+    .section-form__description{
+        font-size: 17px;
+        padding: 10px 11px;   
+    }
+
+}
+.skill-level-container{
+    .tlt-radio-group{height: 46px;}
+}
+.skill-label{
+    display: flex;
+    flex-direction: row;
+    div{
+        margin-left: 3px;
+
+    }
+    .novice{
+        color: #fe7d8b;
+    }
+    .beginner{
+        
+        color: #f68559
+    }
+    .skillful{
+        color: #ec930c;
+    }
+    .experienced{
+        color: #48ba75;
+    }
+    .expert{
+        color: #9ba1fb
+    }
+}
+.skill-level-button{
+    width: 20px;
+}

@@ -1,0 +1,40 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/responsive.scss';
+
+.resume-export{
+    position: fixed;
+    top: 70px;
+    bottom: 0px;
+    right: 0px;
+    width: 50%;
+    flex: 1 1 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
+    background-color: rgb(101, 110, 131);
+    color: rgb(255, 255, 255);
+    user-select: none;
+    @include tablet{
+        display: none;
+    }
+    // z-index: -1;
+    .resume-export__container{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .resume-export-pagination{
+            margin: 10px 0px;
+        }
+        .resume-export-main{
+            height: calc(100% - 32px - 40px - 70px);
+            overflow: hidden;
+        }
+        .resume-export-selection{
+            margin: 10px 0px 30px 10px;
+        }
+    }
+
+}

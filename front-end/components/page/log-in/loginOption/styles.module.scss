@@ -1,0 +1,23 @@
+.button{
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  Button{
+    font-size: 16px;
+    font-weight: 600;
+    height: 50px;
+    // height: 60px;
+    //   font-size: 20px;
+      font-weight: 600;
+      padding-left: 25px;
+      padding-right: 25px;
+      border-radius: 8px;
+      // margin: 30px 0px
+
+  }}
+.register{
+  padding-top: 24px;
+  font-size: 16px;
+  font-weight: 400;
+
+}

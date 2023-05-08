@@ -1,0 +1,69 @@
+
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/responsive.scss';
+
+
+$padding-left: 20px;
+$padding-right: 20px;
+$step-width: 770px;
+$step-width-tablet: 577px;
+$step-width-mobile: 385px;
+.button{
+  height: 60px;
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 8px;
+  margin: 30px 0px
+}
+.home-instruction__step{
+  width: $step-width;
+  padding-left: $padding-left;
+  padding-right: $padding-right;
+  border-radius: 8px;
+  background-color: #fff;
+  .tlt-tabs-tab-btn{
+    padding: 30px
+  }
+  @include tablet{
+    width: $step-width-tablet;
+  }
+  @include mobile{
+    width: $step-width-mobile;
+  }
+}
+.step-panel{
+  width: calc($step-width - $padding-left - $padding-right);
+  padding: 20px;
+  @include tablet{
+    width: calc($step-width-tablet - $padding-left - $padding-right);
+  }
+  @include mobile{
+    width: calc($step-width-mobile - $padding-left - $padding-right);
+  }
+  .step-panel__title{
+    font-size: 18px;
+    font-weight: 600;
+    color: $hover-color;
+    padding-bottom: 10px;
+  }
+  .step-panel__description{
+    font-size: 16px;
+    text-align: justify;
+  }
+}
+.step-title{
+  font-size: 18px;
+  font-weight: 600;
+  // color: $background-color;
+  width: calc($step-width / 3 - $padding-left - $padding-right);
+  @include tablet{
+    width: calc($step-width-tablet / 3 - $padding-left - $padding-right);
+  }
+  @include mobile{
+    width: calc($step-width-mobile / 3 - $padding-left - $padding-right);
+  }
+  padding-left: 10px;
+  
+}

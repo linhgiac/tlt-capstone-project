@@ -1,0 +1,27 @@
+@import '../../../../styles/variables.scss';
+
+.header{
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  
+  .logo{
+    cursor: pointer;
+    float: left;
+    width: 120px;
+    height: 31px;
+  }
+
+  .right-header{
+    cursor: pointer;
+    &:hover {
+      color: $hover-color;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+@import '../../../../styles/responsive.scss';
+
+.blog-action-container {
+    margin: 32px 0;
+}
+
+.blog-action-title {
+    margin-bottom: 16px;
+    font-size: 16px;
+    color: #828ba2;
+}
+
+.blog-action-share-list {
+    display: flex;
+    column-gap: 16px;
+    @include mobile{
+        flex-direction: column;
+    }
+}
+
+.blog-action-share-item {
+    padding: 11px 23px;
+    display: flex;
+    font-size: 18px;
+    border: 1px solid #e7eaf4;
+    border-radius: 4px;
+    font-weight: 600;
+    align-items: center;
+    justify-content: center;
+    @include mobile{
+        margin-bottom: 5px;
+       
+    }
+}
+
+.blog-action-share-item:hover {
+    background-color: #f7f9fc;
+    cursor: pointer;
+}
+
+.blog-action-icon {
+    font-size: 20px;
+    margin-right: 8px;
+}

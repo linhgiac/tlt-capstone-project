@@ -1,0 +1,61 @@
+@import '../../../../styles/responsive.scss';
+
+.title {
+    margin-bottom: 40px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.heading {
+    margin: 48px 0 16px;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.para {
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+// .list ul {
+//     margin: 16px 0;
+//     padding-left: 40px;
+//     font-size: 18px;
+// }
+
+// .list ul li:not(:last-child) {
+//     margin-bottom: 8px;
+// }
+
+// .list ul li::marker {
+//     color: #116fcd;
+// }
+
+.list {
+    ul {
+        margin: 16px 0;
+        padding-left: 40px;
+        font-size: 18px;
+
+        li:not(:last-child) {
+            margin-bottom: 8px;
+        }
+
+        li::marker {
+            color: #116fcd;
+        }
+    }
+}
+
+.strong-font {
+    font-weight: 700;
+}
+
+.blog-menu__tablet{
+    display: none;
+    @include tablet{
+        display: block;
+    }
+}

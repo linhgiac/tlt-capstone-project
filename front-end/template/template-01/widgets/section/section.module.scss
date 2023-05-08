@@ -1,0 +1,23 @@
+.header{
+  font-weight: 900;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+}
+.title{
+  font-weight: 900;
+}
+.date{
+  font-weight: 500;
+}
+.description{
+  padding: 5px 20px;
+  text-align: justify;
+  font-size: 12px;
+}
+.skills{
+  display: grid;
+  grid-gap: 5px 20px;
+  grid-template-columns: repeat(2, 1fr);
+  padding-left: 60px
+
+}

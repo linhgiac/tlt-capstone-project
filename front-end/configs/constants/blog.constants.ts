@@ -1,0 +1,12 @@
+export const HOW_TO_WRITE_A_RESUME = 'how-to-write-a-resume';
+export const RESUME_FORMATS = 'resume-formats';
+export const CHRONOLOGICAL_RESUME = 'chronological-resume';
+export const FUNCTIONAL_RESUME = 'functional-resume';
+export const SUMMARY_OBJECTIVE = 'summary-objective';
+export const EMPLOYMENT_HISTORY = 'employment-history';
+export const SKILLS = 'skills';
+export const EDUCATION = 'education';
+export const REFERENCES = 'references';
+export const LANGUAGES = 'languages';
+export const PROOFREADING = 'proofreading';
+export const INTERNATIONAL_RESUMES = 'international-resumes';

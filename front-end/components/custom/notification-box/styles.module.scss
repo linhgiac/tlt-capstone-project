@@ -1,0 +1,23 @@
+@import '../../../styles/variables.scss';
+
+.container{
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+.container-error{
+  background-color: $error-background-color;
+  border: 2px solid $error-color;
+  .title{
+    color: $error-color;
+    font-size: 14px;
+  }
+}
+.container-success{
+  background-color: $success-background-color;
+  border: 2px solid $success-color;
+  .title{
+    color: $success-color;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,38 @@
+.blogSharing {
+    margin-top: 32px;
+    width: 60%;
+}
+
+.blogSharingTitle {
+    margin-bottom: 4px;
+    font-size: 16px;
+    opacity: 0.6;
+    text-align: center;
+}
+
+.blogSharingList {
+    display: flex;
+    justify-content: center;
+    column-gap: 8px;
+}
+
+.blogSharingItem {
+    flex-basis: 20%;
+}
+
+.blogSharingIcon {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    border: 1px solid #d9deeb;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 48px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.blogSharingIcon:hover {
+    background-color: #f7f9fc;
+    cursor: pointer;
+}

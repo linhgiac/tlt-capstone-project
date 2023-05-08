@@ -1,0 +1,94 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/responsive.scss';
+
+.dashboard-container {
+    padding-top: 30px;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    @include tablet{
+        
+    grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+// .dashboard-row {
+//     width: 100%;
+//     justify-content: space-between;
+//     flex-direction: row;
+//     display: flex;
+//     @include tablet{
+//         flex-direction: column;
+//     }
+
+// }
+
+.dashboard-item {
+    // width: 400px;
+    height: 320px;
+    margin: 20px;
+    display: flex;
+    justify-content: flex-start;
+    // display: inline-block;
+}
+
+.dashboard-item-preview {
+    border: 0;
+    cursor: pointer;
+    // background-color: $medium-color;
+    width: 225px;
+        // height: 321px;
+    margin-right: 20px;
+}
+
+.dashboard-item-body {
+    padding: 0;
+}
+
+.dashboard-item-title-container {
+    align-items: center;
+    color: $placeholder-color;
+    
+}
+
+.dashboard-item-title {
+    padding: 0;
+    font-size: 25px;
+    color: $dark-color;
+    border: 2px solid gray;
+    cursor: pointer;
+    background: none;
+    padding-top: 10px
+}
+
+.dashboard-item-title:hover {
+    color: $active-color;
+}
+
+.dashboard-item-button-list {
+    padding-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.dashboard-item-button {
+    font-size: 16px;
+      font-weight: 600;
+      padding-left: 25px;
+      padding-right: 25px;
+      border-radius: 8px;
+      margin: 5px 0px
+}
+
+.dashboard-item-button:hover {
+    color: $active-color;
+    background-color: transparent;
+}
+
+.dashboard-item-date {
+    font-size: 12px;
+    color: #828ba2;
+    letter-spacing: 0.3px;
+    max-width: 260px;
+}

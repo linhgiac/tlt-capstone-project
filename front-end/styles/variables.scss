@@ -1,0 +1,44 @@
+// Palette colors
+$primary-color: #1890ff;
+$background-color: #eff2f9;
+$hover-color: rgb(19, 95, 157);
+$active-color: rgb(36, 131, 233);
+$dark-sider-color: #191919;
+$light-sider-color: #faf9f5;
+$dark-color: #191919;
+$medium-color: #848484;
+$light-hover-color: #f8f8f8;
+$light-color: #e8e6dd;
+$extra-light-color: #faf9f5;
+$placeholder-color: #bdbdbd;
+$error-color: #fb2828;
+$error-background-color: #fed4d4;
+$warning-color: #f28929;
+$success-color: #1cbf71;
+$success-background-color: #d2f2e3;
+$inactive-text-color: $medium-color;
+$disable-icon-color: #8FDEFF;
+
+
+// Configs
+$base-border-radius: 8px;
+$card-border-radius: 12px;
+$collapse-border-radius: 12px;
+$btn-border-radius: $base-border-radius;
+$input-border-radius: 4px;
+$form-border-radius: $base-border-radius;
+$tabs-border-radius: $base-border-radius;
+$step-color: white;
+$base-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+$base-card-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+$base-btn-border: 1px solid $primary-color;
+
+$btn-height: 40px;
+$min-btn-width: 64px;
+$font-size: 16px;
+
+$card-body-horizontal-padding: 32px;
+$list-item-vertical-padding: 12px;
+
+$canvas-scale-width: calc(1174px / 1660px * (100vh - 112px));
+$canvas-scale-height: calc((100vh - 112px))

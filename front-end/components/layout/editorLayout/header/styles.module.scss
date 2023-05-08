@@ -1,0 +1,36 @@
+@import '../../../../styles/variables.scss';
+
+.header{
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px 0px;
+  .right-header{
+    display: flex;
+    flex-direction: row;
+   
+  } align-items: center;
+  padding-left: 20px;
+}
+
+.button{
+  font-weight: 600;
+}
+.text-button{
+  color: $primary-color;
+  &:hover{
+    color: $hover-color;
+    background-color: transparent;
+  }
+}
+
+.change-language-button {
+  padding-right: 50px;
+}

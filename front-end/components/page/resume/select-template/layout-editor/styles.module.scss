@@ -1,0 +1,54 @@
+@import '../../../../../styles/responsive.scss';
+
+.layout-page__container{
+  background-color: rgb(38,24,38);
+  border-radius: 4px;
+  padding: 0px 16px 16px;
+  color: white;
+  border: 0.5px solid #ccc
+}
+.layout-page__title{
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.layout-page__title-close{
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.layout-page__column{
+ width: 50%;
+ margin: 5px; 
+ padding: 10px 0px;
+ padding-left: 15px;
+  background-color: #404040;
+  border-radius: 4px;
+  @include mini-desktop{
+    width: 100%;
+  }
+}
+
+.layout-page__columns{
+  display: flex;
+  flex-direction: row;
+ @include mini-desktop{
+  flex-direction: column;
+ }
+
+}
+
+.layout-item__container{
+  // height: 0px;
+  padding: 5px;
+  padding-left: 10px;
+  margin: 5px;
+  background-color: #efeded;
+  border-radius: 4px;
+  color: black
+}

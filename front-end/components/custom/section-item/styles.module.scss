@@ -1,0 +1,53 @@
+@import './../../../styles/variables.scss';
+
+
+
+.section-item__container{
+    border: 1px solid $light-color;
+    margin: 10px;
+    border-radius: 5px;
+    width: 100%;
+    .section-item__content{
+        position: relative;
+        .section-item__header{
+            justify-content: space-between;
+            height: 60px;
+            line-height: 20px;
+            padding: 20px;
+            div{
+                font-weight: 600;
+            };
+            .section-item__icon{
+                stroke: $medium-color;   
+                stroke-width: 70;    
+            }
+            &:hover{
+                color: $hover-color;
+                border-color: $hover-color;
+                stroke: $hover-color;
+            }
+        }
+        .section-item__remove{
+            font-size: 18px;
+            position: absolute;
+            left: 100%;
+            top: 0%;
+            bottom: 0%;
+            margin-left: 5px;
+            color: $medium-color;
+            &:hover{
+                color: $hover-color;
+            }
+        }      
+    }
+    .section-item__form{
+            padding: 0px 20px;
+        } 
+    
+    // .section-item__content:hover .section-item__remove{
+    //     display: flex;
+    // }
+    
+    
+    
+}

@@ -1,0 +1,21 @@
+.name{
+  font-family: 'Times New Roman';
+  font-size: 27px;
+}
+.job{
+  font-size: 12px;
+  font-weight: 600;
+}
+.info{
+  display: grid;
+  grid-gap: 5px 20px;
+  grid-template-columns: repeat(2, 1fr);
+  padding-left: 60px
+}
+.header{
+  font-weight: 900;
+  padding-bottom: 5px;
+}
+.content{
+  font-size: 12px;
+}

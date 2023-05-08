@@ -1,0 +1,32 @@
+@import '../../../../styles//variables.scss';
+@import '../../../../styles/responsive.scss';
+
+
+    .home-hero-container{
+      padding-bottom: 0px !important;
+    }
+    .image{
+      width: 770px;
+      height: 400px;
+      margin: 0 150px;
+      // background-color: #fff;
+      background-image: url(../../../../public/assets/HomePage.png);
+      background-size: cover;
+      @include tablet{
+        width: 577.5px;
+        height: 300px;
+      }
+      @include mobile{
+        width: 385px;
+        height: 200px;
+      }
+    }
+    .button{
+      height: 60px;
+      font-size: 20px;
+      font-weight: 600;
+      padding-left: 25px;
+      padding-right: 25px;
+      border-radius: 8px;
+      margin: 30px 0px
+    }

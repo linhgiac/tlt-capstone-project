@@ -1,0 +1,15 @@
+{
+    "dashboard-header": "履歴書",
+    "dashboard-import": "+インポート",
+    "dashboard-create-new": "+新規を作成します",
+    "dashboard-upload-file": "[ファイル]をクリックまたはドラッグこの領域にアップロードします",
+    "dashboard-import-title": "履歴書を輸入します",
+    "dashboard-edit": "編集",
+    "dashboard-duplicate": "複製",
+    "dashboard-delete": "消去",
+    "dashboard-delete-text": "消去",
+    "dashboard-cancel-text": "キャンセル",
+    "dashboard-confirm-text": "OK",
+    "dashboard-delete-title": "履歴書を削除します",
+    "dashboard-delete-description": "この履歴書を削除したいですか？"
+}
