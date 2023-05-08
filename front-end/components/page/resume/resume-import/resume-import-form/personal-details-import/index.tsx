@@ -60,6 +60,9 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                     headers: authHeader,
                 }
             );
+            setPersonalDetailsChangedValues((prev: any) => {
+                return { ...prev, image: response.data.image };
+            });
             console.log('responseeeeeeeee', response.data);
         } catch (error: any) {
             console.log('error', error);
@@ -68,6 +71,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
 
     useEffect(() => {
         form.setFieldsValue(resumeSaved?.personalDetails);
+        console.log('imageeeee', resumeSaved.image);
     }, [form, resumeSaved?.personalDetails]);
 
     // useEffect(() => {
@@ -100,7 +104,9 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                         <ImageUpload
                             className={classNames('no-margin', 'no-padding')}
                             onUpload={uploadImageHandler}
-                            fetchingURL={''}
+                            fetchingURL={
+                                resumeSaved.image ? resumeSaved.image : ''
+                            }
                         />
                         <span
                             onClick={uploadImageHandler}

@@ -12,8 +12,16 @@ type Props = {
 
 const Masthead = (props: Props) => {
     const { className, value } = props;
+    console.log('valueeeee', value);
     return (
         <DataDisplay className={classNames(className)}>
+            <DataDisplay className={styles.avatar}>
+                <img
+                    width={110}
+                    height={110}
+                    src={value.image}
+                />
+            </DataDisplay>
             <div style={{ textAlign: 'center' }}>
                 <DataDisplay className={styles.name}>
                     {value?.firstName} {value?.lastName}

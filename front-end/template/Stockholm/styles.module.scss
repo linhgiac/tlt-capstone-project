@@ -7,19 +7,27 @@
   font-family: 'Source Sans Pro';
   padding: 40px;
   .masthead{
+    display: grid; 
+    grid-template-columns: 1fr 4fr;
     .avatar{
-
+      padding-left: 15px;
+      img{
+        border-radius: 8px;
+      }
     }
-    .name{
+    div{
+      .name{
       font-size: 50px;
       font-weight: 600;
       // padding: 3px 0px
+      }
+      .job{
+        font-size: 25px;
+        color: #333;
+        background-color: #f5f5f5;
+      }
     }
-    .job{
-      font-size: 25px;
-      color: #333;
-      background-color: #f5f5f5;
-    }
+   
   }
   .side-bar{
     width: 30%;

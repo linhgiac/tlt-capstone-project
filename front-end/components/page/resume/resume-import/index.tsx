@@ -20,7 +20,10 @@ import {
     convertTest,
 } from '../../../../configs/utils/format.utils';
 import styles from './styles.module.scss';
-import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
+import {
+    PersonalDetailsDataType,
+    ResumeDataType,
+} from '../../../../configs/interfaces/resume.interface';
 import { ResumeConstants } from '../../../../configs/constants/resume.constants';
 import { resumeTitleValueState } from '../../../../recoil-state/resume-state/resume-title.state';
 import {
@@ -182,6 +185,13 @@ const ResumeImport = (props: ResumeImportProps) => {
             'complexSections.sectionDetails.skills.items'
         );
         setPersonalDetailsChangedValues(resumeSaved?.personalDetails);
+        if (resumeSaved?.image) {
+            setPersonalDetailsChangedValues(
+                (values: PersonalDetailsDataType) => {
+                    return { ...values, image: resumeSaved.image };
+                }
+            );
+        }
         setProfessionalSummaryChangedValues(resumeSaved?.professionalSummary);
         setEmploymentHistoryItems(employmentHistoriesItems);
         setEducationItems(educationsItems);

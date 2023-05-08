@@ -1,5 +1,6 @@
 import { LoadingOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Modal, Upload, UploadFile, UploadProps } from 'antd';
+import AntdImgCrop from 'antd-img-crop';
 import classNames from 'classnames';
 import { image } from 'html2canvas/dist/types/css/types/image';
 import { isEmpty } from 'lodash';
@@ -16,11 +17,11 @@ type ImageUploadProps = {
 const ImageUpload = (props: ImageUploadProps) => {
     const { className, fetchingURL, onUpload } = props;
     const [file, setFile] = useState<UploadFile>();
-    const [imageURL, setimageURL] = useState('');
+    const [imageURL, setImageURL] = useState('');
 
     // More consideration
     useEffect(() => {
-        setimageURL(fetchingURL);
+        setImageURL(fetchingURL);
     }, [fetchingURL]);
 
     useEffect(() => {
@@ -28,12 +29,19 @@ const ImageUpload = (props: ImageUploadProps) => {
             URL.revokeObjectURL(imageURL);
         };
     }, [file]);
-    const changeImageHandler: UploadProps['onChange'] = info => {
-        setFile(info.file);
-        if (info.file.originFileObj) {
-            setimageURL(URL.createObjectURL(info.file.originFileObj));
-            onUpload(info.file.originFileObj);
+    const beforeUpload = (file: any) => {
+        if (file) {
+            setImageURL(URL.createObjectURL(file));
+            setFile(file);
+            onUpload(file);
         }
+    };
+    const changeImageHandler: UploadProps['onChange'] = info => {
+        // setFile(info.file);
+        // if (info.file.originFileObj) {
+        //     setImageURL(URL.createObjectURL(info.file.originFileObj));
+        //     // onUpload(info.file.originFileObj);
+        // }
     };
     const uploadButton = (
         <div>
@@ -43,23 +51,28 @@ const ImageUpload = (props: ImageUploadProps) => {
     );
     return (
         <div className={classNames(className)}>
-            <Upload
-                name="image"
-                listType="picture-card"
-                className={classNames('avatar-uploader', { className })}
-                showUploadList={false}
-                disabled={false}
-                onChange={changeImageHandler}>
-                {imageURL ? (
-                    <img
-                        src={imageURL}
-                        alt="image"
-                        style={{ width: '100%' }}
-                    />
-                ) : (
-                    uploadButton
-                )}
-            </Upload>
+            <AntdImgCrop
+                rotationSlider
+                showReset>
+                <Upload
+                    name="image"
+                    listType="picture-card"
+                    className={classNames('avatar-uploader', { className })}
+                    showUploadList={false}
+                    disabled={false}
+                    beforeUpload={beforeUpload}
+                    onChange={changeImageHandler}>
+                    {imageURL ? (
+                        <img
+                            src={imageURL}
+                            alt="image"
+                            style={{ width: '100%' }}
+                        />
+                    ) : (
+                        uploadButton
+                    )}
+                </Upload>
+            </AntdImgCrop>
         </div>
     );
 };

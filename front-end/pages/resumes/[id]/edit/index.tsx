@@ -9,7 +9,10 @@ import styles from './styles.module.scss';
 
 import ResumeExport from '../../../../components/page/resume/resume-export';
 import ResumeImport from '../../../../components/page/resume/resume-import';
-import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
+import {
+    PersonalDetailsDataType,
+    ResumeDataType,
+} from '../../../../configs/interfaces/resume.interface';
 import { MOCKED_RESUME } from '../../../../mock/resume.mock';
 import { HOST, LAYOUT } from '../../../../configs/constants/misc';
 import {
@@ -129,6 +132,16 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     useEffect(() => {
         if (!isEmpty(initialResumeData?.personalDetails)) {
             setPersonalDetailsChangedValues(initialResumeData?.personalDetails);
+        }
+        if (initialResumeData?.image) {
+            setPersonalDetailsChangedValues(
+                (values: PersonalDetailsDataType) => {
+                    return {
+                        ...values,
+                        image: initialResumeData.image,
+                    };
+                }
+            );
         }
         if (!isEmpty(initialResumeData?.professionalSummary)) {
             setProfessionalSummaryChangedValues(
