@@ -8,7 +8,6 @@ import React, { useEffect } from 'react';
 import styles from './styles.module.scss';
 import AccountForm from '../../components/page/account/account-form';
 import { HOST, LAYOUT } from '../../configs/constants/misc';
-import { MOCKED_USER } from '../../mock/user.mock';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil-state/user-state/user-state';
 import { getAuthHeader } from '../../configs/restApi/clients';

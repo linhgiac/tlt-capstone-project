@@ -28,7 +28,6 @@ const DownloadButton = (props: Props) => {
         // const windowWidth = data.getBoundingClientRect().width;
         if (data) {
             try {
-                console.log('hello', data.style);
                 data.style.transform = 'scale(1)';
                 const canvas = await html2canvas(data, {});
                 const imgData = canvas.toDataURL('image/png', 1.0);
