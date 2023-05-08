@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react'
 import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
 
