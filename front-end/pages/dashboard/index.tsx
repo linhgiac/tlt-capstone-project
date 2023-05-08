@@ -3,22 +3,18 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { DashboardDataType } from '../../configs/interfaces/dashboard.interface';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { MOCKED_DASHBOARD } from '../../mock/dashboard.mock';
 import DashboardContainer from '../../components/page/dashboard/dashboard-container';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
 import { HOST, LAYOUT } from '../../configs/constants/misc';
 import axios from 'axios';
 import { getAuthHeader } from '../../configs/restApi/clients';
-import Divide from '../../template/template-01/widgets/divide/Divide';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { resumeInfoState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
-import { isEmpty } from 'lodash';
 import { hasCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { locale } from 'dayjs';
 import {
     convertDashboardResponse,
     convertPayloadData,

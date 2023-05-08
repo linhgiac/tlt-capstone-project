@@ -13,7 +13,6 @@ import {
     PersonalDetailsDataType,
     ResumeDataType,
 } from '../../../../configs/interfaces/resume.interface';
-import { MOCKED_RESUME } from '../../../../mock/resume.mock';
 import { HOST, LAYOUT } from '../../../../configs/constants/misc';
 import {
     resumeLayoutState,
