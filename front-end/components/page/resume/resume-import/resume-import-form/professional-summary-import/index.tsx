@@ -160,7 +160,7 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     }, []);
 
     useEffect(() => {
-        if (lastCheckTypingTicks - lastTypingTicks > 2000 && !isStopTyping) {
+        if (lastCheckTypingTicks - lastTypingTicks > 5000 && !isStopTyping) {
             console.log('Stop typing');
             setIsStopTyping(true);
             getSuggestions(suggestionMode);
