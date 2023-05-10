@@ -3,12 +3,16 @@ import React from 'react';
 import RegisterContent from '../../components/page/register';
 import { LAYOUT } from '../../configs/constants/misc';
 import { Form } from 'antd';
+import Head from 'next/head';
 
 type Props = {};
 
 const Register = (props: Props) => {
     return (
         <div style={{ height: '100vh' }}>
+            <Head>
+                <title>Register</title>
+            </Head>
             <RegisterContent />
         </div>
     );

@@ -29,9 +29,7 @@ const PersonalDetails = (props: Props) => {
         }
         return true;
     });
-    console.log('keys', keys);
     if (isEmpty(keys)) return null;
-    // console.log('check', check);
     return (
         <div>
             {(keys.includes('address') ||

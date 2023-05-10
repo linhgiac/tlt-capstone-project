@@ -93,13 +93,27 @@ const DashboardItem = (props: DashboardItemProps) => {
                             className={classNames(
                                 styles['dashboard-item-button']
                             )}
-                            icon={<EditOutlined />}
+                            icon={
+                                <EditOutlined
+                                    style={{
+                                        color: '#1890ff',
+                                        fontSize: '18px',
+                                    }}
+                                />
+                            }
                             onClick={editHandler}>
                             {t('dashboard-edit', { ns: 'dashboard' })}
                         </Button>
                         <Button
                             size="large"
-                            icon={<CopyOutlined />}
+                            icon={
+                                <CopyOutlined
+                                    style={{
+                                        color: '#1890ff',
+                                        fontSize: '18px',
+                                    }}
+                                />
+                            }
                             type="text"
                             className={classNames(
                                 styles['dashboard-item-button']
@@ -109,7 +123,14 @@ const DashboardItem = (props: DashboardItemProps) => {
                         </Button>
                         <Button
                             size="large"
-                            icon={<DeleteOutlined />}
+                            icon={
+                                <DeleteOutlined
+                                    style={{
+                                        color: '#1890ff',
+                                        fontSize: '18px',
+                                    }}
+                                />
+                            }
                             type="text"
                             className={classNames(
                                 styles['dashboard-item-button']

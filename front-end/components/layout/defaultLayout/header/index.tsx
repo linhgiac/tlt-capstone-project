@@ -55,7 +55,6 @@ const DefaultHeader = (props: Props) => {
                     closeDrawerHandler();
                     router.push('/');
                 }}>
-                Logo
             </div>
             <span>
                 <RightHeader

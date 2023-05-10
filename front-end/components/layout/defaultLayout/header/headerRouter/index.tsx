@@ -14,7 +14,6 @@ type HeaderRouterProps = {
 
 const HeaderRouter = (props: HeaderRouterProps) => {
     const { isInline, onCloseDrawer } = props;
-    console.log('isOpen', isInline);
     const router = useRouter();
     const headerRouterItems: MenuItem[] = [
         getItem('Resume', 'resume', <DownOutlined />, false, [

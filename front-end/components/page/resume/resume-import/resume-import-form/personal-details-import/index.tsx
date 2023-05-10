@@ -48,7 +48,6 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
     );
 
     const uploadImageHandler = async (image: any) => {
-        console.log('images', image);
         const authHeader = Object.assign(getAuthHeader(), {
             'Content-Type': 'multipart/form-data',
         });
@@ -63,7 +62,6 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
             setPersonalDetailsChangedValues((prev: any) => {
                 return { ...prev, image: response.data.image };
             });
-            console.log('responseeeeeeeee', response.data);
         } catch (error: any) {
             console.log('error', error);
         }
@@ -71,7 +69,6 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
 
     useEffect(() => {
         form.setFieldsValue(resumeSaved?.personalDetails);
-        console.log('imageeeee', resumeSaved.image);
     }, [form, resumeSaved?.personalDetails]);
 
     // useEffect(() => {

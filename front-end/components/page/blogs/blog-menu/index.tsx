@@ -80,7 +80,6 @@ type BlogMenuProps = {
     hasTableOfContents?: boolean;
 };
 const BlogMenu = ({ hasTableOfContents = false }: BlogMenuProps) => {
-    console.log('itemsmmmmmmmm', items);
     const [current, setCurrent] = useState(HOW_TO_WRITE_A_RESUME);
 
     const router = useRouter();

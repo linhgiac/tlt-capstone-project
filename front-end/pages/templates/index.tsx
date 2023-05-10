@@ -13,7 +13,6 @@ type TemplatesProps = {
 const Templates = (props: TemplatesProps) => {
     // const { templatesData } = props;
     // const onChangeCategory = (category: string) => {
-    //     console.log("Change category");
     //     // if (category === "all")
     //     //     router.replace("/templates");
     //     // else
@@ -22,8 +21,6 @@ const Templates = (props: TemplatesProps) => {
     const router = useRouter()
     const id = router.query.id as string;
     // const category = id === undefined ? 'all' : id;
-    console.log(id);
-    // console.log('pre-rendering data', templatesData);
 
 
     useEffect(() => {

@@ -12,7 +12,6 @@ type Props = {
 
 const Masthead = (props: Props) => {
     const { className, value } = props;
-    console.log('valueeeee', value);
     return (
         <DataDisplay className={classNames(className)}>
             <DataDisplay className={styles.avatar}>

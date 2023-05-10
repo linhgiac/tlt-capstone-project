@@ -14,6 +14,7 @@ import axios from 'axios';
 import { HOST } from '../../../configs/constants/misc';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import Head from 'next/head';
 
 type TemplatesProps = {
     templatesData: TemplatesDataType;
@@ -27,7 +28,6 @@ const Templates = (props: TemplatesProps) => {
 
 
     const onChangeCategory = (newId: string) => {
-        console.log('Change category');
         router.replace('/templates/' + newId);
     };
 
@@ -45,6 +45,9 @@ const Templates = (props: TemplatesProps) => {
 
     return (
         <div className="p-48">
+            <Head>
+                <title>Templates</title>
+            </Head>
             <div className="center text-center">
                 <TemplateHeader category={id}></TemplateHeader>
             </div>
@@ -84,7 +87,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
             return `?category=${category}`;
     }
     const category = ctx.params === undefined || ctx.params.id === undefined ? 'all' : ctx.params.id;
-    console.log(`${HOST}resume-template/?category=${getUrl(category)}`);
     const templates = await axios.get(
         `${HOST}resume-template/${getUrl(category)}`,
         {
@@ -94,7 +96,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
             },
         })
 
-    // console.log(templates.data);
     if(ctx.params === undefined || ctx.params.id === undefined) {
         return {
             props: { 

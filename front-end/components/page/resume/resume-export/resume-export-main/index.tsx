@@ -18,7 +18,6 @@ const ResumeExportMain = (props: ResumeExportMainProps) => {
         function handleResumeExportContainerResize() {
             const resumeExportContainer =
                 document.getElementById('resume-export-main');
-            console.log('resumeexport-container', resumeExportContainer);
             if (resumeExportContainer) {
                 setResumeExportContainerSize({
                     width: resumeExportContainer.offsetWidth,
@@ -39,7 +38,6 @@ const ResumeExportMain = (props: ResumeExportMainProps) => {
 
     useEffect(() => {
         setScale(resumeExportContainerSize.height / 1122);
-        console.log('resumeexport', resumeExportContainerSize);
     }, [resumeExportContainerSize]);
     return (
         <div

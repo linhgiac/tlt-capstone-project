@@ -13,6 +13,7 @@ import { userState } from '../../recoil-state/user-state/user-state';
 import { getAuthHeader } from '../../configs/restApi/clients';
 import axios from 'axios';
 import { convertProfileResponse } from '../../configs/utils/format.utils';
+import Head from 'next/head';
 
 type AccountSettingsProps = {
     userData: any;
@@ -32,8 +33,12 @@ const AccountSettings = (props: AccountSettingsProps) => {
                 backgroundColor: 'rgb(239, 242, 249)',
                 display: 'flex',
                 justifyContent: 'center',
-            }}
-        >
+            }}>
+            <Head>
+                <title>
+                    Account Settings 
+                </title>
+            </Head>
             <div className={classNames(styles['setting__container'])}>
                 <div className={classNames(styles['setting-title'])}>
                     Account Settings

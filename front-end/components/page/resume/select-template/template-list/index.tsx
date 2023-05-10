@@ -20,7 +20,6 @@ const TemplateItem = (props: Props) => {
             return { ...prev, template: value.id };
         });
     };
-    console.log('thumbnails', thumbnail);
     return (
         <div
             className={styles['item']}

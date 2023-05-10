@@ -6,6 +6,7 @@ import { Layout } from 'antd';
 import { BlogMenu, VerticalBanner, BlogAsideAction } from '../../components/page/blogs';
 import styles from './styles.module.scss';
 import Content from '../../components/page/blogs/contents';
+import Head from 'next/head';
 
 const { Sider, Content: AntdContent } = Layout;
 
@@ -15,6 +16,9 @@ const Blogs: React.FC = () => {
 
     return (
         <Layout className={styles['container']}>
+            <Head>
+                <title>Blogs</title>
+            </Head>
             <Sider
                 breakpoint="lg"
                 collapsedWidth="0"
@@ -30,7 +34,6 @@ const Blogs: React.FC = () => {
                 <BlogMenu />
             </Sider>
             <AntdContent className={styles['content']}>
-                
                 {blogPath && <Content blogTitle={blogPath} />}
             </AntdContent>
             <Sider

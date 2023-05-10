@@ -30,7 +30,6 @@ const Stockholm = (props: Props) => {
         let isShownLevel;
         if (sectionType === 'personalDetails') {
             if (!isEmpty(personalDetails)) {
-                console.log('persional Details', personalDetails);
                 const {
                     id,
                     firstName,
@@ -48,7 +47,6 @@ const Stockholm = (props: Props) => {
                     items = details;
                 }
                 sectionHeader = header;
-                console.log('itemssssss', items);
             }
         }
         if (sectionType === 'professionalSummary') {
@@ -103,8 +101,6 @@ const Stockholm = (props: Props) => {
                             {mapSectionToLayout('personalDetails')}
                             {resumeLayout[0]['sidebar']?.map(
                                 (type: any, i: number) => {
-                                    console.log('resumeLayout', resumeLayout);
-                                    console.log('aaaasasadasdsas', type);
                                     return mapSectionToLayout(type, i);
                                 }
                             )}
@@ -124,8 +120,6 @@ const Stockholm = (props: Props) => {
                         <div className={styles.sidebar}>
                             {resumeLayout[pageIndex]['sidebar']?.map(
                                 (type: any, i: number) => {
-                                    console.log('resumeLayout', resumeLayout);
-                                    console.log('aaaasasadasdsas', type);
                                     return mapSectionToLayout(type, i);
                                 }
                             )}

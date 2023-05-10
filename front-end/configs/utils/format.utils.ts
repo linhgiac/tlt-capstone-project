@@ -168,7 +168,6 @@ export const convertTest = () => {
 };
 
 export const convertResumeResponse = (resume: any) => {
-    console.log('reeeeeeeeeeee', resume);
     const id = get(resume, 'id');
     const title = get(resume, 'title');
     const template = get(resume, 'template');

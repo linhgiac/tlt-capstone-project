@@ -27,7 +27,6 @@ const Berlin = (props: Props) => {
         let isShownLevel;
         if (sectionType === 'personalDetails') {
             if (!isEmpty(personalDetails)) {
-                console.log('persional Details', personalDetails);
                 const {
                     id,
                     firstName,
@@ -45,7 +44,6 @@ const Berlin = (props: Props) => {
                     items = details;
                 }
                 sectionHeader = header;
-                console.log('itemssssss', items);
             }
         }
         if (sectionType === 'professionalSummary') {
@@ -92,8 +90,6 @@ const Berlin = (props: Props) => {
                             {mapSectionToLayout('personalDetails')}
                             {resumeLayout[0]['sidebar'].map(
                                 (type: any, i: number) => {
-                                    console.log('resumeLayout', resumeLayout);
-                                    console.log('aaaasasadasdsas', type);
                                     return mapSectionToLayout(type, i);
                                 }
                             )}
@@ -113,7 +109,6 @@ const Berlin = (props: Props) => {
                     <div className={styles['side-bar']}>
                         {resumeLayout[pageIndex]['sidebar'].map(
                             (type: any, i: number) => {
-                                console.log('aaaasasadasdsas', type);
                                 return mapSectionToLayout(type, i);
                             }
                         )}

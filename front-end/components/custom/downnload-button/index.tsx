@@ -75,6 +75,13 @@ const DownloadButton = (props: Props) => {
                 </Button>
             ) : (
                 <Button
+                    style={{
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        paddingLeft: '25px',
+                        paddingRight: '25px',
+                        borderRadius: '8px',
+                    }}
                     type="primary"
                     size="large"
                     onClick={downloadHandler}>
