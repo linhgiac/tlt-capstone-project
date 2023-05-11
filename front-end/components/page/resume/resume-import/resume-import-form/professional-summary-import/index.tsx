@@ -73,6 +73,7 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     const getSuggestions = async (
         suggestionMode: ProfessionalSummarySuggestionMode
     ) => {
+        return;
         setIsLoading(true);
         const currentRequestId = Date.now();
         setRequestId(currentRequestId);
