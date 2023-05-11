@@ -28,9 +28,10 @@ const TemplateItem = (props: Props) => {
             {thumbnail && (
                 <div className={styles['thumbnail']}>
                     <Image
-                        src={value.get_thumbnail}
+                        src={value.thumbnail}
                         width={225}
                         height={321}
+                        alt={value.name}
                     />
                 </div>
             )}

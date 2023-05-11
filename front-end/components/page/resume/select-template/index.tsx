@@ -24,6 +24,7 @@ type Props = {
 
 const TemplateSelector = (props: Props) => {
     const { onChangeLayout, templates } = props;
+    console.log('template', templates);
     const [isFooterDisplay, setIsFooterDisplay] = useState(false);
     const templateRef = useRef<any>(null);
     const layoutRef = useRef<any>(null);

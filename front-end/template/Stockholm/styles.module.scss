@@ -6,7 +6,8 @@
   color: #000;
   font-family: 'Source Sans Pro';
   padding: 40px;
-  .masthead{
+  
+  .masthead-avatar{
     display: grid; 
     grid-template-columns: 1fr 4fr;
     .avatar{
@@ -15,6 +16,9 @@
         border-radius: 8px;
       }
     }
+  }
+  .masthead{
+    
     div{
       .name{
       font-size: 50px;
