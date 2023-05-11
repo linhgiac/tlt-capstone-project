@@ -39,7 +39,7 @@ const Dashboard = (props: DashboardProps) => {
     const router = useRouter();
     useEffect(() => {
         if (error || !hasCookie('accessToken')) {
-            router.push('/');
+            router.push('/log-in');
         }
     }, [error, router]);
 
@@ -126,7 +126,6 @@ const Dashboard = (props: DashboardProps) => {
                 fileType: fileType,
                 parseType: 'bart',
             };
-            console.log('input: ', input);
             const parseResult = await axios.post(
                 `${HOST}parse-resume/`,
                 input,
@@ -138,7 +137,6 @@ const Dashboard = (props: DashboardProps) => {
                 }
             );
             let resumeValue = parseResult.data;
-            console.log(resumeValue);
 
             const headers = getAuthHeader();
             const createResponse = await axios.post(
@@ -287,7 +285,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
             },
         };
     } catch (error: any) {
-        console.log('error', error);
         return {
             props: {
                 ...defaultReturnProps,
