@@ -246,12 +246,10 @@ export const convertProfilePayloadData = (payloadData: AccountSettingType) => {
 
 export const convertProfileResponse = (responseData: any) => {
     const { profile, ...dataWithoutProfile } = responseData;
-    if (profile?.avatar) {
-        profile.avatar = `${HOST}${profile.avatar.replace('/', '')}`;
-    }
+
     return convertSnakeToCamel({
-        ...dataWithoutProfile,
         ...profile,
+        ...dataWithoutProfile
     });
 };
 
