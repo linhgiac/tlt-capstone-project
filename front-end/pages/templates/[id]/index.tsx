@@ -22,6 +22,7 @@ type TemplatesProps = {
 
 const Templates = (props: TemplatesProps) => {
     const { templatesData } = props;
+    console.log("TvT log: ",templatesData);
     const {t} = useTranslation();
     const router = useRouter();
     const id = router.query.id as string;

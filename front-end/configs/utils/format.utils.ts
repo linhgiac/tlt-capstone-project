@@ -260,14 +260,13 @@ export const convertDashboardResponse = (responseData: any) => {
     const convertedResponseData = []
     for (let dashboardItem of responseData) {
         const { thumbnail, created_at, updated_at, ...restDashboardItem } = dashboardItem
-        const fullThumbnailURL = `${HOST}${thumbnail.replace('/', '')}`;
         const createdAt = dateFormat(new Date(created_at.replace('/', ' ')), "mmm dd, HH:MM");
         const updatedAt = dateFormat(new Date(updated_at.replace('/', ' ')), "mmm dd, HH:MM");
         convertedResponseData.push({
             ...restDashboardItem,
             createdAt,
             updatedAt,
-            thumbnail: fullThumbnailURL,
+            thumbnail,
         });
     }
     return convertedResponseData;
