@@ -44,18 +44,16 @@ import { hasCookie } from 'cookies-next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import classNames from 'classnames';
 import { FileTextOutlined } from '@ant-design/icons';
+import Head from 'next/head';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
     templateList?: any;
     error?: any;
-    reee: any;
 };
 
 const ResumeEditor = (props: ResumeEditorProps) => {
-    const { initialResumeData, templateList, error, reee } = props;
-    console.log('reee', reee);
-    console.log('initialResumeData :>> ', initialResumeData);
+    const { initialResumeData, templateList, error } = props;
 
     const isLogged = useRecoilValue(userLoginState);
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
@@ -98,9 +96,6 @@ const ResumeEditor = (props: ResumeEditorProps) => {
         }
     }, [error, initialResumeData, router]);
 
-    useEffect(() => {
-        console.log('resumeData', resumeData);
-    }, [resumeData]);
 
     useEffect(() => {
         setResumeInfo({
@@ -259,6 +254,9 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     };
     return (
         <>
+            <Head>
+                <title>Editor | {`${resumeData.title}`}</title>
+            </Head>
             {isEditing ? (
                 <div className="flex-row">
                     <ResumeImport
@@ -308,7 +306,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                 'Content-Type': 'application/json',
             },
         });
-        console.log('response :>> ', templates.data);
         const headers = getAuthHeader({ req, res });
         const resume = await axios.get(`${HOST}resume/${resumeId}/`, {
             headers: headers,
@@ -321,7 +318,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                 ...(await serverSideTranslations(locale as string, ['edit'])),
                 templateList: templates.data,
                 initialResumeData: convertResumeResponse(resume.data),
-                reee: resume.data,
             },
         };
     } catch (error: any) {

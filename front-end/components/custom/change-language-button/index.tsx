@@ -40,7 +40,6 @@ const ChangeLanguageButton = (props: ChangeLanguageButtonProps) => {
     const router = useRouter();
     const onChangeLanguage: MenuProps['onClick'] = async e => {
         onCloseDrawer();
-        console.log('click ', e);
         setCookie('language', e.key);
         if (forceReload) {
             await router.replace(router.asPath, undefined, {

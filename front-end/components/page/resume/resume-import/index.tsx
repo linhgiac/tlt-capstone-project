@@ -122,11 +122,9 @@ const ResumeImport = (props: ResumeImportProps) => {
     ]);
 
     const submitFormHandler = async () => {
-        console.log('resume valueeee', resumeChangedValue);
         const resumeConvertedValue = await convertPayloadData(
             resumeChangedValue
         );
-        console.log('resumeeeeeeeeeeeee', resumeConvertedValue);
 
         try {
             const response = await axios.put(
@@ -260,10 +258,17 @@ const ResumeImport = (props: ResumeImportProps) => {
             <ResumeImportForm />
             <Button
                 className={'btn'}
+                style={{
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    paddingLeft: '25px',
+                    paddingRight: '25px',
+                    borderRadius: '8px',
+                }}
                 type="primary"
                 size="large"
                 onClick={submitFormHandler}>
-                {t('edit-save-resume', {ns: 'edit'})}
+                {t('edit-save-resume', { ns: 'edit' })}
             </Button>
             <Modal
                 title={<div> Save Successfully</div>}

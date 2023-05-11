@@ -42,7 +42,6 @@ const mapDataToItemHeader = (
 
 const EmploymentHistory = (props: Props) => {
     const { header, items } = props;
-    console.log('itemssEmploy', items);
     return (
         <DataDisplay>
             <DataDisplay

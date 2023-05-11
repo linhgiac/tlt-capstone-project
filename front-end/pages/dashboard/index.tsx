@@ -20,6 +20,7 @@ import {
     convertPayloadData,
 } from '../../configs/utils/format.utils';
 import { userState } from '../../recoil-state/user-state/user-state';
+import Head from 'next/head';
 
 type DashboardProps = {
     dashboardData: DashboardDataType;
@@ -32,13 +33,13 @@ const Dashboard = (props: DashboardProps) => {
     const [isImportModalOpen, setIsImportModalOpen] = useState(false);
     const { id, avatar, ...userDetails } = useRecoilValue(userState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
+    const [importFile, setImportFile] = useState<File>();
+    const [isResumeImporting, setIsResumeImporting] = useState<boolean>(false);
 
-
-    console.log('dashboardddd', dashboardData);
     const router = useRouter();
     useEffect(() => {
         if (error || !hasCookie('accessToken')) {
-            router.push('/');
+            router.push('/log-in');
         }
     }, [error, router]);
 
@@ -86,7 +87,6 @@ const Dashboard = (props: DashboardProps) => {
                 ...resumeResponse.data,
                 personalDetails: userDetails,
             });
-            console.log('resume value', resumeValue);
             try {
                 const response = await axios.put(
                     `${HOST}resume/update/`,
@@ -96,12 +96,9 @@ const Dashboard = (props: DashboardProps) => {
                     }
                 );
             } catch (error: any) {
-                console.log('errorrrr', error);
+                console.log('error', error);
             }
 
-            console.log('resume value', resumeValue);
-            console.log('resumeReponse', resumeResponse);
-            console.log('userrrrrr', userDetails);
             router.push({
                 pathname: '/resumes/[id]/edit',
                 query: {
@@ -117,7 +114,64 @@ const Dashboard = (props: DashboardProps) => {
         }
     };
 
-    const importHandler = () => {};
+    const importHandler = async () => {
+        if (importFile) {
+            setIsResumeImporting(true);
+            const splitFilename = importFile.name.split('.');
+            const resumeName = splitFilename[0];
+            const fileType = splitFilename[1];
+            const input = {
+                userId: id,
+                file: importFile,
+                fileType: fileType,
+                parseType: 'bart',
+            };
+            const parseResult = await axios.post(
+                `${HOST}parse-resume/`,
+                input,
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+            let resumeValue = parseResult.data;
+
+            const headers = getAuthHeader();
+            const createResponse = await axios.post(
+                `${HOST}resume/create/`,
+                { template: 2 },
+                {
+                    headers: headers,
+                }
+            );
+
+            resumeValue['id'] = createResponse.data.id;
+            resumeValue['title'] = resumeName;
+
+            const updateResponse = await axios.put(
+                `${HOST}resume/update/`,
+                resumeValue,
+                {
+                    headers: getAuthHeader(),
+                }
+            );
+
+            router.push({
+                pathname: '/resumes/[id]/edit',
+                query: {
+                    id: createResponse.data.id,
+                },
+            });
+            setResumeInfo({
+                id: createResponse.data.id,
+                template: createResponse.data.template,
+            });
+
+            setIsResumeImporting(false);
+        }
+    };
 
     const importCancelHanlder = () => {
         setIsImportModalOpen(false);
@@ -125,16 +179,19 @@ const Dashboard = (props: DashboardProps) => {
 
     const uploadChangeHanlder = (info: any) => {
         if (info.file.status !== 'uploading') {
-            console.log(info.file, info.fileList);
         }
         if (info.file.status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully`);
+            setImportFile(info.file.originFileObj);
+            // message.success(`${info.file.name} file uploaded successfully`);
         } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
+            // message.error(`${info.file.name} file upload failed.`);
         }
     };
     return (
         <div className={classNames(styles['dashboard'])}>
+            <Head>
+                <title>Dashboard</title>
+            </Head>
             <div className={classNames(styles['dashboard-header'])}>
                 <h1>{t('dashboard-header', { ns: 'dashboard' })}</h1>
                 <div>
@@ -147,6 +204,7 @@ const Dashboard = (props: DashboardProps) => {
                     </Button>
                     <Button
                         className={styles.button}
+                        type="primary"
                         size="large"
                         onClick={onCreate}
                         style={{ marginRight: '10px' }}>
@@ -171,6 +229,7 @@ const Dashboard = (props: DashboardProps) => {
                 open={isImportModalOpen}
                 onOk={importHandler}
                 onCancel={importCancelHanlder}
+                confirmLoading={isResumeImporting}
                 okText={
                     t('dashboard-confirm-text', { ns: 'dashboard' }) as string
                 }
@@ -226,7 +285,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
             },
         };
     } catch (error: any) {
-        console.log('erorrrrr', error);
         return {
             props: {
                 ...defaultReturnProps,

@@ -168,7 +168,6 @@ export const convertTest = () => {
 };
 
 export const convertResumeResponse = (resume: any) => {
-    console.log('reeeeeeeeeeee', resume);
     const id = get(resume, 'id');
     const title = get(resume, 'title');
     const template = get(resume, 'template');
@@ -247,7 +246,7 @@ export const convertProfilePayloadData = (payloadData: AccountSettingType) => {
 
 export const convertProfileResponse = (responseData: any) => {
     const { profile, ...dataWithoutProfile } = responseData;
-    if (profile.avatar) {
+    if (profile?.avatar) {
         profile.avatar = `${HOST}${profile.avatar.replace('/', '')}`;
     }
     return convertSnakeToCamel({

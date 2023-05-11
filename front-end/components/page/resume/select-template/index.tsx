@@ -49,7 +49,6 @@ const TemplateSelector = (props: Props) => {
                 break;
         }
     };
-    console.log(isFooterDisplay);
     return (
         <div>
             {/* <div className={styles.header}>

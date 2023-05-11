@@ -87,14 +87,12 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
         }
         const removeSpaceInput = sequences.replaceAll(' ', '');
         if (removeSpaceInput.length !== 0) {
-            console.log('getSuggestions: ' + sequences);
             const url = `${HOST}professional_summary/`;
             const input = {
                 sequences: sequences,
                 mode: suggestionMode,
                 requestId: currentRequestId,
             };
-            console.log(input);
             try {
                 const response = await axios.post(url, input, {
                     headers: {
@@ -103,7 +101,6 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
                     },
                 });
                 const data = response.data; //  MOCKED_SUGGESTIONS[suggestionMode] //
-                console.log(data);
                 const currentResponseId = response.data.responseId;
                 setResponseId(currentResponseId);
                 setSuggestions(data.data);
@@ -146,13 +143,6 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     };
 
     useEffect(() => {
-        console.log(
-            'professionalSummaryChangedValues :>> ',
-            professionalSummaryChangedValues
-        );
-    }, [professionalSummaryChangedValues]);
-
-    useEffect(() => {
         const interval = setInterval(() => checkStopTyping(), 1000);
         return () => {
             clearInterval(interval);
@@ -160,8 +150,7 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     }, []);
 
     useEffect(() => {
-        if (lastCheckTypingTicks - lastTypingTicks > 2000 && !isStopTyping) {
-            console.log('Stop typing');
+        if (lastCheckTypingTicks - lastTypingTicks > 5000 && !isStopTyping) {
             setIsStopTyping(true);
             getSuggestions(suggestionMode);
         }

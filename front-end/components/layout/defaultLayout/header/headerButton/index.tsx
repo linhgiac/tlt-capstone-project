@@ -44,11 +44,10 @@ const HeaderButton = (props: HeaderButtonProps) => {
                         headers: headers,
                     })
                     .then((response: any) => {
-                        console.log('user response', response);
                         setUser(convertProfileResponse(response.data));
                     });
             } catch (error: any) {
-                console.log('error errorrrr', error);
+                console.log('error', error);
             }
         }
     }, [isLogged, setUser]);

@@ -13,7 +13,6 @@ type Props = {
 
 const Skill = (props: Props) => {
     const { header, items, isShown } = props;
-    console.log('itemssSkill', items);
     return (
         <DataDisplay>
             <DataDisplay

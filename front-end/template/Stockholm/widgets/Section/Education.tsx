@@ -36,7 +36,6 @@ const mapDataToItemHeader = (degree: string, school: string, city: string) => {
 };
 const Education = (props: Props) => {
     const { header, items } = props;
-    console.log('itemssEmploy', items);
     return (
         <DataDisplay>
             <DataDisplay
