@@ -14,7 +14,6 @@ const LoginLayoutHeader = (props: Props) => {
             <div
                 className={styles.logo}
                 onClick={() => router.push('/')}>
-                Logo
             </div>
 
             <div

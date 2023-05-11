@@ -13,7 +13,7 @@ import { getAuthHeader } from '../configs/restApi/clients';
 import { getCookie, hasCookie } from 'cookies-next';
 import { useEffect } from 'react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
+import Head from 'next/head';
 
 const Home: NextPage = props => {
     const router = useRouter();
@@ -22,10 +22,17 @@ const Home: NextPage = props => {
         const hasToken = hasCookie('refreshToken');
         if (hasToken) {
             setIsLogged(true);
-        } 
+        }
     }, [setIsLogged]);
 
-    return <HomeContent />;
+    return (
+        <>
+            <Head>
+                <title>TLT Resume Builder</title>
+            </Head>
+            <HomeContent />;
+        </>
+    );
 };
 
 export default Home;
