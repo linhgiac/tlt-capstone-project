@@ -66,7 +66,7 @@ const DashboardItem = (props: DashboardItemProps) => {
                     // size="large"
                     onClick={editHandler}
                     className={classNames(styles['dashboard-item-preview'])}>
-                    <Image
+                    <img
                         src={item?.thumbnail}
                         width={225}
                         height={321}

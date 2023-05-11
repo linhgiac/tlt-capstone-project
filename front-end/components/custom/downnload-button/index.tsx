@@ -29,7 +29,10 @@ const DownloadButton = (props: Props) => {
         if (data) {
             try {
                 data.style.transform = 'scale(1)';
-                const canvas = await html2canvas(data, {});
+                const canvas = await html2canvas(data, {
+                    allowTaint: false,
+                    useCORS: true
+                });
                 const imgData = canvas.toDataURL('image/png', 1.0);
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);

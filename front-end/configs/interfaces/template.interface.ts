@@ -4,7 +4,7 @@ export type TemplateDataType = {
     title: string,
     description: string
     category: TemplateCategoryType,
-    get_thumbnail: string,
+    thumbnail: string,
 }
 export type TemplatesDataType = {
     data: TemplateDataType[]

@@ -144,7 +144,10 @@ const ResumeImport = (props: ResumeImportProps) => {
             if (data2ExportThumbnail) {
                 try {
                     data2ExportThumbnail.style.transform = 'scale(1)';
-                    const canvas = await html2canvas(data2ExportThumbnail, {});
+                    const canvas = await html2canvas(data2ExportThumbnail, {
+                        allowTaint: false,
+                        useCORS: true
+                    });
                     const thumbnailBase64URL = canvas.toDataURL('image/png', 1.0);
                     const thumbnail = await dataUrlToFile(thumbnailBase64URL, "hello.png")
                     const imagesUploadingResponse = await axios.put(
