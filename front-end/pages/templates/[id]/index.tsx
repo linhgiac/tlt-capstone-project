@@ -22,6 +22,7 @@ type TemplatesProps = {
 
 const Templates = (props: TemplatesProps) => {
     const { templatesData } = props;
+    
     const {t} = useTranslation();
     const router = useRouter();
     const id = router.query.id as string;

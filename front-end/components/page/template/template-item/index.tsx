@@ -58,9 +58,9 @@ const TemplateItem = (props: TemplateItemProps) => {
                         'center ' + classNames(styles['template-item-preview'])
                     }>
                     <div className={classNames(styles['template-item-image'])}>
-                        {item.get_thumbnail && (
-                            <Image
-                                src={item.get_thumbnail}
+                        {item.thumbnail && (
+                            <img
+                                src={item.thumbnail}
                                 width={225}
                                 height={321}
                             />
