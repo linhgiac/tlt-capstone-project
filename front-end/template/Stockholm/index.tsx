@@ -79,56 +79,66 @@ const Stockholm = (props: Props) => {
         );
     };
 
-    const Layout = () => (
-        <>
-            {' '}
-            {pageIndex === 0 ? (
-                <>
-                    <Masthead
-                        className={styles.masthead}
-                        value={personalDetails}
-                    />
-                    <div className="flex-row">
-                        <div className={styles.main}>
-                            {mapSectionToLayout('professionalSummary')}
-                            {resumeLayout[0]['main']?.map(
-                                (type: any, i: number) => {
-                                    return mapSectionToLayout(type, i);
-                                }
+    const Layout = () => {
+        const mastheadStyle = personalDetails?.image
+            ? 'masthead masthead-avatar'
+            : 'masthead';
+        return (
+            <>
+                {' '}
+                {pageIndex === 0 ? (
+                    <>
+                        <Masthead
+                            className={classNames(
+                                styles.masthead,
+                                personalDetails?.image
+                                    ? styles['masthead-avatar']
+                                    : ''
                             )}
+                            value={personalDetails}
+                        />
+                        <div className="flex-row">
+                            <div className={styles.main}>
+                                {mapSectionToLayout('professionalSummary')}
+                                {resumeLayout[0]['main']?.map(
+                                    (type: any, i: number) => {
+                                        return mapSectionToLayout(type, i);
+                                    }
+                                )}
+                            </div>
+                            <div className={styles.sidebar}>
+                                {mapSectionToLayout('personalDetails')}
+                                {resumeLayout[0]['sidebar']?.map(
+                                    (type: any, i: number) => {
+                                        return mapSectionToLayout(type, i);
+                                    }
+                                )}
+                            </div>
                         </div>
-                        <div className={styles.sidebar}>
-                            {mapSectionToLayout('personalDetails')}
-                            {resumeLayout[0]['sidebar']?.map(
-                                (type: any, i: number) => {
-                                    return mapSectionToLayout(type, i);
-                                }
-                            )}
+                    </>
+                ) : (
+                    <>
+                        <div className="flex-row">
+                            <div className={styles.main}>
+                                {resumeLayout[pageIndex]['main']?.map(
+                                    (type: any, i: number) => {
+                                        return mapSectionToLayout(type, i);
+                                    }
+                                )}
+                            </div>
+                            <div className={styles.sidebar}>
+                                {resumeLayout[pageIndex]['sidebar']?.map(
+                                    (type: any, i: number) => {
+                                        return mapSectionToLayout(type, i);
+                                    }
+                                )}
+                            </div>
                         </div>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <div className="flex-row">
-                        <div className={styles.main}>
-                            {resumeLayout[pageIndex]['main']?.map(
-                                (type: any, i: number) => {
-                                    return mapSectionToLayout(type, i);
-                                }
-                            )}
-                        </div>
-                        <div className={styles.sidebar}>
-                            {resumeLayout[pageIndex]['sidebar']?.map(
-                                (type: any, i: number) => {
-                                    return mapSectionToLayout(type, i);
-                                }
-                            )}
-                        </div>
-                    </div>
-                </>
-            )}
-        </>
-    );
+                    </>
+                )}
+            </>
+        );
+    };
 
     return (
         <div className={classNames(styles.container)}>
