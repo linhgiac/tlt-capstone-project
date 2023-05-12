@@ -50,11 +50,12 @@ type ResumeImportProps = {
 const ResumeImport = (props: ResumeImportProps) => {
     const { t } = useTranslation();
     const { className } = props;
+    const [error, setError] = useState(false);
     const router = useRouter();
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
     const resumeChangedValue: ResumeDataType = useRecoilValue(
         resumeChangedValueState
-        );
+    );
     const resumeInfo = useRecoilValue(resumeInfoState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
     const [resumeTitle, setResumeTitle] = useRecoilState(resumeTitleValueState);
@@ -139,17 +140,29 @@ const ResumeImport = (props: ResumeImportProps) => {
             reloadData();
             setIsSuccessful(true);
             // TO-DO TVT
-            const authHeader = Object.assign(getAuthHeader(), { 'Content-Type': 'multipart/form-data' });
-            const data2ExportThumbnail: any = await document.querySelector('#pdf');
+            const authHeader = Object.assign(getAuthHeader(), {
+                'Content-Type': 'multipart/form-data',
+            });
+            const data2ExportThumbnail: any = await document.querySelector(
+                '#pdf'
+            );
             if (data2ExportThumbnail) {
                 try {
+                    const scale = data2ExportThumbnail.style.transform;
+                    console.log('scale', scale);
                     data2ExportThumbnail.style.transform = 'scale(1)';
                     const canvas = await html2canvas(data2ExportThumbnail, {
                         allowTaint: false,
-                        useCORS: true
+                        useCORS: true,
                     });
-                    const thumbnailBase64URL = canvas.toDataURL('image/png', 1.0);
-                    const thumbnail = await dataUrlToFile(thumbnailBase64URL, "hello.png")
+                    const thumbnailBase64URL = canvas.toDataURL(
+                        'image/png',
+                        1.0
+                    );
+                    const thumbnail = await dataUrlToFile(
+                        thumbnailBase64URL,
+                        'hello.png'
+                    );
                     const imagesUploadingResponse = await axios.put(
                         `${HOST}resume/${resumeInfo.id}/images-uploading/`,
                         { thumbnail: thumbnail },
@@ -157,12 +170,14 @@ const ResumeImport = (props: ResumeImportProps) => {
                             headers: authHeader,
                         }
                     );
+                    data2ExportThumbnail.style.transform = scale;
                 } catch (error) {
                     console.log(error);
                 }
-            }            
+            }
         } catch (error) {
             console.log('error :>> ', error);
+            setError(true);
         }
 
         // await resetChangeValue();
@@ -198,13 +213,15 @@ const ResumeImport = (props: ResumeImportProps) => {
         setEducationItems(educationsItems);
         setLinkItems(linksItems);
         setSkillItems(skillsItems);
-    }, [resumeSaved, 
-        setEducationItems, 
-        setEmploymentHistoryItems, 
-        setLinkItems, 
-        setPersonalDetailsChangedValues, 
-        setProfessionalSummaryChangedValues, 
-        setSkillItems]);
+    }, [
+        resumeSaved,
+        setEducationItems,
+        setEmploymentHistoryItems,
+        setLinkItems,
+        setPersonalDetailsChangedValues,
+        setProfessionalSummaryChangedValues,
+        setSkillItems,
+    ]);
 
     const getDataHandler = async () => {
         // const response = await fetch('/api/resume-editor');
@@ -274,12 +291,20 @@ const ResumeImport = (props: ResumeImportProps) => {
                 {t('edit-save-resume', { ns: 'edit' })}
             </Button>
             <Modal
-                title={<div> Save Successfully</div>}
+                title={
+                    <div>
+                        {' '}
+                        {isSuccessful
+                            ? 'Save Successfully'
+                            : 'Problem Occurred When Saving'}
+                    </div>
+                }
                 centered
-                open={isSuccessful}
+                open={isSuccessful || error}
                 onCancel={() => {
                     setIsSuccessful(false);
-                    router.reload();
+                    setError(false);
+                    // router.reload();
                 }}
                 footer={null}></Modal>
             {/* <Button
