@@ -41,6 +41,11 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import html2canvas from 'html2canvas';
 import { dataUrlToFile } from '../../../../configs/utils/images.utils';
+import {
+    CheckCircleOutlined,
+    CloseCircleOutlined,
+    ExclamationCircleOutlined,
+} from '@ant-design/icons';
 
 type ResumeImportProps = {
     className?: string;
@@ -292,28 +297,40 @@ const ResumeImport = (props: ResumeImportProps) => {
             </Button>
             <Modal
                 title={
-                    <div>
-                        {' '}
-                        {isSuccessful
-                            ? 'Save Successfully'
-                            : 'Problem Occurred When Saving'}
-                    </div>
+                    isSuccessful ? (
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <CheckCircleOutlined
+                                style={{
+                                    color: 'forestgreen',
+                                    fontSize: '28px',
+                                    paddingRight: '5px',
+                                }}
+                            />
+                            Save Successfully
+                        </div>
+                    ) : (
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <ExclamationCircleOutlined
+                                style={{
+                                    color: 'red',
+                                    fontSize: '28px',
+                                    paddingRight: '5px',
+                                }}
+                            />
+                            Problem Occurred When Saving
+                        </div>
+                    )
                 }
-                centered
                 open={isSuccessful || error}
                 onCancel={() => {
                     setIsSuccessful(false);
                     setError(false);
-                    // router.reload();
                 }}
-                footer={null}></Modal>
-            {/* <Button
-                className={'btn'}
-                type="primary"
-                size="large"
-                onClick={getDataHandler}>
-                Get Resume Data
-            </Button> */}
+                bodyStyle={{ height: '0px', padding: '0px' }}
+                footer={null}
+                closable
+                centered
+            />
         </div>
     );
 };
