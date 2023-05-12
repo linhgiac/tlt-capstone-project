@@ -102,7 +102,7 @@ const PersonalDetailsImport = (props: PersonalDetailsImportProps) => {
                             className={classNames('no-margin', 'no-padding')}
                             onUpload={uploadImageHandler}
                             fetchingURL={
-                                resumeSaved.image ? resumeSaved.image : ''
+                                resumeSaved?.image ? resumeSaved?.image : ''
                             }
                         />
                         <span
