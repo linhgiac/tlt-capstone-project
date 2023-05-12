@@ -297,34 +297,43 @@ const ResumeImport = (props: ResumeImportProps) => {
             </Button>
             <Modal
                 title={
-                    isSuccessful ? (
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <CheckCircleOutlined
-                                style={{
-                                    color: 'forestgreen',
-                                    fontSize: '28px',
-                                    paddingRight: '5px',
-                                }}
-                            />
-                            Save Successfully
-                        </div>
-                    ) : (
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <ExclamationCircleOutlined
-                                style={{
-                                    color: 'red',
-                                    fontSize: '28px',
-                                    paddingRight: '5px',
-                                }}
-                            />
-                            Problem Occurred When Saving
-                        </div>
-                    )
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <ExclamationCircleOutlined
+                            style={{
+                                color: 'red',
+                                fontSize: '28px',
+                                paddingRight: '5px',
+                            }}
+                        />
+                        Problem Occurred When Saving
+                    </div>
                 }
-                open={isSuccessful || error}
+                open={error}
+                onCancel={() => {
+                    setError(false);
+                }}
+                bodyStyle={{ height: '0px', padding: '0px' }}
+                footer={null}
+                closable
+                centered
+            />
+            <Modal
+                title={
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <CheckCircleOutlined
+                            style={{
+                                color: 'forestgreen',
+                                fontSize: '28px',
+                                paddingRight: '5px',
+                            }}
+                        />
+                        Save Successfully
+                    </div>
+                }
+                open={isSuccessful}
                 onCancel={() => {
                     setIsSuccessful(false);
-                    setError(false);
+                    router.reload();
                 }}
                 bodyStyle={{ height: '0px', padding: '0px' }}
                 footer={null}
