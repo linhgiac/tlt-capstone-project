@@ -28,8 +28,10 @@ const ResumeExportSelection = (props: ResumeExportSelectionProps) => {
             const keys = Array.from(
                 new Set(Object.keys(obj).concat(Object.keys(other)))
             );
+
             for (let i = 0; i < keys.length; i++) {
                 const key = keys[i];
+                if (key === 'sectionType') continue;
                 if (obj.hasOwnProperty(key) && other.hasOwnProperty(key)) {
                     if (
                         typeof obj[key] === 'object' &&
@@ -73,16 +75,22 @@ const ResumeExportSelection = (props: ResumeExportSelectionProps) => {
 
         const isNullObject = (obj: any) => {
             if (Object.keys(obj).length === 0) return true;
+            if (obj.hasOwnProperty('items')) {
+                if (obj['items'].length === 0) return true;
+                else return false;
+            }
             const keys = Object.keys(obj);
             for (let i = 0; i < keys.length; i++) {
                 const childObj = obj[keys[i]];
-                if (childObj === null || childObj === undefined) continue;
                 if (typeof childObj === 'object') {
                     if (!isNullObject(childObj)) return false;
+                } else if (Array.isArray(childObj)) {
+                    return false;
                 }
+                return true;
             }
-            return true;
         };
+
         // console.log('compare', compareObject(resumeSaved, resumeData));
         if (compareObject(resumeSaved, resumeData)) {
             onChangeEditorLayout();
@@ -130,5 +138,3 @@ const ResumeExportSelection = (props: ResumeExportSelectionProps) => {
 };
 
 export default ResumeExportSelection;
-
-
