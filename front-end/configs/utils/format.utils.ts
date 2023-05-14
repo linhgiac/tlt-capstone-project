@@ -158,7 +158,7 @@ const convertComplexSectionsToFE = (complex_sections: any) => {
         }
     }
     return {
-        sectionTypes: sectionTypes,
+        sectionType: sectionTypes,
         sectionDetails: sectionDetails,
     };
 };
