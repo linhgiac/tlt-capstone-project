@@ -6,36 +6,40 @@ import { setCookie } from 'cookies-next';
 import styles from './styles.module.scss';
 
 type ChangeLanguageItemProps = {
-    language: string
-}
+    language: string;
+};
 
 const NativeLanguageName: any = {
-    'en' : "English",
-    'de' : "German",
-    'ja' : "Japanese",
-    'fr' : 'French',
-    'vi' : 'Vietnamese'
-}
+    en: 'English',
+    de: 'German',
+    ja: 'Japanese',
+    fr: 'French',
+    vi: 'Vietnamese',
+};
 
-const ChangeLanguageItem = (props : ChangeLanguageItemProps) => {
-    const {language} = props;
+const ChangeLanguageItem = (props: ChangeLanguageItemProps) => {
+    const { language } = props;
     return (
         <div>
-            <img className={styles.flag} src={"/assets/flags/" + language +".png"}/>
+            <img
+                className={styles.flag}
+                src={'/assets/flags/' + language + '.png'}
+            />
             <span className={styles.name}>{NativeLanguageName[language]}</span>
         </div>
-    )
-}
+    );
+};
 
 type ChangeLanguageButtonProps = {
-    forceReload: boolean
-}
+    forceReload: boolean;
+    onCloseDrawer: () => void;
+};
 
 const ChangeLanguageButton = (props: ChangeLanguageButtonProps) => {
-    const {forceReload} = props;
+    const { forceReload, onCloseDrawer } = props;
     const router = useRouter();
     const onChangeLanguage: MenuProps['onClick'] = async e => {
-        console.log('click ', e);
+        onCloseDrawer();
         setCookie('language', e.key);
         if (forceReload) {
             await router.replace(router.asPath, undefined, {
@@ -50,29 +54,33 @@ const ChangeLanguageButton = (props: ChangeLanguageButtonProps) => {
             });
         }
     };
-     
+
     const menu = (
         <Menu
             onClick={onChangeLanguage}
-            items={nextI18nextConfig.i18n.locales.map((lng) => {
-                return (
-                    {
-                        key: lng,
-                        label: (
-                            <div>
-                                <ChangeLanguageItem language={lng}></ChangeLanguageItem>
-                            </div>)
-                    }
-                )
-            })}
-        ></Menu>
-    )
+            items={nextI18nextConfig.i18n.locales.map(lng => {
+                return {
+                    key: lng,
+                    label: (
+                        <div>
+                            <ChangeLanguageItem
+                                language={lng}></ChangeLanguageItem>
+                        </div>
+                    ),
+                };
+            })}></Menu>
+    );
 
     return (
-        <Dropdown overlay={menu} placement="bottomRight">
-            <img className={styles.biggerFlag} src={"/assets/flags/" + router.locale +".png"}/>
+        <Dropdown
+            overlay={menu}
+            placement="bottomRight">
+            <img
+                className={styles.biggerFlag}
+                src={'/assets/flags/' + router.locale + '.png'}
+            />
         </Dropdown>
-    )
-}
+    );
+};
 
 export default ChangeLanguageButton

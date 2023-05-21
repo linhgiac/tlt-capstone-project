@@ -15,7 +15,12 @@
     cursor: pointer;
     float: left;
     width: 120px;
-    height: 31px;
+    background-image: url('../../../../public/assets/logo.png');
+    height: 50px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    border-radius: 8px;
   }
 
   .right-header{

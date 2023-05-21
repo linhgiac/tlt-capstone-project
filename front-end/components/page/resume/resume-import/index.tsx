@@ -20,7 +20,10 @@ import {
     convertTest,
 } from '../../../../configs/utils/format.utils';
 import styles from './styles.module.scss';
-import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
+import {
+    PersonalDetailsDataType,
+    ResumeDataType,
+} from '../../../../configs/interfaces/resume.interface';
 import { ResumeConstants } from '../../../../configs/constants/resume.constants';
 import { resumeTitleValueState } from '../../../../recoil-state/resume-state/resume-title.state';
 import {
@@ -38,6 +41,11 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import html2canvas from 'html2canvas';
 import { dataUrlToFile } from '../../../../configs/utils/images.utils';
+import {
+    CheckCircleOutlined,
+    CloseCircleOutlined,
+    ExclamationCircleOutlined,
+} from '@ant-design/icons';
 
 type ResumeImportProps = {
     className?: string;
@@ -47,11 +55,12 @@ type ResumeImportProps = {
 const ResumeImport = (props: ResumeImportProps) => {
     const { t } = useTranslation();
     const { className } = props;
+    const [error, setError] = useState(false);
     const router = useRouter();
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
     const resumeChangedValue: ResumeDataType = useRecoilValue(
         resumeChangedValueState
-        );
+    );
     const resumeInfo = useRecoilValue(resumeInfoState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
     const [resumeTitle, setResumeTitle] = useRecoilState(resumeTitleValueState);
@@ -136,14 +145,29 @@ const ResumeImport = (props: ResumeImportProps) => {
             reloadData();
             setIsSuccessful(true);
             // TO-DO TVT
-            const authHeader = Object.assign(getAuthHeader(), { 'Content-Type': 'multipart/form-data' });
-            const data2ExportThumbnail: any = await document.querySelector('#pdf');
+            const authHeader = Object.assign(getAuthHeader(), {
+                'Content-Type': 'multipart/form-data',
+            });
+            const data2ExportThumbnail: any = await document.querySelector(
+                '#pdf'
+            );
             if (data2ExportThumbnail) {
                 try {
+                    const scale = data2ExportThumbnail.style.transform;
+                    console.log('scale', scale);
                     data2ExportThumbnail.style.transform = 'scale(1)';
-                    const canvas = await html2canvas(data2ExportThumbnail, {});
-                    const thumbnailBase64URL = canvas.toDataURL('image/png', 1.0);
-                    const thumbnail = await dataUrlToFile(thumbnailBase64URL, "hello.png")
+                    const canvas = await html2canvas(data2ExportThumbnail, {
+                        allowTaint: false,
+                        useCORS: true,
+                    });
+                    const thumbnailBase64URL = canvas.toDataURL(
+                        'image/png',
+                        1.0
+                    );
+                    const thumbnail = await dataUrlToFile(
+                        thumbnailBase64URL,
+                        'hello.png'
+                    );
                     const imagesUploadingResponse = await axios.put(
                         `${HOST}resume/${resumeInfo.id}/images-uploading/`,
                         { thumbnail: thumbnail },
@@ -151,12 +175,14 @@ const ResumeImport = (props: ResumeImportProps) => {
                             headers: authHeader,
                         }
                     );
+                    data2ExportThumbnail.style.transform = scale;
                 } catch (error) {
                     console.log(error);
                 }
-            }            
+            }
         } catch (error) {
             console.log('error :>> ', error);
+            setError(true);
         }
 
         // await resetChangeValue();
@@ -180,18 +206,27 @@ const ResumeImport = (props: ResumeImportProps) => {
             'complexSections.sectionDetails.skills.items'
         );
         setPersonalDetailsChangedValues(resumeSaved?.personalDetails);
+        if (resumeSaved?.image) {
+            setPersonalDetailsChangedValues(
+                (values: PersonalDetailsDataType) => {
+                    return { ...values, image: resumeSaved.image };
+                }
+            );
+        }
         setProfessionalSummaryChangedValues(resumeSaved?.professionalSummary);
         setEmploymentHistoryItems(employmentHistoriesItems);
         setEducationItems(educationsItems);
         setLinkItems(linksItems);
         setSkillItems(skillsItems);
-    }, [resumeSaved, 
-        setEducationItems, 
-        setEmploymentHistoryItems, 
-        setLinkItems, 
-        setPersonalDetailsChangedValues, 
-        setProfessionalSummaryChangedValues, 
-        setSkillItems]);
+    }, [
+        resumeSaved,
+        setEducationItems,
+        setEmploymentHistoryItems,
+        setLinkItems,
+        setPersonalDetailsChangedValues,
+        setProfessionalSummaryChangedValues,
+        setSkillItems,
+    ]);
 
     const getDataHandler = async () => {
         // const response = await fetch('/api/resume-editor');
@@ -248,27 +283,63 @@ const ResumeImport = (props: ResumeImportProps) => {
             <ResumeImportForm />
             <Button
                 className={'btn'}
+                style={{
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    paddingLeft: '25px',
+                    paddingRight: '25px',
+                    borderRadius: '8px',
+                }}
                 type="primary"
                 size="large"
                 onClick={submitFormHandler}>
-                {t('edit-save-resume', {ns: 'edit'})}
+                {t('edit-save-resume', { ns: 'edit' })}
             </Button>
             <Modal
-                title={<div> Save Successfully</div>}
+                title={
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <ExclamationCircleOutlined
+                            style={{
+                                color: 'red',
+                                fontSize: '28px',
+                                paddingRight: '5px',
+                            }}
+                        />
+                        Problem Occurred When Saving
+                    </div>
+                }
+                open={error}
+                onCancel={() => {
+                    setError(false);
+                }}
+                bodyStyle={{ height: '0px', padding: '0px' }}
+                footer={null}
+                closable
                 centered
+            />
+            <Modal
+                title={
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <CheckCircleOutlined
+                            style={{
+                                color: 'forestgreen',
+                                fontSize: '28px',
+                                paddingRight: '5px',
+                            }}
+                        />
+                        Save Successfully
+                    </div>
+                }
                 open={isSuccessful}
                 onCancel={() => {
                     setIsSuccessful(false);
                     router.reload();
                 }}
-                footer={null}></Modal>
-            {/* <Button
-                className={'btn'}
-                type="primary"
-                size="large"
-                onClick={getDataHandler}>
-                Get Resume Data
-            </Button> */}
+                bodyStyle={{ height: '0px', padding: '0px' }}
+                footer={null}
+                closable
+                centered
+            />
         </div>
     );
 };

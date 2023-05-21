@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import classNames from 'classnames';
@@ -7,12 +8,12 @@ import React, { useEffect } from 'react';
 import styles from './styles.module.scss';
 import AccountForm from '../../components/page/account/account-form';
 import { HOST, LAYOUT } from '../../configs/constants/misc';
-import { MOCKED_USER } from '../../mock/user.mock';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil-state/user-state/user-state';
 import { getAuthHeader } from '../../configs/restApi/clients';
 import axios from 'axios';
 import { convertProfileResponse } from '../../configs/utils/format.utils';
+import Head from 'next/head';
 
 type AccountSettingsProps = {
     userData: any;
@@ -32,8 +33,12 @@ const AccountSettings = (props: AccountSettingsProps) => {
                 backgroundColor: 'rgb(239, 242, 249)',
                 display: 'flex',
                 justifyContent: 'center',
-            }}
-        >
+            }}>
+            <Head>
+                <title>
+                    Account Settings 
+                </title>
+            </Head>
             <div className={classNames(styles['setting__container'])}>
                 <div className={classNames(styles['setting-title'])}>
                     Account Settings

@@ -24,37 +24,37 @@ const ResumeImportForm = (props: Props) => {
     const { className } = props;
 
     return (
-            <div>
-                <PersonalDetailsImport
-                    className="p-b-20"
-                    defaultTitle="Personal Details"
-                />
-                <ProfessionalSummaryImport
-                    className="p-b-20"
-                    defaultTitle="Professional Summary"
-                />
-                <EmploymentHistoryImport
-                    className="p-b-20"
-                    defaultTitle="Employment History"
-                    sectionType="employmentHistories"
-                />
-                <EducationImport
-                    className="p-b-20"
-                    defaultTitle="Education"
-                    sectionType="educations"
-                />
-                <LinkImport
+        <div>
+            <PersonalDetailsImport
+                className="p-b-20"
+                defaultTitle="Personal Details"
+            />
+            <ProfessionalSummaryImport
+                className="p-b-20"
+                defaultTitle="Professional Summary"
+            />
+            <EmploymentHistoryImport
+                className="p-b-20"
+                defaultTitle="Employment History"
+                sectionType="employmentHistories"
+            />
+            <EducationImport
+                className="p-b-20"
+                defaultTitle="Education"
+                sectionType="educations"
+            />
+            {/* <LinkImport
                     className="p-b-20"
                     defaultTitle="Website & Social Links"
                     sectionType="links"
-                />
+                /> */}
 
-                <SkillImport
-                    className="p-b-20"
-                    defaultTitle="Skills"
-                    sectionType="skills"
-                />
-            </div>
+            <SkillImport
+                className="p-b-20"
+                defaultTitle="Skills"
+                sectionType="skills"
+            />
+        </div>
     );
 };
 

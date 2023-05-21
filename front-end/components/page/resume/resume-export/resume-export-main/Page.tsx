@@ -12,11 +12,12 @@ type Props = {
 };
 
 const Page = (props: Props) => {
-    const { className, scale } = props;
+    const { className, scale = 1 } = props;
     const resumeInfo = useRecoilValue(resumeInfoState);
 
     return (
-        <div id={'pdf'}>
+        // <div id={'pdf'}>
+        <div >
             <TemplateMap
                 id={resumeInfo.template}
                 scale={scale}

@@ -28,13 +28,18 @@ const DownloadButton = (props: Props) => {
         // const windowWidth = data.getBoundingClientRect().width;
         if (data) {
             try {
-                // data.style.transform = 'scale(1)';
-                const canvas = await html2canvas(data, {});
+                const scale = data.style.transform;
+                data.style.transform = 'scale(1)';
+                const canvas = await html2canvas(data, {
+                    allowTaint: false,
+                    useCORS: true,
+                });
                 const imgData = canvas.toDataURL('image/png', 1.0);
                 const pdf = new jsPDF('p', 'mm', 'a4');
                 pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
                 pdf.save(`${resume.title}.pdf`);
-                data.style.removeProperty('transform');
+                data.style.transform = scale;
+                // data.style.removeProperty('transform');
             } catch (error) {
                 console.log(error);
             }
@@ -75,6 +80,13 @@ const DownloadButton = (props: Props) => {
                 </Button>
             ) : (
                 <Button
+                    style={{
+                        fontSize: '14px',
+                        fontWeight: 600,
+                        paddingLeft: '25px',
+                        paddingRight: '25px',
+                        borderRadius: '8px',
+                    }}
                     type="primary"
                     size="large"
                     onClick={downloadHandler}>

@@ -9,8 +9,8 @@ type ResumeExportMainProps = {
 const ResumeExportMain = (props: ResumeExportMainProps) => {
     const { className } = props;
     const [resumeExportContainerSize, setResumeExportContainerSize] = useState({
-        width: 0,
-        height: 0,
+        width: 436,
+        height: 617,
     });
     const [scale, setScale] = useState(0.55);
 
@@ -18,7 +18,6 @@ const ResumeExportMain = (props: ResumeExportMainProps) => {
         function handleResumeExportContainerResize() {
             const resumeExportContainer =
                 document.getElementById('resume-export-main');
-            console.log('resumeexport-container', resumeExportContainer);
             if (resumeExportContainer) {
                 setResumeExportContainerSize({
                     width: resumeExportContainer.offsetWidth,
@@ -39,7 +38,6 @@ const ResumeExportMain = (props: ResumeExportMainProps) => {
 
     useEffect(() => {
         setScale(resumeExportContainerSize.height / 1122);
-        console.log('resumeexport', resumeExportContainerSize);
     }, [resumeExportContainerSize]);
     return (
         <div

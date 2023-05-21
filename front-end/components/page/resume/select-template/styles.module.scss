@@ -1,4 +1,4 @@
-
+@import '../../../../styles/responsive.scss';
 
 .header{
   background-color: #000;
@@ -29,7 +29,7 @@
   height: 100vh;
   position: fixed;
   inset: 0px;
-  z-index: 999;
+  z-index: 100;
 }
 .layout{
   background-color: #495163;
@@ -45,6 +45,7 @@
     // border-right: #fff 1px solid;
     // padding: 30px;
     // padding-top: 90px;
+   
     
   }
   .template-list{
@@ -54,6 +55,30 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     overflow-y: auto;
+    @include mini-desktop{
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  
+  .footer-template-list{
+    // padding-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    // grid-template-columns: fit-content(100%);
+    // grid-auto-flow: column;
+    @include mobile{
+      grid-template-columns: repeat(1, 1fr);
+    }
+    gap: 20px;
+    overflow-y: auto;
+    .item{
+      width: 100%;
+      // height: 100%;
+      .thumbnail {
+        // width: auto;
+        // height: 100%;
+      }
+    }
   }
   .resume{
     float: right;
@@ -73,10 +98,47 @@
       padding-top: 20px;
       height: 1072px;
       overflow: hidden;
+
     }
-    
+   
   }
 }
+ .resume-option{
+display: none;
+  @include tablet{
+
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    left: 0px;
+    right: 0;
+    height: 30%;
+    background-color: #000;
+    display: flex;
+    flex-direction: row;
+  }
+    }
+
+.select-template-footer{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  .select-template-footer__content{
+    padding: 10px 15px;
+    overflow-y: auto;
+    width: 100%;
+
+  }
+  .select-template-footer__title{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+  }
+}    
 .item{
   cursor: pointer;
   .name{
@@ -85,7 +147,10 @@
     font-size: 16px;
   }
   .thumbnail{
-    background-color: #fff;
+    @include mobile{
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 

@@ -8,6 +8,8 @@ import styles from '../styles.module.scss';
 import { HOST } from '../../../../configs/constants/misc';
 import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { useEffect, useState } from 'react';
+import html2canvas from 'html2canvas';
+import { dataUrlToFile } from '../../../../configs/utils/images.utils';
 
 type DashboardContainerProps = {
     data: DashboardItemType[];
@@ -54,6 +56,7 @@ const DashboardContainer = (props: DashboardContainerProps) => {
     //     }
     //     return children;
     // };
+   
     const deleteHandler = async (id: number) => {
         try {
             const response = await axios.delete(`${HOST}resume/${id}/delete/`, {
@@ -86,7 +89,6 @@ const DashboardContainer = (props: DashboardContainerProps) => {
         <div className={classNames(styles['dashboard-container'])}>
             {itemList.map((item: any, index: number) => (
                 <DashboardItem
-                    className={classNames('w-50')}
                     key={index}
                     item={item}
                     onDelete={deleteHandler}

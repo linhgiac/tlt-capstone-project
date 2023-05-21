@@ -59,14 +59,14 @@ const DashboardItem = (props: DashboardItemProps) => {
     };
     return (
         <div
-            style={{ display: 'inline-block' }}
+            // style={{ display: 'inline-block' }}
             className={classNames(className)}>
             <div className={classNames(styles['dashboard-item'])}>
                 <div
                     // size="large"
                     onClick={editHandler}
                     className={classNames(styles['dashboard-item-preview'])}>
-                    <Image
+                    <img
                         src={item?.thumbnail}
                         width={225}
                         height={321}
@@ -77,8 +77,12 @@ const DashboardItem = (props: DashboardItemProps) => {
                         editable={false}
                         title={item.title}></ResumeTitle>
                     {/* <div className={classNames(styles['dashboard-item-lastupdated'])}>Updated {item.lastUpdated}</div> */}
-                    <div className={styles['dashboard-item-date']}>Created {item.createdAt}</div>
-                    <div className={styles['dashboard-item-date']}>Updated {item.updatedAt}</div>
+                    <div className={styles['dashboard-item-date']}>
+                        Created {item.createdAt}
+                    </div>
+                    <div className={styles['dashboard-item-date']}>
+                        Updated {item.updatedAt}
+                    </div>
                     <div
                         className={classNames(
                             styles['dashboard-item-button-list']
@@ -89,23 +93,44 @@ const DashboardItem = (props: DashboardItemProps) => {
                             className={classNames(
                                 styles['dashboard-item-button']
                             )}
-                            icon={<EditOutlined />}
+                            icon={
+                                <EditOutlined
+                                    style={{
+                                        color: '#1890ff',
+                                        fontSize: '18px',
+                                    }}
+                                />
+                            }
                             onClick={editHandler}>
-                            {t('dashboard-edit', {ns: 'dashboard'})}
+                            {t('dashboard-edit', { ns: 'dashboard' })}
                         </Button>
                         <Button
                             size="large"
-                            icon={<CopyOutlined />}
+                            icon={
+                                <CopyOutlined
+                                    style={{
+                                        color: '#1890ff',
+                                        fontSize: '18px',
+                                    }}
+                                />
+                            }
                             type="text"
                             className={classNames(
                                 styles['dashboard-item-button']
                             )}
                             onClick={duplicateItemHandler}>
-                            {t('dashboard-duplicate', {ns: 'dashboard'})}
+                            {t('dashboard-duplicate', { ns: 'dashboard' })}
                         </Button>
                         <Button
                             size="large"
-                            icon={<DeleteOutlined />}
+                            icon={
+                                <DeleteOutlined
+                                    style={{
+                                        color: '#1890ff',
+                                        fontSize: '18px',
+                                    }}
+                                />
+                            }
                             type="text"
                             className={classNames(
                                 styles['dashboard-item-button']
@@ -113,15 +138,29 @@ const DashboardItem = (props: DashboardItemProps) => {
                             onClick={() => {
                                 setIsModalOpened(true);
                             }}>
-                            {t('dashboard-delete', {ns: 'dashboard'})}
+                            {t('dashboard-delete', { ns: 'dashboard' })}
                         </Button>
                         <PopupModal
-                            title={t('dashboard-delete-title', {ns: 'dashboard'})}
-                            description={t('dashboard-delete-description', {ns: 'dashboard'}) as string}
+                            title={t('dashboard-delete-title', {
+                                ns: 'dashboard',
+                            })}
+                            description={
+                                t('dashboard-delete-description', {
+                                    ns: 'dashboard',
+                                }) as string
+                            }
                             type={'confirm'}
                             visible={isModalOpened}
-                            okText={t('dashboard-delete-text', {ns: 'dashboard'}) as string}
-                            cancelText={t('dashboard-cancel-text', {ns: 'dashboard'}) as string}
+                            okText={
+                                t('dashboard-delete-text', {
+                                    ns: 'dashboard',
+                                }) as string
+                            }
+                            cancelText={
+                                t('dashboard-cancel-text', {
+                                    ns: 'dashboard',
+                                }) as string
+                            }
                             onCancel={() => {
                                 setIsModalOpened(false);
                             }}

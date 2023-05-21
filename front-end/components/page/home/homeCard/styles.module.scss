@@ -1,8 +1,13 @@
 @import '../../../../styles//variables.scss';
+@import '../../../../styles/responsive.scss';
+
 
 .home-card-container{
   background-color: $background-color;
-  padding: 80px 160px;
+  padding: 80px 50px;
+  @include tablet{
+    padding: 80px 20px;
+  }
   .home-card-main{
     display: flex;
     // width: 770px;
@@ -12,7 +17,7 @@
     padding-top: 70px;
     .home-card-main__title{
       text-align: center;
-      width: 770px;
+      max-width: 770px;
       padding: 0px 50px;
     }
     .title{
@@ -20,6 +25,7 @@
     }
     .description{
       font-size: 19px;
+      max-width: 600px;
     }
     
   }

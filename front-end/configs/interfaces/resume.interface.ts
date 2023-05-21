@@ -4,6 +4,9 @@ export type ResumeDataType = {
     id?: number;
     title?: string;
     template?: number;
+    layout?: ResumeLayoutType;
+    image?: string;
+    thumbnail?: string;
     personalDetails?: PersonalDetailsDataType;
     professionalSummary?: ProfessionalSummaryDataType;
     complexSections?: ComplexSectionDataType;
@@ -11,10 +14,15 @@ export type ResumeDataType = {
 export type ResumeInfoType = {
     id?: number;
     template?: number;
+    layout?: ResumeLayoutType;
+    image?: string;
+    thumbnail?: string;
 };
 export type PersonalDetailsDataType = {
     id?: number;
+    position?: number;
     header?: string;
+    image?: string;
     jobTitle?: string;
     firstName?: string;
     lastName?: string;
@@ -31,6 +39,7 @@ export type PersonalDetailsDataType = {
 export type ProfessionalSummaryDataType = {
     id?: number;
     header?: string;
+    position?: number;
     content?: string;
 };
 

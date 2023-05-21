@@ -4,6 +4,10 @@ import React, { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { ComplexSection } from '../../configs/interfaces/resume.interface';
 import { resumeChangedValueState } from '../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
+import {
+    resumeLayoutState,
+    resumeSelectedPageIndexState,
+} from '../../recoil-state/resume-state/resume.state';
 import styles from './styles.module.scss';
 import Masthead from './widgets/masthead/Masthead';
 import Section from './widgets/section/Section';
@@ -11,40 +15,66 @@ import Section from './widgets/section/Section';
 type Props = {};
 
 const Template01 = (props: Props) => {
-    const layout = [
-        'employmentHistories',
-        'skills',
-        'educations',
-    ] as ComplexSection[];
     const resumeData = useRecoilValue(resumeChangedValueState);
     const { personalDetails, professionalSummary, complexSections } =
         resumeData;
+    const pageIndex = useRecoilValue(resumeSelectedPageIndexState);
+    const resumeLayout = useRecoilValue(resumeLayoutState);
     const masthead = { personalDetails, professionalSummary };
+
     return (
         <div className={classNames('cv-format', styles.container)}>
-            <div className={styles['masthead']}>
-                <Masthead value={masthead} />
-            </div>
+            {pageIndex === 0 && (
+                <div className={styles['masthead']}>
+                    <Masthead value={masthead} />
+                </div>
+            )}
 
-            {layout.map(sectionType => {
-                if (complexSections?.sectionType.includes(sectionType)) {
+            {resumeLayout[pageIndex]['main'].map((type: any) => {
+                if (complexSections?.sectionType.includes(type)) {
                     const header = get(
                         complexSections,
-                        `sectionDetails.${sectionType}.header`
+                        `sectionDetails.${type}.header`
                     );
                     const items = get(
                         complexSections,
-                        `sectionDetails.${sectionType}.items`
+                        `sectionDetails.${type}.items`
                     );
                     const isShownLevel = get(
                         complexSections,
-                        `sectionDetails.${sectionType}.isShownLevel`
+                        `sectionDetails.${type}.isShownLevel`
                     );
 
                     return (
                         <Section
-                            key={sectionType}
-                            sectionType={sectionType}
+                            key={type}
+                            sectionType={type}
+                            header={header}
+                            items={items}
+                            isShown={isShownLevel}
+                        />
+                    );
+                }
+            })}
+            {resumeLayout[pageIndex]['sidebar'].map((type: any) => {
+                if (complexSections?.sectionType.includes(type)) {
+                    const header = get(
+                        complexSections,
+                        `sectionDetails.${type}.header`
+                    );
+                    const items = get(
+                        complexSections,
+                        `sectionDetails.${type}.items`
+                    );
+                    const isShownLevel = get(
+                        complexSections,
+                        `sectionDetails.${type}.isShownLevel`
+                    );
+
+                    return (
+                        <Section
+                            key={type}
+                            sectionType={type}
                             header={header}
                             items={items}
                             isShown={isShownLevel}

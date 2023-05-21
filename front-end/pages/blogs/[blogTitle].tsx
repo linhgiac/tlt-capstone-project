@@ -6,6 +6,7 @@ import { Layout } from 'antd';
 import { BlogMenu, VerticalBanner, BlogAsideAction } from '../../components/page/blogs';
 import styles from './styles.module.scss';
 import Content from '../../components/page/blogs/contents';
+import Head from 'next/head';
 
 const { Sider, Content: AntdContent } = Layout;
 
@@ -14,9 +15,13 @@ const Blogs: React.FC = () => {
     const blogPath = last(router.asPath.split('/'));
 
     return (
-        <Layout
-        >
+        <Layout className={styles['container']}>
+            <Head>
+                <title>Blogs</title>
+            </Head>
             <Sider
+                breakpoint="lg"
+                collapsedWidth="0"
                 width={'20%'}
                 style={{
                     overflow: 'auto',
@@ -25,15 +30,16 @@ const Blogs: React.FC = () => {
                     left: 0,
                     top: 70,
                     bottom: 0,
-                }}
-            >
+                }}>
                 <BlogMenu />
             </Sider>
-            <AntdContent className={styles["content"]}>
+            <AntdContent className={styles['content']}>
                 {blogPath && <Content blogTitle={blogPath} />}
             </AntdContent>
             <Sider
-                className={styles["right-sidebar"]}
+                className={styles['right-sidebar']}
+                breakpoint="lg"
+                collapsedWidth="0"
                 width={'25%'}
                 style={{
                     backgroundColor: 'white',
@@ -43,16 +49,19 @@ const Blogs: React.FC = () => {
                     right: 0,
                     top: 70,
                     bottom: 0,
-
-                }}
-            >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}>
                     <VerticalBanner />
                     <BlogAsideAction />
                 </div>
             </Sider>
         </Layout>
-    )
+    );
 };
 
 export default Blogs;

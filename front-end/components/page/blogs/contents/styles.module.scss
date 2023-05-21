@@ -1,6 +1,9 @@
+@import '../../../../styles/responsive.scss';
+
 .title {
     margin-bottom: 40px;
     font-size: 28px;
+    font-weight: 600;
 }
 
 .heading {
@@ -12,7 +15,7 @@
 
 .para {
     margin-bottom: 16px;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.2;
 }
 
@@ -48,4 +51,11 @@
 
 .strong-font {
     font-weight: 700;
+}
+
+.blog-menu__tablet{
+    display: none;
+    @include tablet{
+        display: block;
+    }
 }

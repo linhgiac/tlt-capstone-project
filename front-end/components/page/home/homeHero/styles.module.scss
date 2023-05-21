@@ -1,4 +1,6 @@
 @import '../../../../styles//variables.scss';
+@import '../../../../styles/responsive.scss';
+
 
     .home-hero-container{
       padding-bottom: 0px !important;
@@ -10,6 +12,14 @@
       // background-color: #fff;
       background-image: url(../../../../public/assets/HomePage.png);
       background-size: cover;
+      @include tablet{
+        width: 577.5px;
+        height: 300px;
+      }
+      @include mobile{
+        width: 385px;
+        height: 200px;
+      }
     }
     .button{
       height: 60px;

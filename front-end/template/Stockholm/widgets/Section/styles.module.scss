@@ -1,0 +1,20 @@
+.container{
+  padding: 10px 0px;
+  .header{
+    font-weight: 600;
+    font-size: 22px;
+    // padding: 5px 0px;
+  }
+  .item{
+    padding: 5px 0px;
+    padding-left: 26px;
+    text-align: justify;
+  }
+  .item-header{
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .item-date{
+    color: #8a8a8a
+  }
+}

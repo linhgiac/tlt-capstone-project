@@ -12,32 +12,35 @@ const TemplateCategoryTabs = (props: TemplateCategoryButtonProps) => {
     const { activeKey, onChange } = props;
     const { t } = useTranslation();
     return (
-        <Tabs
-            activeKey={activeKey}
-            onChange={onChange}
-            items={[
-                {
-                    label: t('template-all-tab', {ns: 'template'}),
-                    key: 'all',
-                },
-                {
-                    label:  t('template-creative-tab', {ns: 'template'}),
-                    key: 'creative',
-                },
-                {
-                    label:  t('template-simple-tab', {ns: 'template'}),
-                    key: 'simple',
-                },
-                {
-                    label: t('template-professional-tab', {ns: 'template'}),
-                    key: 'professional',
-                },
-                {
-                    label: t('template-modern-tab', {ns: 'template'}),
-                    key: 'modern',
-                },
-            ]}>
-        </Tabs>
+        <div style={{ width: '100%' }}>
+            <Tabs
+                activeKey={activeKey}
+                onChange={onChange}
+                items={[
+                    {
+                        label: t('template-all-tab', { ns: 'template' }),
+                        key: 'all',
+                    },
+                    {
+                        label: t('template-creative-tab', { ns: 'template' }),
+                        key: 'creative',
+                    },
+                    {
+                        label: t('template-simple-tab', { ns: 'template' }),
+                        key: 'simple',
+                    },
+                    {
+                        label: t('template-professional-tab', {
+                            ns: 'template',
+                        }),
+                        key: 'professional',
+                    },
+                    {
+                        label: t('template-modern-tab', { ns: 'template' }),
+                        key: 'modern',
+                    },
+                ]}></Tabs>
+        </div>
     );
 };
 

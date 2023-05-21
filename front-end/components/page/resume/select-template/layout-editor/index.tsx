@@ -31,7 +31,6 @@ const LayoutEditor = (props: Props) => {
             ...removedPages['main'],
             ...removedPages['sidebar'],
         ];
-        console.log('newpages', newPages.slice(0));
         setPages([
             { main: newFirstMain, sidebar: newFirstSidebar },
             ...newPages.slice(1),

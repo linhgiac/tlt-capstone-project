@@ -4,12 +4,16 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import styles from '../styles.module.scss';
 
-type Props = {};
+type Props = {
+    onCloseDrawer: () => void;
+};
 
 const LoginButton = (props: Props) => {
     const router = useRouter();
     return (
-        <div>
+        <div
+            className={styles['login-button__container']}
+            onClick={props.onCloseDrawer}>
             <Button
                 className={classNames(
                     'm-l-8',

@@ -19,10 +19,12 @@ import { convertProfileResponse } from '../../../../../configs/utils/format.util
 
 type HeaderButtonProps = {
     className: string;
+    isInline: boolean;
+    onCloseDrawer: () => void;
 };
 
 const HeaderButton = (props: HeaderButtonProps) => {
-    const { className } = props;
+    const { className, isInline, onCloseDrawer } = props;
     const [isLogged, setIsLogged] = useRecoilState(userLoginState);
     const [user, setUser] = useRecoilState(userState);
     const [isLoading, setIsLoading] = useState(false);
@@ -42,14 +44,12 @@ const HeaderButton = (props: HeaderButtonProps) => {
                         headers: headers,
                     })
                     .then((response: any) => {
-                        console.log('user response', response);
                         setUser(convertProfileResponse(response.data));
                     });
             } catch (error: any) {
                 console.log('error', error);
             }
         }
-        
     }, [isLogged, setUser]);
 
     const logoutHandler = async () => {
@@ -64,10 +64,11 @@ const HeaderButton = (props: HeaderButtonProps) => {
                     headers: headers,
                 }
             );
+            router.push('/');
             deleteCookie('accessToken');
             deleteCookie('refreshToken');
-            router.push('/');
-            router.reload();
+            setIsLogged(false);
+            // router.reload();
         } catch (error) {}
         setIsLoading(false);
     };
@@ -75,9 +76,13 @@ const HeaderButton = (props: HeaderButtonProps) => {
     return (
         <div className={classNames(className)}>
             {!isLogged ? (
-                <LoginButton />
+                <LoginButton onCloseDrawer={onCloseDrawer} />
             ) : (
-                <LoggedButton onLogout={logoutHandler} />
+                <LoggedButton
+                    isInline={isInline}
+                    onLogout={logoutHandler}
+                    onCloseDrawer={onCloseDrawer}
+                />
             )}
         </div>
     );

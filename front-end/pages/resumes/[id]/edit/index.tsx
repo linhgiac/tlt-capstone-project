@@ -9,10 +9,15 @@ import styles from './styles.module.scss';
 
 import ResumeExport from '../../../../components/page/resume/resume-export';
 import ResumeImport from '../../../../components/page/resume/resume-import';
-import { ResumeDataType } from '../../../../configs/interfaces/resume.interface';
-import { MOCKED_RESUME } from '../../../../mock/resume.mock';
+import {
+    PersonalDetailsDataType,
+    ResumeDataType,
+} from '../../../../configs/interfaces/resume.interface';
 import { HOST, LAYOUT } from '../../../../configs/constants/misc';
-import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
+import {
+    resumeLayoutState,
+    resumeSavedState,
+} from '../../../../recoil-state/resume-state/resume.state';
 import {
     personalDetailChangedValueState,
     professionalSummaryChangedValueState,
@@ -38,6 +43,8 @@ import { userLoginState } from '../../../../recoil-state/user-state/user-state';
 import { hasCookie } from 'cookies-next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import classNames from 'classnames';
+import { FileTextOutlined } from '@ant-design/icons';
+import Head from 'next/head';
 
 type ResumeEditorProps = {
     initialResumeData: ResumeDataType;
@@ -47,7 +54,6 @@ type ResumeEditorProps = {
 
 const ResumeEditor = (props: ResumeEditorProps) => {
     const { initialResumeData, templateList, error } = props;
-    console.log('initialResumeData :>> ', initialResumeData);
 
     const isLogged = useRecoilValue(userLoginState);
     const [resumeSaved, setResumeSaved] = useRecoilState(resumeSavedState);
@@ -55,6 +61,8 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     const resumeData = useRecoilValue(resumeChangedValueState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
     const setResumeTitle = useSetRecoilState(resumeTitleValueState);
+    const setResumeLayout = useSetRecoilState(resumeLayoutState);
+
     const setPersonalDetailsChangedValues = useSetRecoilState(
         personalDetailChangedValueState
     );
@@ -88,9 +96,6 @@ const ResumeEditor = (props: ResumeEditorProps) => {
         }
     }, [error, initialResumeData, router]);
 
-    useEffect(() => {
-        console.log('resumeData', resumeData);
-    }, [resumeData]);
 
     useEffect(() => {
         setResumeInfo({
@@ -100,11 +105,37 @@ const ResumeEditor = (props: ResumeEditorProps) => {
         setResumeTitle(
             initialResumeData?.title ? initialResumeData?.title : 'Untitled'
         );
-    }, [initialResumeData, setResumeInfo, setResumeSaved, setResumeTitle]);
+        setResumeLayout(
+            initialResumeData?.layout
+                ? initialResumeData?.layout
+                : [
+                      {
+                          main: ['employmentHistories', 'educations'],
+                          sidebar: ['skills'],
+                      },
+                  ]
+        );
+    }, [
+        initialResumeData,
+        setResumeInfo,
+        setResumeLayout,
+        setResumeSaved,
+        setResumeTitle,
+    ]);
 
     useEffect(() => {
         if (!isEmpty(initialResumeData?.personalDetails)) {
             setPersonalDetailsChangedValues(initialResumeData?.personalDetails);
+        }
+        if (initialResumeData?.image) {
+            setPersonalDetailsChangedValues(
+                (values: PersonalDetailsDataType) => {
+                    return {
+                        ...values,
+                        image: initialResumeData.image,
+                    };
+                }
+            );
         }
         if (!isEmpty(initialResumeData?.professionalSummary)) {
             setProfessionalSummaryChangedValues(
@@ -223,20 +254,30 @@ const ResumeEditor = (props: ResumeEditorProps) => {
     };
     return (
         <>
+            <Head>
+                <title>Editor | {`${resumeData.title}`}</title>
+            </Head>
             {isEditing ? (
                 <div className="flex-row">
                     <ResumeImport
-                        className={classNames(
-                            'w-50 p-48',
-                            styles['resume-import']
-                        )}
+                        className={classNames(styles['resume-import'])}
 
                         // initialResume={resumeSaved}
                     />
                     <ResumeExport
-                        className="w-50"
+                        className={classNames(styles['resume-export'])}
                         onChangeLayout={changeLayoutHandler}
                     />
+                    <Button
+                        type="text"
+                        shape="round"
+                        size="large"
+                        style={{ height: '50px', fontWeight: '600' }}
+                        icon={<FileTextOutlined />}
+                        onClick={changeLayoutHandler}
+                        className={styles['preview-btn']}>
+                        Preview & Download
+                    </Button>
                 </div>
             ) : (
                 <TemplateSelector
@@ -265,17 +306,16 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                 'Content-Type': 'application/json',
             },
         });
-        console.log('response :>> ', templates.data);
         const headers = getAuthHeader({ req, res });
         const resume = await axios.get(`${HOST}resume/${resumeId}/`, {
             headers: headers,
         });
-        const {locale} = ctx
+        const { locale } = ctx;
         return {
             props: {
                 ...defaultReturnProps,
                 // initialResumeData: MOCKED_RESUME,
-                ...await serverSideTranslations(locale as string, ['edit']),
+                ...(await serverSideTranslations(locale as string, ['edit'])),
                 templateList: templates.data,
                 initialResumeData: convertResumeResponse(resume.data),
             },

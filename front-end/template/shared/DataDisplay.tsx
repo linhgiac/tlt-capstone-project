@@ -35,8 +35,7 @@ const DataDisplay: React.FC<React.PropsWithChildren<Props>> = ({
 
     return (
         <div className={classNames(className)}>
-            {icon}
-            <span className={textClassName}>{children}</span>
+            {icon} {children}
         </div>
     );
 };

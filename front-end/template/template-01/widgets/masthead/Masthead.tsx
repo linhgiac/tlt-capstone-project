@@ -27,7 +27,7 @@ const Masthead = (props: Props) => {
                 <Divide />
             </div>
             <div>
-                <div
+                <DataDisplay
                     className={classNames(
                         styles['info'],
                         'flex-row',
@@ -36,18 +36,31 @@ const Masthead = (props: Props) => {
                     <DataDisplay>{personalDetails?.phone}</DataDisplay>
                     <DataDisplay>{personalDetails?.email}</DataDisplay>
                     <DataDisplay>
-                        {personalDetails?.address}, {personalDetails?.city},{' '}
+                        {personalDetails?.address && (
+                            <span>{personalDetails?.address},</span>
+                        )}
+                        {personalDetails?.city && (
+                            <span>{personalDetails?.city},</span>
+                        )}
                         {personalDetails?.country}
                     </DataDisplay>
                     <DataDisplay>{personalDetails?.nationality}</DataDisplay>
                     <DataDisplay>{personalDetails?.placeOfBirth}</DataDisplay>
                     <DataDisplay>{personalDetails?.dateOfBirth}</DataDisplay>
-                </div>
+                </DataDisplay>
             </div>
             <div>
-                <Divide />
-                <DataDisplay className={styles.header}>{professionalSummary?.header}</DataDisplay>
-                <DataDisplay className={styles.content}>{professionalSummary?.content}</DataDisplay>
+                {professionalSummary?.content && (
+                    <DataDisplay>
+                        <Divide />
+                        <DataDisplay className={styles.header}>
+                            {professionalSummary?.header}
+                        </DataDisplay>
+                        <DataDisplay className={styles.content}>
+                            {professionalSummary?.content}
+                        </DataDisplay>
+                    </DataDisplay>
+                )}
             </div>
         </div>
     );
