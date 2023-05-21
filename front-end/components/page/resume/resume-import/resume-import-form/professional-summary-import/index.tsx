@@ -73,7 +73,6 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     const getSuggestions = async (
         suggestionMode: ProfessionalSummarySuggestionMode
     ) => {
-        return;
         setIsLoading(true);
         const currentRequestId = Date.now();
         setRequestId(currentRequestId);
@@ -151,7 +150,7 @@ function ProfessionalSummaryImport(props: ProfessionalSummaryImportProps) {
     }, []);
 
     useEffect(() => {
-        if (lastCheckTypingTicks - lastTypingTicks > 5000 && !isStopTyping) {
+        if (lastCheckTypingTicks - lastTypingTicks > 2000 && !isStopTyping) {
             setIsStopTyping(true);
             getSuggestions(suggestionMode);
         }
