@@ -195,13 +195,13 @@ const Dashboard = (props: DashboardProps) => {
             <div className={classNames(styles['dashboard-header'])}>
                 <h1>{t('dashboard-header', { ns: 'dashboard' })}</h1>
                 <div>
-                    {false && <Button
+                    <Button
                         className={styles.button}
                         size="large"
                         onClick={() => setIsImportModalOpen(true)}
                         style={{ marginRight: '10px' }}>
                         {t('dashboard-import', { ns: 'dashboard' })}
-                    </Button>}
+                    </Button>
                     <Button
                         className={styles.button}
                         type="primary"
