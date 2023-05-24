@@ -1,5 +1,5 @@
 export type JobQueryType = {
-    jobTitle: string,
+    job_title: string,
     location: string,
     keywords?: string[],
     jobPortal?: string,

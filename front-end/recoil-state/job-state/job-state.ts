@@ -8,9 +8,9 @@ export const jobPostingsState = atom<any>({
 });
 
 export const jobQueryState = atom<JobQueryType>({
-    key: "jobQueryState",
+    key: 'jobQueryState',
     default: {
-        jobTitle: DEFAULT_JOB_TITLE_INPUT,
-        location: DEFAULT_LOCATION_INPUT
-    }
+        job_title: '',
+        location: '',
+    },
 });

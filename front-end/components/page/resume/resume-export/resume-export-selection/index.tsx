@@ -21,9 +21,6 @@ const ResumeExportSelection = (props: ResumeExportSelectionProps) => {
     const [isSavedWarning, setIsSaveWarning] = useState(false);
 
     const clickHandler = async () => {
-        console.log('resumeSaved', resumeSaved);
-        console.log('resumeeee', resumeData);
-
         const compareObject = (obj: any, other: any): boolean => {
             const keys = Array.from(
                 new Set(Object.keys(obj).concat(Object.keys(other)))

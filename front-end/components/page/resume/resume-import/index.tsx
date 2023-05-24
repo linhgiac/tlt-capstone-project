@@ -34,7 +34,7 @@ import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { HOST } from '../../../../configs/constants/misc';
 import axios from 'axios';
 import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
-import { get } from 'lodash';
+import { get, kebabCase } from 'lodash';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import html2canvas from 'html2canvas';
@@ -310,9 +310,10 @@ const ResumeImport = (props: ResumeImportProps) => {
                 onClick={() => {
                     setIsSeekingJob(true);
                     jobSeekingForm.setFieldValue(
-                        'jobTitle',
+                        'job_title',
                         personalDetailsChangedValues.jobTitle
                     );
+                    jobSeekingForm.setFieldValue('location', 'ho-chi-minh');
                 }}>
                 Job Seeking
             </Button>
@@ -341,20 +342,29 @@ const ResumeImport = (props: ResumeImportProps) => {
                     form={jobSeekingForm}
                     onFinish={(values: any) => {
                         console.log('seeking job:', values);
+                        router.push({
+                            pathname: '/job-postings/[search]',
+                            query: {
+                                search: `${kebabCase(values.job_title)}_${
+                                    values.location
+                                }`,
+                            },
+                        });
                     }}>
                     <Form.Item
-                        name="jobTitle"
+                        name="job_title"
                         label={<div style={{ color: '#000' }}>Job Title</div>}>
                         <Input disabled />
                     </Form.Item>
                     <Form.Item
+                        required
                         name="location"
+                        initialValue="ho-chi-minh"
                         label={<div style={{ color: '#000' }}>Location</div>}>
                         <Radio.Group>
-                            <Radio value="all"> All </Radio>
-                            <Radio value="hanoi"> Ha Noi </Radio>
-                            <Radio value="danang"> Da Nang </Radio>
-                            <Radio value="hochiminh"> Ho Chi Minh </Radio>
+                            <Radio value="ha-noi"> Ha Noi </Radio>
+                            <Radio value="da-nang"> Da Nang </Radio>
+                            <Radio value="ho-chi-minh"> Ho Chi Minh </Radio>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

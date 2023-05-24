@@ -5,17 +5,19 @@ import type { InputRef } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 import styles from "./styles.module.scss";
+import { JOB_DATA } from '../../../../configs/constants/job.constants';
 
 type FilterModalContentProps = {
-    handleFilterModalCancel: () => void,
+    onFilterJob: (value: any) => void;
 };
 
 const FilterModalContent = (props: FilterModalContentProps) => {
-    const { handleFilterModalCancel } = props;
+    const { onFilterJob } = props;
     /*
         KEY WORDS HANDLING
     */
     const [tags, setTags] = useState<string[]>([]);
+    const [loading, setLoading] = useState(false);
     const [inputVisible, setInputVisible] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [editInputIndex, setEditInputIndex] = useState(-1);
@@ -33,6 +35,24 @@ const FilterModalContent = (props: FilterModalContentProps) => {
         editInputRef.current?.focus();
     }, [inputValue]);
 
+    const filterHandler = (values: any) => {
+        console.log('TvT log: value from filter modal', values);
+        setLoading(true);
+        // try {
+        //     const response = await axios.get(
+        //         `${HOST}jobs/?keywords=${values.keywords}&location=${values.location}`,
+        //     );
+        //     console.log("TvT log: response data from search modal: ", response.data);
+        // setJobPostings(response.data)
+        setLoading(false);
+        onFilterJob(JOB_DATA.results); // thay bang response
+        // } catch (error: any) {
+        //     error?.response?.data.detail &&
+        //         // setError(error.response.data.detail);
+        //         // Error Handling
+        //         console.log(error.response.data.detail);
+        // }
+    };
     const handleClose = (removedTag: string) => {
         const newTags = tags.filter(tag => tag !== removedTag);
         console.log(newTags);
@@ -72,17 +92,15 @@ const FilterModalContent = (props: FilterModalContentProps) => {
 
     return (
         <>
-            <Form>
+            <Form onFinish={filterHandler}>
                 <Collapse
                     expandIconPosition="end"
                     collapsible="header"
                     bordered={false}
-                    className={styles["form-collapse"]}
-                >
+                    className={styles['form-collapse']}>
                     <Collapse.Panel
                         header="Sort By"
-                        key="1"
-                    >
+                        key="1">
                         <Form.Item>
                             <Button>Relevancy</Button>
                             <Button>Newest</Button>
@@ -90,8 +108,7 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                     </Collapse.Panel>
                     <Collapse.Panel
                         header="Job Portal"
-                        key="2"
-                    >
+                        key="2">
                         <Form.Item>
                             <Checkbox>Linkedin</Checkbox>
                             <br />
@@ -103,8 +120,7 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                     </Collapse.Panel>
                     <Collapse.Panel
                         header="Keywords (Skills/Certificates/...)"
-                        key="3"
-                    >
+                        key="3">
                         <Form.Item>
                             {tags.map((tag, index) => {
                                 if (editInputIndex === index) {
@@ -113,11 +129,13 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                                             ref={editInputRef}
                                             key={tag}
                                             size="small"
-                                            className={styles["tag-input"]}
+                                            className={styles['tag-input']}
                                             value={editInputValue}
                                             onChange={handleEditInputChange}
                                             onBlur={handleEditInputConfirm}
-                                            onPressEnter={handleEditInputConfirm}
+                                            onPressEnter={
+                                                handleEditInputConfirm
+                                            }
                                         />
                                     );
                                 }
@@ -126,11 +144,10 @@ const FilterModalContent = (props: FilterModalContentProps) => {
 
                                 const tagElem = (
                                     <Tag
-                                        className={styles["edit-tag"]}
+                                        className={styles['edit-tag']}
                                         key={tag}
                                         closable={true}
-                                        onClose={() => handleClose(tag)}
-                                    >
+                                        onClose={() => handleClose(tag)}>
                                         <span
                                             onDoubleClick={e => {
                                                 if (index !== 0) {
@@ -138,14 +155,17 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                                                     setEditInputValue(tag);
                                                     e.preventDefault();
                                                 }
-                                            }}
-                                        >
-                                            {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+                                            }}>
+                                            {isLongTag
+                                                ? `${tag.slice(0, 20)}...`
+                                                : tag}
                                         </span>
                                     </Tag>
                                 );
                                 return isLongTag ? (
-                                    <Tooltip title={tag} key={tag}>
+                                    <Tooltip
+                                        title={tag}
+                                        key={tag}>
                                         {tagElem}
                                     </Tooltip>
                                 ) : (
@@ -157,7 +177,7 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                                     ref={inputRef}
                                     type="text"
                                     size="small"
-                                    className={styles["tag-input"]}
+                                    className={styles['tag-input']}
                                     value={inputValue}
                                     onChange={handleInputChange}
                                     onBlur={handleInputConfirm}
@@ -165,7 +185,9 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                                 />
                             )}
                             {!inputVisible && (
-                                <Tag className={styles["site-tag-plus"]} onClick={showInput}>
+                                <Tag
+                                    className={styles['site-tag-plus']}
+                                    onClick={showInput}>
                                     <PlusOutlined /> New Keyword
                                 </Tag>
                             )}
@@ -173,8 +195,7 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                     </Collapse.Panel>
                     <Collapse.Panel
                         header="Last Updated"
-                        key="4"
-                    >
+                        key="4">
                         <Form.Item>
                             <Radio.Group
                             // onChange={onChange}
@@ -193,8 +214,7 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                     <Button
                         type="primary"
                         htmlType="submit"
-                        block
-                    >
+                        block>
                         REFINE JOBS
                     </Button>
                 </Form.Item>

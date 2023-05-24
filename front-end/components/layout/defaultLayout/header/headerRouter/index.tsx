@@ -5,6 +5,10 @@ import { getItem } from '../../../../../configs/utils/antd.utils';
 import { DownOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import { HOW_TO_WRITE_A_RESUME } from '../../../../../configs/constants/blog.constants';
+import {
+    DEFAULT_JOB_TITLE_INPUT,
+    DEFAULT_LOCATION_INPUT,
+} from '../../../../../configs/constants/job.constants';
 
 type MenuItem = Required<MenuProps>['items'][number];
 type HeaderRouterProps = {
@@ -31,15 +35,16 @@ const HeaderRouter = (props: HeaderRouterProps) => {
         onCloseDrawer();
         if (e.key === 'blogs') {
             router.push({
-                pathname: `/blogs/${HOW_TO_WRITE_A_RESUME}`
-            })
-        }
-        else if (e.key === 'job-postings') {
+                pathname: `/blogs/${HOW_TO_WRITE_A_RESUME}`,
+            });
+        } else if (e.key === 'job-postings') {
             router.push({
-                pathname: "/job-postings"
-            })
-        }
-        else if (e.key !== 'resume')
+                pathname: '/job-postings/[search]',
+                query: {
+                    search: 'python-developer_ho-chi-minh',
+                },
+            });
+        } else if (e.key !== 'resume')
             router.push({
                 pathname: `/${e.key}`,
             });

@@ -1,38 +1,69 @@
 import axios from "axios";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { useRecoilState } from "recoil";
+import { useRecoilState } from 'recoil';
 
-import { Form, Input, Button, Select } from "antd";
-import { EnvironmentOutlined, SearchOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Select } from 'antd';
+import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
 
-import styles from "./styles.module.scss";
-import { HOST } from "../../../../configs/constants/misc";
-import { jobPostingsState } from "../../../../recoil-state/job-state/job-state";
-import { DEFAULT_JOB_TITLE_INPUT } from "../../../../configs/constants/job.constants";
+import styles from './styles.module.scss';
+import { HOST } from '../../../../configs/constants/misc';
+import {
+    jobPostingsState,
+    jobQueryState,
+} from '../../../../recoil-state/job-state/job-state';
+import {
+    DEFAULT_JOB_TITLE_INPUT,
+    JOB_DATA,
+} from '../../../../configs/constants/job.constants';
+import { convertSearchJobPayload } from '../../../../configs/utils/format.utils';
+import { useRouter } from 'next/router';
+import { kebabCase } from 'lodash';
 
 type SearchModalContentProps = {
-    handleSearchModalCancel: () => void,
+    onSearchJob: (value: any) => void;
 };
 
 const SearchModalContent = (props: SearchModalContentProps) => {
-    const { handleSearchModalCancel } = props;
-    const [jobPostings, setJobPostings] = useRecoilState(jobPostingsState)
-    const [loading, setLoading] = useState(false)
+    const { onSearchJob } = props;
+    const router = useRouter();
+    const [jobPostings, setJobPostings] = useRecoilState(jobPostingsState);
+    const [searchQuery, setSearchQuery] = useRecoilState(jobQueryState);
+    const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
 
+    useEffect(() => {
+        form.setFieldsValue({
+            job_title: searchQuery.job_title,
+            location: searchQuery.location,
+        });
+    }, [searchQuery]);
     const handleSubmit = async (values: any) => {
-        console.log("TvT log: value from search modal", values);
-        setLoading(true)
+        console.log('TvT log: value from search modal', values);
+        const payload = convertSearchJobPayload(
+            `${values.job_title}_${values.location}`
+        );
+        setLoading(true);
         // try {
         //     const response = await axios.get(
-        //         `${HOST}jobs/?keywords=${values.keywords}&location=${values.location}`,
+        //         `${HOST}jobs/?keywords=${payload.job}&location=${payload.location}`,
         //     );
         //     console.log("TvT log: response data from search modal: ", response.data);
-        //     setJobPostings(response.data)
-        //     setLoading(false)
-        //     handleSearchModalCancel()
+        // setJobPostings(response.data)
+        setSearchQuery({
+            job_title: values.job_title,
+            location: values.location,
+        });
+        router.push({
+            pathname: '/job-postings/[search]',
+            query: {
+                search: `${kebabCase(values.job_title)}_${values.location}`,
+            },
+        });
+
+        setLoading(false);
+        onSearchJob(JOB_DATA.results);
         // } catch (error: any) {
         //     error?.response?.data.detail &&
         //         // setError(error.response.data.detail);
@@ -45,40 +76,35 @@ const SearchModalContent = (props: SearchModalContentProps) => {
         <>
             <Form
                 form={form}
-                onFinish={handleSubmit}
-            >
-                <Form.Item
-                    name="job_title"
-                    initialValue={DEFAULT_JOB_TITLE_INPUT}
-                >
+                onFinish={handleSubmit}>
+                <Form.Item name="job_title">
                     <Input
                         placeholder="Enter a job title"
                         allowClear
                         prefix={<SearchOutlined />}
                     />
                 </Form.Item>
-                <Form.Item
-                    name="location"
-                    initialValue="Ho Chi Minh city, Vietnam"
-                >
+                <Form.Item name="location">
                     <Select
                         showSearch
                         placeholder="Select a city"
                         optionFilterProp="children"
                         filterOption={(input, option) =>
-                            (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                            (option?.label ?? '')
+                                .toLowerCase()
+                                .includes(input.toLowerCase())
                         }
                         options={[
                             {
-                                value: 'Ho Chi Minh city, Vietnam',
+                                value: 'ho-chi-minh',
                                 label: 'Hồ Chí Minh',
                             },
                             {
-                                value: 'Ha Noi city, Vietnam',
+                                value: 'ha-noi',
                                 label: 'Hà Nội',
                             },
                             {
-                                value: 'Da Nang city, Vietnam',
+                                value: 'da-nang',
                                 label: 'Đà Nẵng',
                             },
                         ]}
@@ -89,8 +115,7 @@ const SearchModalContent = (props: SearchModalContentProps) => {
                         type="primary"
                         htmlType="submit"
                         block
-                        loading={loading}
-                    >
+                        loading={loading}>
                         SEARCH
                     </Button>
                 </Form.Item>
