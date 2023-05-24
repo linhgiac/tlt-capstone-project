@@ -10,6 +10,7 @@ import axios from 'axios';
 import router from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { resumeInfoState } from '../../../../recoil-state/resume-state/resume-changed-state/resume-changed-single-section.state';
+import { getCookie, hasCookie } from 'cookies-next';
 
 type TemplateItemProps = {
     item: TemplateDataType;
@@ -26,24 +27,29 @@ const TemplateItem = (props: TemplateItemProps) => {
         setIsActive(false);
     };
     const onClick = async () => {
-        const headers = getAuthHeader();
-        const response = await axios.post(
-            `${HOST}resume/create/`,
-            { template: item.id },
-            {
-                headers: headers,
-            }
-        );
-        router.push({
-            pathname: '/resumes/[id]/edit',
-            query: {
+        console.log('cookie', hasCookie('accessToken'));
+        if (hasCookie('accessToken')) {
+            const headers = getAuthHeader();
+            const response = await axios.post(
+                `${HOST}resume/create/`,
+                { template: item.id },
+                {
+                    headers: headers,
+                }
+            );
+            router.push({
+                pathname: '/resumes/[id]/edit',
+                query: {
+                    id: response.data.id,
+                },
+            });
+            setResumeInfo({
                 id: response.data.id,
-            },
-        });
-        setResumeInfo({
-            id: response.data.id,
-            template: response.data.template,
-        });
+                template: response.data.template,
+            });
+        } else {
+            router.push('/log-in');
+        }
     };
 
     return (
