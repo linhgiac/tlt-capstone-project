@@ -23,6 +23,7 @@ const HeaderRouter = (props: HeaderRouterProps) => {
             getItem('Professional', 'templates/professional'),
             getItem('Modern', 'templates/modern'),
         ]),
+        getItem('Jobs', 'job-postings'),
         getItem('Blogs', 'blogs'),
     ];
 
@@ -30,9 +31,15 @@ const HeaderRouter = (props: HeaderRouterProps) => {
         onCloseDrawer();
         if (e.key === 'blogs') {
             router.push({
-                pathname: `/blogs/${HOW_TO_WRITE_A_RESUME}`,
-            });
-        } else if (e.key !== 'resume')
+                pathname: `/blogs/${HOW_TO_WRITE_A_RESUME}`
+            })
+        }
+        else if (e.key === 'job-postings') {
+            router.push({
+                pathname: "/job-postings"
+            })
+        }
+        else if (e.key !== 'resume')
             router.push({
                 pathname: `/${e.key}`,
             });

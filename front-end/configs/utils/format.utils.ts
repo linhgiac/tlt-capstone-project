@@ -4,6 +4,7 @@ import camelCase from 'camelcase';
 import { AccountSettingType } from '../interfaces/user.interface';
 import { HOST } from '../constants/misc';
 import dateFormat from 'dateformat';
+import { JOB_PORTALS } from '../constants/job.constants';
 
 export const convertCamelToSnake = (obj: any, newObj = {}) => {
     for (let key in obj) {
@@ -268,4 +269,23 @@ export const convertDashboardResponse = (responseData: any) => {
         });
     }
     return convertedResponseData;
+}
+
+export const convertJobResponse = (responseData: any) => {
+    const convertedResponseData = []
+    for (let jobPostingItem of responseData) {
+        const { date, job_portal, ...rest } = jobPostingItem;
+        const jobPortal = JOB_PORTALS[job_portal];
+        const convertedDate = dateFormat(new Date(date.split('T')[0]), "mmmm dS, yyyy")
+        convertedResponseData.push(convertSnakeToCamel({
+            date: convertedDate,
+            jobPortal,
+            ...rest
+        }));
+    }
+    return convertedResponseData;
+}
+
+export const convertJobQueryPayload = (payload: any) => {
+    return convertCamelToSnake(payload);
 }

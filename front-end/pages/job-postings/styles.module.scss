@@ -1,0 +1,19 @@
+.job-postings-container {
+    padding: 15px;
+}
+
+.search-btn {
+    padding: 8px 20px;
+    display: flex;
+    font-size: 16px;
+
+    .search-icon {
+        margin-right: 8px;
+    }
+}
+
+.modal-title {
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+}
