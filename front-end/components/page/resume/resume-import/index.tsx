@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import ResumeTitle from './resume-title';
 import classNames from 'classnames';
-import { Button, Input, Modal } from 'antd';
+import { Button, Form, Input, Modal, Radio } from 'antd';
 import ResumeImportForm from './resume-import-form';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
@@ -19,12 +19,10 @@ import {
     convertResumeResponse,
     convertTest,
 } from '../../../../configs/utils/format.utils';
-import styles from './styles.module.scss';
 import {
     PersonalDetailsDataType,
     ResumeDataType,
 } from '../../../../configs/interfaces/resume.interface';
-import { ResumeConstants } from '../../../../configs/constants/resume.constants';
 import { resumeTitleValueState } from '../../../../recoil-state/resume-state/resume-title.state';
 import {
     personalDetailChangedValueState,
@@ -36,15 +34,15 @@ import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { HOST } from '../../../../configs/constants/misc';
 import axios from 'axios';
 import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
-import { isEmpty, get } from 'lodash';
+import { get } from 'lodash';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import html2canvas from 'html2canvas';
 import { dataUrlToFile } from '../../../../configs/utils/images.utils';
 import {
     CheckCircleOutlined,
-    CloseCircleOutlined,
     ExclamationCircleOutlined,
+    FileSearchOutlined,
 } from '@ant-design/icons';
 
 type ResumeImportProps = {
@@ -64,9 +62,8 @@ const ResumeImport = (props: ResumeImportProps) => {
     const resumeInfo = useRecoilValue(resumeInfoState);
     const setResumeInfo = useSetRecoilState(resumeInfoState);
     const [resumeTitle, setResumeTitle] = useRecoilState(resumeTitleValueState);
-    const setPersonalDetailsChangedValues = useSetRecoilState(
-        personalDetailChangedValueState
-    );
+    const [personalDetailsChangedValues, setPersonalDetailsChangedValues] =
+        useRecoilState(personalDetailChangedValueState);
     const setProfessionalSummaryChangedValues = useSetRecoilState(
         professionalSummaryChangedValueState
     );
@@ -250,12 +247,14 @@ const ResumeImport = (props: ResumeImportProps) => {
     //     setResumeInfo,
     //     setResumeInitialTitle,
     // ]);
-    const [isOpenModal, setIsOpenModal] = useState(false);
+    const [isOpenTitleModal, setIsOpenTitleModal] = useState(false);
     const [title, setTitle] = useState(resumeSaved?.title);
     const openModalHandler = () => {
-        setIsOpenModal(true);
+        setIsOpenTitleModal(true);
     };
     const [isSuccessful, setIsSuccessful] = useState(false);
+    const [isSeekingJob, setIsSeekingJob] = useState(false);
+    const [jobSeekingForm] = Form.useForm();
 
     return (
         <div className={classNames(className)}>
@@ -263,9 +262,9 @@ const ResumeImport = (props: ResumeImportProps) => {
             <Modal
                 title={<div> Change Title </div>}
                 centered
-                open={isOpenModal}
+                open={isOpenTitleModal}
                 onCancel={() => {
-                    setIsOpenModal(false);
+                    setIsOpenTitleModal(false);
                 }}
                 footer={null}>
                 <Input
@@ -276,7 +275,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                     }}
                     onPressEnter={() => {
                         setResumeTitle(title);
-                        setIsOpenModal(false);
+                        setIsOpenTitleModal(false);
                     }}
                 />
             </Modal>
@@ -295,6 +294,89 @@ const ResumeImport = (props: ResumeImportProps) => {
                 onClick={submitFormHandler}>
                 {t('edit-save-resume', { ns: 'edit' })}
             </Button>
+            <Button
+                className={'btn'}
+                style={{
+                    color: '#1890ff',
+                    border: '1px solid #1890ff',
+                    fontSize: '14px',
+                    fontWeight: 600,
+                    paddingLeft: '25px',
+                    paddingRight: '25px',
+                    borderRadius: '8px',
+                }}
+                type="text"
+                size="large"
+                onClick={() => {
+                    setIsSeekingJob(true);
+                    jobSeekingForm.setFieldValue(
+                        'jobTitle',
+                        personalDetailsChangedValues.jobTitle
+                    );
+                }}>
+                Job Seeking
+            </Button>
+            <Modal
+                title={
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <FileSearchOutlined
+                            style={{
+                                color: '#1890ff',
+                                fontSize: '28px',
+                                paddingRight: '5px',
+                            }}
+                        />
+                        Job Seeking
+                    </div>
+                }
+                open={isSeekingJob}
+                onCancel={() => {
+                    setIsSeekingJob(false);
+                }}
+                bodyStyle={{ paddingBottom: '4px' }}
+                footer={null}
+                closable
+                centered>
+                <Form
+                    form={jobSeekingForm}
+                    onFinish={(values: any) => {
+                        console.log('seeking job:', values);
+                    }}>
+                    <Form.Item
+                        name="jobTitle"
+                        label={<div style={{ color: '#000' }}>Job Title</div>}>
+                        <Input disabled />
+                    </Form.Item>
+                    <Form.Item
+                        name="location"
+                        label={<div style={{ color: '#000' }}>Location</div>}>
+                        <Radio.Group>
+                            <Radio value="all"> All </Radio>
+                            <Radio value="hanoi"> Ha Noi </Radio>
+                            <Radio value="danang"> Da Nang </Radio>
+                            <Radio value="hochiminh"> Ho Chi Minh </Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                        <Button
+                            className={'btn'}
+                            style={{
+                                border: '1px solid #1890ff',
+                                fontSize: '14px',
+                                fontWeight: 600,
+                                paddingLeft: '25px',
+                                paddingRight: '25px',
+                                borderRadius: '8px',
+                            }}
+                            type="primary"
+                            size="large"
+                            htmlType="submit">
+                            Find Job
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
             <Modal
                 title={
                     <div style={{ display: 'flex', alignItems: 'center' }}>
