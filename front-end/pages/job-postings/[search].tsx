@@ -32,6 +32,7 @@ import {
 } from '../../configs/utils/format.utils';
 import { camelCase, kebabCase, lowerCase } from 'lodash';
 import { useRouter } from 'next/router';
+import classNames from 'classnames';
 
 type JobPostingsProps = {
     jobList: any;
@@ -49,8 +50,8 @@ const JobPostings = (props: JobPostingsProps) => {
     const [jobsTotal, setJobsTotal] = useState(jobsCount);
 
     useEffect(() => {
-        window.scrollTo(0, 0)
-      }, [jobs])
+        window.scrollTo(0, 0);
+    }, [jobs]);
 
     useEffect(() => {
         setJobs(jobList);
@@ -88,12 +89,12 @@ const JobPostings = (props: JobPostingsProps) => {
                 {
                     query: {
                         location: convertedLocation,
-                        ...rest
+                        ...rest,
                     },
                 },
                 {
                     headers: authHeader,
-                },
+                }
             );
             const jobPostingList = convertJobResponse(response.data.results);
             setJobs(jobPostingList);
@@ -106,40 +107,48 @@ const JobPostings = (props: JobPostingsProps) => {
         }
     };
 
-    const searchJobHandler = (jobs: any) => {
-        setIsSearchModalOpen(false);
-        setJobs(jobs);
-    };
-
-    const filterJobHandler = (value: any) => {
-        setIsFilterModalOpen(false);
-        setJobs(value);
-    };
-
     return (
         <div className={styles['job-postings-container']}>
-            <div
-                className={styles['search-btn']}
-                onClick={() => setIsSearchModalOpen(true)}>
-                <div className={styles['search-icon']}>
-                    <SearchOutlined
-                        style={{
-                            color: '#798899',
-                            strokeWidth: '60',
-                            stroke: '#798899',
-                        }}
-                    />
+            <div className={styles.search}>
+                <div className={styles.search}>
+                    <SearchModalContent />
                 </div>
-                <div className={styles['search-text']}>Jobs in Vietnam</div>
+                <div
+                    className={classNames(styles['search-btn'])}
+                    onClick={() => setIsSearchModalOpen(true)}>
+                    <div className={styles['search-icon']}>
+                        <SearchOutlined
+                            style={{
+                                color: '#798899',
+                                strokeWidth: '60',
+                                stroke: '#798899',
+                            }}
+                        />
+                    </div>
+                    <div className={styles['search-text']}>Jobs in Vietnam</div>
+                </div>
+                <Modal
+                    title={
+                        <div className={styles['modal-title']}>
+                            edit your search
+                        </div>
+                    }
+                    open={isSearchModalOpen}
+                    onCancel={() => setIsSearchModalOpen(false)}
+                    footer={null}
+                    maskClosable>
+                    <SearchModalContent />
+                </Modal>
             </div>
+
             <Button
                 icon={<FilterOutlined />}
                 shape="round"
+                size="large"
                 block={true}
                 style={{
                     color: '#777777',
                 }}
-                size="small"
                 onClick={() => setIsFilterModalOpen(true)}>
                 Filter
             </Button>
@@ -151,18 +160,7 @@ const JobPostings = (props: JobPostingsProps) => {
                 onChange={handlePageChange}
             />
             {/* SEARCH MODAL */}
-            <Modal
-                title={
-                    <div className={styles['modal-title']}>
-                        edit your search
-                    </div>
-                }
-                open={isSearchModalOpen}
-                onCancel={() => setIsSearchModalOpen(false)}
-                footer={null}
-                maskClosable>
-                <SearchModalContent />
-            </Modal>
+
             {/* FILTER MODAL */}
             <Modal
                 title={
@@ -201,30 +199,30 @@ export const getServerSideProps: GetServerSideProps = async (
 
     try {
         const headers = getAuthHeader({ req, res });
-        const response = await axios.post(
-            `${HOST}jobs/searching/?limit=${PAGE_LIMIT}&offset=0`,
-            {
-                query: {
-                    job_title: job,
-                    location: location,
-                    job_portal,
-                    keywords,
-                    last_updated,
-                },
-                sort: sort_by,
-            },
-            {
-                headers: headers,
-            }
-        );
-        const jobList = convertJobResponse(response.data.results);
+        // const response = await axios.post(
+        //     `${HOST}jobs/searching/?limit=${PAGE_LIMIT}&offset=0`,
+        //     {
+        //         query: {
+        //             job_title: job,
+        //             location: location,
+        //             job_portal,
+        //             keywords,
+        //             last_updated,
+        //         },
+        //         sort: sort_by,
+        //     },
+        //     {
+        //         headers: headers,
+        //     }
+        // );
+        // const jobList = convertJobResponse(response.data.results);
         // const jobList: any = [];
         return {
             props: {
                 ...defaultReturnProps,
-                jobList,
-                jobsCount: response.data.count,
-                // jobsCount: JOB_DATA.count,
+                jobList: JOB_DATA.results,
+                // jobsCount: response.data.count,
+                jobsCount: JOB_DATA.count,
             },
         };
     } catch (error: any) {

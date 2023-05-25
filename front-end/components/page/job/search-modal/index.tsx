@@ -21,10 +21,11 @@ import { convertSearchJobPayload } from '../../../../configs/utils/format.utils'
 import { useRouter } from 'next/router';
 import { kebabCase } from 'lodash';
 
-type SearchModalContentProps = {};
+type SearchModalContentProps = {
+    // horizontal?: boolean;
+};
 
 const SearchModalContent = (props: SearchModalContentProps) => {
-    const {} = props;
     const router = useRouter();
     const [jobPostings, setJobPostings] = useRecoilState(jobPostingsState);
     const [searchQuery, setSearchQuery] = useRecoilState(jobQueryState);
@@ -60,48 +61,61 @@ const SearchModalContent = (props: SearchModalContentProps) => {
             <Form
                 form={form}
                 onFinish={handleSubmit}>
-                <Form.Item name="job_title">
-                    <Input
-                        placeholder="Enter a job title"
-                        allowClear
-                        prefix={<SearchOutlined />}
-                    />
-                </Form.Item>
-                <Form.Item name="location">
-                    <Select
-                        showSearch
-                        placeholder="Select a city"
-                        optionFilterProp="children"
-                        filterOption={(input, option) =>
-                            (option?.label ?? '')
-                                .toLowerCase()
-                                .includes(input.toLowerCase())
-                        }
-                        options={[
-                            {
-                                value: 'ho-chi-minh',
-                                label: 'Hồ Chí Minh',
-                            },
-                            {
-                                value: 'ha-noi',
-                                label: 'Hà Nội',
-                            },
-                            {
-                                value: 'da-nang',
-                                label: 'Đà Nẵng',
-                            },
-                        ]}
-                    />
-                </Form.Item>
-                <Form.Item>
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        block
-                        loading={loading}>
-                        SEARCH
-                    </Button>
-                </Form.Item>
+                <div className={styles['search-form__item']}>
+                    <Form.Item name="job_title">
+                        <Input
+                            placeholder="Enter a job title"
+                            size="large"
+                            style={{ height: '40px', borderRadius: '4px' }}
+                            allowClear
+                            prefix={<SearchOutlined />}
+                        />
+                    </Form.Item>
+                    <Form.Item name="location">
+                        <Select
+                            showSearch
+                            placeholder="Select a city"
+                            optionFilterProp="children"
+                            size="large"
+                            filterOption={(input, option) =>
+                                (option?.label ?? '')
+                                    .toLowerCase()
+                                    .includes(input.toLowerCase())
+                            }
+                            options={[
+                                {
+                                    value: 'ho-chi-minh',
+                                    label: 'Hồ Chí Minh',
+                                },
+                                {
+                                    value: 'ha-noi',
+                                    label: 'Hà Nội',
+                                },
+                                {
+                                    value: 'da-nang',
+                                    label: 'Đà Nẵng',
+                                },
+                            ]}
+                        />
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button
+                            type="primary"
+                            // className="btn"
+                            style={{
+                                borderRadius: '8px',
+                                height: '40px',
+                                width: '150px',
+                            }}
+                            htmlType="submit"
+                            // size="large"
+                            block
+                            loading={loading}>
+                            SEARCH
+                        </Button>
+                    </Form.Item>
+                </div>
             </Form>
         </>
     );

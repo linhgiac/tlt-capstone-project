@@ -239,8 +239,7 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                         key="4">
                         <Form.Item
                             name="last_updated"
-                            initialValue={0}
-                        >
+                            initialValue={0}>
                             <Radio.Group
                             // onChange={onChange}
                             // value={value}
@@ -257,8 +256,13 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                 <Form.Item>
                     <Button
                         type="primary"
-                        htmlType="submit"
-                        block>
+                        className="btn"
+                        style={{
+                            height: '40px',
+                            borderRadius: '8px',
+                            width: '50%',
+                        }}
+                        htmlType="submit">
                         REFINE JOBS
                     </Button>
                 </Form.Item>

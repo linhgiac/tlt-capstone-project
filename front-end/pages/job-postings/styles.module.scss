@@ -1,15 +1,25 @@
+@import '../../styles/responsive.scss';
+
 .job-postings-container {
-    padding: 15px;
+    padding: 25px 64px;
 }
-
+.search{
+@include mobile{
+    display: none;
+}
+}
 .search-btn {
-    padding: 8px 20px;
-    display: flex;
-    font-size: 16px;
+    display: none;
+    @include mobile{
+       padding: 8px 20px;
+        display: flex;
+        font-size: 16px;
 
-    .search-icon {
-        margin-right: 8px;
+        .search-icon {
+            margin-right: 8px;
+        } 
     }
+    
 }
 
 .modal-title {
