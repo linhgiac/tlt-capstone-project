@@ -11,5 +11,8 @@
     "dashboard-cancel-text": "Annuler",
     "dashboard-confirm-text": "D'ACCORD",
     "dashboard-delete-title": "Supprimer le CV",
-    "dashboard-delete-description": "Êtes-vous sûr de vouloir supprimer ce curriculum vitae?"
+    "dashboard-delete-description": "Êtes-vous sûr de vouloir supprimer ce curriculum vitae?",
+    "dashboard-created": "Créé à",
+    "dashboard-updated": "Mis à jour à",
+    "dashboard-create-with-personal": "Créer nouveau avec des détails personnels"
 }

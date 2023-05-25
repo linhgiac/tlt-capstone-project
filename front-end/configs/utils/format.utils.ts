@@ -1,14 +1,19 @@
-import { get, isEmpty, omit, snakeCase } from 'lodash';
+import { get, isEmpty, lowerCase, omit, snakeCase } from 'lodash';
 import { ResumeDataType } from './../interfaces/resume.interface';
 import camelCase from 'camelcase';
 import { AccountSettingType } from '../interfaces/user.interface';
 import { HOST } from '../constants/misc';
 import dateFormat from 'dateformat';
+import { JOB_PORTALS } from '../constants/job.constants';
 
 export const convertCamelToSnake = (obj: any, newObj = {}) => {
     for (let key in obj) {
         let value = null;
-        if (!(obj[key] instanceof File) && typeof obj[key] === 'object' && typeof obj[key] !== null) {
+        if (
+            !(obj[key] instanceof File) &&
+            typeof obj[key] === 'object' &&
+            typeof obj[key] !== null
+        ) {
             value = convertCamelToSnake(obj[key], {});
         } else {
             value = obj[key];
@@ -197,47 +202,47 @@ export const convertResumeResponse = (resume: any) => {
 };
 
 const data_test: any = {
-    "id": 4,
-    "title": "Untitled",
-    "completeness": 0,
-    "template": 1,
-    "personal_details": null,
-    "professional_summary": null,
-    "complex_sections": [
+    id: 4,
+    title: 'Untitled',
+    completeness: 0,
+    template: 1,
+    personal_details: null,
+    professional_summary: null,
+    complex_sections: [
         {
-            "id": 14,
-            "header": "Employment History",
-            "position": 2,
-            "section_type": "employment_histories",
-            "employment_histories": [
+            id: 14,
+            header: 'Employment History',
+            position: 2,
+            section_type: 'employment_histories',
+            employment_histories: [
                 {
-                    "id": 2,
-                    "position": 0,
-                    "job_title": null,
-                    "employer": null,
-                    "description": null,
-                    "city": null,
-                    "start_date": "2022-01-01",
-                    "end_date": "2022-01-01"
+                    id: 2,
+                    position: 0,
+                    job_title: null,
+                    employer: null,
+                    description: null,
+                    city: null,
+                    start_date: '2022-01-01',
+                    end_date: '2022-01-01',
                 },
                 {
-                    "id": 3,
-                    "position": 0,
-                    "job_title": null,
-                    "employer": null,
-                    "description": null,
-                    "city": null,
-                    "start_date": "2022-02-01",
-                    "end_date": "2022-02-01"
-                }
+                    id: 3,
+                    position: 0,
+                    job_title: null,
+                    employer: null,
+                    description: null,
+                    city: null,
+                    start_date: '2022-02-01',
+                    end_date: '2022-02-01',
+                },
             ],
-            "educations": [],
-            "work_experiences": [],
-            "skills": [],
-            "links": [],
-            "customs": []
-        }
-    ]
+            educations: [],
+            work_experiences: [],
+            skills: [],
+            links: [],
+            customs: [],
+        },
+    ],
 };
 
 export const convertProfilePayloadData = (payloadData: AccountSettingType) => {
@@ -249,17 +254,16 @@ export const convertProfileResponse = (responseData: any) => {
 
     return convertSnakeToCamel({
         ...profile,
-        ...dataWithoutProfile
+        ...dataWithoutProfile,
     });
 };
 
 export const convertDashboardResponse = (responseData: any) => {
-    
-    const convertedResponseData = []
+    const convertedResponseData = [];
     for (let dashboardItem of responseData) {
         const { thumbnail, created_at, updated_at, ...restDashboardItem } = dashboardItem
-        const createdAt = dateFormat(new Date(created_at.replace('/', ' ')), "mmm dd, HH:MM");
-        const updatedAt = dateFormat(new Date(updated_at.replace('/', ' ')), "mmm dd, HH:MM");
+        const createdAt = dateFormat(new Date(created_at.replace('/', ' ')), "HH:MM dd/mm/yyyy");
+        const updatedAt = dateFormat(new Date(updated_at.replace('/', ' ')), "HH:MM dd/mm/yyyy");
         convertedResponseData.push({
             ...restDashboardItem,
             createdAt,
@@ -268,4 +272,41 @@ export const convertDashboardResponse = (responseData: any) => {
         });
     }
     return convertedResponseData;
-}
+};
+
+export const convertJobResponse = (responseData: any) => {
+    const convertedResponseData = [];
+    for (let jobPostingItem of responseData) {
+        const { date, job_portal, ...rest } = jobPostingItem;
+        const jobPortal = JOB_PORTALS[job_portal];
+        const convertedDate = dateFormat(
+            new Date(date.split('T')[0]),
+            'mmmm dS, yyyy'
+        );
+        convertedResponseData.push(
+            convertSnakeToCamel({
+                date: convertedDate,
+                jobPortal,
+                ...rest,
+            })
+        );
+    }
+    return convertedResponseData;
+};
+
+export const convertSearchJobPayload = (path: any) => {
+    const [job, location] = path.split('_');
+    let convertLocation = '';
+    if (location === 'ho-chi-minh') {
+        convertLocation = 'Ho Chi Minh city, Vietnam';
+    } else if (location === 'ha-noi') {
+        convertLocation = 'Ha Noi city, Vietnam';
+    } else if (location === 'da-nang') {
+        convertLocation = 'Da Nang city, Vietnam';
+    }
+    return [lowerCase(job), convertLocation];
+};
+
+export const convertJobQueryPayload = (payload: any) => {
+    return convertCamelToSnake(payload);
+};

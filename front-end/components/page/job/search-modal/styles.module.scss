@@ -1,0 +1,10 @@
+@import '../../../../styles/responsive.scss';
+
+.search-form__item{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr auto;
+  @include mobile{
+    display: block;
+  }
+}

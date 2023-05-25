@@ -9,6 +9,7 @@ import AccountAvatar from "../account-avatar";
 import { convertProfilePayloadData } from "../../../../configs/utils/format.utils";
 import { HOST } from "../../../../configs/constants/misc";
 import { getAuthHeader } from "../../../../configs/restApi/clients";
+import { useTranslation } from "next-i18next";
 
 type AccountFormProps = {
     className?: string;
@@ -23,6 +24,7 @@ const AccountForm = (props: AccountFormProps) => {
     const [isSuccessful, setIsSuccessful] = useState(false)
     const [form] = Form.useForm();
     const router = useRouter()
+    const { t } = useTranslation();
 
     useEffect(() => {
         form.setFieldsValue(data);
@@ -71,10 +73,10 @@ const AccountForm = (props: AccountFormProps) => {
                         fetchingURL = {data?.avatar ? data?.avatar : ""}
                     />
                 </Form.Item>
-                <Form.Item name="firstName" label="First Name">
+                <Form.Item name="firstName" label={t('account-first-name', {ns: 'account'})}>
                     <Input />
                 </Form.Item>
-                <Form.Item name="lastName" label="Last Name">
+                <Form.Item name="lastName" label={t('account-last-name', {ns: 'account'})}>
                     <Input />
                 </Form.Item>
                 <Form.Item
@@ -83,22 +85,22 @@ const AccountForm = (props: AccountFormProps) => {
                     rules={[
                         {
                             type: "email",
-                            message: "The input is not valid E-mail!",
+                            message: t('account-invalid-email', {ns: 'account'}) as string,
                         },
                     ]}
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item name="phone" label="Phone">
+                <Form.Item name="phone" label={t('account-phone', {ns: 'account'})}>
                     <Input />
                 </Form.Item>
-                <Form.Item name="country" label="Country">
+                <Form.Item name="country" label={t('account-country', {ns: 'account'})}>
                     <Input />
                 </Form.Item>
-                <Form.Item name="city" label="City">
+                <Form.Item name="city" label={t('account-city', {ns: 'account'})}>
                     <Input />
                 </Form.Item>
-                <Form.Item name="address" label="Address">
+                <Form.Item name="address" label={t('account-address', {ns: 'account'})}>
                     <Input />
                 </Form.Item>
                 <Form.Item>
@@ -108,12 +110,12 @@ const AccountForm = (props: AccountFormProps) => {
                         type="text"
                         htmlType="submit"
                     >
-                        Save
+                        {t('account-save', {ns: 'account'})}
                     </Button>
                 </Form.Item>
             </Form>
             <Modal
-                title={<div> Save Successfully</div>}
+                title={<div> {t('account-save-success', {ns: 'account'})}</div>}
                 centered
                 open={isSuccessful}
                 onCancel={() => {

@@ -11,5 +11,8 @@
     "dashboard-cancel-text": "Cancel",
     "dashboard-confirm-text": "OK",
     "dashboard-delete-title": "Delete Resume",
-    "dashboard-delete-description": "Are you sure you want to delete this resume?"
+    "dashboard-delete-description": "Are you sure you want to delete this resume?",
+    "dashboard-created": "Created at",
+    "dashboard-updated": "Updated at",
+    "dashboard-create-with-personal": "Create new with Personal Details"
 }

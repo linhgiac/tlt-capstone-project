@@ -6,6 +6,7 @@ import html2canvas from 'html2canvas';
 
 import { resumeSavedState } from '../../../recoil-state/resume-state/resume.state';
 import { DownloadOutlined, DragOutlined } from '@ant-design/icons';
+import { useTranslation } from 'next-i18next';
 
 type Props = {
     icon?: any;
@@ -13,6 +14,7 @@ type Props = {
 
 const DownloadButton = (props: Props) => {
     const { icon } = props;
+    const { t } = useTranslation();
     const resume = useRecoilValue(resumeSavedState);
     const downloadHandler = async () => {
         // const pdf = new jsPDF({
@@ -90,7 +92,7 @@ const DownloadButton = (props: Props) => {
                     type="primary"
                     size="large"
                     onClick={downloadHandler}>
-                    Download
+                    {t('edit-download', {ns: 'edit'})}
                 </Button>
             )}
         </>

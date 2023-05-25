@@ -78,10 +78,10 @@ const DashboardItem = (props: DashboardItemProps) => {
                         title={item.title}></ResumeTitle>
                     {/* <div className={classNames(styles['dashboard-item-lastupdated'])}>Updated {item.lastUpdated}</div> */}
                     <div className={styles['dashboard-item-date']}>
-                        Created {item.createdAt}
+                        {t('dashboard-created', {ns: 'dashboard'})} {item.createdAt}
                     </div>
                     <div className={styles['dashboard-item-date']}>
-                        Updated {item.updatedAt}
+                        {t('dashboard-updated', {ns: 'dashboard'})} {item.updatedAt}
                     </div>
                     <div
                         className={classNames(

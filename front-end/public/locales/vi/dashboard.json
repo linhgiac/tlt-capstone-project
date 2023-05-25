@@ -11,5 +11,8 @@
     "dashboard-cancel-text": "Hủy bỏ",
     "dashboard-confirm-text": "OK",
     "dashboard-delete-title": "Xóa sơ yếu lý lịch",
-    "dashboard-delete-description": "Bạn có chắc là bạn muốn xóa sơ yếu lý lịch này?"
+    "dashboard-delete-description": "Bạn có chắc là bạn muốn xóa sơ yếu lý lịch này?",
+    "dashboard-created": "Được tạo ra tại",
+    "dashboard-updated": "Cập nhật tại",
+    "dashboard-create-with-personal": "Tạo mới với chi tiết cá nhân"
 }
