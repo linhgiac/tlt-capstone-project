@@ -17,6 +17,7 @@ import {
 } from '../../../configs/interfaces/resume.interface';
 import moment from 'moment';
 import { isEmpty } from 'lodash';
+import { useTranslation } from 'next-i18next';
 
 type Props = {
     index: number;
@@ -44,6 +45,7 @@ const SectionItem = (props: Props) => {
         onRemove,
         onChangeItem,
     } = props;
+    const { t } = useTranslation();
     const labelList = useMemo(() => SECTION_TYPE[sectionType], [sectionType]);
     const [isVisible, setIsVisible] = useState(false);
     const [isModalOpened, setIsModalOpened] = useState(false);
@@ -126,12 +128,12 @@ const SectionItem = (props: Props) => {
             </div>
             <div>
                 <PopupModal
-                    title="Delete Item"
-                    description="Are you sure you want to delete this item?"
+                    title={t('edit-delete-title', {ns: 'edit'})}
+                    description={t('edit-delete-des', {ns: 'edit'}) as string} 
                     type={'confirm'}
                     visible={isModalOpened}
-                    okText="Delete"
-                    cancelText="Cancel"
+                    okText={t('edit-delete-confirm', {ns: 'edit'}) as string}
+                    cancelText={t('edit-delete-cancel', {ns: 'edit'}) as string}
                     onCancel={() => {
                         setIsModalOpened(false);
                     }}

@@ -214,7 +214,7 @@ const Dashboard = (props: DashboardProps) => {
                         className={styles.button}
                         size="large"
                         onClick={onCreateWithDetails}>
-                        + Create new with Personal Details
+                        + {t('dashboard-create-with-personal', {ns: 'dashboard'})}
                     </Button>
                 </div>
             </div>
@@ -276,7 +276,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
             props: {
                 ...defaultReturnProps,
                 ...(await serverSideTranslations(locale as string, [
-                    'dashboard',
+                    'dashboard', 'layout'
                 ])),
                 dashboardData:
                     resume === null

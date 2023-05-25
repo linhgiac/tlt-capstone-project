@@ -8,6 +8,8 @@ import styles from '../styles.module.scss';
 import { UserOutlined } from '@ant-design/icons';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../../../../recoil-state/user-state/user-state';
+import { useTranslation } from 'next-i18next';
+
 type Props = {
     onLogout: () => void;
     isInline: boolean;
@@ -18,6 +20,7 @@ const LoggedButton = (props: Props) => {
     const { onLogout, isInline, onCloseDrawer } = props;
     const router = useRouter();
     const user = useRecoilValue(userState);
+    const { t } = useTranslation();
 
     const items: MenuProps['items'] = [
         {
@@ -40,7 +43,7 @@ const LoggedButton = (props: Props) => {
                                 onCloseDrawer();
                                 router.push('/account');
                             }}>
-                            Account Settings
+                            {t('layout-account-settings', {ns: 'layout'})}
                         </div>
                     ),
                 },
@@ -52,7 +55,7 @@ const LoggedButton = (props: Props) => {
                                 onCloseDrawer();
                                 onLogout();
                             }}>
-                            Logout
+                            {t('layout-logout', {ns: 'layout'})}
                         </div>
                     ),
                 },

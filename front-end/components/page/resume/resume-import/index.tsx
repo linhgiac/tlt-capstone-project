@@ -260,7 +260,7 @@ const ResumeImport = (props: ResumeImportProps) => {
         <div className={classNames(className)}>
             <ResumeTitle onClick={openModalHandler} />
             <Modal
-                title={<div> Change Title </div>}
+                title={<div> {t('edit-change-title', {ns: 'edit'})} </div>}
                 centered
                 open={isOpenTitleModal}
                 onCancel={() => {
@@ -315,7 +315,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                     );
                     jobSeekingForm.setFieldValue('location', 'ho-chi-minh');
                 }}>
-                Job Seeking
+                {t('edit-job-seeking', {ns: 'edit'})}
             </Button>
             <Modal
                 title={
@@ -327,7 +327,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                                 paddingRight: '5px',
                             }}
                         />
-                        Job Seeking
+                        {t('edit-job-seeking', {ns: 'edit'})}
                     </div>
                 }
                 open={isSeekingJob}
@@ -357,14 +357,14 @@ const ResumeImport = (props: ResumeImportProps) => {
                     }}>
                     <Form.Item
                         name="job_title"
-                        label={<div style={{ color: '#000' }}>Job Title</div>}>
+                        label={<div style={{ color: '#000' }}>{t('edit-job-title', {ns: 'edit'})}</div>}>
                         <Input disabled />
                     </Form.Item>
                     <Form.Item
                         required
                         name="location"
                         initialValue="ho-chi-minh"
-                        label={<div style={{ color: '#000' }}>Location</div>}>
+                        label={<div style={{ color: '#000' }}>{t('edit-location', {ns: 'edit'})}</div>}>
                         <Radio.Group>
                             <Radio value="ha-noi"> Ha Noi </Radio>
                             <Radio value="da-nang"> Da Nang </Radio>
@@ -385,7 +385,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                             type="primary"
                             size="large"
                             htmlType="submit">
-                            Find Job
+                            {t('edit-find-job', {ns: 'edit'})}
                         </Button>
                     </Form.Item>
                 </Form>
@@ -401,7 +401,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                                 paddingRight: '5px',
                             }}
                         />
-                        Problem Occurred When Saving
+                        {t('edit-save-error', {ns: 'edit'})}
                     </div>
                 }
                 open={error}
@@ -423,7 +423,7 @@ const ResumeImport = (props: ResumeImportProps) => {
                                 paddingRight: '5px',
                             }}
                         />
-                        Save Successfully
+                        {t('edit-save-success', {ns: 'edit'})}
                     </div>
                 }
                 open={isSuccessful}

@@ -108,7 +108,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         return {
             props: { 
                 templatesData: templates === null ? null : { data: templates.data },
-                ...await serverSideTranslations(locale as string, ['template']),
+                ...await serverSideTranslations(locale as string, ['template', 'layout']),
             }
         }
     }

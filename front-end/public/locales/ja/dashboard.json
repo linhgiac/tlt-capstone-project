@@ -11,5 +11,8 @@
     "dashboard-cancel-text": "キャンセル",
     "dashboard-confirm-text": "OK",
     "dashboard-delete-title": "履歴書を削除します",
-    "dashboard-delete-description": "この履歴書を削除したいですか？"
+    "dashboard-delete-description": "この履歴書を削除したいですか？",
+    "dashboard-created": "で作成されました",
+    "dashboard-updated": "で更新されました",
+    "dashboard-create-with-personal": "個人的な詳細を備えた新規を作成します"
 }

@@ -14,6 +14,8 @@ import { getAuthHeader } from '../../configs/restApi/clients';
 import axios from 'axios';
 import { convertProfileResponse } from '../../configs/utils/format.utils';
 import Head from 'next/head';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 type AccountSettingsProps = {
     userData: any;
@@ -23,6 +25,7 @@ type AccountSettingsProps = {
 const AccountSettings = (props: AccountSettingsProps) => {
     const { userData } = props;
     const [user, setUser] = useRecoilState(userState);
+    const { t } = useTranslation();
     useEffect(() => {
         setUser(userData);
     }, [userData]);
@@ -36,16 +39,16 @@ const AccountSettings = (props: AccountSettingsProps) => {
             }}>
             <Head>
                 <title>
-                    Account Settings 
+                    {t('account-settings', {ns: 'account'})}
                 </title>
             </Head>
             <div className={classNames(styles['setting__container'])}>
                 <div className={classNames(styles['setting-title'])}>
-                    Account Settings
+                    {t('account-settings', {ns: 'account'})}
                 </div>
                 <div className={classNames(styles['account__container'])}>
                     <div className={classNames(styles['account-title'])}>
-                        Account
+                        {t('account', {ns: 'account'})}
                     </div>
                     <div
                         className={classNames(
@@ -71,9 +74,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
         const response = await axios.get(`${HOST}accounts/user-details/`, {
             headers: headers,
         });
+        const { locale } = ctx
         return {
             props: {
                 ...defaultReturnProps,
+                ...(await serverSideTranslations(locale as string, [
+                    'account', 'layout'
+                ])),
                 userData: convertProfileResponse(response.data),
             },
         };

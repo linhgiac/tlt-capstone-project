@@ -1,0 +1,15 @@
+{
+    "account-settings": "アカウント設定",
+    "account": "アカウント設定",
+    "account-first-name": "ファーストネーム",
+    "account-last-name": "苗字",
+    "account-email": "Eメール",
+    "account-phone": "電話",
+    "account-country": "国",
+    "account-city": "街",
+    "account-address": "住所",
+    "account-save": "保存",
+    "account-save-success": "セーブに成功",
+    "account-invalid-email": "入力は有効な電子メールではありません！",
+    "account-change-avatar": "アバターを変更します"
+}
