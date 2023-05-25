@@ -31,7 +31,6 @@ const FilterModalContent = (props: FilterModalContentProps) => {
     const searchQuery = useRecoilValue(jobQueryState);
 
     useEffect(() => {
-        console.log('keywords', router.query.keywords);
         if (
             router.query.keywords &&
             typeof router.query.keywords === 'string'
@@ -61,12 +60,7 @@ const FilterModalContent = (props: FilterModalContentProps) => {
     }, [router]);
 
     const filterHandler = (values: any) => {
-        console.log('TvT log: value from filter modal', {
-            ...values,
-            keywords: tags,
-        });
         setLoading(true);
-        console.log('search', searchQuery);
         router.push({
             pathname: '/job-postings/[search]',
             query: {
@@ -82,7 +76,6 @@ const FilterModalContent = (props: FilterModalContentProps) => {
     };
     const handleClose = (removedTag: string) => {
         const newTags = tags.filter((tag: any) => tag !== removedTag);
-        console.log(newTags);
         setTags(newTags);
     };
 

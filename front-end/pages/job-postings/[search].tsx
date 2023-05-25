@@ -187,15 +187,6 @@ export const getServerSideProps: GetServerSideProps = async (
     const job_portal = ctx.query?.job_portal;
     const keywords = ctx.query?.keywords;
     const last_updated = ctx.query?.last_updated;
-    console.log(
-        sort_by,
-        job_portal,
-        keywords,
-        last_updated,
-
-        job,
-        location
-    );
 
     try {
         const headers = getAuthHeader({ req, res });
@@ -205,7 +196,7 @@ export const getServerSideProps: GetServerSideProps = async (
                 query: {
                     job_title: job,
                     location: location,
-                    job_portal,
+                    job_portal: typeof job_portal === 'string' ? [job_portal] : job_portal,
                     keywords,
                     last_updated,
                 },
