@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.scss';
 import { HOST } from '../../../../configs/constants/misc';
+import { useTranslation } from 'next-i18next';
 
 type AccountAvatarProps = {
     className?: string;
@@ -17,6 +18,7 @@ const AccountAvatar = (props: AccountAvatarProps) => {
     const { className, onChangeAvatar, fetchingURL } = props;
     const [file, setFile] = useState<UploadFile>();
     const [avatarURL, setAvatarURL] = useState("");
+    const { t } = useTranslation();
 
     // More consideration
     useEffect(() => {
@@ -60,7 +62,7 @@ const AccountAvatar = (props: AccountAvatarProps) => {
                 showUploadList={false}
                 onChange={changeAvatarHandler}>
                 <div className={classNames(styles['change-avatar'])}>
-                    Change avatar
+                    {t('account-change-avatar', {ns: 'account'})}
                 </div>
             </Upload>
         </div>

@@ -1,0 +1,15 @@
+{
+    "account-settings": "Account Settings ",
+    "account": "Account Settings ",
+    "account-first-name": "First Name",
+    "account-last-name": "Last Name",
+    "account-email": "Email",
+    "account-phone": "Phone",
+    "account-country": "Country",
+    "account-city": "City",
+    "account-address": "Address",
+    "account-save": "Save",
+    "account-save-success": "Save Successfully",
+    "account-invalid-email": "The input is not valid E-mail!",
+    "account-change-avatar": "Change avatar"
+}

@@ -46,14 +46,13 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => {
         return {
             props: {
                 ...defaultReturnProps,
-                ...await serverSideTranslations(locale as string, ['home']),
+                ...await serverSideTranslations(locale as string, ['home', 'layout']),
             },
         };
     } catch (error: any) {
         return {
             props: {
                 ...defaultReturnProps,
-                ...await serverSideTranslations(locale as string, ['home']),
                 error: JSON.stringify(error),
             },
         };

@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styles from '../styles.module.scss';
+import { useTranslation } from 'next-i18next';
 
 type Props = {
     onCloseDrawer: () => void;
@@ -10,6 +11,7 @@ type Props = {
 
 const LoginButton = (props: Props) => {
     const router = useRouter();
+    const { t } = useTranslation();
     return (
         <div
             className={styles['login-button__container']}
@@ -26,7 +28,7 @@ const LoginButton = (props: Props) => {
                 onClick={() => {
                     router.push('/log-in');
                 }}>
-                Log in
+                {t('layout-login', {ns: 'layout'})}
             </Button>
             <Button
                 className={classNames(
@@ -38,7 +40,7 @@ const LoginButton = (props: Props) => {
                 size="large"
                 type="primary"
                 onClick={() => router.push('/register')}>
-                Sign Up
+                {t('layout-signup', {ns: 'layout'})}
             </Button>
         </div>
     );

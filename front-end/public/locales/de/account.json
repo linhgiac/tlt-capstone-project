@@ -1,0 +1,15 @@
+{
+    "account-settings": "Account Einstellungen",
+    "account": "Account Einstellungen",
+    "account-first-name": "Vorname",
+    "account-last-name": "Familienname, Nachname",
+    "account-email": "Email",
+    "account-phone": "Telefon",
+    "account-country": "Land",
+    "account-city": "Stadt",
+    "account-address": "Adresse",
+    "account-save": "Speichern",
+    "account-save-success": "Erfolgreich gespeichert",
+    "account-invalid-email": "Die Eingabe ist keine gültige E-Mail!",
+    "account-change-avatar": "Avatar ändern"
+}

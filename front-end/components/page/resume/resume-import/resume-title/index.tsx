@@ -5,6 +5,7 @@ import { ResumeConstants } from '../../../../../configs/constants/resume.constan
 import { resumeTitleValueState } from '../../../../../recoil-state/resume-state/resume-title.state';
 import { EditableTitle } from '../../../../custom';
 import styles from './styles.module.scss';
+import { useTranslation } from 'next-i18next'; 
 
 type ResumeTitleProps = {
     title?: string;
@@ -17,6 +18,7 @@ const ResumeTitle = (props: ResumeTitleProps) => {
     const [resumeTitleValue, setResumeTitleValue] = useRecoilState(
         resumeTitleValueState
     );
+    const { t } = useTranslation();
     return (
         <>
             {editable ? (
@@ -25,7 +27,7 @@ const ResumeTitle = (props: ResumeTitleProps) => {
                     onClick={onClick}>
                     <Tooltip
                         placement="bottom"
-                        title="Click to change title!">
+                        title={t('edit-change-title-tooltip', {ns: 'edit'})}>
                         {resumeTitleValue}
                     </Tooltip>
 

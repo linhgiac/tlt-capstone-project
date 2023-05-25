@@ -11,5 +11,8 @@
     "dashboard-cancel-text": "Stornieren",
     "dashboard-confirm-text": "OK",
     "dashboard-delete-title": "Lebenslauf löschen",
-    "dashboard-delete-description": "Sind Sie sicher, dass Sie diesen Lebenslauf löschen möchten?"
+    "dashboard-delete-description": "Sind Sie sicher, dass Sie diesen Lebenslauf löschen möchten?",
+    "dashboard-created": "Hergestellt in",
+    "dashboard-updated": "Aktualisiert am",
+    "dashboard-create-with-personal": "Erstellen Sie Neue mit persönlichen Details"
 }

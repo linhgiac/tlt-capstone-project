@@ -13,6 +13,7 @@ import SelectTemplateFooter from './select-template-footer';
 import styles from './styles.module.scss';
 import TemplateItem from './template-list';
 import TemplateList from './template-list';
+import { useTranslation } from 'next-i18next';
 
 const { Sider, Content } = Layout;
 
@@ -23,6 +24,7 @@ type Props = {
 };
 
 const TemplateSelector = (props: Props) => {
+    const { t } = useTranslation();
     const { onChangeLayout, templates } = props;
     console.log('template', templates);
     const [isFooterDisplay, setIsFooterDisplay] = useState(false);
@@ -91,7 +93,7 @@ const TemplateSelector = (props: Props) => {
                                     <LayoutOutlined
                                         style={{ paddingRight: '5px' }}
                                     />
-                                    Template
+                                    {t('edit-template', {ns: 'edit'})}
                                 </div>
                                 <div
                                     style={{
@@ -117,7 +119,7 @@ const TemplateSelector = (props: Props) => {
                                     <DragOutlined
                                         style={{ paddingRight: '5px' }}
                                     />
-                                    Layout
+                                    {t('edit-layout', {ns: 'edit'})}
                                 </div>
                                 <div
                                     style={{

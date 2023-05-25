@@ -9,7 +9,7 @@ import { Avatar, Button, Tooltip } from 'antd';
 import { useRouter } from 'next/router';
 import React from 'react';
 import DownloadButton from '../../../../custom/downnload-button';
-
+import { useTranslation } from 'next-i18next';
 import styles from '../styles.module.scss';
 
 type Props = {
@@ -18,13 +18,14 @@ type Props = {
 
 const ActionList = (props: Props) => {
     const { onAction } = props;
+    const { t } = useTranslation();
     const router = useRouter();
     return (
         <div>
             <div className={styles['action-item']}>
                 <Tooltip
                     placement="right"
-                    title={'Account Settings'}>
+                    title={t('edit-account-settings', {ns: 'edit'})}>
                     <Button
                         style={{
                             backgroundColor: 'transparent',
@@ -47,7 +48,7 @@ const ActionList = (props: Props) => {
             <div className={styles['action-item']}>
                 <Tooltip
                     placement="right"
-                    title={'Editor'}>
+                    title={t('edit-editor', {ns: 'edit'})}>
                     <Button
                         style={{
                             backgroundColor: 'transparent',
@@ -65,7 +66,7 @@ const ActionList = (props: Props) => {
             <div className={styles['action-item']}>
                 <Tooltip
                     placement="right"
-                    title={'Template'}>
+                    title={t('edit-template', {ns: 'edit'})}>
                     <Button
                         style={{
                             backgroundColor: 'transparent',
@@ -83,7 +84,7 @@ const ActionList = (props: Props) => {
             <div className={styles['action-item']}>
                 <Tooltip
                     placement="right"
-                    title={'Layout'}>
+                    title={t('edit-layout', {ns: 'edit'})}>
                     <Button
                         style={{
                             backgroundColor: 'transparent',
@@ -101,7 +102,7 @@ const ActionList = (props: Props) => {
             <div className={styles['action-item']}>
                 <Tooltip
                     placement="right"
-                    title={'Export'}>
+                    title={t('edit-export', {ns:'edit'})}>
                     <DownloadButton icon={true} />
                 </Tooltip>
             </div>
