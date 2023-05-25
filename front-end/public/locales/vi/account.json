@@ -1,0 +1,15 @@
+{
+    "account-settings": "Cài đặt tài khoản",
+    "account": "Cài đặt tài khoản",
+    "account-first-name": "Tên",
+    "account-last-name": "Họ",
+    "account-email": "E-mail",
+    "account-phone": "Điện thoại",
+    "account-country": "Quốc gia",
+    "account-city": "Thành phố",
+    "account-address": "Địa chỉ",
+    "account-save": "Lưu",
+    "account-save-success": "Lưu lại thành công",
+    "account-invalid-email": "Đầu vào không phải là e-mail hợp lệ!",
+    "account-change-avatar": "Thay đổi Avatar"
+}

@@ -16,7 +16,7 @@ import MultiDndContainer from '../../../../../custom/multi-sortable/multi-dndcon
 import { Divider } from 'antd';
 import { upperFirst } from 'lodash';
 import { CloseOutlined } from '@ant-design/icons';
-
+import { useTranslation } from 'next-i18next';
 type Props = {
     index: number;
     items: any;
@@ -25,11 +25,12 @@ type Props = {
 
 const LayoutPage = (props: Props) => {
     const { index, items, onRemovePage } = props;
+    const { t } = useTranslation();
 
     return (
         <div className={classNames(styles['layout-page__container'])}>
             <div className={classNames(styles['layout-page__title'])}>
-                <div>Page {index + 1}</div>
+                <div>{t('edit-page', {ns: 'edit'})} {index + 1}</div>
                 <div
                     className={classNames(styles['layout-page__title-close'])}
                     onClick={() => {
@@ -50,7 +51,7 @@ const LayoutPage = (props: Props) => {
                                 className={classNames(
                                     styles['layout-page__columns_title']
                                 )}>
-                                {upperFirst(item)}
+                                {t('edit-' + item, {ns: 'edit'})}
                             </div>
                             <MultiDroppable
                                 id={`${item}-${index}`}

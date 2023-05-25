@@ -8,6 +8,7 @@ import { resumeChangedValueState } from '../../../../../recoil-state/resume-stat
 import { resumeSavedState } from '../../../../../recoil-state/resume-state/resume.state';
 import DownloadButton from '../../../../custom/downnload-button';
 import styles from './styles.module.scss';
+import { useTranslation } from 'next-i18next';
 
 type ResumeExportSelectionProps = {
     className: string;
@@ -19,6 +20,7 @@ const ResumeExportSelection = (props: ResumeExportSelectionProps) => {
     const resumeSaved = useRecoilValue(resumeSavedState);
     const resumeData = useRecoilValue(resumeChangedValueState);
     const [isSavedWarning, setIsSaveWarning] = useState(false);
+    const { t } = useTranslation();
 
     const clickHandler = async () => {
         console.log('resumeSaved', resumeSaved);
@@ -107,7 +109,7 @@ const ResumeExportSelection = (props: ResumeExportSelectionProps) => {
                 size="large"
                 onClick={clickHandler}
                 className={styles['resume-export-button__selection']}>
-                Select Template
+                {t('edit-select-template' , {ns: 'edit'})}
             </Button>
             <Modal
                 title={
@@ -120,7 +122,7 @@ const ResumeExportSelection = (props: ResumeExportSelectionProps) => {
                                 paddingRight: '5px',
                             }}
                         />
-                        You must save your information!
+                        {t('edit-need-save' , {ns: 'edit'})}
                     </div>
                 }
                 open={isSavedWarning}

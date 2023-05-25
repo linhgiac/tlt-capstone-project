@@ -5,11 +5,12 @@ import { useRecoilState } from 'recoil';
 import { resumeLayoutState } from '../../../../../recoil-state/resume-state/resume.state';
 import MultiDndContainer from '../../../../custom/multi-sortable/multi-dndcontainer';
 import LayoutPage from './layout-page';
-
+import { useTranslation } from 'next-i18next';
 type Props = {};
 
 const LayoutEditor = (props: Props) => {
     const [pages, setPages] = useRecoilState(resumeLayoutState);
+    const { t } = useTranslation();
 
     const addPageHandler = () => {
         setPages((prevPages: any) => {
@@ -62,7 +63,7 @@ const LayoutEditor = (props: Props) => {
                     </div>
                 );
             })}
-            <Button onClick={addPageHandler}>Add more page</Button>
+            <Button onClick={addPageHandler}>{t('edit-add-page', {ns:'edit'})}</Button>
         </MultiDndContainer>
     );
 };
