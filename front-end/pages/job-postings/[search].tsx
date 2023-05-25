@@ -199,30 +199,28 @@ export const getServerSideProps: GetServerSideProps = async (
 
     try {
         const headers = getAuthHeader({ req, res });
-        // const response = await axios.post(
-        //     `${HOST}jobs/searching/?limit=${PAGE_LIMIT}&offset=0`,
-        //     {
-        //         query: {
-        //             job_title: job,
-        //             location: location,
-        //             job_portal,
-        //             keywords,
-        //             last_updated,
-        //         },
-        //         sort: sort_by,
-        //     },
-        //     {
-        //         headers: headers,
-        //     }
-        // );
-        // const jobList = convertJobResponse(response.data.results);
-        // const jobList: any = [];
+        const response = await axios.post(
+            `${HOST}jobs/searching/?limit=${PAGE_LIMIT}&offset=0`,
+            {
+                query: {
+                    job_title: job,
+                    location: location,
+                    job_portal,
+                    keywords,
+                    last_updated,
+                },
+                sort: sort_by,
+            },
+            {
+                headers: headers,
+            }
+        );
+        const jobList = convertJobResponse(response.data.results);
         return {
             props: {
                 ...defaultReturnProps,
-                jobList: JOB_DATA.results,
+                jobList,
                 // jobsCount: response.data.count,
-                jobsCount: JOB_DATA.count,
             },
         };
     } catch (error: any) {

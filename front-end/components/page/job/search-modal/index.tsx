@@ -102,14 +102,12 @@ const SearchModalContent = (props: SearchModalContentProps) => {
                     <Form.Item>
                         <Button
                             type="primary"
-                            // className="btn"
                             style={{
                                 borderRadius: '8px',
                                 height: '40px',
                                 width: '150px',
                             }}
                             htmlType="submit"
-                            // size="large"
                             block
                             loading={loading}>
                             SEARCH
