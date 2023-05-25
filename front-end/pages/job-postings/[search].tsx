@@ -109,7 +109,7 @@ const JobPostings = (props: JobPostingsProps) => {
 
     return (
         <div className={styles['job-postings-container']}>
-            <div className={styles.search}>
+            <div>
                 <div className={styles.search}>
                     <SearchModalContent />
                 </div>
@@ -220,7 +220,7 @@ export const getServerSideProps: GetServerSideProps = async (
             props: {
                 ...defaultReturnProps,
                 jobList,
-                // jobsCount: response.data.count,
+                jobsCount: response.data.count,
             },
         };
     } catch (error: any) {

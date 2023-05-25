@@ -25,6 +25,107 @@ export const JOB_DATA = {
         },
         {
             job_portal: 'vietnamworks',
+            jobTitle:
+                'Software Developer ( Python) Software Developer ( Python)',
+            company: 'German Software Intelligence LLC',
+            date: '2023-04-28T00:00:00Z',
+            link: 'https://www.vietnamworks.com/software-developer-python-2-1645716-jv',
+            location: '153, Ung Van Khiem, Binh Thanh, Ho Chi Minh City',
+            details:
+                '- Implement development project scope using languages such as Python and C/C++ \r\n- Manage work using Agile development process (Scrum) in Jira and managing code in Bitbucket,\r\n- Coaching Junior or fresher developer in coding\r\n- Support to develop company standards and create documentation of works in accordance with good practices, \r\n- Support to plan code...#- BA in Information Technology/ Computer Science or Civil Engineering/ Architecture \r\n - At least 3 - 5 years’ experience in professional software development environment\r\n- Good Object-oriented programming skills \r\n- Interest & good in mathematical – geometry calculation (2D/3D/matrix) \r\n- Structured working manor, good analytical skills, and attention to detail \r\n- Team player with...',
+            searching_location: 'Ho Chi Minh city, Vietnam',
+        },
+        {
+            job_portal: 'vietnamworks',
+            job_title: 'Software Developer ( Python)',
+            company: 'German Software Intelligence LLC',
+            date: '2023-04-28T00:00:00Z',
+            link: 'https://www.vietnamworks.com/software-developer-python-2-1645716-jv',
+            location: '153, Ung Van Khiem, Binh Thanh, Ho Chi Minh City',
+            details:
+                '- Implement development project scope using languages such as Python and C/C++ \r\n- Manage work using Agile development process (Scrum) in Jira and managing code in Bitbucket,\r\n- Coaching Junior or fresher developer in coding\r\n- Support to develop company standards and create documentation of works in accordance with good practices, \r\n- Support to plan code...#- BA in Information Technology/ Computer Science or Civil Engineering/ Architecture \r\n - At least 3 - 5 years’ experience in professional software development environment\r\n- Good Object-oriented programming skills \r\n- Interest & good in mathematical – geometry calculation (2D/3D/matrix) \r\n- Structured working manor, good analytical skills, and attention to detail \r\n- Team player with...',
+            searching_location: 'Ho Chi Minh city, Vietnam',
+        },
+        {
+            job_portal: 'vietnamworks',
+            job_title: 'Software Developer ( Python)',
+            company: 'German Software Intelligence LLC',
+            date: '2023-04-28T00:00:00Z',
+            link: 'https://www.vietnamworks.com/software-developer-python-2-1645716-jv',
+            location: '153, Ung Van Khiem, Binh Thanh, Ho Chi Minh City',
+            details:
+                '- Implement development project scope using languages such as Python and C/C++ \r\n- Manage work using Agile development process (Scrum) in Jira and managing code in Bitbucket,\r\n- Coaching Junior or fresher developer in coding\r\n- Support to develop company standards and create documentation of works in accordance with good practices, \r\n- Support to plan code...#- BA in Information Technology/ Computer Science or Civil Engineering/ Architecture \r\n - At least 3 - 5 years’ experience in professional software development environment\r\n- Good Object-oriented programming skills \r\n- Interest & good in mathematical – geometry calculation (2D/3D/matrix) \r\n- Structured working manor, good analytical skills, and attention to detail \r\n- Team player with...',
+            searching_location: 'Ho Chi Minh city, Vietnam',
+        },
+        {
+            job_portal: 'vietnamworks',
+            job_title: 'Software Developer ( Python)',
+            company: 'German Software Intelligence LLC',
+            date: '2023-04-28T00:00:00Z',
+            link: 'https://www.vietnamworks.com/software-developer-python-2-1645716-jv',
+            location: '153, Ung Van Khiem, Binh Thanh, Ho Chi Minh City',
+            details:
+                '- Implement development project scope using languages such as Python and C/C++ \r\n- Manage work using Agile development process (Scrum) in Jira and managing code in Bitbucket,\r\n- Coaching Junior or fresher developer in coding\r\n- Support to develop company standards and create documentation of works in accordance with good practices, \r\n- Support to plan code...#- BA in Information Technology/ Computer Science or Civil Engineering/ Architecture \r\n - At least 3 - 5 years’ experience in professional software development environment\r\n- Good Object-oriented programming skills \r\n- Interest & good in mathematical – geometry calculation (2D/3D/matrix) \r\n- Structured working manor, good analytical skills, and attention to detail \r\n- Team player with...',
+            searching_location: 'Ho Chi Minh city, Vietnam',
+        },
+
+        {
+            job_portal: 'vietnamworks',
+            job_title: 'Software Developer ( Python)',
+            company: 'German Software Intelligence LLC',
+            date: '2023-04-28T00:00:00Z',
+            link: 'https://www.vietnamworks.com/software-developer-python-2-1645716-jv',
+            location: '153, Ung Van Khiem, Binh Thanh, Ho Chi Minh City',
+            details:
+                '- Implement development project scope using languages such as Python and C/C++ \r\n- Manage work using Agile development process (Scrum) in Jira and managing code in Bitbucket,\r\n- Coaching Junior or fresher developer in coding\r\n- Support to develop company standards and create documentation of works in accordance with good practices, \r\n- Support to plan code...#- BA in Information Technology/ Computer Science or Civil Engineering/ Architecture \r\n - At least 3 - 5 years’ experience in professional software development environment\r\n- Good Object-oriented programming skills \r\n- Interest & good in mathematical – geometry calculation (2D/3D/matrix) \r\n- Structured working manor, good analytical skills, and attention to detail \r\n- Team player with...',
+            searching_location: 'Ho Chi Minh city, Vietnam',
+        },
+        {
+            job_portal: 'vietnamworks',
+            job_title: 'Software Developer ( Python)',
+            company: 'German Software Intelligence LLC',
+            date: '2023-04-28T00:00:00Z',
+            link: 'https://www.vietnamworks.com/software-developer-python-2-1645716-jv',
+            location: '153, Ung Van Khiem, Binh Thanh, Ho Chi Minh City',
+            details:
+                '- Implement development project scope using languages such as Python and C/C++ \r\n- Manage work using Agile development process (Scrum) in Jira and managing code in Bitbucket,\r\n- Coaching Junior or fresher developer in coding\r\n- Support to develop company standards and create documentation of works in accordance with good practices, \r\n- Support to plan code...#- BA in Information Technology/ Computer Science or Civil Engineering/ Architecture \r\n - At least 3 - 5 years’ experience in professional software development environment\r\n- Good Object-oriented programming skills \r\n- Interest & good in mathematical – geometry calculation (2D/3D/matrix) \r\n- Structured working manor, good analytical skills, and attention to detail \r\n- Team player with...',
+            searching_location: 'Ho Chi Minh city, Vietnam',
+        },
+        {
+            job_portal: 'vietnamworks',
+            job_title: 'Software Developer ( Python)',
+            company: 'German Software Intelligence LLC',
+            date: '2023-04-28T00:00:00Z',
+            link: 'https://www.vietnamworks.com/software-developer-python-2-1645716-jv',
+            location: '153, Ung Van Khiem, Binh Thanh, Ho Chi Minh City',
+            details:
+                '- Implement development project scope using languages such as Python and C/C++ \r\n- Manage work using Agile development process (Scrum) in Jira and managing code in Bitbucket,\r\n- Coaching Junior or fresher developer in coding\r\n- Support to develop company standards and create documentation of works in accordance with good practices, \r\n- Support to plan code...#- BA in Information Technology/ Computer Science or Civil Engineering/ Architecture \r\n - At least 3 - 5 years’ experience in professional software development environment\r\n- Good Object-oriented programming skills \r\n- Interest & good in mathematical – geometry calculation (2D/3D/matrix) \r\n- Structured working manor, good analytical skills, and attention to detail \r\n- Team player with...',
+            searching_location: 'Ho Chi Minh city, Vietnam',
+        },
+        {
+            job_portal: 'vietnamworks',
+            job_title: 'Software Developer ( Python)',
+            company: 'German Software Intelligence LLC',
+            date: '2023-04-28T00:00:00Z',
+            link: 'https://www.vietnamworks.com/software-developer-python-2-1645716-jv',
+            location: '153, Ung Van Khiem, Binh Thanh, Ho Chi Minh City',
+            details:
+                '- Implement development project scope using languages such as Python and C/C++ \r\n- Manage work using Agile development process (Scrum) in Jira and managing code in Bitbucket,\r\n- Coaching Junior or fresher developer in coding\r\n- Support to develop company standards and create documentation of works in accordance with good practices, \r\n- Support to plan code...#- BA in Information Technology/ Computer Science or Civil Engineering/ Architecture \r\n - At least 3 - 5 years’ experience in professional software development environment\r\n- Good Object-oriented programming skills \r\n- Interest & good in mathematical – geometry calculation (2D/3D/matrix) \r\n- Structured working manor, good analytical skills, and attention to detail \r\n- Team player with...',
+            searching_location: 'Ho Chi Minh city, Vietnam',
+        },
+        {
+            job_portal: 'vietnamworks',
+            job_title: 'Software Developer ( Python)',
+            company: 'German Software Intelligence LLC',
+            date: '2023-04-28T00:00:00Z',
+            link: 'https://www.vietnamworks.com/software-developer-python-2-1645716-jv',
+            location: '153, Ung Van Khiem, Binh Thanh, Ho Chi Minh City',
+            details:
+                '- Implement development project scope using languages such as Python and C/C++ \r\n- Manage work using Agile development process (Scrum) in Jira and managing code in Bitbucket,\r\n- Coaching Junior or fresher developer in coding\r\n- Support to develop company standards and create documentation of works in accordance with good practices, \r\n- Support to plan code...#- BA in Information Technology/ Computer Science or Civil Engineering/ Architecture \r\n - At least 3 - 5 years’ experience in professional software development environment\r\n- Good Object-oriented programming skills \r\n- Interest & good in mathematical – geometry calculation (2D/3D/matrix) \r\n- Structured working manor, good analytical skills, and attention to detail \r\n- Team player with...',
+            searching_location: 'Ho Chi Minh city, Vietnam',
+        },
+        {
+            job_portal: 'vietnamworks',
             job_title:
                 '[Hybrid - HCM] [$1400 - $1700] Automation Test Framework Developer (C++/python)',
             company: "Navigos Search's Client",
