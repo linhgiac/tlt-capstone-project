@@ -31,7 +31,8 @@ const JobPostingItem = (props: JobPostingItemProps) => {
             extra={
                 <a
                     href={link}
-                    target="_blank">
+                    target="_blank"
+                    rel="noreferrer">
                     Details
                 </a>
             }
