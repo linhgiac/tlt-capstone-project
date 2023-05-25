@@ -25,7 +25,8 @@ const HeaderRouter = (props: HeaderRouterProps) => {
             getItem(t('layout-professional', {ns: 'layout'}), 'templates/professional'),
             getItem(t('layout-modern', {ns: 'layout'}), 'templates/modern'),
         ]),
-        getItem(t('layout-blogs', {ns: 'layout'}), 'blogs'),
+        getItem('Jobs', 'job-postings'),
+        getItem('Blogs', 'blogs'),
     ];
 
     const clickHandler: MenuProps['onClick'] = e => {
@@ -33,6 +34,13 @@ const HeaderRouter = (props: HeaderRouterProps) => {
         if (e.key === 'blogs') {
             router.push({
                 pathname: `/blogs/${HOW_TO_WRITE_A_RESUME}`,
+            });
+        } else if (e.key === 'job-postings') {
+            router.push({
+                pathname: '/job-postings/[search]',
+                query: {
+                    search: 'python-developer_ho-chi-minh',
+                },
             });
         } else if (e.key !== 'resume')
             router.push({

@@ -34,7 +34,7 @@ import { getAuthHeader } from '../../../../configs/restApi/clients';
 import { HOST } from '../../../../configs/constants/misc';
 import axios from 'axios';
 import { resumeSavedState } from '../../../../recoil-state/resume-state/resume.state';
-import { get } from 'lodash';
+import { get, kebabCase } from 'lodash';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import html2canvas from 'html2canvas';
@@ -80,7 +80,7 @@ const ResumeImport = (props: ResumeImportProps) => {
     );
     const setEducationItems = useSetRecoilState(educationItemsState);
     const setLinkItems = useSetRecoilState(linkItemsState);
-    const setSkillItems = useSetRecoilState(skillItemsState);
+    const [skillItems, setSkillItems] = useRecoilState(skillItemsState);
     useEffect(() => {}, [resumeChangedValue]);
     const reloadData = useCallback(() => {
         const employmentHistories = get(
@@ -310,9 +310,10 @@ const ResumeImport = (props: ResumeImportProps) => {
                 onClick={() => {
                     setIsSeekingJob(true);
                     jobSeekingForm.setFieldValue(
-                        'jobTitle',
+                        'job_title',
                         personalDetailsChangedValues.jobTitle
                     );
+                    jobSeekingForm.setFieldValue('location', 'ho-chi-minh');
                 }}>
                 {t('edit-job-seeking', {ns: 'edit'})}
             </Button>
@@ -341,20 +342,33 @@ const ResumeImport = (props: ResumeImportProps) => {
                     form={jobSeekingForm}
                     onFinish={(values: any) => {
                         console.log('seeking job:', values);
+                        console.log('skill', skillItems);
+                        router.push({
+                            pathname: '/job-postings/[search]',
+                            query: {
+                                search: `${kebabCase(values.job_title)}_${
+                                    values.location
+                                }`,
+                                keywords: skillItems.map(
+                                    (item: any) => item.name
+                                ),
+                            },
+                        });
                     }}>
                     <Form.Item
-                        name="jobTitle"
+                        name="job_title"
                         label={<div style={{ color: '#000' }}>{t('edit-job-title', {ns: 'edit'})}</div>}>
                         <Input disabled />
                     </Form.Item>
                     <Form.Item
+                        required
                         name="location"
+                        initialValue="ho-chi-minh"
                         label={<div style={{ color: '#000' }}>{t('edit-location', {ns: 'edit'})}</div>}>
                         <Radio.Group>
-                            <Radio value="all"> {t('edit-all', {ns: 'edit'})} </Radio>
-                            <Radio value="hanoi"> Ha Noi </Radio>
-                            <Radio value="danang"> Da Nang </Radio>
-                            <Radio value="hochiminh"> Ho Chi Minh </Radio>
+                            <Radio value="ha-noi"> Ha Noi </Radio>
+                            <Radio value="da-nang"> Da Nang </Radio>
+                            <Radio value="ho-chi-minh"> Ho Chi Minh </Radio>
                         </Radio.Group>
                     </Form.Item>
                     <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

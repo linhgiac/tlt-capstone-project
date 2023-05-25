@@ -23,10 +23,10 @@ const ResumeExportSelection = (props: ResumeExportSelectionProps) => {
     const { t } = useTranslation();
 
     const clickHandler = async () => {
-        console.log('resumeSaved', resumeSaved);
-        console.log('resumeeee', resumeData);
-
         const compareObject = (obj: any, other: any): boolean => {
+            if (obj === null || isEmpty(obj)) {
+                return true;
+            }
             const keys = Array.from(
                 new Set(Object.keys(obj).concat(Object.keys(other)))
             );
