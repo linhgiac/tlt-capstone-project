@@ -66,6 +66,7 @@ const FilterModalContent = (props: FilterModalContentProps) => {
             keywords: tags,
         });
         setLoading(true);
+        console.log('search', searchQuery);
         router.push({
             pathname: '/job-postings/[search]',
             query: {

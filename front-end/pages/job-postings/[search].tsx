@@ -31,16 +31,17 @@ import {
     convertSearchJobPayload,
 } from '../../configs/utils/format.utils';
 import { camelCase, kebabCase, lowerCase } from 'lodash';
+import { useRouter } from 'next/router';
 
 type JobPostingsProps = {
     jobList: any;
     jobsCount: number;
     error?: any;
-    searchJobPayload: any;
 };
 
 const JobPostings = (props: JobPostingsProps) => {
-    const { jobList, jobsCount, error, searchJobPayload } = props;
+    const { jobList, jobsCount, error } = props;
+    const router = useRouter();
     const [jobQuery, setJobQuery] = useRecoilState(jobQueryState);
     const [jobs, setJobs] = useState();
     const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
@@ -51,10 +52,16 @@ const JobPostings = (props: JobPostingsProps) => {
     useEffect(() => {
         setJobs(jobList);
         setJobQuery({
-            job_title: lowerCase(searchJobPayload?.split('_')[0]),
-            location: searchJobPayload?.split('_')[1],
+            job_title: lowerCase(router.query.search?.toString().split('_')[0]),
+            location: router.query.search?.toString().split('_')[1]
+                ? router.query.search?.toString().split('_')[1]
+                : 'ho-chi-minh',
+            sort_by: router.query.sort_by,
+            job_portal: router.query.job_portal,
+            keywords: router.query.keywords,
+            last_updated: router.query.last_updated,
         });
-    }, [jobList, searchJobPayload]);
+    }, [jobList, router]);
 
     const handlePageChange: PaginationProps['onChange'] = (
         pageNumber,
@@ -141,11 +148,20 @@ export const getServerSideProps: GetServerSideProps = async (
     const defaultReturnProps = {
         currentLayout: LAYOUT.DEFAULT,
     };
-    const [job, location] = convertSearchJobPayload(ctx.params?.search);
-    const sort_by = ctx.params?.sort_by;
-    const job_portal = ctx.params?.job_portal;
-    const keywords = ctx.params?.keywords;
-    const last_updated = ctx.params?.last_updated;
+    const [job, location] = convertSearchJobPayload(ctx.query?.search);
+    const sort_by = ctx.query?.sort_by;
+    const job_portal = ctx.query?.job_portal;
+    const keywords = ctx.query?.keywords;
+    const last_updated = ctx.query?.last_updated;
+    console.log(
+        sort_by,
+        job_portal,
+        keywords,
+        last_updated,
+
+        job,
+        location
+    );
 
     try {
         const headers = getAuthHeader({ req, res });
@@ -173,7 +189,6 @@ export const getServerSideProps: GetServerSideProps = async (
                 jobList,
                 jobsCount: response.data.count,
                 // jobsCount: JOB_DATA.count,
-                searchJobPayload: ctx.params?.search,
             },
         };
     } catch (error: any) {

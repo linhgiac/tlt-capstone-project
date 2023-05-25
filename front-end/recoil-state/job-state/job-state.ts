@@ -12,5 +12,6 @@ export const jobQueryState = atom<JobQueryType>({
     default: {
         job_title: '',
         location: '',
+        sort_by: 'relevancy',
     },
 });

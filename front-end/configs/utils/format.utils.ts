@@ -305,11 +305,11 @@ export const convertSearchJobPayload = (path: any) => {
     const [job, location] = path.split('_');
     let convertLocation = '';
     if (location === 'ho-chi-minh') {
-        convertLocation = 'Ho Chi Minh city, Viet Nam';
+        convertLocation = 'Ho Chi Minh city, Vietnam';
     } else if (location === 'ha-noi') {
-        convertLocation = 'Ha Noi city, Viet Nam';
+        convertLocation = 'Ha Noi city, Vietnam';
     } else if (location === 'da-nang') {
-        convertLocation = 'Da Nang city, Viet Nam';
+        convertLocation = 'Da Nang city, Vietnam';
     }
     return [lowerCase(job), convertLocation];
 };
