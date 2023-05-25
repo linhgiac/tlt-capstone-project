@@ -21,12 +21,10 @@ import { convertSearchJobPayload } from '../../../../configs/utils/format.utils'
 import { useRouter } from 'next/router';
 import { kebabCase } from 'lodash';
 
-type SearchModalContentProps = {
-    onSearchJob: (value: any) => void;
-};
+type SearchModalContentProps = {};
 
 const SearchModalContent = (props: SearchModalContentProps) => {
-    const { onSearchJob } = props;
+    const {} = props;
     const router = useRouter();
     const [jobPostings, setJobPostings] = useRecoilState(jobPostingsState);
     const [searchQuery, setSearchQuery] = useRecoilState(jobQueryState);
@@ -41,16 +39,7 @@ const SearchModalContent = (props: SearchModalContentProps) => {
     }, [searchQuery]);
     const handleSubmit = async (values: any) => {
         console.log('TvT log: value from search modal', values);
-        const payload = convertSearchJobPayload(
-            `${values.job_title}_${values.location}`
-        );
         setLoading(true);
-        // try {
-        //     const response = await axios.get(
-        //         `${HOST}jobs/?keywords=${payload.job}&location=${payload.location}`,
-        //     );
-        //     console.log("TvT log: response data from search modal: ", response.data);
-        // setJobPostings(response.data)
         setSearchQuery({
             job_title: values.job_title,
             location: values.location,
@@ -63,13 +52,6 @@ const SearchModalContent = (props: SearchModalContentProps) => {
         });
 
         setLoading(false);
-        onSearchJob(JOB_DATA.results);
-        // } catch (error: any) {
-        //     error?.response?.data.detail &&
-        //         // setError(error.response.data.detail);
-        //         // Error Handling
-        //         console.log(error.response.data.detail);
-        // }
     };
 
     return (

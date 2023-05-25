@@ -6,17 +6,21 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import styles from "./styles.module.scss";
 import { JOB_DATA } from '../../../../configs/constants/job.constants';
+import { useRouter } from 'next/router';
+import { kebabCase } from 'lodash';
+import { useRecoilValue } from 'recoil';
+import { jobQueryState } from '../../../../recoil-state/job-state/job-state';
 
-type FilterModalContentProps = {
-    onFilterJob: (value: any) => void;
-};
+type FilterModalContentProps = {};
 
 const FilterModalContent = (props: FilterModalContentProps) => {
-    const { onFilterJob } = props;
+    const {} = props;
+    const router = useRouter();
     /*
         KEY WORDS HANDLING
     */
-    const [tags, setTags] = useState<string[]>([]);
+    const [filterForm] = Form.useForm();
+    const [tags, setTags] = useState<any>([]);
     const [loading, setLoading] = useState(false);
     const [inputVisible, setInputVisible] = useState(false);
     const [inputValue, setInputValue] = useState('');
@@ -24,6 +28,19 @@ const FilterModalContent = (props: FilterModalContentProps) => {
     const [editInputValue, setEditInputValue] = useState('');
     const inputRef = useRef<InputRef>(null);
     const editInputRef = useRef<InputRef>(null);
+    const searchQuery = useRecoilValue(jobQueryState);
+
+    useEffect(() => {
+        console.log('keywords', router.query.keywords);
+        if (
+            router.query.keywords &&
+            typeof router.query.keywords === 'string'
+        ) {
+            setTags([router.query.keywords]);
+        } else if (router.query.keywords) {
+            setTags(router.query.keywords);
+        }
+    }, [router]);
 
     useEffect(() => {
         if (inputVisible) {
@@ -35,26 +52,35 @@ const FilterModalContent = (props: FilterModalContentProps) => {
         editInputRef.current?.focus();
     }, [inputValue]);
 
+    useEffect(() => {
+        filterForm.setFieldsValue({
+            sort_by: router.query.sort_by,
+            job_portal: router.query.job_portal,
+            last_updated: router.query.last_updated,
+        });
+    }, [router]);
+
     const filterHandler = (values: any) => {
-        console.log('TvT log: value from filter modal', values);
+        console.log('TvT log: value from filter modal', {
+            ...values,
+            keywords: tags,
+        });
         setLoading(true);
-        // try {
-        //     const response = await axios.get(
-        //         `${HOST}jobs/?keywords=${values.keywords}&location=${values.location}`,
-        //     );
-        //     console.log("TvT log: response data from search modal: ", response.data);
-        // setJobPostings(response.data)
+        router.push({
+            pathname: '/job-postings/[search]',
+            query: {
+                search: `${kebabCase(searchQuery.job_title)}_${
+                    searchQuery.location
+                }`,
+                ...values,
+                keywords: tags,
+            },
+        });
+
         setLoading(false);
-        onFilterJob(JOB_DATA.results); // thay bang response
-        // } catch (error: any) {
-        //     error?.response?.data.detail &&
-        //         // setError(error.response.data.detail);
-        //         // Error Handling
-        //         console.log(error.response.data.detail);
-        // }
     };
     const handleClose = (removedTag: string) => {
-        const newTags = tags.filter(tag => tag !== removedTag);
+        const newTags = tags.filter((tag: any) => tag !== removedTag);
         console.log(newTags);
         setTags(newTags);
     };
@@ -92,7 +118,9 @@ const FilterModalContent = (props: FilterModalContentProps) => {
 
     return (
         <>
-            <Form onFinish={filterHandler}>
+            <Form
+                onFinish={filterHandler}
+                form={filterForm}>
                 <Collapse
                     expandIconPosition="end"
                     collapsible="header"
@@ -101,28 +129,40 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                     <Collapse.Panel
                         header="Sort By"
                         key="1">
-                        <Form.Item>
-                            <Button>Relevancy</Button>
-                            <Button>Newest</Button>
+                        <Form.Item
+                            name="sort_by"
+                            initialValue="relevancy">
+                            <Radio.Group>
+                                <Radio.Button value="relevancy">
+                                    Relevancy
+                                </Radio.Button>
+                                <Radio.Button value="newest">
+                                    Newest
+                                </Radio.Button>
+                            </Radio.Group>
                         </Form.Item>
                     </Collapse.Panel>
                     <Collapse.Panel
                         header="Job Portal"
                         key="2">
-                        <Form.Item>
-                            <Checkbox>Linkedin</Checkbox>
-                            <br />
-                            <Checkbox>VietnamWorks</Checkbox>
-                            <br />
-                            <Checkbox>TopCV</Checkbox>
-                            <br />
+                        <Form.Item name="job_portal">
+                            <Checkbox.Group>
+                                <Checkbox value="linkedin">Linkedin</Checkbox>
+                                <br />
+                                <Checkbox value="vietnamworks">
+                                    VietnamWorks
+                                </Checkbox>
+                                <br />
+                                <Checkbox value="topcv">TopCV</Checkbox>
+                                <br />
+                            </Checkbox.Group>
                         </Form.Item>
                     </Collapse.Panel>
                     <Collapse.Panel
                         header="Keywords (Skills/Certificates/...)"
                         key="3">
-                        <Form.Item>
-                            {tags.map((tag, index) => {
+                        <Form.Item name="keywords">
+                            {tags.map((tag: any, index: any) => {
                                 if (editInputIndex === index) {
                                     return (
                                         <Input
@@ -196,13 +236,13 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                     <Collapse.Panel
                         header="Last Updated"
                         key="4">
-                        <Form.Item>
+                        <Form.Item name="last_updated">
                             <Radio.Group
                             // onChange={onChange}
                             // value={value}
                             >
                                 <Space direction="vertical">
-                                    <Radio value={1}>3 Days agon</Radio>
+                                    <Radio value={1}>3 Days ago</Radio>
                                     <Radio value={2}>Past Week</Radio>
                                     <Radio value={3}>Any Time</Radio>
                                 </Space>

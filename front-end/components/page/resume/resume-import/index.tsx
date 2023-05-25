@@ -80,7 +80,7 @@ const ResumeImport = (props: ResumeImportProps) => {
     );
     const setEducationItems = useSetRecoilState(educationItemsState);
     const setLinkItems = useSetRecoilState(linkItemsState);
-    const setSkillItems = useSetRecoilState(skillItemsState);
+    const [skillItems, setSkillItems] = useRecoilState(skillItemsState);
     useEffect(() => {}, [resumeChangedValue]);
     const reloadData = useCallback(() => {
         const employmentHistories = get(
@@ -342,12 +342,16 @@ const ResumeImport = (props: ResumeImportProps) => {
                     form={jobSeekingForm}
                     onFinish={(values: any) => {
                         console.log('seeking job:', values);
+                        console.log('skill', skillItems);
                         router.push({
                             pathname: '/job-postings/[search]',
                             query: {
                                 search: `${kebabCase(values.job_title)}_${
                                     values.location
                                 }`,
+                                keywords: skillItems.map(
+                                    (item: any) => item.name
+                                ),
                             },
                         });
                     }}>

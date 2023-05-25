@@ -118,7 +118,7 @@ const JobPostings = (props: JobPostingsProps) => {
                 onCancel={() => setIsSearchModalOpen(false)}
                 footer={null}
                 maskClosable>
-                <SearchModalContent onSearchJob={searchJobHandler} />
+                <SearchModalContent />
             </Modal>
             {/* FILTER MODAL */}
             <Modal
@@ -128,7 +128,7 @@ const JobPostings = (props: JobPostingsProps) => {
                 open={isFilterModalOpen}
                 onCancel={() => setIsFilterModalOpen(false)}
                 footer={null}>
-                <FilterModalContent onFilterJob={filterJobHandler} />
+                <FilterModalContent />
             </Modal>
         </div>
     );
@@ -142,29 +142,37 @@ export const getServerSideProps: GetServerSideProps = async (
         currentLayout: LAYOUT.DEFAULT,
     };
     const [job, location] = convertSearchJobPayload(ctx.params?.search);
+    const sort_by = ctx.params?.sort_by;
+    const job_portal = ctx.params?.job_portal;
+    const keywords = ctx.params?.keywords;
+    const last_updated = ctx.params?.last_updated;
 
     try {
         const headers = getAuthHeader({ req, res });
-        // const response = await axios.post(
-        //     `${HOST}jobs/searching/?limit=${PAGE_LIMIT}&offset=0`,
-        //     {
-        //         query: {
-        //             job_title: job,
-        //             location: location,
-        //         },
-        //     },
-        //     {
-        //         headers: headers,
-        //     }
-        // );
-        // const jobList = convertJobResponse(response.data.results);
-        const jobList: any = [];
+        const response = await axios.post(
+            `${HOST}jobs/searching/?limit=${PAGE_LIMIT}&offset=0`,
+            {
+                query: {
+                    job_title: job,
+                    location: location,
+                    sort_by,
+                    job_portal,
+                    keywords,
+                    last_updated,
+                },
+            },
+            {
+                headers: headers,
+            }
+        );
+        const jobList = convertJobResponse(response.data.results);
+        // const jobList: any = [];
         return {
             props: {
                 ...defaultReturnProps,
                 jobList,
-                // jobsCount: response.data.count,
-                jobsCount: JOB_DATA.count,
+                jobsCount: response.data.count,
+                // jobsCount: JOB_DATA.count,
                 searchJobPayload: ctx.params?.search,
             },
         };
