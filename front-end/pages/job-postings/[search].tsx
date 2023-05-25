@@ -43,11 +43,14 @@ const JobPostings = (props: JobPostingsProps) => {
     const { jobList, jobsCount, error } = props;
     const router = useRouter();
     const [jobQuery, setJobQuery] = useRecoilState(jobQueryState);
-    const [jobs, setJobs] = useState();
+    const [jobs, setJobs] = useState<any>();
     const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
     const [jobsTotal, setJobsTotal] = useState(jobsCount);
-    const [jobsOffset, setJobsOffset] = useState(0);
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [jobs])
 
     useEffect(() => {
         setJobs(jobList);
@@ -63,11 +66,44 @@ const JobPostings = (props: JobPostingsProps) => {
         });
     }, [jobList, router]);
 
-    const handlePageChange: PaginationProps['onChange'] = (
+    const handlePageChange: PaginationProps['onChange'] = async (
         pageNumber,
         pageSize
     ) => {
-        setJobsOffset((pageNumber - 1) * pageSize);
+        const jobOffset = (pageNumber - 1) * pageSize;
+        const { location, ...rest } = jobQuery;
+        // router.query.search
+        let convertedLocation = '';
+        if (location === 'ho-chi-minh') {
+            convertedLocation = 'Ho Chi Minh city, Vietnam';
+        } else if (location === 'ha-noi') {
+            convertedLocation = 'Ha Noi city, Vietnam';
+        } else if (location === 'da-nang') {
+            convertedLocation = 'Da Nang city, Vietnam';
+        }
+        const authHeader = getAuthHeader();
+        try {
+            const response = await axios.post(
+                `${HOST}jobs/searching/?limit=${PAGE_LIMIT}&offset=${jobOffset}`,
+                {
+                    query: {
+                        location: convertedLocation,
+                        ...rest
+                    },
+                },
+                {
+                    headers: authHeader,
+                },
+            );
+            const jobPostingList = convertJobResponse(response.data.results);
+            setJobs(jobPostingList);
+            setJobsTotal(response.data.count);
+        } catch (error: any) {
+            error?.response?.data.detail &&
+                // setError(error.response.data.detail);
+                // Error Handling
+                console.log(error.response.data.detail);
+        }
     };
 
     const searchJobHandler = (jobs: any) => {
@@ -171,11 +207,11 @@ export const getServerSideProps: GetServerSideProps = async (
                 query: {
                     job_title: job,
                     location: location,
-                    sort_by,
                     job_portal,
                     keywords,
                     last_updated,
                 },
+                sort: sort_by,
             },
             {
                 headers: headers,

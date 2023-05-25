@@ -43,6 +43,7 @@ const SearchModalContent = (props: SearchModalContentProps) => {
         setSearchQuery({
             job_title: values.job_title,
             location: values.location,
+            sort_by: 'relevancy',
         });
         router.push({
             pathname: '/job-postings/[search]',

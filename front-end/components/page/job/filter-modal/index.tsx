@@ -237,15 +237,18 @@ const FilterModalContent = (props: FilterModalContentProps) => {
                     <Collapse.Panel
                         header="Last Updated"
                         key="4">
-                        <Form.Item name="last_updated">
+                        <Form.Item
+                            name="last_updated"
+                            initialValue={0}
+                        >
                             <Radio.Group
                             // onChange={onChange}
                             // value={value}
                             >
                                 <Space direction="vertical">
-                                    <Radio value={1}>3 Days ago</Radio>
-                                    <Radio value={2}>Past Week</Radio>
-                                    <Radio value={3}>Any Time</Radio>
+                                    <Radio value={3}>3 Days ago</Radio>
+                                    <Radio value={7}>Past Week</Radio>
+                                    <Radio value={0}>Any Time</Radio>
                                 </Space>
                             </Radio.Group>
                         </Form.Item>
