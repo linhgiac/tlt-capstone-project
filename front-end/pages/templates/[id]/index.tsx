@@ -100,14 +100,14 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     if(ctx.params === undefined || ctx.params.id === undefined) {
         return {
             props: { 
-                templatesData: templates === null ? null : { data: templates.data },
+                templatesData: templates === null ? null : { data: templates.data.results },
             }
         }    
     } else {
         const {locale} = ctx;
         return {
             props: { 
-                templatesData: templates === null ? null : { data: templates.data },
+                templatesData: templates === null ? null : { data: templates.data.results },
                 ...await serverSideTranslations(locale as string, ['template', 'layout']),
             }
         }
