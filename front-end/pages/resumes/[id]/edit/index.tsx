@@ -316,7 +316,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
                 ...defaultReturnProps,
                 // initialResumeData: MOCKED_RESUME,
                 ...(await serverSideTranslations(locale as string, ['edit', 'layout'])),
-                templateList: templates.data,
+                templateList: templates.data.results,
                 initialResumeData: convertResumeResponse(resume.data),
             },
         };
