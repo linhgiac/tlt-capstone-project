@@ -27,7 +27,7 @@ const EditorHeader = (props: Props) => {
                         // router.reload();
                     }
                 }}>
-                My resume
+                My resumes
             </Button>
             {/* <span className={classNames(styles['change-language-button'])}>
                 <ChangeLanguageButton forceReload={true}></ChangeLanguageButton>

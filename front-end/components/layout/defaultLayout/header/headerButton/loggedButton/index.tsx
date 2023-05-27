@@ -80,7 +80,7 @@ const LoggedButton = (props: Props) => {
                     onClick={() => {
                         router.push('/dashboard');
                     }}>
-                    My Resume
+                    My Resumes
                 </Button>
             )}
 
